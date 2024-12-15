@@ -7,7 +7,7 @@ class Asset:
         self,
         name: str,
         description: str,
-        serial_number: Optional[str] = None,
+        serial_number: str,
         status: str = AssetStatus.AVAILABLE.value
     ):
         self.serial_number = serial_number if serial_number else str(uuid.uuid4())

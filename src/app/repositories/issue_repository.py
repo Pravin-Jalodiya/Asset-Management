@@ -4,6 +4,7 @@ from typing import List
 from AssetManagement.src.app.config.config import DB
 from AssetManagement.src.app.models.issue import Issue
 from AssetManagement.src.app.utils.errors.error import DatabaseError
+from AssetManagement.src.app.utils.db.query_builder import GenericQueryBuilder
 
 
 class IssueRepository:
@@ -16,18 +17,15 @@ class IssueRepository:
             conn = self.db.get_connection()
             cursor = conn.cursor()
             with conn:
-                cursor.execute('''
-                    INSERT INTO issues (
-                        issue_id, user_id, asset_id, description, 
-                        report_date
-                    ) VALUES (?, ?, ?, ?, ?);
-                ''', (
-                    issue.issue_id,
-                    issue.user_id,
-                    issue.asset_id,
-                    issue.description,
-                    issue.report_date,
-                ))
+                issue_data = {
+                    "issue_id": issue.issue_id,
+                    "user_id": issue.user_id,
+                    "asset_id": issue.asset_id,
+                    "description": issue.description,
+                    "report_date": issue.report_date
+                }
+                query, values = GenericQueryBuilder.insert("issues", issue_data)
+                cursor.execute(query, values)
         except sqlite3.IntegrityError as e:
             raise DatabaseError(f"Issue reporting failed: {str(e)}")
         except Exception as e:
@@ -39,11 +37,9 @@ class IssueRepository:
             conn = self.db.get_connection()
             with conn:
                 cursor = conn.cursor()
-                cursor.execute('''
-                    SELECT issue_id, user_id, asset_id, description, 
-                           report_date
-                    FROM issues
-                ''')
+                columns = ["issue_id", "user_id", "asset_id", "description", "report_date"]
+                query, values = GenericQueryBuilder.select("issues", columns=columns)
+                cursor.execute(query, values)
                 results = cursor.fetchall()
 
             return [
@@ -64,11 +60,14 @@ class IssueRepository:
             conn = self.db.get_connection()
             with conn:
                 cursor = conn.cursor()
-                cursor.execute('''
-                    SELECT issue_id, user_id, asset_id, description, report_date
-                    FROM issues
-                    WHERE user_id = (?)
-                ''', (user_id,))
+                columns = ["issue_id", "user_id", "asset_id", "description", "report_date"]
+                where_clause = {"user_id": user_id}
+                query, values = GenericQueryBuilder.select(
+                    "issues",
+                    columns=columns,
+                    where=where_clause
+                )
+                cursor.execute(query, values)
                 results = cursor.fetchall()
 
             return [

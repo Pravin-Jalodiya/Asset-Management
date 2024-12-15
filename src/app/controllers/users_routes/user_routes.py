@@ -1,11 +1,13 @@
 from flask import Blueprint
 
 from AssetManagement.src.app.controllers.users_routes.user_handlers import UserHandler
+from AssetManagement.src.app.middleware.middleware import auth_middleware
 from AssetManagement.src.app.services.user_service import UserService
 
 
 def create_user_routes(user_service: UserService) -> Blueprint:
     user_routes_blueprint = Blueprint('user_routes', __name__)
+    user_routes_blueprint.before_request(auth_middleware)
     user_handler = UserHandler.create(user_service)
 
     # Authentication routes

@@ -1,5 +1,6 @@
 from flask import Flask
 
+from AssetManagement.src.app.controllers.asset_routes.asset_routes import create_asset_routes
 from AssetManagement.src.app.controllers.issue_routes.issue_routes import create_issue_routes
 from AssetManagement.src.app.controllers.users_routes.user_routes import create_user_routes
 from AssetManagement.src.app.repositories.asset_repository import AssetRepository
@@ -22,7 +23,7 @@ def create_app():
 
     user_service = UserService(user_repository)
     asset_service = AssetService(asset_repository, user_service)
-    issue_service = IssueService(issue_repository)
+    issue_service = IssueService(issue_repository, asset_service)
 
 
     # Register blueprints
@@ -32,6 +33,10 @@ def create_app():
 
     app.register_blueprint(
         create_issue_routes(issue_service)
+    )
+
+    app.register_blueprint(
+        create_asset_routes(asset_service)
     )
 
     return app

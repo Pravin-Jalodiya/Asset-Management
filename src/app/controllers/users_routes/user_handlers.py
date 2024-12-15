@@ -2,6 +2,7 @@ from flask import Blueprint, request, jsonify, g
 from werkzeug.routing import ValidationError
 from dataclasses import dataclass
 
+from AssetManagement.src.app.models.response import CustomResponse
 from AssetManagement.src.app.models.user import User
 from AssetManagement.src.app.services.user_service import UserService
 from AssetManagement.src.app.utils.logger.custom_logger import custom_logger
@@ -40,15 +41,33 @@ class UserHandler:
             user = self.user_service.login_user(email, password)
 
             token = Utils.create_jwt_token(user.id, user.role)
-            return jsonify({
-                'token': token,
-                'role': user.role,
-                'user_id': user.id
-            }), 200
-        except (ValidationError, InvalidCredentialsError) as e:
-            return jsonify({"message": str(e)}), 400
+            return jsonify(CustomResponse(
+                status_code=2001,  # Successful login
+                message="Login successful",
+                data={
+                    'token': token,
+                    'role': user.role,
+                    'user_id': user.id
+                }
+            ).to_dict()), 200
+        except ValidationError as e:
+            return jsonify(CustomResponse(
+                status_code=4001,  # Email validation error
+                message=str(e),
+                data=None
+            ).to_dict()), 400
+        except InvalidCredentialsError as e:
+            return jsonify(CustomResponse(
+                status_code=4002,  # Invalid login credentials
+                message="Invalid email or password",
+                data=None
+            ).to_dict()), 400
         except Exception as e:
-            return jsonify({"message": f"Unexpected error during login {str(e)}"}), 500
+            return jsonify(CustomResponse(
+                status_code=5001,  # Unexpected login error
+                message="Unexpected error during login",
+                data=None
+            ).to_dict()), 500
 
     @custom_logger(logger)
     def signup(self):
@@ -89,20 +108,36 @@ class UserHandler:
             self.user_service.signup_user(user)
             token = Utils.create_jwt_token(user.id, user.role)
 
-            return jsonify({
-                'token': token,
-                'role': user.role,
-                'user_id': user.id
-            }), 200
+            return jsonify(CustomResponse(
+                status_code=2002,  # Successful signup
+                message="User registered successfully",
+                data={
+                    'token': token,
+                    'role': user.role,
+                    'user_id': user.id
+                }
+            ).to_dict()), 200
         except UserExistsError as e:
-            return jsonify({"message": str(e)}), 409
+            return jsonify(CustomResponse(
+                status_code=4003,  # User already exists
+                message=str(e),
+                data=None
+            ).to_dict()), 409
         except (ValidationError, ValueError) as e:
-            return jsonify({"message": str(e)}), 400
+            return jsonify(CustomResponse(
+                status_code=4004,  # Validation error during signup
+                message=str(e),
+                data=None
+            ).to_dict()), 400
         except Exception as e:
-            return jsonify({"message": f"Unexpected error during signup: {str(e)}"}), 500
-
+            return jsonify(CustomResponse(
+                status_code=5002,  # Unexpected signup error
+                message=f"Unexpected error during signup",
+                data=None
+            ).to_dict()), 500
 
     @custom_logger(logger)
+    @Utils.admin
     def get_users(self):
         """
         Handle request for all users' details
@@ -111,14 +146,23 @@ class UserHandler:
             results = self.user_service.get_users()
             results = [result.__dict__ for result in results] if results else []
             if results is not None:
-                return jsonify({
-                    "users": results
-                }), 200
+                return jsonify(CustomResponse(
+                    status_code=2003,  # Successfully fetched users
+                    message="Users fetched successfully",
+                    data=results
+                ).to_dict()), 200
             else:
-                return jsonify({"message": "Users not found"}), 404
+                return jsonify(CustomResponse(
+                    status_code=4005,  # No users found
+                    message="No users found",
+                    data=None
+                ).to_dict()), 404
         except Exception as e:
-            print(e)
-            return jsonify({"message": f"Error fetching users"}), 500
+            return jsonify(CustomResponse(
+                status_code=5003,  # Error fetching users
+                message="Error fetching users",
+                data=None
+            ).to_dict()), 500
 
     @custom_logger(logger)
     def get_user(self, user_id: str):
@@ -128,16 +172,27 @@ class UserHandler:
         try:
             result = self.user_service.get_user_by_id(user_id).__dict__
 
-            if result:
-                return jsonify({
-                    "user": result
-                }), 200
+            if result is not None:
+                return jsonify(CustomResponse(
+                    status_code=2004,  # Successfully fetched user
+                    message="User details retrieved successfully",
+                    data=result
+                ).to_dict()), 200
             else:
-                return jsonify({"message": "User not found"}), 404
+                return jsonify(CustomResponse(
+                    status_code=4006,  # User not found
+                    message="User not found",
+                    data=None
+                ).to_dict()), 404
         except Exception as e:
-            return jsonify({"message": "Error fetching user"}), 500
+            return jsonify(CustomResponse(
+                status_code=5004,  # Error fetching user details
+                message="Error fetching user details",
+                data=None
+            ).to_dict()), 500
 
     @custom_logger(logger)
+    @Utils.admin
     def delete_user(self, user_id: str):
         """
         Handle user account deletion
@@ -147,8 +202,20 @@ class UserHandler:
         try:
             success = self.user_service.delete_user_account(user_id)
             if success:
-                return jsonify({"message": "User account deleted successfully"}), 200
+                return jsonify(CustomResponse(
+                    status_code=2005,  # Successfully deleted user
+                    message="User account deleted successfully",
+                    data=None
+                ).to_dict()), 200
             else:
-                return jsonify({"message": "User not found"}), 404
+                return jsonify(CustomResponse(
+                    status_code=4007,  # User not found for deletion
+                    message="User not found",
+                    data=None
+                ).to_dict()), 404
         except Exception as e:
-            return jsonify({"message": "Error deleting account"}), 500
+            return jsonify(CustomResponse(
+                status_code=5005,  # Error deleting account
+                message="Error deleting account",
+                data=None
+            ).to_dict()), 500

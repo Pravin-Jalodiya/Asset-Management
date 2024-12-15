@@ -4,6 +4,7 @@ from AssetManagement.src.app.models.user import User, UserDTO
 from AssetManagement.src.app.config.config import DB
 from AssetManagement.src.app.config.types import Role
 from AssetManagement.src.app.utils.errors.error import DatabaseError
+from AssetManagement.src.app.utils.db.query_builder import GenericQueryBuilder
 
 
 class UserRepository:
@@ -16,10 +17,16 @@ class UserRepository:
             conn = self.db.get_connection()
             cursor = conn.cursor()
             with conn:
-                cursor.execute('''
-                    INSERT INTO users (id, name, email, password, role, department)
-                    VALUES (?, ?, ?, ?, ?, ?);
-                ''', (user.id, user.name, user.email, user.password, user.role, user.department))
+                user_data = {
+                    "id": user.id,
+                    "name": user.name,
+                    "email": user.email,
+                    "password": user.password,
+                    "role": user.role,
+                    "department": user.department
+                }
+                query, values = GenericQueryBuilder.insert("users", user_data)
+                cursor.execute(query, values)
         except sqlite3.IntegrityError as e:
             raise DatabaseError(f"User creation failed: {str(e)}")
         except Exception as e:
@@ -31,19 +38,17 @@ class UserRepository:
             conn = self.db.get_connection()
             cursor = conn.cursor()
             with conn:
-                cursor.execute('''
-                DELETE FROM users
-                WHERE id = (?)
-                ''', (user_id,))
+                where_clause = {"id": user_id}
+                query, values = GenericQueryBuilder.delete("users", where_clause)
+                cursor.execute(query, values)
 
-            if cursor.rowcount == 0:
-                return False
+                if cursor.rowcount == 0:
+                    return False
 
             return True
 
         except Exception as e:
-            raise DatabaseError("")
-
+            raise DatabaseError(f"Error deleting user: {str(e)}")
 
     def fetch_users(self) -> List[UserDTO]:
         """Fetch all users except admin"""
@@ -51,15 +56,14 @@ class UserRepository:
             conn = self.db.get_connection()
             with conn:
                 cursor = conn.cursor()
-                cursor.execute(
-                    '''
-                    SELECT id, name, email, department
-                    FROM users
-                    WHERE role = ?
-                    ''',
-                    (Role.USER.value,)
+                where_clause = {"role": Role.USER.value}
+                columns = ["id", "name", "email", "department"]
+                query, values = GenericQueryBuilder.select(
+                    "users",
+                    columns=columns,
+                    where=where_clause
                 )
-
+                cursor.execute(query, values)
                 results = cursor.fetchall()
 
                 if results:
@@ -74,7 +78,6 @@ class UserRepository:
                 return []
 
         except Exception as e:
-            print(e)
             raise DatabaseError(f"Error fetching users: {str(e)}")
 
     def fetch_user_by_email(self, email: str) -> Optional[User]:
@@ -83,11 +86,14 @@ class UserRepository:
             conn = self.db.get_connection()
             with conn:
                 cursor = conn.cursor()
-                cursor.execute('''
-                    SELECT id, name, email, password, role, department
-                    FROM users
-                    WHERE email = ?;
-                ''', (email,))
+                where_clause = {"email": email}
+                columns = ["id", "name", "email", "password", "role", "department"]
+                query, values = GenericQueryBuilder.select(
+                    "users",
+                    columns=columns,
+                    where=where_clause
+                )
+                cursor.execute(query, values)
                 result = cursor.fetchone()
 
             if result:
@@ -109,11 +115,14 @@ class UserRepository:
             conn = self.db.get_connection()
             with conn:
                 cursor = conn.cursor()
-                cursor.execute('''
-                    SELECT id, name, email, password, role, department
-                    FROM users
-                    WHERE id = ?;
-                ''', (user_id,))
+                where_clause = {"id": user_id}
+                columns = ["id", "name", "email", "password", "role", "department"]
+                query, values = GenericQueryBuilder.select(
+                    "users",
+                    columns=columns,
+                    where=where_clause
+                )
+                cursor.execute(query, values)
                 result = cursor.fetchone()
 
             if result:
