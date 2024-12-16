@@ -1,10 +1,10 @@
 from typing import Optional, List
 import sqlite3
-from AssetManagement.src.app.models.user import User, UserDTO
-from AssetManagement.src.app.config.config import DB
-from AssetManagement.src.app.config.types import Role
-from AssetManagement.src.app.utils.errors.error import DatabaseError
-from AssetManagement.src.app.utils.db.query_builder import GenericQueryBuilder
+from src.app.models.user import User, UserDTO
+from src.app.config.db_config import DB
+from src.app.config.types import Role
+from src.app.utils.errors.error import DatabaseError
+from src.app.utils.db.query_builder import GenericQueryBuilder
 
 
 class UserRepository:
@@ -27,8 +27,7 @@ class UserRepository:
                 }
                 query, values = GenericQueryBuilder.insert("users", user_data)
                 cursor.execute(query, values)
-        except sqlite3.IntegrityError as e:
-            raise DatabaseError(f"User creation failed: {str(e)}")
+
         except Exception as e:
             raise DatabaseError(f"Unexpected error during user creation: {str(e)}")
 
@@ -106,17 +105,18 @@ class UserRepository:
                     department=result[5]
                 )
             return None
+
         except Exception as e:
             raise DatabaseError(f"Error fetching user: {str(e)}")
 
-    def fetch_user_by_id(self, user_id: str) -> Optional[User]:
+    def fetch_user_by_id(self, user_id: str) -> Optional[UserDTO]:
         """Fetches a user from the database by their id."""
         try:
             conn = self.db.get_connection()
             with conn:
                 cursor = conn.cursor()
                 where_clause = {"id": user_id}
-                columns = ["id", "name", "email", "password", "role", "department"]
+                columns = ["id", "name", "email", "department"]
                 query, values = GenericQueryBuilder.select(
                     "users",
                     columns=columns,
@@ -126,14 +126,13 @@ class UserRepository:
                 result = cursor.fetchone()
 
             if result:
-                return User(
+                return UserDTO(
                     id=result[0],
                     name=result[1],
                     email=result[2],
-                    password=result[3],
-                    role=result[4],
-                    department=result[5]
+                    department=result[3]
                 )
             return None
+
         except Exception as e:
             raise DatabaseError(f"Error fetching user: {str(e)}")

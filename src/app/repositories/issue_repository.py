@@ -1,10 +1,10 @@
 import sqlite3
 from typing import List
 
-from AssetManagement.src.app.config.config import DB
-from AssetManagement.src.app.models.issue import Issue
-from AssetManagement.src.app.utils.errors.error import DatabaseError
-from AssetManagement.src.app.utils.db.query_builder import GenericQueryBuilder
+from src.app.config.db_config import DB
+from src.app.models.issue import Issue
+from src.app.utils.errors.error import DatabaseError
+from src.app.utils.db.query_builder import GenericQueryBuilder
 
 
 class IssueRepository:
@@ -26,8 +26,7 @@ class IssueRepository:
                 }
                 query, values = GenericQueryBuilder.insert("issues", issue_data)
                 cursor.execute(query, values)
-        except sqlite3.IntegrityError as e:
-            raise DatabaseError(f"Issue reporting failed: {str(e)}")
+
         except Exception as e:
             raise DatabaseError(f"Unexpected error during issue reporting: {str(e)}")
 
@@ -51,6 +50,7 @@ class IssueRepository:
                     report_date=row[4],
                 ) for row in results
             ]
+
         except Exception as e:
             raise DatabaseError(f"Error retrieving user issues: {str(e)}")
 
@@ -70,14 +70,15 @@ class IssueRepository:
                 cursor.execute(query, values)
                 results = cursor.fetchall()
 
-            return [
-                Issue(
-                    issue_id=row[0],
-                    user_id=row[1],
-                    asset_id=row[2],
-                    description=row[3],
-                    report_date=row[4],
-                ) for row in results
-            ]
+                return [
+                    Issue(
+                        issue_id=row[0],
+                        user_id=row[1],
+                        asset_id=row[2],
+                        description=row[3],
+                        report_date=row[4],
+                    ) for row in results
+                ]
+
         except Exception as e:
             raise DatabaseError(f"Error retrieving user issues: {str(e)}")

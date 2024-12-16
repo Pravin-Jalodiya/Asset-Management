@@ -1,20 +1,20 @@
 from typing import List
-from AssetManagement.src.app.models.user import User, UserDTO
-from AssetManagement.src.app.models.asset import Asset
-from AssetManagement.src.app.models.issue import Issue
-from AssetManagement.src.app.repositories.user_repository import UserRepository
-from AssetManagement.src.app.utils.errors.error import (
+from src.app.models.user import User, UserDTO
+from src.app.models.asset import Asset
+from src.app.models.issue import Issue
+from src.app.repositories.user_repository import UserRepository
+from src.app.utils.errors.error import (
     UserExistsError,
     InvalidCredentialsError,
-    AssetNotFoundError
+    AssetNotFoundError, NotExistsError
 )
-from AssetManagement.src.app.utils.utils import Utils
+from src.app.utils.utils import Utils
 
 class UserService:
     def __init__(self, user_repository: UserRepository):
         self.user_repository = user_repository
 
-    def signup_user(self, user: User) -> User:
+    def signup_user(self, user: User):
         """
         Register a new user
         - Checks if user already exists
@@ -29,7 +29,6 @@ class UserService:
 
         # Save to database
         self.user_repository.save_user(user)
-        return user
 
     def login_user(self, email: str, password: str) -> User:
         """

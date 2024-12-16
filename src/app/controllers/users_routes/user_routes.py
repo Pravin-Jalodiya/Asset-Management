@@ -1,8 +1,8 @@
 from flask import Blueprint
 
-from AssetManagement.src.app.controllers.users_routes.user_handlers import UserHandler
-from AssetManagement.src.app.middleware.middleware import auth_middleware
-from AssetManagement.src.app.services.user_service import UserService
+from src.app.controllers.users_routes.user_handlers import UserHandler
+from src.app.middleware.middleware import auth_middleware
+from src.app.services.user_service import UserService
 
 
 def create_user_routes(user_service: UserService) -> Blueprint:
@@ -18,7 +18,7 @@ def create_user_routes(user_service: UserService) -> Blueprint:
         '/signup', 'signup', user_handler.signup, methods=['POST']
     )
 
-    # User management routes
+    # User related routes
     user_routes_blueprint.add_url_rule(
         '/users', 'users', user_handler.get_users, methods=['GET']
     )
@@ -30,14 +30,5 @@ def create_user_routes(user_service: UserService) -> Blueprint:
     user_routes_blueprint.add_url_rule(
         '/delete-user/<user_id>', 'delete_user', user_handler.delete_user, methods=['DELETE']
     )
-
-    # Asset-related routes
-    # user_routes_blueprint.add_url_rule(
-    #     '/assets', 'view_assets', user_handler.view_assigned_assets, methods=['GET']
-    # )
-    # user_routes_blueprint.add_url_rule(
-    #     '/return-asset', 'return_asset', user_handler.return_asset, methods=['POST']
-    # )
-    #
 
     return user_routes_blueprint

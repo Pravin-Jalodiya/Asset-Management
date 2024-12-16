@@ -1,8 +1,8 @@
 from flask import Blueprint
 
-from AssetManagement.src.app.controllers.issue_routes.issue_handlers import IssueHandler
-from AssetManagement.src.app.middleware.middleware import auth_middleware
-from AssetManagement.src.app.services.issue_service import IssueService
+from src.app.controllers.issue_routes.issue_handlers import IssueHandler
+from src.app.middleware.middleware import auth_middleware
+from src.app.services.issue_service import IssueService
 
 
 def create_issue_routes(issue_service: IssueService) -> Blueprint:

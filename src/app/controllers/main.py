@@ -1,15 +1,15 @@
 from flask import Flask
 
-from AssetManagement.src.app.controllers.asset_routes.asset_routes import create_asset_routes
-from AssetManagement.src.app.controllers.issue_routes.issue_routes import create_issue_routes
-from AssetManagement.src.app.controllers.users_routes.user_routes import create_user_routes
-from AssetManagement.src.app.repositories.asset_repository import AssetRepository
-from AssetManagement.src.app.repositories.issue_repository import IssueRepository
-from AssetManagement.src.app.repositories.user_repository import UserRepository
-from AssetManagement.src.app.services.asset_service import AssetService
-from AssetManagement.src.app.services.issue_service import IssueService
-from AssetManagement.src.app.services.user_service import UserService
-from AssetManagement.src.app.utils.db.db import DB
+from src.app.controllers.asset_routes.asset_routes import create_asset_routes
+from src.app.controllers.issue_routes.issue_routes import create_issue_routes
+from src.app.controllers.users_routes.user_routes import create_user_routes
+from src.app.repositories.asset_repository import AssetRepository
+from src.app.repositories.issue_repository import IssueRepository
+from src.app.repositories.user_repository import UserRepository
+from src.app.services.asset_service import AssetService
+from src.app.services.issue_service import IssueService
+from src.app.services.user_service import UserService
+from src.app.utils.db.db import DB
 
 
 def create_app():
@@ -23,8 +23,7 @@ def create_app():
 
     user_service = UserService(user_repository)
     asset_service = AssetService(asset_repository, user_service)
-    issue_service = IssueService(issue_repository, asset_service)
-
+    issue_service = IssueService(issue_repository, asset_service, user_service)
 
     # Register blueprints
     app.register_blueprint(
@@ -40,6 +39,7 @@ def create_app():
     )
 
     return app
+
 
 if __name__ == "__main__":
     app = create_app()

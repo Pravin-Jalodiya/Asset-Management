@@ -1,6 +1,6 @@
 import functools
 from flask import request, g
-from AssetManagement.src.app.utils.logger.logger import Logger
+from src.app.utils.logger.logger import Logger
 
 
 def custom_logger(logger: Logger):

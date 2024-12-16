@@ -1,7 +1,7 @@
 import re
 import uuid
 
-from AssetManagement.src.app.config.types import Department
+from src.app.config.types import Department
 
 
 class Validators:
@@ -74,19 +74,13 @@ class Validators:
             # If a ValueError is raised, the string is not a valid UUID
             return False
 
-    @classmethod
-    def is_department_valid(cls, department) -> bool:
+    @staticmethod
+    def is_department_valid(department) -> bool:
         """
         Checks if the provided department is valid
         """
-        department = cls.clean_string(department)
         for dept in Department:
             if department == dept.value:
                 return True
 
         return False
-
-    @classmethod
-    def clean_string(cls, string: str):
-        return string.strip().lower()
-

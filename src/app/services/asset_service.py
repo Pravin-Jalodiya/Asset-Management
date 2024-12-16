@@ -1,11 +1,11 @@
 from typing import List
 
-from AssetManagement.src.app.config.types import AssetStatus
-from AssetManagement.src.app.models.asset import Asset
-from AssetManagement.src.app.models.asset_assigned import AssetAssigned
-from AssetManagement.src.app.repositories.asset_repository import AssetRepository
-from AssetManagement.src.app.services.user_service import UserService
-from AssetManagement.src.app.utils.errors.error import (
+from src.app.config.types import AssetStatus
+from src.app.models.asset import Asset
+from src.app.models.asset_assigned import AssetAssigned
+from src.app.repositories.asset_repository import AssetRepository
+from src.app.services.user_service import UserService
+from src.app.utils.errors.error import (
     ExistsError,
     NotExistsError,
     NotAssignedError,
@@ -85,6 +85,10 @@ class AssetService:
         """
         Retrieve all assets assigned to a user
         """
+        result = self.user_service.get_user_by_id(user_id)
+        if result is None:
+            raise NotExistsError("User does not exist")
+
         return self.asset_repository.view_assigned_assets(user_id)
 
     def view_all_assigned_assets(self) -> List[dict]:
@@ -92,3 +96,6 @@ class AssetService:
 
     def get_asset_by_id(self, asset_id: str):
         return self.asset_repository.fetch_asset_by_id(asset_id)
+
+    def is_asset_assigned(self, user_id: str, asset_id: str):
+        return self.asset_repository.is_asset_assigned(user_id, asset_id)

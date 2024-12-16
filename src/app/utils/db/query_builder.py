@@ -40,7 +40,7 @@ class GenericQueryBuilder:
         columns_clause = ", ".join(columns) if columns else "*"
         query = f"SELECT {columns_clause} FROM {table}"
         if where:
-            where_clause = "AND ".join([f"{key} = ?" for key in where.keys()])
+            where_clause = " AND ".join([f"{key} = ?" for key in where.keys()])
             query += f" WHERE {where_clause}"
 
         if order_by:

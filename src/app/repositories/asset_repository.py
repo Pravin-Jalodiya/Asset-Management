@@ -1,11 +1,11 @@
 from typing import List, Union
 
-from AssetManagement.src.app.config.config import DB
-from AssetManagement.src.app.config.types import AssetStatus
-from AssetManagement.src.app.models.asset import Asset
-from AssetManagement.src.app.models.asset_assigned import AssetAssigned
-from AssetManagement.src.app.utils.errors.error import DatabaseError, AssetAlreadyAssignedError
-from AssetManagement.src.app.utils.db.query_builder import GenericQueryBuilder
+from src.app.config.db_config import DB
+from src.app.config.types import AssetStatus
+from src.app.models.asset import Asset
+from src.app.models.asset_assigned import AssetAssigned
+from src.app.utils.errors.error import DatabaseError, AssetAlreadyAssignedError
+from src.app.utils.db.query_builder import GenericQueryBuilder
 
 
 class AssetRepository:
@@ -170,7 +170,6 @@ class AssetRepository:
                 query, values = GenericQueryBuilder.select("assets_assigned", columns=columns, where=where_clause)
                 cursor.execute(query, values)
                 result = cursor.fetchone()
-
                 return True if result else False
 
         except Exception as e:
@@ -208,6 +207,7 @@ class AssetRepository:
                 "user_id": user_id,
                 "assets": assets
             }
+
         except Exception as e:
             raise DatabaseError(f"Error retrieving assigned assets: {str(e)}")
 
@@ -231,5 +231,6 @@ class AssetRepository:
                     "asset_ids": row[1].split(',') if row[1] else []
                 } for row in results
             ]
+
         except Exception as e:
             raise DatabaseError(f"Error retrieving assigned assets: {str(e)}")

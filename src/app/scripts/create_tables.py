@@ -1,5 +1,5 @@
 import sqlite3
-import AssetManagement.src.app.config.config as config
+import src.app.config.db_config as config
 
 # Open connection and enable foreign key support explicitly for SQLite
 conn = sqlite3.connect(config.DB)

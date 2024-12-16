@@ -7,9 +7,13 @@ class CustomResponse:
     message: str
     data: any
 
-    def to_dict(self):
-        return {
+    def dto_to_dict(self):
+        response ={
             'status_code': self.status_code,
             'message': self.message,
-            'data': self.data
         }
+
+        if self.data:
+            response.update({'data': self.data})
+
+        return response

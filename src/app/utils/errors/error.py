@@ -51,11 +51,13 @@ class AssetNotFoundError(Exception):
     def __init__(self, message: str):
         super().__init__(message)
 
+
 class AssetAlreadyAssignedError(Exception):
     """Base exception class for asset already assigned"""
 
     def __init__(self, message: str):
         super().__init__(message)
+
 
 class NotAssignedError(Exception):
     """Base exception class for asset not assigned"""
@@ -63,8 +65,15 @@ class NotAssignedError(Exception):
     def __init__(self, message: str):
         super().__init__(message)
 
+
 class AlreadyAssignedError(Exception):
     """Base exception class for asset already assigned"""
+
+    def __init__(self, message: str):
+        super().__init__(message)
+
+class MissingFieldError(Exception):
+    """Base exception class for missing fields"""
 
     def __init__(self, message: str):
         super().__init__(message)

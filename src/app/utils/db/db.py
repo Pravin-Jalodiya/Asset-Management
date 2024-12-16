@@ -1,5 +1,5 @@
 import sqlite3
-import AssetManagement.src.app.config.config as config
+import src.app.config.db_config as config
 
 
 class DB:

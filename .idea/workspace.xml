@@ -1,7 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="347872e0-5b89-419e-982a-7a257b7fd3fb" name="Changes" comment="" />
+    <list default="true" id="347872e0-5b89-419e-982a-7a257b7fd3fb" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/PythonProject.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/PythonProject.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/config/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/config/db_config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/config/types.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/config/types.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/controllers/app.log" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/controllers/app.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/controllers/asset_routes/asset_handlers.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/controllers/asset_routes/asset_handlers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/controllers/asset_routes/asset_routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/controllers/asset_routes/asset_routes.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/controllers/issue_routes/issue_handlers.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/controllers/issue_routes/issue_handlers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/controllers/issue_routes/issue_routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/controllers/issue_routes/issue_routes.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/controllers/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/controllers/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/controllers/users_routes/user_handlers.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/controllers/users_routes/user_handlers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/controllers/users_routes/user_routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/controllers/users_routes/user_routes.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/middleware/middleware.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/middleware/middleware.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/models/asset.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/models/asset.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/models/asset_assigned.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/models/asset_assigned.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/models/response.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/models/response.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/models/user.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/models/user.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/repositories/asset_repository.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/repositories/asset_repository.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/repositories/issue_repository.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/repositories/issue_repository.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/repositories/user_repository.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/repositories/user_repository.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/scripts/create_tables.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/scripts/create_tables.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/services/asset_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/services/asset_service.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/services/issue_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/services/issue_service.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/services/user_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/services/user_service.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/utils/db/asset_management.db" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/utils/db/asset_management.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/utils/db/db.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/utils/db/db.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/utils/db/query_builder.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/utils/db/query_builder.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/utils/errors/error.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/utils/errors/error.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/utils/logger/custom_logger.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/utils/logger/custom_logger.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/utils/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/utils/utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/utils/validators/validators.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/utils/validators/validators.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -10,9 +46,9 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 3
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 3
+}</component>
   <component name="ProjectId" id="2q1LGCedemIkv9Nib7iwre9MHnh" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -21,8 +57,18 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Python.create_tables.executor": "Run",
+    "Python.main.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main"
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "C:/Users/pjalodiya/PycharmProjects/AssetManagement",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
   <component name="SharedIndexes">
@@ -40,7 +86,15 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1733825038024</updated>
+      <workItem from="1734265608475" duration="21945000" />
     </task>
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/Asset_Management$create_tables.coverage" NAME="create_tables Coverage Results" MODIFIED="1734266401812" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/app/scripts" />
+    <SUITE FILE_PATH="coverage/Asset_Management$main.coverage" NAME="main Coverage Results" MODIFIED="1734280650771" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/app/controllers" />
   </component>
 </project>

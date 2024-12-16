@@ -7,7 +7,7 @@ class AssetAssigned:
         self,
         user_id: str,
         asset_id: str,
-        asset_assigned_id:str = None,
+        asset_assigned_id: str = None,
         assigned_date: datetime = None
     ):
         self.asset_assigned_id = asset_assigned_id if asset_assigned_id else str(uuid.uuid4())

@@ -1,19 +1,30 @@
-from flask import Blueprint, request, jsonify, g
+from flask import request
 from werkzeug.routing import ValidationError
 from dataclasses import dataclass
 
-from AssetManagement.src.app.models.response import CustomResponse
-from AssetManagement.src.app.models.user import User
-from AssetManagement.src.app.services.user_service import UserService
-from AssetManagement.src.app.utils.logger.custom_logger import custom_logger
-from AssetManagement.src.app.utils.utils import Utils
-from AssetManagement.src.app.utils.validators.validators import Validators
-from AssetManagement.src.app.utils.logger.logger import Logger
-from AssetManagement.src.app.utils.errors.error import (
+from src.app.models.request_objects import LoginRequest, SignupRequest
+from src.app.models.response import CustomResponse
+from src.app.models.user import User
+from src.app.services.user_service import UserService
+from src.app.utils.logger.custom_logger import custom_logger
+from src.app.utils.utils import Utils
+from src.app.utils.logger.logger import Logger
+from src.app.utils.errors.error import (
     UserExistsError,
-    InvalidCredentialsError,
+    InvalidCredentialsError, MissingFieldError, DatabaseError,
 )
+from src.app.utils.validators.validators import Validators
 
+# Importing the new error codes
+from src.app.config.custom_error_codes import (
+    VALIDATION_ERROR,
+    MISSING_FIELD_ERROR,
+    INVALID_CREDENTIALS_ERROR,
+    USER_EXISTS_ERROR,
+    DATABASE_OPERATION_ERROR,
+    RECORD_NOT_FOUND_ERROR,
+    USER_NOT_FOUND_ERROR
+)
 
 @dataclass
 class UserHandler:
@@ -26,196 +37,185 @@ class UserHandler:
 
     @custom_logger(logger)
     def login(self):
-        """
-        Handle user login
-        - Validate email and password
-        - Generate JWT token
-        """
-        request_body = request.get_json()
         try:
-            email = request_body['email'].strip().lower()
-            if not Validators.is_email_valid(email):
-                raise ValidationError('Email is not valid')
-
-            password = request_body['password'].strip()
-            user = self.user_service.login_user(email, password)
-
+            login_data = LoginRequest(request.get_json())
+            user = self.user_service.login_user(login_data.email, login_data.password)
             token = Utils.create_jwt_token(user.id, user.role)
-            return jsonify(CustomResponse(
-                status_code=2001,  # Successful login
+
+            return CustomResponse(
+                status_code=200,
                 message="Login successful",
                 data={
                     'token': token,
                     'role': user.role,
                     'user_id': user.id
                 }
-            ).to_dict()), 200
+            ).to_dict(), 200
+
         except ValidationError as e:
-            return jsonify(CustomResponse(
-                status_code=4001,  # Email validation error
+            return CustomResponse(
+                status_code=VALIDATION_ERROR,
                 message=str(e),
                 data=None
-            ).to_dict()), 400
+            ).to_dict(), 400
+
+        except MissingFieldError as e:
+            return CustomResponse(
+                status_code=MISSING_FIELD_ERROR,
+                message=str(e),
+                data=None
+            ).to_dict(), 400
+
         except InvalidCredentialsError as e:
-            return jsonify(CustomResponse(
-                status_code=4002,  # Invalid login credentials
+            return CustomResponse(
+                status_code=INVALID_CREDENTIALS_ERROR,
                 message="Invalid email or password",
                 data=None
-            ).to_dict()), 400
-        except Exception as e:
-            return jsonify(CustomResponse(
-                status_code=5001,  # Unexpected login error
+            ).to_dict(), 400
+
+        except (DatabaseError, Exception) as e:
+            return CustomResponse(
+                status_code=DATABASE_OPERATION_ERROR,
                 message="Unexpected error during login",
                 data=None
-            ).to_dict()), 500
+            ).to_dict(), 500
 
-    @custom_logger(logger)
     def signup(self):
-        """
-        Handle user signup
-        - Validate all input fields
-        - Create user
-        - Generate JWT token
-        """
-        request_body = request.get_json()
         try:
-            # Validate and extract input fields
-            name = request_body['name'].strip()
-            if not Validators.is_name_valid(name):
-                raise ValidationError('Name is not valid')
+            signup_data = SignupRequest(request.get_json())
 
-            email = request_body['email'].strip().lower()
-            if not Validators.is_email_valid(email):
-                raise ValidationError('Email is not valid')
-
-            password = request_body['password'].strip()
-            if not Validators.is_password_valid(password):
-                raise ValidationError('Password is not valid')
-
-            department = request_body['department'].strip()
-            if not Validators.is_department_valid(department):
-                raise ValidationError('Department is not valid')
-
-            # Create user
             user = User(
-                name=name,
-                email=email,
-                password=password,
-                department=department
+                name=signup_data.name,
+                email=signup_data.email,
+                password=signup_data.password,
+                department=signup_data.department
             )
 
-            # Signup and generate token
             self.user_service.signup_user(user)
             token = Utils.create_jwt_token(user.id, user.role)
 
-            return jsonify(CustomResponse(
-                status_code=2002,  # Successful signup
+            return CustomResponse(
+                status_code=200,
                 message="User registered successfully",
                 data={
                     'token': token,
                     'role': user.role,
                     'user_id': user.id
                 }
-            ).to_dict()), 200
+            ).to_dict(), 200
+
+        except ValidationError as e:
+            return CustomResponse(
+                status_code=VALIDATION_ERROR,
+                message=str(e),
+                data=None
+            ).to_dict(), 400
+
+        except MissingFieldError as e:
+            return CustomResponse(
+                status_code=MISSING_FIELD_ERROR,
+                message=str(e),
+                data=None
+            ).to_dict(), 400
+
         except UserExistsError as e:
-            return jsonify(CustomResponse(
-                status_code=4003,  # User already exists
+            return CustomResponse(
+                status_code=USER_EXISTS_ERROR,
                 message=str(e),
                 data=None
-            ).to_dict()), 409
-        except (ValidationError, ValueError) as e:
-            return jsonify(CustomResponse(
-                status_code=4004,  # Validation error during signup
-                message=str(e),
+            ).to_dict(), 409
+
+        except (DatabaseError, Exception) as e:
+            return CustomResponse(
+                status_code=DATABASE_OPERATION_ERROR,
+                message="Unexpected error during signup",
                 data=None
-            ).to_dict()), 400
-        except Exception as e:
-            return jsonify(CustomResponse(
-                status_code=5002,  # Unexpected signup error
-                message=f"Unexpected error during signup",
-                data=None
-            ).to_dict()), 500
+            ).to_dict(), 500
 
     @custom_logger(logger)
     @Utils.admin
     def get_users(self):
-        """
-        Handle request for all users' details
-        """
         try:
             results = self.user_service.get_users()
             results = [result.__dict__ for result in results] if results else []
+
             if results is not None:
-                return jsonify(CustomResponse(
-                    status_code=2003,  # Successfully fetched users
+                return CustomResponse(
+                    status_code=200,
                     message="Users fetched successfully",
                     data=results
-                ).to_dict()), 200
-            else:
-                return jsonify(CustomResponse(
-                    status_code=4005,  # No users found
-                    message="No users found",
-                    data=None
-                ).to_dict()), 404
-        except Exception as e:
-            return jsonify(CustomResponse(
-                status_code=5003,  # Error fetching users
+                ).to_dict(), 200
+
+        except (DatabaseError, Exception) as e:
+            return CustomResponse(
+                status_code=DATABASE_OPERATION_ERROR,
                 message="Error fetching users",
                 data=None
-            ).to_dict()), 500
+            ).to_dict(), 500
 
     @custom_logger(logger)
     def get_user(self, user_id: str):
-        """
-        Handle request for specific user details
-        """
         try:
             result = self.user_service.get_user_by_id(user_id).__dict__
 
             if result is not None:
-                return jsonify(CustomResponse(
-                    status_code=2004,  # Successfully fetched user
+                return CustomResponse(
+                    status_code=200,
                     message="User details retrieved successfully",
                     data=result
-                ).to_dict()), 200
+                ).to_dict(), 200
             else:
-                return jsonify(CustomResponse(
-                    status_code=4006,  # User not found
+                return CustomResponse(
+                    status_code=USER_NOT_FOUND_ERROR,
                     message="User not found",
                     data=None
-                ).to_dict()), 404
-        except Exception as e:
-            return jsonify(CustomResponse(
-                status_code=5004,  # Error fetching user details
+                ).to_dict(), 404
+
+        except (DatabaseError, Exception) as e:
+            return CustomResponse(
+                status_code=DATABASE_OPERATION_ERROR,
                 message="Error fetching user details",
                 data=None
-            ).to_dict()), 500
+            ).to_dict(), 500
 
     @custom_logger(logger)
     @Utils.admin
     def delete_user(self, user_id: str):
-        """
-        Handle user account deletion
-        - Verify user authentication
-        - Delete account
-        """
         try:
-            success = self.user_service.delete_user_account(user_id)
-            if success:
-                return jsonify(CustomResponse(
-                    status_code=2005,  # Successfully deleted user
-                    message="User account deleted successfully",
-                    data=None
-                ).to_dict()), 200
+            valid_id = Validators.is_valid_UUID(user_id)
+            if valid_id:
+                success = self.user_service.delete_user_account(user_id)
+
+                if success:
+                    return CustomResponse(
+                        status_code=200,
+                        message="User account deleted successfully",
+                        data=None
+                    ).to_dict(), 200
+                else:
+                    return CustomResponse(
+                        status_code=USER_NOT_FOUND_ERROR,
+                        message="User not found",
+                        data=None
+                    ).to_dict(), 404
+
             else:
-                return jsonify(CustomResponse(
-                    status_code=4007,  # User not found for deletion
-                    message="User not found",
+                return CustomResponse(
+                    status_code=200,
+                    message="Invalid user id",
                     data=None
-                ).to_dict()), 404
-        except Exception as e:
-            return jsonify(CustomResponse(
-                status_code=5005,  # Error deleting account
+                ).to_dict(), 200
+
+        except ValueError as e:
+            return CustomResponse(
+                status_code=RECORD_NOT_FOUND_ERROR,
+                message="Invalid user id",
+                data=None
+            ).to_dict(), 400
+
+        except (DatabaseError, Exception) as e:
+            return CustomResponse(
+                status_code=DATABASE_OPERATION_ERROR,
                 message="Error deleting account",
                 data=None
-            ).to_dict()), 500
+            ).to_dict(), 500
