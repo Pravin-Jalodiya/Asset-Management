@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="1" time="4.485" timestamp="2024-12-17T17:55:21.634223+05:30" hostname="LAP-55355"><testcase classname="tests.controllers_tests.test_asset_handlers.TestAssetHandler" name="test_unassign_asset_success" time="0.080"><failure message="AssertionError: 400 != 200">self = &lt;AssetManagement.tests.controllers_tests.test_asset_handlers.TestAssetHandler testMethod=test_unassign_asset_success&gt;
+
+    def test_unassign_asset_success(self):
+        """Test successful unassignment of an asset."""
+        unassign_payload = {"user_id": "user123", "asset_id": "asset123"}
+    
+        dummy_user = User(
+            name="pravin",
+            email="Pravin123@watchguard.com",
+            department="CLOUD PLATFORM",
+            password="Password@123"
+        )
+    
+        dummy_asset = Asset(
+            name="Dell x32",
+            description="Dell laptop"
+        )
+    
+        with self.app.test_request_context(method="POST", json=unassign_payload):
+            # Mock the unassign_asset method of AssetService
+            self.mock_asset_service.unassign_asset.return_value = None
+            self.mock_asset_repository.fetch_asset_by_id(unassign_payload['asset_id']).return_value = dummy_asset
+            self.mock_user_service.get_user_by_id(unassign_payload['user_id']).return_value = dummy_user
+            self.mock_asset_repository.is_asset_assigned(unassign_payload['user_id'],unassign_payload['asset_id']).return_value = True
+    
+            # Call the unassign_asset method of AssetHandler
+            g.role='admin'
+            response, status_code = self.asset_handler.unassign_asset()
+    
+            # Assert the response and status code
+&gt;           self.assertEqual(status_code, 200)
+
+dummy_asset = &lt;src.app.models.asset.Asset object at 0x0000026FE7F03750&gt;
+dummy_user = &lt;src.app.models.user.User object at 0x0000026FE7F6F380&gt;
+response   = {'message': 'Invalid user id', 'status_code': 4002}
+self       = &lt;AssetManagement.tests.controllers_tests.test_asset_handlers.TestAssetHandler testMethod=test_unassign_asset_success&gt;
+status_code = 400
+unassign_payload = {'asset_id': 'asset123', 'user_id': 'user123'}
+
+test_asset_handlers.py:149: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+C:\Program Files\JetBrains\PyCharm Community Edition 2024.3\plugins\python-ce\helpers\pycharm\teamcity\diff_tools.py:33: in _patched_equals
+    old(self, first, second, msg)
+E   AssertionError: 400 != 200
+        error      = EqualsAssertionError(400, 200, None)
+        first      = 400
+        msg        = None
+        old        = &lt;function TestCase.assertEqual at 0x0000026FE62447C0&gt;
+        second     = 200
+        self       = &lt;AssetManagement.tests.controllers_tests.test_asset_handlers.TestAssetHandler testMethod=test_unassign_asset_success&gt;
+        store_exception = &lt;function store_exception at 0x0000026FE80045E0&gt;
+        test_filter = None</failure></testcase></testsuite></testsuites>

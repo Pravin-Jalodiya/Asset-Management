@@ -1,13 +1,13 @@
 from flask import Flask
 
-from src.app.controllers.asset_routes.asset_routes import create_asset_routes
-from src.app.controllers.issue_routes.issue_routes import create_issue_routes
-from src.app.controllers.users_routes.user_routes import create_user_routes
+from src.app.controllers.asset.routes import create_asset_routes
+from src.app.controllers.asset_issue.routes import create_issue_routes
+from src.app.controllers.users.routes import create_user_routes
 from src.app.repositories.asset_repository import AssetRepository
-from src.app.repositories.issue_repository import IssueRepository
+from src.app.repositories.asset_issue_repository import IssueRepository
 from src.app.repositories.user_repository import UserRepository
 from src.app.services.asset_service import AssetService
-from src.app.services.issue_service import IssueService
+from src.app.services.asset_issue_service import IssueService
 from src.app.services.user_service import UserService
 from src.app.utils.db.db import DB
 

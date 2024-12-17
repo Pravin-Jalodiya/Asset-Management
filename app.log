@@ -1,0 +1,711 @@
+2024-12-17 16:11:31,215 - DEBUG - Entering report_issue
+User Context:
+  - user_id: Unknown
+  - role: Unknown
+Request Context:
+  - method: GET
+  - path: /
+  - client_ip: None
+  - headers: {'Host': 'localhost', 'Content-Type': 'application/json', 'Content-Length': '65'}
+  - body: {'asset_id': 'asset123', 'description': 'Test issue description'}
+Function Context:
+  - handler: IssueHandler
+ - for user_id=unknown | role=unknown
+2024-12-17 16:11:31,217 - INFO - report_issue executed successfully. - for user_id=unknown | role=unknown
+2024-12-17 16:11:31,217 - DEBUG - Exiting report_issue - for user_id=unknown | role=unknown
+2024-12-17 16:11:31,238 - DEBUG - Entering report_issue
+User Context:
+  - user_id: Unknown
+  - role: Unknown
+Request Context:
+  - method: GET
+  - path: /
+  - client_ip: None
+  - headers: {'Host': 'localhost', 'Content-Type': 'application/json', 'Content-Length': '65'}
+  - body: {'asset_id': 'asset123', 'description': 'Test issue description'}
+Function Context:
+  - handler: IssueHandler
+ - for user_id=unknown | role=unknown
+2024-12-17 16:11:31,238 - INFO - report_issue executed successfully. - for user_id=unknown | role=unknown
+2024-12-17 16:11:31,239 - DEBUG - Exiting report_issue - for user_id=unknown | role=unknown
+2024-12-17 16:11:31,258 - DEBUG - Entering report_issue
+User Context:
+  - user_id: Unknown
+  - role: Unknown
+Request Context:
+  - method: GET
+  - path: /
+  - client_ip: None
+  - headers: {'Host': 'localhost', 'Content-Type': 'application/json', 'Content-Length': '65'}
+  - body: {'asset_id': 'asset123', 'description': 'Test issue description'}
+Function Context:
+  - handler: IssueHandler
+ - for user_id=unknown | role=unknown
+2024-12-17 16:11:31,258 - INFO - report_issue executed successfully. - for user_id=unknown | role=unknown
+2024-12-17 16:11:31,258 - DEBUG - Exiting report_issue - for user_id=unknown | role=unknown
+2024-12-17 16:11:31,275 - DEBUG - Entering report_issue
+User Context:
+  - user_id: Unknown
+  - role: Unknown
+Request Context:
+  - method: GET
+  - path: /
+  - client_ip: None
+  - headers: {'Host': 'localhost', 'Content-Type': 'application/json', 'Content-Length': '65'}
+  - body: {'asset_id': 'asset123', 'description': 'Test issue description'}
+Function Context:
+  - handler: IssueHandler
+ - for user_id=unknown | role=unknown
+2024-12-17 16:11:31,276 - INFO - report_issue executed successfully. - for user_id=unknown | role=unknown
+2024-12-17 16:11:31,276 - DEBUG - Exiting report_issue - for user_id=unknown | role=unknown
+2024-12-17 16:12:18,328 - DEBUG - Entering wrapped_func
+User Context:
+  - user_id: Unknown
+  - role: Unknown
+Request Context:
+  - method: GET
+  - path: /
+  - client_ip: None
+  - headers: {'Host': 'localhost', 'Content-Type': 'application/json', 'Content-Length': '56'}
+  - body: {'description': 'Test Asset', 'name': 'Duplicate Asset'}
+Function Context:
+  - handler: AssetHandler
+ - for user_id=unknown | role=unknown
+2024-12-17 16:12:18,329 - INFO - wrapped_func executed successfully. - for user_id=unknown | role=unknown
+2024-12-17 16:12:18,329 - DEBUG - Exiting wrapped_func - for user_id=unknown | role=unknown
+2024-12-17 16:12:18,463 - DEBUG - Entering wrapped_func
+User Context:
+  - user_id: Unknown
+  - role: Unknown
+Request Context:
+  - method: GET
+  - path: /
+  - client_ip: None
+  - headers: {'Host': 'localhost', 'Content-Type': 'application/json', 'Content-Length': '50'}
+  - body: {'description': 'Test Asset', 'name': 'New Asset'}
+Function Context:
+  - handler: AssetHandler
+ - for user_id=unknown | role=unknown
+2024-12-17 16:12:18,463 - INFO - wrapped_func executed successfully. - for user_id=unknown | role=unknown
+2024-12-17 16:12:18,463 - DEBUG - Exiting wrapped_func - for user_id=unknown | role=unknown
+2024-12-17 16:12:18,481 - DEBUG - Entering wrapped_func
+User Context:
+  - user_id: Unknown
+  - role: Unknown
+Request Context:
+  - method: GET
+  - path: /
+  - client_ip: None
+  - headers: {'Host': 'localhost', 'Content-Type': 'application/json', 'Content-Length': '19'}
+  - body: {'name': 'Invalid'}
+Function Context:
+  - handler: AssetHandler
+ - for user_id=unknown | role=unknown
+2024-12-17 16:12:18,481 - INFO - wrapped_func executed successfully. - for user_id=unknown | role=unknown
+2024-12-17 16:12:18,481 - DEBUG - Exiting wrapped_func - for user_id=unknown | role=unknown
+2024-12-17 16:12:18,502 - DEBUG - Entering wrapped_func
+User Context:
+  - user_id: Unknown
+  - role: Unknown
+Request Context:
+  - method: GET
+  - path: /
+  - client_ip: None
+  - headers: {'Host': 'localhost', 'Content-Type': 'application/json', 'Content-Length': '42'}
+  - body: {'asset_id': 'asset1', 'user_id': 'user1'}
+Function Context:
+  - handler: AssetHandler
+ - for user_id=unknown | role=unknown
+2024-12-17 16:12:18,503 - INFO - wrapped_func executed successfully. - for user_id=unknown | role=unknown
+2024-12-17 16:12:18,503 - DEBUG - Exiting wrapped_func - for user_id=unknown | role=unknown
+2024-12-17 16:12:18,521 - DEBUG - Entering wrapped_func
+User Context:
+  - user_id: Unknown
+  - role: Unknown
+Request Context:
+  - method: GET
+  - path: /
+  - client_ip: None
+  - headers: {'Host': 'localhost', 'Content-Type': 'application/json', 'Content-Length': '42'}
+  - body: {'asset_id': 'asset1', 'user_id': 'user1'}
+Function Context:
+  - handler: AssetHandler
+ - for user_id=unknown | role=unknown
+2024-12-17 16:12:18,522 - INFO - wrapped_func executed successfully. - for user_id=unknown | role=unknown
+2024-12-17 16:12:18,522 - DEBUG - Exiting wrapped_func - for user_id=unknown | role=unknown
+2024-12-17 16:12:18,793 - DEBUG - Entering assigned_assets
+User Context:
+  - user_id: Unknown
+  - role: Unknown
+Request Context:
+  - method: GET
+  - path: /
+  - client_ip: None
+  - headers: {'Host': 'localhost'}
+  - body: {}
+Function Context:
+  - handler: AssetHandler
+ - for user_id=unknown | role=unknown
+2024-12-17 16:12:18,794 - INFO - assigned_assets executed successfully. - for user_id=unknown | role=unknown
+2024-12-17 16:12:18,794 - DEBUG - Exiting assigned_assets - for user_id=unknown | role=unknown
+2024-12-17 16:12:18,799 - DEBUG - Entering assigned_assets
+User Context:
+  - user_id: Unknown
+  - role: Unknown
+Request Context:
+  - method: GET
+  - path: /
+  - client_ip: None
+  - headers: {'Host': 'localhost'}
+  - body: {}
+Function Context:
+  - handler: AssetHandler
+ - for user_id=unknown | role=unknown
+2024-12-17 16:12:18,799 - INFO - assigned_assets executed successfully. - for user_id=unknown | role=unknown
+2024-12-17 16:12:18,799 - DEBUG - Exiting assigned_assets - for user_id=unknown | role=unknown
+2024-12-17 16:12:18,815 - DEBUG - Entering wrapped_func
+User Context:
+  - user_id: Unknown
+  - role: Unknown
+Request Context:
+  - method: GET
+  - path: /
+  - client_ip: None
+  - headers: {'Host': 'localhost'}
+  - body: {}
+Function Context:
+  - handler: AssetHandler
+ - for user_id=unknown | role=unknown
+2024-12-17 16:12:18,815 - INFO - wrapped_func executed successfully. - for user_id=unknown | role=unknown
+2024-12-17 16:12:18,815 - DEBUG - Exiting wrapped_func - for user_id=unknown | role=unknown
+2024-12-17 16:12:18,831 - DEBUG - Entering wrapped_func
+User Context:
+  - user_id: Unknown
+  - role: Unknown
+Request Context:
+  - method: GET
+  - path: /
+  - client_ip: None
+  - headers: {'Host': 'localhost'}
+  - body: {}
+Function Context:
+  - handler: AssetHandler
+ - for user_id=unknown | role=unknown
+2024-12-17 16:12:18,831 - INFO - wrapped_func executed successfully. - for user_id=unknown | role=unknown
+2024-12-17 16:12:18,832 - DEBUG - Exiting wrapped_func - for user_id=unknown | role=unknown
+2024-12-17 16:12:19,331 - DEBUG - Entering unassign_asset
+User Context:
+  - user_id: Unknown
+  - role: Unknown
+Request Context:
+  - method: GET
+  - path: /
+  - client_ip: None
+  - headers: {'Host': 'localhost', 'Content-Type': 'application/json', 'Content-Length': '42'}
+  - body: {'asset_id': 'asset1', 'user_id': 'user1'}
+Function Context:
+  - handler: AssetHandler
+ - for user_id=unknown | role=unknown
+2024-12-17 16:12:19,331 - INFO - unassign_asset executed successfully. - for user_id=unknown | role=unknown
+2024-12-17 16:12:19,331 - DEBUG - Exiting unassign_asset - for user_id=unknown | role=unknown
+2024-12-17 16:12:19,347 - DEBUG - Entering unassign_asset
+User Context:
+  - user_id: Unknown
+  - role: Unknown
+Request Context:
+  - method: GET
+  - path: /
+  - client_ip: None
+  - headers: {'Host': 'localhost', 'Content-Type': 'application/json', 'Content-Length': '42'}
+  - body: {'asset_id': 'asset1', 'user_id': 'user1'}
+Function Context:
+  - handler: AssetHandler
+ - for user_id=unknown | role=unknown
+2024-12-17 16:12:19,347 - INFO - unassign_asset executed successfully. - for user_id=unknown | role=unknown
+2024-12-17 16:12:19,347 - DEBUG - Exiting unassign_asset - for user_id=unknown | role=unknown
+2024-12-17 16:12:19,471 - DEBUG - Entering report_issue
+User Context:
+  - user_id: Unknown
+  - role: Unknown
+Request Context:
+  - method: GET
+  - path: /
+  - client_ip: None
+  - headers: {'Host': 'localhost', 'Content-Type': 'application/json', 'Content-Length': '65'}
+  - body: {'asset_id': 'asset123', 'description': 'Test issue description'}
+Function Context:
+  - handler: IssueHandler
+ - for user_id=unknown | role=unknown
+2024-12-17 16:12:19,471 - INFO - report_issue executed successfully. - for user_id=unknown | role=unknown
+2024-12-17 16:12:19,471 - DEBUG - Exiting report_issue - for user_id=unknown | role=unknown
+2024-12-17 16:12:19,497 - DEBUG - Entering report_issue
+User Context:
+  - user_id: Unknown
+  - role: Unknown
+Request Context:
+  - method: GET
+  - path: /
+  - client_ip: None
+  - headers: {'Host': 'localhost', 'Content-Type': 'application/json', 'Content-Length': '65'}
+  - body: {'asset_id': 'asset123', 'description': 'Test issue description'}
+Function Context:
+  - handler: IssueHandler
+ - for user_id=unknown | role=unknown
+2024-12-17 16:12:19,498 - INFO - report_issue executed successfully. - for user_id=unknown | role=unknown
+2024-12-17 16:12:19,498 - DEBUG - Exiting report_issue - for user_id=unknown | role=unknown
+2024-12-17 16:12:19,543 - DEBUG - Entering report_issue
+User Context:
+  - user_id: Unknown
+  - role: Unknown
+Request Context:
+  - method: GET
+  - path: /
+  - client_ip: None
+  - headers: {'Host': 'localhost', 'Content-Type': 'application/json', 'Content-Length': '65'}
+  - body: {'asset_id': 'asset123', 'description': 'Test issue description'}
+Function Context:
+  - handler: IssueHandler
+ - for user_id=unknown | role=unknown
+2024-12-17 16:12:19,544 - INFO - report_issue executed successfully. - for user_id=unknown | role=unknown
+2024-12-17 16:12:19,544 - DEBUG - Exiting report_issue - for user_id=unknown | role=unknown
+2024-12-17 16:12:19,570 - DEBUG - Entering report_issue
+User Context:
+  - user_id: Unknown
+  - role: Unknown
+Request Context:
+  - method: GET
+  - path: /
+  - client_ip: None
+  - headers: {'Host': 'localhost', 'Content-Type': 'application/json', 'Content-Length': '65'}
+  - body: {'asset_id': 'asset123', 'description': 'Test issue description'}
+Function Context:
+  - handler: IssueHandler
+ - for user_id=unknown | role=unknown
+2024-12-17 16:12:19,570 - INFO - report_issue executed successfully. - for user_id=unknown | role=unknown
+2024-12-17 16:12:19,570 - DEBUG - Exiting report_issue - for user_id=unknown | role=unknown
+2024-12-17 16:58:20,534 - DEBUG - Entering wrapped_func
+User Context:
+  - user_id: Unknown
+  - role: Unknown
+Request Context:
+  - method: POST
+  - path: /
+  - client_ip: None
+  - headers: {'Host': 'localhost', 'Content-Type': 'application/json', 'Content-Length': '2'}
+  - body: {}
+Function Context:
+  - handler: AssetHandler
+ - for user_id=unknown | role=unknown
+2024-12-17 16:58:20,535 - INFO - wrapped_func executed successfully. - for user_id=unknown | role=unknown
+2024-12-17 16:58:20,536 - DEBUG - Exiting wrapped_func - for user_id=unknown | role=unknown
+2024-12-17 16:58:20,660 - DEBUG - Entering wrapped_func
+User Context:
+  - user_id: Unknown
+  - role: Unknown
+Request Context:
+  - method: POST
+  - path: /
+  - client_ip: None
+  - headers: {'Host': 'localhost', 'Content-Type': 'application/json', 'Content-Length': '57'}
+  - body: {'description': 'Asset description', 'name': 'New Asset'}
+Function Context:
+  - handler: AssetHandler
+ - for user_id=unknown | role=unknown
+2024-12-17 16:58:20,661 - INFO - wrapped_func executed successfully. - for user_id=unknown | role=unknown
+2024-12-17 16:58:20,661 - DEBUG - Exiting wrapped_func - for user_id=unknown | role=unknown
+2024-12-17 16:58:20,817 - DEBUG - Entering report_issue
+User Context:
+  - user_id: Unknown
+  - role: Unknown
+Request Context:
+  - method: GET
+  - path: /
+  - client_ip: None
+  - headers: {'Host': 'localhost', 'Content-Type': 'application/json', 'Content-Length': '65'}
+  - body: {'asset_id': 'asset123', 'description': 'Test issue description'}
+Function Context:
+  - handler: IssueHandler
+ - for user_id=unknown | role=unknown
+2024-12-17 16:58:20,817 - INFO - report_issue executed successfully. - for user_id=unknown | role=unknown
+2024-12-17 16:58:20,817 - DEBUG - Exiting report_issue - for user_id=unknown | role=unknown
+2024-12-17 16:58:20,834 - DEBUG - Entering report_issue
+User Context:
+  - user_id: Unknown
+  - role: Unknown
+Request Context:
+  - method: GET
+  - path: /
+  - client_ip: None
+  - headers: {'Host': 'localhost', 'Content-Type': 'application/json', 'Content-Length': '65'}
+  - body: {'asset_id': 'asset123', 'description': 'Test issue description'}
+Function Context:
+  - handler: IssueHandler
+ - for user_id=unknown | role=unknown
+2024-12-17 16:58:20,835 - INFO - report_issue executed successfully. - for user_id=unknown | role=unknown
+2024-12-17 16:58:20,835 - DEBUG - Exiting report_issue - for user_id=unknown | role=unknown
+2024-12-17 16:58:20,853 - DEBUG - Entering report_issue
+User Context:
+  - user_id: Unknown
+  - role: Unknown
+Request Context:
+  - method: GET
+  - path: /
+  - client_ip: None
+  - headers: {'Host': 'localhost', 'Content-Type': 'application/json', 'Content-Length': '65'}
+  - body: {'asset_id': 'asset123', 'description': 'Test issue description'}
+Function Context:
+  - handler: IssueHandler
+ - for user_id=unknown | role=unknown
+2024-12-17 16:58:20,853 - INFO - report_issue executed successfully. - for user_id=unknown | role=unknown
+2024-12-17 16:58:20,853 - DEBUG - Exiting report_issue - for user_id=unknown | role=unknown
+2024-12-17 16:58:20,871 - DEBUG - Entering report_issue
+User Context:
+  - user_id: Unknown
+  - role: Unknown
+Request Context:
+  - method: GET
+  - path: /
+  - client_ip: None
+  - headers: {'Host': 'localhost', 'Content-Type': 'application/json', 'Content-Length': '65'}
+  - body: {'asset_id': 'asset123', 'description': 'Test issue description'}
+Function Context:
+  - handler: IssueHandler
+ - for user_id=unknown | role=unknown
+2024-12-17 16:58:20,871 - INFO - report_issue executed successfully. - for user_id=unknown | role=unknown
+2024-12-17 16:58:20,871 - DEBUG - Exiting report_issue - for user_id=unknown | role=unknown
+2024-12-17 16:58:20,972 - DEBUG - Exiting wrapped_func - for user_id=unknown | role=unknown
+2024-12-17 16:58:21,034 - DEBUG - Exiting wrapped_func - for user_id=unknown | role=unknown
+2024-12-17 16:58:21,110 - DEBUG - Entering login
+User Context:
+  - user_id: Unknown
+  - role: Unknown
+Request Context:
+  - method: POST
+  - path: /
+  - client_ip: None
+  - headers: {'Host': 'localhost', 'Content-Type': 'application/json', 'Content-Length': '58'}
+  - body: {'email': 'test@example.com', 'password': '***'}
+Function Context:
+  - handler: UserHandler
+ - for user_id=unknown | role=unknown
+2024-12-17 16:58:21,111 - INFO - login executed successfully. - for user_id=unknown | role=unknown
+2024-12-17 16:58:21,111 - DEBUG - Exiting login - for user_id=unknown | role=unknown
+2024-12-17 17:13:44,896 - DEBUG - Entering wrapped_func
+User Context:
+  - user_id: Unknown
+  - role: admin
+Request Context:
+  - method: POST
+  - path: /
+  - client_ip: None
+  - headers: {'Host': 'localhost', 'Content-Type': 'application/json', 'Content-Length': '2'}
+  - body: {}
+Function Context:
+  - handler: AssetHandler
+ - for user_id=unknown | role=admin
+2024-12-17 17:13:44,899 - INFO - wrapped_func executed successfully. - for user_id=unknown | role=admin
+2024-12-17 17:13:44,900 - DEBUG - Exiting wrapped_func - for user_id=unknown | role=admin
+2024-12-17 17:13:44,936 - DEBUG - Entering wrapped_func
+User Context:
+  - user_id: Unknown
+  - role: admin
+Request Context:
+  - method: POST
+  - path: /
+  - client_ip: None
+  - headers: {'Host': 'localhost', 'Content-Type': 'application/json', 'Content-Length': '57'}
+  - body: {'description': 'Asset description', 'name': 'New Asset'}
+Function Context:
+  - handler: AssetHandler
+ - for user_id=unknown | role=admin
+2024-12-17 17:13:44,936 - INFO - wrapped_func executed successfully. - for user_id=unknown | role=admin
+2024-12-17 17:13:44,937 - DEBUG - Exiting wrapped_func - for user_id=unknown | role=admin
+2024-12-17 17:13:45,643 - DEBUG - Entering report_issue
+User Context:
+  - user_id: Unknown
+  - role: Unknown
+Request Context:
+  - method: GET
+  - path: /
+  - client_ip: None
+  - headers: {'Host': 'localhost', 'Content-Type': 'application/json', 'Content-Length': '65'}
+  - body: {'asset_id': 'asset123', 'description': 'Test issue description'}
+Function Context:
+  - handler: IssueHandler
+ - for user_id=unknown | role=unknown
+2024-12-17 17:13:45,644 - INFO - report_issue executed successfully. - for user_id=unknown | role=unknown
+2024-12-17 17:13:45,644 - DEBUG - Exiting report_issue - for user_id=unknown | role=unknown
+2024-12-17 17:13:45,688 - DEBUG - Entering report_issue
+User Context:
+  - user_id: Unknown
+  - role: Unknown
+Request Context:
+  - method: GET
+  - path: /
+  - client_ip: None
+  - headers: {'Host': 'localhost', 'Content-Type': 'application/json', 'Content-Length': '65'}
+  - body: {'asset_id': 'asset123', 'description': 'Test issue description'}
+Function Context:
+  - handler: IssueHandler
+ - for user_id=unknown | role=unknown
+2024-12-17 17:13:45,689 - INFO - report_issue executed successfully. - for user_id=unknown | role=unknown
+2024-12-17 17:13:45,689 - DEBUG - Exiting report_issue - for user_id=unknown | role=unknown
+2024-12-17 17:13:45,735 - DEBUG - Entering report_issue
+User Context:
+  - user_id: Unknown
+  - role: Unknown
+Request Context:
+  - method: GET
+  - path: /
+  - client_ip: None
+  - headers: {'Host': 'localhost', 'Content-Type': 'application/json', 'Content-Length': '65'}
+  - body: {'asset_id': 'asset123', 'description': 'Test issue description'}
+Function Context:
+  - handler: IssueHandler
+ - for user_id=unknown | role=unknown
+2024-12-17 17:13:45,736 - INFO - report_issue executed successfully. - for user_id=unknown | role=unknown
+2024-12-17 17:13:45,736 - DEBUG - Exiting report_issue - for user_id=unknown | role=unknown
+2024-12-17 17:13:45,780 - DEBUG - Entering report_issue
+User Context:
+  - user_id: Unknown
+  - role: Unknown
+Request Context:
+  - method: GET
+  - path: /
+  - client_ip: None
+  - headers: {'Host': 'localhost', 'Content-Type': 'application/json', 'Content-Length': '65'}
+  - body: {'asset_id': 'asset123', 'description': 'Test issue description'}
+Function Context:
+  - handler: IssueHandler
+ - for user_id=unknown | role=unknown
+2024-12-17 17:13:45,781 - INFO - report_issue executed successfully. - for user_id=unknown | role=unknown
+2024-12-17 17:13:45,781 - DEBUG - Exiting report_issue - for user_id=unknown | role=unknown
+2024-12-17 17:13:46,065 - DEBUG - Exiting wrapped_func - for user_id=unknown | role=unknown
+2024-12-17 17:13:46,258 - DEBUG - Exiting wrapped_func - for user_id=unknown | role=unknown
+2024-12-17 17:13:46,451 - DEBUG - Entering login
+User Context:
+  - user_id: Unknown
+  - role: Unknown
+Request Context:
+  - method: POST
+  - path: /
+  - client_ip: None
+  - headers: {'Host': 'localhost', 'Content-Type': 'application/json', 'Content-Length': '58'}
+  - body: {'email': 'test@example.com', 'password': '***'}
+Function Context:
+  - handler: UserHandler
+ - for user_id=unknown | role=unknown
+2024-12-17 17:13:46,453 - INFO - login executed successfully. - for user_id=unknown | role=unknown
+2024-12-17 17:13:46,454 - DEBUG - Exiting login - for user_id=unknown | role=unknown
+2024-12-17 17:55:46,119 - DEBUG - Entering wrapped_func
+User Context:
+  - user_id: Unknown
+  - role: admin
+Request Context:
+  - method: POST
+  - path: /
+  - client_ip: None
+  - headers: {'Host': 'localhost', 'Content-Type': 'application/json', 'Content-Length': '2'}
+  - body: {}
+Function Context:
+  - handler: AssetHandler
+ - for user_id=unknown | role=admin
+2024-12-17 17:55:46,121 - INFO - wrapped_func executed successfully. - for user_id=unknown | role=admin
+2024-12-17 17:55:46,121 - DEBUG - Exiting wrapped_func - for user_id=unknown | role=admin
+2024-12-17 17:55:46,148 - DEBUG - Entering wrapped_func
+User Context:
+  - user_id: Unknown
+  - role: admin
+Request Context:
+  - method: POST
+  - path: /
+  - client_ip: None
+  - headers: {'Host': 'localhost', 'Content-Type': 'application/json', 'Content-Length': '57'}
+  - body: {'description': 'Asset description', 'name': 'New Asset'}
+Function Context:
+  - handler: AssetHandler
+ - for user_id=unknown | role=admin
+2024-12-17 17:55:46,149 - INFO - wrapped_func executed successfully. - for user_id=unknown | role=admin
+2024-12-17 17:55:46,149 - DEBUG - Exiting wrapped_func - for user_id=unknown | role=admin
+2024-12-17 17:55:46,160 - DEBUG - Entering wrapped_func
+User Context:
+  - user_id: Unknown
+  - role: admin
+Request Context:
+  - method: POST
+  - path: /
+  - client_ip: None
+  - headers: {'Host': 'localhost', 'Content-Type': 'application/json', 'Content-Length': '46'}
+  - body: {'asset_id': 'asset123', 'user_id': 'user123'}
+Function Context:
+  - handler: AssetHandler
+ - for user_id=unknown | role=admin
+2024-12-17 17:55:46,160 - INFO - wrapped_func executed successfully. - for user_id=unknown | role=admin
+2024-12-17 17:55:46,160 - DEBUG - Exiting wrapped_func - for user_id=unknown | role=admin
+2024-12-17 17:55:46,363 - DEBUG - Entering wrapped_func
+User Context:
+  - user_id: Unknown
+  - role: admin
+Request Context:
+  - method: POST
+  - path: /
+  - client_ip: None
+  - headers: {'Host': 'localhost', 'Content-Type': 'application/json', 'Content-Length': '46'}
+  - body: {'asset_id': 'asset123', 'user_id': 'user123'}
+Function Context:
+  - handler: AssetHandler
+ - for user_id=unknown | role=admin
+2024-12-17 17:55:46,363 - INFO - wrapped_func executed successfully. - for user_id=unknown | role=admin
+2024-12-17 17:55:46,364 - DEBUG - Exiting wrapped_func - for user_id=unknown | role=admin
+2024-12-17 17:55:46,403 - DEBUG - Entering wrapped_func
+User Context:
+  - user_id: Unknown
+  - role: admin
+Request Context:
+  - method: DELETE
+  - path: /
+  - client_ip: None
+  - headers: {'Host': 'localhost', 'Content-Type': 'application/json', 'Content-Length': '26'}
+  - body: {'asset_id': 'invalid_id'}
+Function Context:
+  - handler: AssetHandler
+ - for user_id=unknown | role=admin
+2024-12-17 17:55:46,403 - INFO - wrapped_func executed successfully. - for user_id=unknown | role=admin
+2024-12-17 17:55:46,404 - DEBUG - Exiting wrapped_func - for user_id=unknown | role=admin
+2024-12-17 17:55:46,424 - DEBUG - Entering wrapped_func
+User Context:
+  - user_id: Unknown
+  - role: admin
+Request Context:
+  - method: DELETE
+  - path: /
+  - client_ip: None
+  - headers: {'Host': 'localhost', 'Content-Type': 'application/json', 'Content-Length': '21'}
+  - body: {'asset_id': '12345'}
+Function Context:
+  - handler: AssetHandler
+ - for user_id=unknown | role=admin
+2024-12-17 17:55:46,425 - INFO - wrapped_func executed successfully. - for user_id=unknown | role=admin
+2024-12-17 17:55:46,425 - DEBUG - Exiting wrapped_func - for user_id=unknown | role=admin
+2024-12-17 17:55:46,466 - DEBUG - Entering wrapped_func
+User Context:
+  - user_id: Unknown
+  - role: admin
+Request Context:
+  - method: GET
+  - path: /
+  - client_ip: None
+  - headers: {'Host': 'localhost'}
+  - body: {}
+Function Context:
+  - handler: AssetHandler
+ - for user_id=unknown | role=admin
+2024-12-17 17:55:46,467 - INFO - wrapped_func executed successfully. - for user_id=unknown | role=admin
+2024-12-17 17:55:46,467 - DEBUG - Exiting wrapped_func - for user_id=unknown | role=admin
+2024-12-17 17:55:46,482 - DEBUG - Entering unassign_asset
+User Context:
+  - user_id: Unknown
+  - role: Unknown
+Request Context:
+  - method: POST
+  - path: /
+  - client_ip: None
+  - headers: {'Host': 'localhost', 'Content-Type': 'application/json', 'Content-Length': '46'}
+  - body: {'asset_id': 'asset123', 'user_id': 'user123'}
+Function Context:
+  - handler: AssetHandler
+ - for user_id=unknown | role=unknown
+2024-12-17 17:55:46,483 - INFO - unassign_asset executed successfully. - for user_id=unknown | role=unknown
+2024-12-17 17:55:46,483 - DEBUG - Exiting unassign_asset - for user_id=unknown | role=unknown
+2024-12-17 17:55:46,517 - DEBUG - Entering unassign_asset
+User Context:
+  - user_id: Unknown
+  - role: admin
+Request Context:
+  - method: POST
+  - path: /
+  - client_ip: None
+  - headers: {'Host': 'localhost', 'Content-Type': 'application/json', 'Content-Length': '46'}
+  - body: {'asset_id': 'asset123', 'user_id': 'user123'}
+Function Context:
+  - handler: AssetHandler
+ - for user_id=unknown | role=admin
+2024-12-17 17:55:46,518 - INFO - unassign_asset executed successfully. - for user_id=unknown | role=admin
+2024-12-17 17:55:46,518 - DEBUG - Exiting unassign_asset - for user_id=unknown | role=admin
+2024-12-17 17:55:46,801 - DEBUG - Entering report_issue
+User Context:
+  - user_id: Unknown
+  - role: Unknown
+Request Context:
+  - method: GET
+  - path: /
+  - client_ip: None
+  - headers: {'Host': 'localhost', 'Content-Type': 'application/json', 'Content-Length': '65'}
+  - body: {'asset_id': 'asset123', 'description': 'Test issue description'}
+Function Context:
+  - handler: IssueHandler
+ - for user_id=unknown | role=unknown
+2024-12-17 17:55:46,802 - INFO - report_issue executed successfully. - for user_id=unknown | role=unknown
+2024-12-17 17:55:46,802 - DEBUG - Exiting report_issue - for user_id=unknown | role=unknown
+2024-12-17 17:55:46,828 - DEBUG - Entering report_issue
+User Context:
+  - user_id: Unknown
+  - role: Unknown
+Request Context:
+  - method: GET
+  - path: /
+  - client_ip: None
+  - headers: {'Host': 'localhost', 'Content-Type': 'application/json', 'Content-Length': '65'}
+  - body: {'asset_id': 'asset123', 'description': 'Test issue description'}
+Function Context:
+  - handler: IssueHandler
+ - for user_id=unknown | role=unknown
+2024-12-17 17:55:46,828 - INFO - report_issue executed successfully. - for user_id=unknown | role=unknown
+2024-12-17 17:55:46,829 - DEBUG - Exiting report_issue - for user_id=unknown | role=unknown
+2024-12-17 17:55:46,857 - DEBUG - Entering report_issue
+User Context:
+  - user_id: Unknown
+  - role: Unknown
+Request Context:
+  - method: GET
+  - path: /
+  - client_ip: None
+  - headers: {'Host': 'localhost', 'Content-Type': 'application/json', 'Content-Length': '65'}
+  - body: {'asset_id': 'asset123', 'description': 'Test issue description'}
+Function Context:
+  - handler: IssueHandler
+ - for user_id=unknown | role=unknown
+2024-12-17 17:55:46,857 - INFO - report_issue executed successfully. - for user_id=unknown | role=unknown
+2024-12-17 17:55:46,858 - DEBUG - Exiting report_issue - for user_id=unknown | role=unknown
+2024-12-17 17:55:46,881 - DEBUG - Entering report_issue
+User Context:
+  - user_id: Unknown
+  - role: Unknown
+Request Context:
+  - method: GET
+  - path: /
+  - client_ip: None
+  - headers: {'Host': 'localhost', 'Content-Type': 'application/json', 'Content-Length': '65'}
+  - body: {'asset_id': 'asset123', 'description': 'Test issue description'}
+Function Context:
+  - handler: IssueHandler
+ - for user_id=unknown | role=unknown
+2024-12-17 17:55:46,882 - INFO - report_issue executed successfully. - for user_id=unknown | role=unknown
+2024-12-17 17:55:46,882 - DEBUG - Exiting report_issue - for user_id=unknown | role=unknown
+2024-12-17 17:55:47,080 - DEBUG - Exiting wrapped_func - for user_id=unknown | role=unknown
+2024-12-17 17:55:47,234 - DEBUG - Exiting wrapped_func - for user_id=unknown | role=unknown
+2024-12-17 17:55:47,413 - DEBUG - Entering login
+User Context:
+  - user_id: Unknown
+  - role: Unknown
+Request Context:
+  - method: POST
+  - path: /
+  - client_ip: None
+  - headers: {'Host': 'localhost', 'Content-Type': 'application/json', 'Content-Length': '58'}
+  - body: {'email': 'test@example.com', 'password': '***'}
+Function Context:
+  - handler: UserHandler
+ - for user_id=unknown | role=unknown
+2024-12-17 17:55:47,415 - INFO - login executed successfully. - for user_id=unknown | role=unknown
+2024-12-17 17:55:47,415 - DEBUG - Exiting login - for user_id=unknown | role=unknown

@@ -1,0 +1,33 @@
+[metadata]
+name = asset_management
+version = 1.0.0
+description = Project for mananging assets in an organisation
+author = Pravin
+
+[options]
+install_requires =
+    bcrypt
+    blinker
+    cffi
+    click
+    colorama
+    coverage
+    cryptography
+    execnet
+    Flask
+    iniconfig
+    itsdangerous
+    Jinja2
+    jwt
+    MarkupSafe
+    packaging
+    pip
+    pluggy
+    pycparser
+    PyJWT
+    pytest
+    pytest-cov
+    pytest-html
+    pytest-metadata
+    pytest-xdist
+    Werkzeug

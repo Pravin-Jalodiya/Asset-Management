@@ -3808,3 +3808,724 @@ Function Context:
  - for user_id=fcb38cbd-317b-4b9e-aa52-87c8fadc6434 | role=admin
 2024-12-16 11:18:45,426 - INFO - wrapped_func executed successfully. - for user_id=fcb38cbd-317b-4b9e-aa52-87c8fadc6434 | role=admin
 2024-12-16 11:18:45,426 - DEBUG - Exiting wrapped_func - for user_id=fcb38cbd-317b-4b9e-aa52-87c8fadc6434 | role=admin
+2024-12-16 16:16:48,811 - DEBUG - Entering login
+User Context:
+  - user_id: Unknown
+  - role: Unknown
+Request Context:
+  - method: POST
+  - path: /login
+  - client_ip: 127.0.0.1
+  - headers: {'Content-Type': 'application/json', 'User-Agent': 'PostmanRuntime/7.43.0', 'Accept': '*/*', 'Postman-Token': '29011054-30d4-4396-ab8c-39c420487c0d', 'Host': '127.0.0.1:5000', 'Accept-Encoding': 'gzip, deflate, br', 'Connection': 'keep-alive', 'Content-Length': '74'}
+  - body: {'email': 'pravin6@watchguard.com', 'password': '***'}
+Function Context:
+  - handler: UserHandler
+ - for user_id=unknown | role=unknown
+2024-12-16 16:16:49,081 - ERROR - Error occurred in login: 'CustomResponse' object has no attribute 'to_dict'
+User Context:
+  - user_id: Unknown
+  - role: Unknown
+Request Context:
+  - method: POST
+  - path: /login
+  - client_ip: 127.0.0.1
+  - body: {'email': 'pravin6@watchguard.com', 'password': '***'} - for user_id=unknown | role=unknown
+2024-12-16 16:16:49,082 - DEBUG - Exiting login - for user_id=unknown | role=unknown
+2024-12-16 16:16:58,159 - DEBUG - Entering login
+User Context:
+  - user_id: Unknown
+  - role: Unknown
+Request Context:
+  - method: POST
+  - path: /login
+  - client_ip: 127.0.0.1
+  - headers: {'Content-Type': 'application/json', 'User-Agent': 'PostmanRuntime/7.43.0', 'Accept': '*/*', 'Postman-Token': '2cb0cc03-7463-4bd5-a8a1-b5776a5ac6fe', 'Host': '127.0.0.1:5000', 'Accept-Encoding': 'gzip, deflate, br', 'Connection': 'keep-alive', 'Content-Length': '74'}
+  - body: {'email': 'pravin6@watchguard.com', 'password': '***'}
+Function Context:
+  - handler: UserHandler
+ - for user_id=unknown | role=unknown
+2024-12-16 16:16:58,390 - ERROR - Error occurred in login: 'CustomResponse' object has no attribute 'to_dict'
+User Context:
+  - user_id: Unknown
+  - role: Unknown
+Request Context:
+  - method: POST
+  - path: /login
+  - client_ip: 127.0.0.1
+  - body: {'email': 'pravin6@watchguard.com', 'password': '***'} - for user_id=unknown | role=unknown
+2024-12-16 16:16:58,390 - DEBUG - Exiting login - for user_id=unknown | role=unknown
+2024-12-16 16:18:01,415 - DEBUG - Entering login
+User Context:
+  - user_id: Unknown
+  - role: Unknown
+Request Context:
+  - method: POST
+  - path: /login
+  - client_ip: 127.0.0.1
+  - headers: {'Content-Type': 'application/json', 'User-Agent': 'PostmanRuntime/7.43.0', 'Accept': '*/*', 'Postman-Token': 'da262962-5cfc-4839-b84b-b2d695efc59a', 'Host': '127.0.0.1:5000', 'Accept-Encoding': 'gzip, deflate, br', 'Connection': 'keep-alive', 'Content-Length': '74'}
+  - body: {'email': 'pravin6@watchguard.com', 'password': '***'}
+Function Context:
+  - handler: UserHandler
+ - for user_id=unknown | role=unknown
+2024-12-16 16:18:01,646 - INFO - login executed successfully. - for user_id=unknown | role=unknown
+2024-12-16 16:18:01,646 - DEBUG - Exiting login - for user_id=unknown | role=unknown
+2024-12-16 16:18:01,715 - DEBUG - Entering get_user_issues
+User Context:
+  - user_id: 25820625-a342-43d2-98fc-2c622715ac16
+  - role: user
+Request Context:
+  - method: GET
+  - path: /issues/25820625-a342-43d2-98fc-2c622715ac16
+  - client_ip: 127.0.0.1
+  - headers: {'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMjU4MjA2MjUtYTM0Mi00M2QyLTk4ZmMtMmM2MjI3MTVhYzE2Iiwicm9sZSI6InVzZXIiLCJleHAiOjE3MzQzNDk2ODEsImlhdCI6MTczNDM0NjA4MSwibmJmIjoxNzM0MzQ2MDgxfQ.4rFZXTe89qdsYzB9cjYVYYXwkBOl-TtLGbJ9VtmeOQE', 'User-Agent': 'PostmanRuntime/7.43.0', 'Accept': '*/*', 'Postman-Token': 'f0814b14-9be9-485e-9396-775089a10b2f', 'Host': '127.0.0.1:5000', 'Accept-Encoding': 'gzip, deflate, br', 'Connection': 'keep-alive'}
+  - body: {}
+Function Context:
+  - handler: IssueHandler
+ - for user_id=25820625-a342-43d2-98fc-2c622715ac16 | role=user
+2024-12-16 16:18:01,716 - INFO - get_user_issues executed successfully. - for user_id=25820625-a342-43d2-98fc-2c622715ac16 | role=user
+2024-12-16 16:18:01,716 - DEBUG - Exiting get_user_issues - for user_id=25820625-a342-43d2-98fc-2c622715ac16 | role=user
+2024-12-16 16:18:01,794 - DEBUG - Entering assigned_assets
+User Context:
+  - user_id: 25820625-a342-43d2-98fc-2c622715ac16
+  - role: user
+Request Context:
+  - method: GET
+  - path: /assigned-assets/25820625-a342-43d2-98fc-2c622715ac16
+  - client_ip: 127.0.0.1
+  - headers: {'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMjU4MjA2MjUtYTM0Mi00M2QyLTk4ZmMtMmM2MjI3MTVhYzE2Iiwicm9sZSI6InVzZXIiLCJleHAiOjE3MzQzNDk2ODEsImlhdCI6MTczNDM0NjA4MSwibmJmIjoxNzM0MzQ2MDgxfQ.4rFZXTe89qdsYzB9cjYVYYXwkBOl-TtLGbJ9VtmeOQE', 'User-Agent': 'PostmanRuntime/7.43.0', 'Accept': '*/*', 'Postman-Token': '5750c36b-9b83-4320-98f5-8eeefe03f20c', 'Host': '127.0.0.1:5000', 'Accept-Encoding': 'gzip, deflate, br', 'Connection': 'keep-alive'}
+  - body: {}
+Function Context:
+  - handler: AssetHandler
+ - for user_id=25820625-a342-43d2-98fc-2c622715ac16 | role=user
+2024-12-16 16:18:01,795 - INFO - assigned_assets executed successfully. - for user_id=25820625-a342-43d2-98fc-2c622715ac16 | role=user
+2024-12-16 16:18:01,796 - DEBUG - Exiting assigned_assets - for user_id=25820625-a342-43d2-98fc-2c622715ac16 | role=user
+2024-12-16 16:18:01,857 - DEBUG - Entering get_user
+User Context:
+  - user_id: 25820625-a342-43d2-98fc-2c622715ac16
+  - role: user
+Request Context:
+  - method: GET
+  - path: /user/25820625-a342-43d2-98fc-2c622715ac16
+  - client_ip: 127.0.0.1
+  - headers: {'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMjU4MjA2MjUtYTM0Mi00M2QyLTk4ZmMtMmM2MjI3MTVhYzE2Iiwicm9sZSI6InVzZXIiLCJleHAiOjE3MzQzNDk2ODEsImlhdCI6MTczNDM0NjA4MSwibmJmIjoxNzM0MzQ2MDgxfQ.4rFZXTe89qdsYzB9cjYVYYXwkBOl-TtLGbJ9VtmeOQE', 'User-Agent': 'PostmanRuntime/7.43.0', 'Accept': '*/*', 'Postman-Token': '8181197c-fdd4-41d7-a773-0dd7d3fb174c', 'Host': '127.0.0.1:5000', 'Accept-Encoding': 'gzip, deflate, br', 'Connection': 'keep-alive'}
+  - body: {}
+Function Context:
+  - handler: UserHandler
+ - for user_id=25820625-a342-43d2-98fc-2c622715ac16 | role=user
+2024-12-16 16:18:01,858 - INFO - get_user executed successfully. - for user_id=25820625-a342-43d2-98fc-2c622715ac16 | role=user
+2024-12-16 16:18:01,858 - DEBUG - Exiting get_user - for user_id=25820625-a342-43d2-98fc-2c622715ac16 | role=user
+2024-12-16 16:18:01,935 - DEBUG - Entering login
+User Context:
+  - user_id: Unknown
+  - role: Unknown
+Request Context:
+  - method: POST
+  - path: /login
+  - client_ip: 127.0.0.1
+  - headers: {'Content-Type': 'application/json', 'User-Agent': 'PostmanRuntime/7.43.0', 'Accept': '*/*', 'Postman-Token': 'cd208b30-baba-43b4-9bb7-db8c687f108b', 'Host': '127.0.0.1:5000', 'Accept-Encoding': 'gzip, deflate, br', 'Connection': 'keep-alive', 'Content-Length': '71'}
+  - body: {'email': 'admin@watchguard.com', 'password': '***'}
+Function Context:
+  - handler: UserHandler
+ - for user_id=unknown | role=unknown
+2024-12-16 16:18:02,166 - INFO - login executed successfully. - for user_id=unknown | role=unknown
+2024-12-16 16:18:02,166 - DEBUG - Exiting login - for user_id=unknown | role=unknown
+2024-12-16 16:18:02,251 - DEBUG - Entering wrapped_func
+User Context:
+  - user_id: fcb38cbd-317b-4b9e-aa52-87c8fadc6434
+  - role: admin
+Request Context:
+  - method: GET
+  - path: /users
+  - client_ip: 127.0.0.1
+  - headers: {'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZmNiMzhjYmQtMzE3Yi00YjllLWFhNTItODdjOGZhZGM2NDM0Iiwicm9sZSI6ImFkbWluIiwiZXhwIjoxNzM0MzQ5NjgyLCJpYXQiOjE3MzQzNDYwODIsIm5iZiI6MTczNDM0NjA4Mn0.K-XfRGwdKPVW2v5H3GGPzCIoo3ReqROb0SNQIu2ZjG0', 'User-Agent': 'PostmanRuntime/7.43.0', 'Accept': '*/*', 'Postman-Token': 'a7f356a6-ccb7-4cf6-8b10-f41be29fe529', 'Host': '127.0.0.1:5000', 'Accept-Encoding': 'gzip, deflate, br', 'Connection': 'keep-alive'}
+  - body: {}
+Function Context:
+  - handler: UserHandler
+ - for user_id=fcb38cbd-317b-4b9e-aa52-87c8fadc6434 | role=admin
+2024-12-16 16:18:02,253 - INFO - wrapped_func executed successfully. - for user_id=fcb38cbd-317b-4b9e-aa52-87c8fadc6434 | role=admin
+2024-12-16 16:18:02,253 - DEBUG - Exiting wrapped_func - for user_id=fcb38cbd-317b-4b9e-aa52-87c8fadc6434 | role=admin
+2024-12-16 16:18:02,315 - DEBUG - Entering wrapped_func
+User Context:
+  - user_id: fcb38cbd-317b-4b9e-aa52-87c8fadc6434
+  - role: admin
+Request Context:
+  - method: GET
+  - path: /issues
+  - client_ip: 127.0.0.1
+  - headers: {'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZmNiMzhjYmQtMzE3Yi00YjllLWFhNTItODdjOGZhZGM2NDM0Iiwicm9sZSI6ImFkbWluIiwiZXhwIjoxNzM0MzQ5NjgyLCJpYXQiOjE3MzQzNDYwODIsIm5iZiI6MTczNDM0NjA4Mn0.K-XfRGwdKPVW2v5H3GGPzCIoo3ReqROb0SNQIu2ZjG0', 'User-Agent': 'PostmanRuntime/7.43.0', 'Accept': '*/*', 'Postman-Token': '11c84f15-373d-4b1b-a4f8-0e8444a160be', 'Host': '127.0.0.1:5000', 'Accept-Encoding': 'gzip, deflate, br', 'Connection': 'keep-alive'}
+  - body: {}
+Function Context:
+  - handler: IssueHandler
+ - for user_id=fcb38cbd-317b-4b9e-aa52-87c8fadc6434 | role=admin
+2024-12-16 16:18:02,316 - INFO - wrapped_func executed successfully. - for user_id=fcb38cbd-317b-4b9e-aa52-87c8fadc6434 | role=admin
+2024-12-16 16:18:02,316 - DEBUG - Exiting wrapped_func - for user_id=fcb38cbd-317b-4b9e-aa52-87c8fadc6434 | role=admin
+2024-12-16 16:18:02,410 - DEBUG - Entering wrapped_func
+User Context:
+  - user_id: fcb38cbd-317b-4b9e-aa52-87c8fadc6434
+  - role: admin
+Request Context:
+  - method: POST
+  - path: /add-asset
+  - client_ip: 127.0.0.1
+  - headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZmNiMzhjYmQtMzE3Yi00YjllLWFhNTItODdjOGZhZGM2NDM0Iiwicm9sZSI6ImFkbWluIiwiZXhwIjoxNzM0MzQ5NjgyLCJpYXQiOjE3MzQzNDYwODIsIm5iZiI6MTczNDM0NjA4Mn0.K-XfRGwdKPVW2v5H3GGPzCIoo3ReqROb0SNQIu2ZjG0', 'User-Agent': 'PostmanRuntime/7.43.0', 'Accept': '*/*', 'Postman-Token': '5a6682b6-cc3a-4366-a8d2-d86a27f2cb57', 'Host': '127.0.0.1:5000', 'Accept-Encoding': 'gzip, deflate, br', 'Connection': 'keep-alive', 'Content-Length': '95'}
+  - body: {'name': 'Dell X22', 'description': 'Dell 2024 series laptop with intel x22 chip'}
+Function Context:
+  - handler: AssetHandler
+ - for user_id=fcb38cbd-317b-4b9e-aa52-87c8fadc6434 | role=admin
+2024-12-16 16:18:02,425 - INFO - wrapped_func executed successfully. - for user_id=fcb38cbd-317b-4b9e-aa52-87c8fadc6434 | role=admin
+2024-12-16 16:18:02,425 - DEBUG - Exiting wrapped_func - for user_id=fcb38cbd-317b-4b9e-aa52-87c8fadc6434 | role=admin
+2024-12-16 16:18:02,504 - DEBUG - Entering wrapped_func
+User Context:
+  - user_id: fcb38cbd-317b-4b9e-aa52-87c8fadc6434
+  - role: admin
+Request Context:
+  - method: GET
+  - path: /assets
+  - client_ip: 127.0.0.1
+  - headers: {'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZmNiMzhjYmQtMzE3Yi00YjllLWFhNTItODdjOGZhZGM2NDM0Iiwicm9sZSI6ImFkbWluIiwiZXhwIjoxNzM0MzQ5NjgyLCJpYXQiOjE3MzQzNDYwODIsIm5iZiI6MTczNDM0NjA4Mn0.K-XfRGwdKPVW2v5H3GGPzCIoo3ReqROb0SNQIu2ZjG0', 'User-Agent': 'PostmanRuntime/7.43.0', 'Accept': '*/*', 'Postman-Token': 'e1710b58-6478-4cf7-879f-8bad73ce25d5', 'Host': '127.0.0.1:5000', 'Accept-Encoding': 'gzip, deflate, br', 'Connection': 'keep-alive'}
+  - body: {}
+Function Context:
+  - handler: AssetHandler
+ - for user_id=fcb38cbd-317b-4b9e-aa52-87c8fadc6434 | role=admin
+2024-12-16 16:18:02,505 - INFO - wrapped_func executed successfully. - for user_id=fcb38cbd-317b-4b9e-aa52-87c8fadc6434 | role=admin
+2024-12-16 16:18:02,505 - DEBUG - Exiting wrapped_func - for user_id=fcb38cbd-317b-4b9e-aa52-87c8fadc6434 | role=admin
+2024-12-16 16:18:02,582 - DEBUG - Entering wrapped_func
+User Context:
+  - user_id: fcb38cbd-317b-4b9e-aa52-87c8fadc6434
+  - role: admin
+Request Context:
+  - method: POST
+  - path: /assign-asset
+  - client_ip: 127.0.0.1
+  - headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZmNiMzhjYmQtMzE3Yi00YjllLWFhNTItODdjOGZhZGM2NDM0Iiwicm9sZSI6ImFkbWluIiwiZXhwIjoxNzM0MzQ5NjgyLCJpYXQiOjE3MzQzNDYwODIsIm5iZiI6MTczNDM0NjA4Mn0.K-XfRGwdKPVW2v5H3GGPzCIoo3ReqROb0SNQIu2ZjG0', 'User-Agent': 'PostmanRuntime/7.43.0', 'Accept': '*/*', 'Postman-Token': '0e618b36-323e-46b0-817b-d740c4a88882', 'Host': '127.0.0.1:5000', 'Accept-Encoding': 'gzip, deflate, br', 'Connection': 'keep-alive', 'Content-Length': '116'}
+  - body: {'user_id': 'fcb38cbd-317b-4b9e-aa52-87c8fadc6434', 'asset_id': 'b3ae69a9-87c8-42f4-b54b-8ee375f8c584'}
+Function Context:
+  - handler: AssetHandler
+ - for user_id=fcb38cbd-317b-4b9e-aa52-87c8fadc6434 | role=admin
+2024-12-16 16:18:02,597 - INFO - wrapped_func executed successfully. - for user_id=fcb38cbd-317b-4b9e-aa52-87c8fadc6434 | role=admin
+2024-12-16 16:18:02,597 - DEBUG - Exiting wrapped_func - for user_id=fcb38cbd-317b-4b9e-aa52-87c8fadc6434 | role=admin
+2024-12-16 16:18:02,678 - DEBUG - Entering report_issue
+User Context:
+  - user_id: fcb38cbd-317b-4b9e-aa52-87c8fadc6434
+  - role: admin
+Request Context:
+  - method: POST
+  - path: /report-issue
+  - client_ip: 127.0.0.1
+  - headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZmNiMzhjYmQtMzE3Yi00YjllLWFhNTItODdjOGZhZGM2NDM0Iiwicm9sZSI6ImFkbWluIiwiZXhwIjoxNzM0MzQ5NjgyLCJpYXQiOjE3MzQzNDYwODIsIm5iZiI6MTczNDM0NjA4Mn0.K-XfRGwdKPVW2v5H3GGPzCIoo3ReqROb0SNQIu2ZjG0', 'User-Agent': 'PostmanRuntime/7.43.0', 'Accept': '*/*', 'Postman-Token': 'a03c78b7-67b5-4618-b885-211bdccefebd', 'Host': '127.0.0.1:5000', 'Accept-Encoding': 'gzip, deflate, br', 'Connection': 'keep-alive', 'Content-Length': '100'}
+  - body: {'asset_id': 'b3ae69a9-87c8-42f4-b54b-8ee375f8c584', 'description': 'Keyboard failure'}
+Function Context:
+  - handler: IssueHandler
+ - for user_id=fcb38cbd-317b-4b9e-aa52-87c8fadc6434 | role=admin
+2024-12-16 16:18:02,687 - INFO - report_issue executed successfully. - for user_id=fcb38cbd-317b-4b9e-aa52-87c8fadc6434 | role=admin
+2024-12-16 16:18:02,687 - DEBUG - Exiting report_issue - for user_id=fcb38cbd-317b-4b9e-aa52-87c8fadc6434 | role=admin
+2024-12-16 16:18:02,771 - DEBUG - Entering wrapped_func
+User Context:
+  - user_id: fcb38cbd-317b-4b9e-aa52-87c8fadc6434
+  - role: admin
+Request Context:
+  - method: GET
+  - path: /assigned-assets/all
+  - client_ip: 127.0.0.1
+  - headers: {'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZmNiMzhjYmQtMzE3Yi00YjllLWFhNTItODdjOGZhZGM2NDM0Iiwicm9sZSI6ImFkbWluIiwiZXhwIjoxNzM0MzQ5NjgyLCJpYXQiOjE3MzQzNDYwODIsIm5iZiI6MTczNDM0NjA4Mn0.K-XfRGwdKPVW2v5H3GGPzCIoo3ReqROb0SNQIu2ZjG0', 'User-Agent': 'PostmanRuntime/7.43.0', 'Accept': '*/*', 'Postman-Token': 'a2f0fc31-b9c2-4afb-8438-4a286f699a15', 'Host': '127.0.0.1:5000', 'Accept-Encoding': 'gzip, deflate, br', 'Connection': 'keep-alive'}
+  - body: {}
+Function Context:
+  - handler: AssetHandler
+ - for user_id=fcb38cbd-317b-4b9e-aa52-87c8fadc6434 | role=admin
+2024-12-16 16:18:02,773 - INFO - wrapped_func executed successfully. - for user_id=fcb38cbd-317b-4b9e-aa52-87c8fadc6434 | role=admin
+2024-12-16 16:18:02,774 - DEBUG - Exiting wrapped_func - for user_id=fcb38cbd-317b-4b9e-aa52-87c8fadc6434 | role=admin
+2024-12-16 16:18:02,834 - DEBUG - Entering unassign_asset
+User Context:
+  - user_id: fcb38cbd-317b-4b9e-aa52-87c8fadc6434
+  - role: admin
+Request Context:
+  - method: POST
+  - path: /unassign-asset
+  - client_ip: 127.0.0.1
+  - headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZmNiMzhjYmQtMzE3Yi00YjllLWFhNTItODdjOGZhZGM2NDM0Iiwicm9sZSI6ImFkbWluIiwiZXhwIjoxNzM0MzQ5NjgyLCJpYXQiOjE3MzQzNDYwODIsIm5iZiI6MTczNDM0NjA4Mn0.K-XfRGwdKPVW2v5H3GGPzCIoo3ReqROb0SNQIu2ZjG0', 'User-Agent': 'PostmanRuntime/7.43.0', 'Accept': '*/*', 'Postman-Token': 'd92caf58-9a0e-462c-a2f1-60fdf7096940', 'Host': '127.0.0.1:5000', 'Accept-Encoding': 'gzip, deflate, br', 'Connection': 'keep-alive', 'Content-Length': '116'}
+  - body: {'user_id': 'fcb38cbd-317b-4b9e-aa52-87c8fadc6434', 'asset_id': 'b3ae69a9-87c8-42f4-b54b-8ee375f8c584'}
+Function Context:
+  - handler: AssetHandler
+ - for user_id=fcb38cbd-317b-4b9e-aa52-87c8fadc6434 | role=admin
+2024-12-16 16:18:02,853 - INFO - unassign_asset executed successfully. - for user_id=fcb38cbd-317b-4b9e-aa52-87c8fadc6434 | role=admin
+2024-12-16 16:18:02,853 - DEBUG - Exiting unassign_asset - for user_id=fcb38cbd-317b-4b9e-aa52-87c8fadc6434 | role=admin
+2024-12-16 16:18:02,930 - DEBUG - Entering wrapped_func
+User Context:
+  - user_id: fcb38cbd-317b-4b9e-aa52-87c8fadc6434
+  - role: admin
+Request Context:
+  - method: DELETE
+  - path: /delete-asset/b3ae69a9-87c8-42f4-b54b-8ee375f8c584
+  - client_ip: 127.0.0.1
+  - headers: {'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZmNiMzhjYmQtMzE3Yi00YjllLWFhNTItODdjOGZhZGM2NDM0Iiwicm9sZSI6ImFkbWluIiwiZXhwIjoxNzM0MzQ5NjgyLCJpYXQiOjE3MzQzNDYwODIsIm5iZiI6MTczNDM0NjA4Mn0.K-XfRGwdKPVW2v5H3GGPzCIoo3ReqROb0SNQIu2ZjG0', 'User-Agent': 'PostmanRuntime/7.43.0', 'Accept': '*/*', 'Postman-Token': '8e660260-6c51-4baa-ad94-6df8a6c5f9c0', 'Host': '127.0.0.1:5000', 'Accept-Encoding': 'gzip, deflate, br', 'Connection': 'keep-alive'}
+  - body: {}
+Function Context:
+  - handler: AssetHandler
+ - for user_id=fcb38cbd-317b-4b9e-aa52-87c8fadc6434 | role=admin
+2024-12-16 16:18:02,939 - INFO - wrapped_func executed successfully. - for user_id=fcb38cbd-317b-4b9e-aa52-87c8fadc6434 | role=admin
+2024-12-16 16:18:02,939 - DEBUG - Exiting wrapped_func - for user_id=fcb38cbd-317b-4b9e-aa52-87c8fadc6434 | role=admin
+2024-12-16 16:18:03,021 - DEBUG - Entering wrapped_func
+User Context:
+  - user_id: fcb38cbd-317b-4b9e-aa52-87c8fadc6434
+  - role: admin
+Request Context:
+  - method: DELETE
+  - path: /delete-user/25820625-a342-43d2-98fc-2c622715ac16
+  - client_ip: 127.0.0.1
+  - headers: {'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZmNiMzhjYmQtMzE3Yi00YjllLWFhNTItODdjOGZhZGM2NDM0Iiwicm9sZSI6ImFkbWluIiwiZXhwIjoxNzM0MzQ5NjgyLCJpYXQiOjE3MzQzNDYwODIsIm5iZiI6MTczNDM0NjA4Mn0.K-XfRGwdKPVW2v5H3GGPzCIoo3ReqROb0SNQIu2ZjG0', 'User-Agent': 'PostmanRuntime/7.43.0', 'Accept': '*/*', 'Postman-Token': '48b2278b-1ebe-463e-9d96-79b9ddf382e6', 'Host': '127.0.0.1:5000', 'Accept-Encoding': 'gzip, deflate, br', 'Connection': 'keep-alive'}
+  - body: {}
+Function Context:
+  - handler: UserHandler
+ - for user_id=fcb38cbd-317b-4b9e-aa52-87c8fadc6434 | role=admin
+2024-12-16 16:18:03,029 - INFO - wrapped_func executed successfully. - for user_id=fcb38cbd-317b-4b9e-aa52-87c8fadc6434 | role=admin
+2024-12-16 16:18:03,029 - DEBUG - Exiting wrapped_func - for user_id=fcb38cbd-317b-4b9e-aa52-87c8fadc6434 | role=admin
+2024-12-17 00:40:51,986 - DEBUG - Entering login
+User Context:
+  - user_id: Unknown
+  - role: Unknown
+Request Context:
+  - method: POST
+  - path: /login
+  - client_ip: 127.0.0.1
+  - headers: {'Content-Type': 'application/json', 'User-Agent': 'PostmanRuntime/7.43.0', 'Accept': '*/*', 'Postman-Token': 'a6804dc1-975f-4845-8f2d-7fe63a75e568', 'Host': '127.0.0.1:5000', 'Accept-Encoding': 'gzip, deflate, br', 'Connection': 'keep-alive', 'Content-Length': '74'}
+  - body: {'email': 'pravin6@watchguard.com', 'password': '***'}
+Function Context:
+  - handler: UserHandler
+ - for user_id=unknown | role=unknown
+2024-12-17 00:40:52,329 - INFO - login executed successfully. - for user_id=unknown | role=unknown
+2024-12-17 00:40:52,329 - DEBUG - Exiting login - for user_id=unknown | role=unknown
+2024-12-17 00:40:52,426 - DEBUG - Entering get_user_issues
+User Context:
+  - user_id: ee6c17ae-d1d3-43f5-8192-f75a53028512
+  - role: user
+Request Context:
+  - method: GET
+  - path: /issues/ee6c17ae-d1d3-43f5-8192-f75a53028512
+  - client_ip: 127.0.0.1
+  - headers: {'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZWU2YzE3YWUtZDFkMy00M2Y1LTgxOTItZjc1YTUzMDI4NTEyIiwicm9sZSI6InVzZXIiLCJleHAiOjE3MzQzNzk4NTIsImlhdCI6MTczNDM3NjI1MiwibmJmIjoxNzM0Mzc2MjUyfQ.IIiejmZOJQf-gIEqfYhHwiYOnjtf063pWTvOKL76ols', 'User-Agent': 'PostmanRuntime/7.43.0', 'Accept': '*/*', 'Postman-Token': '2ddda6dc-0c23-42f1-a6d3-74ae16bc1fbc', 'Host': '127.0.0.1:5000', 'Accept-Encoding': 'gzip, deflate, br', 'Connection': 'keep-alive'}
+  - body: {}
+Function Context:
+  - handler: IssueHandler
+ - for user_id=ee6c17ae-d1d3-43f5-8192-f75a53028512 | role=user
+2024-12-17 00:40:52,430 - INFO - get_user_issues executed successfully. - for user_id=ee6c17ae-d1d3-43f5-8192-f75a53028512 | role=user
+2024-12-17 00:40:52,430 - DEBUG - Exiting get_user_issues - for user_id=ee6c17ae-d1d3-43f5-8192-f75a53028512 | role=user
+2024-12-17 00:40:52,499 - DEBUG - Entering assigned_assets
+User Context:
+  - user_id: ee6c17ae-d1d3-43f5-8192-f75a53028512
+  - role: user
+Request Context:
+  - method: GET
+  - path: /assigned-assets/ee6c17ae-d1d3-43f5-8192-f75a53028512
+  - client_ip: 127.0.0.1
+  - headers: {'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZWU2YzE3YWUtZDFkMy00M2Y1LTgxOTItZjc1YTUzMDI4NTEyIiwicm9sZSI6InVzZXIiLCJleHAiOjE3MzQzNzk4NTIsImlhdCI6MTczNDM3NjI1MiwibmJmIjoxNzM0Mzc2MjUyfQ.IIiejmZOJQf-gIEqfYhHwiYOnjtf063pWTvOKL76ols', 'User-Agent': 'PostmanRuntime/7.43.0', 'Accept': '*/*', 'Postman-Token': 'd336a40d-fa2f-4402-8b08-f5eca0ef051a', 'Host': '127.0.0.1:5000', 'Accept-Encoding': 'gzip, deflate, br', 'Connection': 'keep-alive'}
+  - body: {}
+Function Context:
+  - handler: AssetHandler
+ - for user_id=ee6c17ae-d1d3-43f5-8192-f75a53028512 | role=user
+2024-12-17 00:40:52,503 - INFO - assigned_assets executed successfully. - for user_id=ee6c17ae-d1d3-43f5-8192-f75a53028512 | role=user
+2024-12-17 00:40:52,503 - DEBUG - Exiting assigned_assets - for user_id=ee6c17ae-d1d3-43f5-8192-f75a53028512 | role=user
+2024-12-17 00:40:52,565 - DEBUG - Entering get_user
+User Context:
+  - user_id: ee6c17ae-d1d3-43f5-8192-f75a53028512
+  - role: user
+Request Context:
+  - method: GET
+  - path: /user/ee6c17ae-d1d3-43f5-8192-f75a53028512
+  - client_ip: 127.0.0.1
+  - headers: {'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZWU2YzE3YWUtZDFkMy00M2Y1LTgxOTItZjc1YTUzMDI4NTEyIiwicm9sZSI6InVzZXIiLCJleHAiOjE3MzQzNzk4NTIsImlhdCI6MTczNDM3NjI1MiwibmJmIjoxNzM0Mzc2MjUyfQ.IIiejmZOJQf-gIEqfYhHwiYOnjtf063pWTvOKL76ols', 'User-Agent': 'PostmanRuntime/7.43.0', 'Accept': '*/*', 'Postman-Token': '83614665-0c03-4ef6-bf12-81ea4e1bd1b9', 'Host': '127.0.0.1:5000', 'Accept-Encoding': 'gzip, deflate, br', 'Connection': 'keep-alive'}
+  - body: {}
+Function Context:
+  - handler: UserHandler
+ - for user_id=ee6c17ae-d1d3-43f5-8192-f75a53028512 | role=user
+2024-12-17 00:40:52,567 - INFO - get_user executed successfully. - for user_id=ee6c17ae-d1d3-43f5-8192-f75a53028512 | role=user
+2024-12-17 00:40:52,568 - DEBUG - Exiting get_user - for user_id=ee6c17ae-d1d3-43f5-8192-f75a53028512 | role=user
+2024-12-17 00:40:52,642 - DEBUG - Entering login
+User Context:
+  - user_id: Unknown
+  - role: Unknown
+Request Context:
+  - method: POST
+  - path: /login
+  - client_ip: 127.0.0.1
+  - headers: {'Content-Type': 'application/json', 'User-Agent': 'PostmanRuntime/7.43.0', 'Accept': '*/*', 'Postman-Token': '1ceafdbc-e788-477f-a25e-21b2c854a7aa', 'Host': '127.0.0.1:5000', 'Accept-Encoding': 'gzip, deflate, br', 'Connection': 'keep-alive', 'Content-Length': '71'}
+  - body: {'email': 'admin@watchguard.com', 'password': '***'}
+Function Context:
+  - handler: UserHandler
+ - for user_id=unknown | role=unknown
+2024-12-17 00:40:53,073 - INFO - login executed successfully. - for user_id=unknown | role=unknown
+2024-12-17 00:40:53,073 - DEBUG - Exiting login - for user_id=unknown | role=unknown
+2024-12-17 00:40:53,171 - DEBUG - Entering wrapped_func
+User Context:
+  - user_id: fcb38cbd-317b-4b9e-aa52-87c8fadc6434
+  - role: admin
+Request Context:
+  - method: GET
+  - path: /users
+  - client_ip: 127.0.0.1
+  - headers: {'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZmNiMzhjYmQtMzE3Yi00YjllLWFhNTItODdjOGZhZGM2NDM0Iiwicm9sZSI6ImFkbWluIiwiZXhwIjoxNzM0Mzc5ODUzLCJpYXQiOjE3MzQzNzYyNTMsIm5iZiI6MTczNDM3NjI1M30.4PNEiE1lJgUtA56aTVmgKmr8oTCtsKWDqXPHOEVI4kI', 'User-Agent': 'PostmanRuntime/7.43.0', 'Accept': '*/*', 'Postman-Token': '36bed45c-9549-4616-bd42-09f9ccc353a2', 'Host': '127.0.0.1:5000', 'Accept-Encoding': 'gzip, deflate, br', 'Connection': 'keep-alive'}
+  - body: {}
+Function Context:
+  - handler: UserHandler
+ - for user_id=fcb38cbd-317b-4b9e-aa52-87c8fadc6434 | role=admin
+2024-12-17 00:40:53,173 - INFO - wrapped_func executed successfully. - for user_id=fcb38cbd-317b-4b9e-aa52-87c8fadc6434 | role=admin
+2024-12-17 00:40:53,174 - DEBUG - Exiting wrapped_func - for user_id=fcb38cbd-317b-4b9e-aa52-87c8fadc6434 | role=admin
+2024-12-17 00:40:53,237 - DEBUG - Entering wrapped_func
+User Context:
+  - user_id: fcb38cbd-317b-4b9e-aa52-87c8fadc6434
+  - role: admin
+Request Context:
+  - method: GET
+  - path: /issues
+  - client_ip: 127.0.0.1
+  - headers: {'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZmNiMzhjYmQtMzE3Yi00YjllLWFhNTItODdjOGZhZGM2NDM0Iiwicm9sZSI6ImFkbWluIiwiZXhwIjoxNzM0Mzc5ODUzLCJpYXQiOjE3MzQzNzYyNTMsIm5iZiI6MTczNDM3NjI1M30.4PNEiE1lJgUtA56aTVmgKmr8oTCtsKWDqXPHOEVI4kI', 'User-Agent': 'PostmanRuntime/7.43.0', 'Accept': '*/*', 'Postman-Token': '08dd082b-1391-4c07-9eda-f3c3e023d24a', 'Host': '127.0.0.1:5000', 'Accept-Encoding': 'gzip, deflate, br', 'Connection': 'keep-alive'}
+  - body: {}
+Function Context:
+  - handler: IssueHandler
+ - for user_id=fcb38cbd-317b-4b9e-aa52-87c8fadc6434 | role=admin
+2024-12-17 00:40:53,239 - INFO - wrapped_func executed successfully. - for user_id=fcb38cbd-317b-4b9e-aa52-87c8fadc6434 | role=admin
+2024-12-17 00:40:53,240 - DEBUG - Exiting wrapped_func - for user_id=fcb38cbd-317b-4b9e-aa52-87c8fadc6434 | role=admin
+2024-12-17 00:40:53,313 - DEBUG - Entering wrapped_func
+User Context:
+  - user_id: fcb38cbd-317b-4b9e-aa52-87c8fadc6434
+  - role: admin
+Request Context:
+  - method: POST
+  - path: /add-asset
+  - client_ip: 127.0.0.1
+  - headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZmNiMzhjYmQtMzE3Yi00YjllLWFhNTItODdjOGZhZGM2NDM0Iiwicm9sZSI6ImFkbWluIiwiZXhwIjoxNzM0Mzc5ODUzLCJpYXQiOjE3MzQzNzYyNTMsIm5iZiI6MTczNDM3NjI1M30.4PNEiE1lJgUtA56aTVmgKmr8oTCtsKWDqXPHOEVI4kI', 'User-Agent': 'PostmanRuntime/7.43.0', 'Accept': '*/*', 'Postman-Token': 'bb246107-cb83-42cf-aaa1-8f6a2c3efdcd', 'Host': '127.0.0.1:5000', 'Accept-Encoding': 'gzip, deflate, br', 'Connection': 'keep-alive', 'Content-Length': '95'}
+  - body: {'name': 'Dell X22', 'description': 'Dell 2024 series laptop with intel x22 chip'}
+Function Context:
+  - handler: AssetHandler
+ - for user_id=fcb38cbd-317b-4b9e-aa52-87c8fadc6434 | role=admin
+2024-12-17 00:40:53,336 - INFO - wrapped_func executed successfully. - for user_id=fcb38cbd-317b-4b9e-aa52-87c8fadc6434 | role=admin
+2024-12-17 00:40:53,336 - DEBUG - Exiting wrapped_func - for user_id=fcb38cbd-317b-4b9e-aa52-87c8fadc6434 | role=admin
+2024-12-17 00:40:53,388 - DEBUG - Entering wrapped_func
+User Context:
+  - user_id: fcb38cbd-317b-4b9e-aa52-87c8fadc6434
+  - role: admin
+Request Context:
+  - method: GET
+  - path: /assets
+  - client_ip: 127.0.0.1
+  - headers: {'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZmNiMzhjYmQtMzE3Yi00YjllLWFhNTItODdjOGZhZGM2NDM0Iiwicm9sZSI6ImFkbWluIiwiZXhwIjoxNzM0Mzc5ODUzLCJpYXQiOjE3MzQzNzYyNTMsIm5iZiI6MTczNDM3NjI1M30.4PNEiE1lJgUtA56aTVmgKmr8oTCtsKWDqXPHOEVI4kI', 'User-Agent': 'PostmanRuntime/7.43.0', 'Accept': '*/*', 'Postman-Token': 'd6a76ceb-eeb5-41db-8a5a-553492580c8f', 'Host': '127.0.0.1:5000', 'Accept-Encoding': 'gzip, deflate, br', 'Connection': 'keep-alive'}
+  - body: {}
+Function Context:
+  - handler: AssetHandler
+ - for user_id=fcb38cbd-317b-4b9e-aa52-87c8fadc6434 | role=admin
+2024-12-17 00:40:53,390 - INFO - wrapped_func executed successfully. - for user_id=fcb38cbd-317b-4b9e-aa52-87c8fadc6434 | role=admin
+2024-12-17 00:40:53,390 - DEBUG - Exiting wrapped_func - for user_id=fcb38cbd-317b-4b9e-aa52-87c8fadc6434 | role=admin
+2024-12-17 00:40:53,467 - DEBUG - Entering wrapped_func
+User Context:
+  - user_id: fcb38cbd-317b-4b9e-aa52-87c8fadc6434
+  - role: admin
+Request Context:
+  - method: POST
+  - path: /assign-asset
+  - client_ip: 127.0.0.1
+  - headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZmNiMzhjYmQtMzE3Yi00YjllLWFhNTItODdjOGZhZGM2NDM0Iiwicm9sZSI6ImFkbWluIiwiZXhwIjoxNzM0Mzc5ODUzLCJpYXQiOjE3MzQzNzYyNTMsIm5iZiI6MTczNDM3NjI1M30.4PNEiE1lJgUtA56aTVmgKmr8oTCtsKWDqXPHOEVI4kI', 'User-Agent': 'PostmanRuntime/7.43.0', 'Accept': '*/*', 'Postman-Token': '44478dbb-9e75-47f8-ab9c-977798e2fbf9', 'Host': '127.0.0.1:5000', 'Accept-Encoding': 'gzip, deflate, br', 'Connection': 'keep-alive', 'Content-Length': '116'}
+  - body: {'user_id': 'fcb38cbd-317b-4b9e-aa52-87c8fadc6434', 'asset_id': 'daadda69-3f47-4aab-b757-55ab28385721'}
+Function Context:
+  - handler: AssetHandler
+ - for user_id=fcb38cbd-317b-4b9e-aa52-87c8fadc6434 | role=admin
+2024-12-17 00:40:53,508 - INFO - wrapped_func executed successfully. - for user_id=fcb38cbd-317b-4b9e-aa52-87c8fadc6434 | role=admin
+2024-12-17 00:40:53,508 - DEBUG - Exiting wrapped_func - for user_id=fcb38cbd-317b-4b9e-aa52-87c8fadc6434 | role=admin
+2024-12-17 00:40:53,593 - DEBUG - Entering report_issue
+User Context:
+  - user_id: fcb38cbd-317b-4b9e-aa52-87c8fadc6434
+  - role: admin
+Request Context:
+  - method: POST
+  - path: /report-issue
+  - client_ip: 127.0.0.1
+  - headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZmNiMzhjYmQtMzE3Yi00YjllLWFhNTItODdjOGZhZGM2NDM0Iiwicm9sZSI6ImFkbWluIiwiZXhwIjoxNzM0Mzc5ODUzLCJpYXQiOjE3MzQzNzYyNTMsIm5iZiI6MTczNDM3NjI1M30.4PNEiE1lJgUtA56aTVmgKmr8oTCtsKWDqXPHOEVI4kI', 'User-Agent': 'PostmanRuntime/7.43.0', 'Accept': '*/*', 'Postman-Token': '86cb3261-26b2-4605-8690-4f200455a23b', 'Host': '127.0.0.1:5000', 'Accept-Encoding': 'gzip, deflate, br', 'Connection': 'keep-alive', 'Content-Length': '100'}
+  - body: {'asset_id': 'daadda69-3f47-4aab-b757-55ab28385721', 'description': 'Keyboard failure'}
+Function Context:
+  - handler: IssueHandler
+ - for user_id=fcb38cbd-317b-4b9e-aa52-87c8fadc6434 | role=admin
+2024-12-17 00:40:53,613 - INFO - report_issue executed successfully. - for user_id=fcb38cbd-317b-4b9e-aa52-87c8fadc6434 | role=admin
+2024-12-17 00:40:53,613 - DEBUG - Exiting report_issue - for user_id=fcb38cbd-317b-4b9e-aa52-87c8fadc6434 | role=admin
+2024-12-17 00:40:53,685 - DEBUG - Entering wrapped_func
+User Context:
+  - user_id: fcb38cbd-317b-4b9e-aa52-87c8fadc6434
+  - role: admin
+Request Context:
+  - method: GET
+  - path: /assigned-assets/all
+  - client_ip: 127.0.0.1
+  - headers: {'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZmNiMzhjYmQtMzE3Yi00YjllLWFhNTItODdjOGZhZGM2NDM0Iiwicm9sZSI6ImFkbWluIiwiZXhwIjoxNzM0Mzc5ODUzLCJpYXQiOjE3MzQzNzYyNTMsIm5iZiI6MTczNDM3NjI1M30.4PNEiE1lJgUtA56aTVmgKmr8oTCtsKWDqXPHOEVI4kI', 'User-Agent': 'PostmanRuntime/7.43.0', 'Accept': '*/*', 'Postman-Token': '63bc5c3d-70a8-41c2-a537-d66eaba5dd7b', 'Host': '127.0.0.1:5000', 'Accept-Encoding': 'gzip, deflate, br', 'Connection': 'keep-alive'}
+  - body: {}
+Function Context:
+  - handler: AssetHandler
+ - for user_id=fcb38cbd-317b-4b9e-aa52-87c8fadc6434 | role=admin
+2024-12-17 00:40:53,688 - INFO - wrapped_func executed successfully. - for user_id=fcb38cbd-317b-4b9e-aa52-87c8fadc6434 | role=admin
+2024-12-17 00:40:53,688 - DEBUG - Exiting wrapped_func - for user_id=fcb38cbd-317b-4b9e-aa52-87c8fadc6434 | role=admin
+2024-12-17 00:40:53,777 - DEBUG - Entering unassign_asset
+User Context:
+  - user_id: fcb38cbd-317b-4b9e-aa52-87c8fadc6434
+  - role: admin
+Request Context:
+  - method: POST
+  - path: /unassign-asset
+  - client_ip: 127.0.0.1
+  - headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZmNiMzhjYmQtMzE3Yi00YjllLWFhNTItODdjOGZhZGM2NDM0Iiwicm9sZSI6ImFkbWluIiwiZXhwIjoxNzM0Mzc5ODUzLCJpYXQiOjE3MzQzNzYyNTMsIm5iZiI6MTczNDM3NjI1M30.4PNEiE1lJgUtA56aTVmgKmr8oTCtsKWDqXPHOEVI4kI', 'User-Agent': 'PostmanRuntime/7.43.0', 'Accept': '*/*', 'Postman-Token': 'edceaa27-eb37-4a24-bd60-1fb27faa1536', 'Host': '127.0.0.1:5000', 'Accept-Encoding': 'gzip, deflate, br', 'Connection': 'keep-alive', 'Content-Length': '116'}
+  - body: {'user_id': 'fcb38cbd-317b-4b9e-aa52-87c8fadc6434', 'asset_id': 'daadda69-3f47-4aab-b757-55ab28385721'}
+Function Context:
+  - handler: AssetHandler
+ - for user_id=fcb38cbd-317b-4b9e-aa52-87c8fadc6434 | role=admin
+2024-12-17 00:40:53,800 - INFO - unassign_asset executed successfully. - for user_id=fcb38cbd-317b-4b9e-aa52-87c8fadc6434 | role=admin
+2024-12-17 00:40:53,801 - DEBUG - Exiting unassign_asset - for user_id=fcb38cbd-317b-4b9e-aa52-87c8fadc6434 | role=admin
+2024-12-17 00:40:53,870 - DEBUG - Entering wrapped_func
+User Context:
+  - user_id: fcb38cbd-317b-4b9e-aa52-87c8fadc6434
+  - role: admin
+Request Context:
+  - method: DELETE
+  - path: /delete-asset/daadda69-3f47-4aab-b757-55ab28385721
+  - client_ip: 127.0.0.1
+  - headers: {'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZmNiMzhjYmQtMzE3Yi00YjllLWFhNTItODdjOGZhZGM2NDM0Iiwicm9sZSI6ImFkbWluIiwiZXhwIjoxNzM0Mzc5ODUzLCJpYXQiOjE3MzQzNzYyNTMsIm5iZiI6MTczNDM3NjI1M30.4PNEiE1lJgUtA56aTVmgKmr8oTCtsKWDqXPHOEVI4kI', 'User-Agent': 'PostmanRuntime/7.43.0', 'Accept': '*/*', 'Postman-Token': '4446cc3e-47b2-4a84-aa44-25910a376789', 'Host': '127.0.0.1:5000', 'Accept-Encoding': 'gzip, deflate, br', 'Connection': 'keep-alive'}
+  - body: {}
+Function Context:
+  - handler: AssetHandler
+ - for user_id=fcb38cbd-317b-4b9e-aa52-87c8fadc6434 | role=admin
+2024-12-17 00:40:53,881 - INFO - wrapped_func executed successfully. - for user_id=fcb38cbd-317b-4b9e-aa52-87c8fadc6434 | role=admin
+2024-12-17 00:40:53,881 - DEBUG - Exiting wrapped_func - for user_id=fcb38cbd-317b-4b9e-aa52-87c8fadc6434 | role=admin
+2024-12-17 00:40:53,949 - DEBUG - Entering wrapped_func
+User Context:
+  - user_id: fcb38cbd-317b-4b9e-aa52-87c8fadc6434
+  - role: admin
+Request Context:
+  - method: DELETE
+  - path: /delete-user/ee6c17ae-d1d3-43f5-8192-f75a53028512
+  - client_ip: 127.0.0.1
+  - headers: {'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZmNiMzhjYmQtMzE3Yi00YjllLWFhNTItODdjOGZhZGM2NDM0Iiwicm9sZSI6ImFkbWluIiwiZXhwIjoxNzM0Mzc5ODUzLCJpYXQiOjE3MzQzNzYyNTMsIm5iZiI6MTczNDM3NjI1M30.4PNEiE1lJgUtA56aTVmgKmr8oTCtsKWDqXPHOEVI4kI', 'User-Agent': 'PostmanRuntime/7.43.0', 'Accept': '*/*', 'Postman-Token': 'e5da4e46-4ba5-4e63-98dd-aa84c654bb84', 'Host': '127.0.0.1:5000', 'Accept-Encoding': 'gzip, deflate, br', 'Connection': 'keep-alive'}
+  - body: {}
+Function Context:
+  - handler: UserHandler
+ - for user_id=fcb38cbd-317b-4b9e-aa52-87c8fadc6434 | role=admin
+2024-12-17 00:40:53,961 - INFO - wrapped_func executed successfully. - for user_id=fcb38cbd-317b-4b9e-aa52-87c8fadc6434 | role=admin
+2024-12-17 00:40:53,961 - DEBUG - Exiting wrapped_func - for user_id=fcb38cbd-317b-4b9e-aa52-87c8fadc6434 | role=admin
+2024-12-17 09:33:58,080 - DEBUG - Entering login
+User Context:
+  - user_id: Unknown
+  - role: Unknown
+Request Context:
+  - method: POST
+  - path: /login
+  - client_ip: 127.0.0.1
+  - headers: {'Content-Type': 'application/json', 'User-Agent': 'PostmanRuntime/7.43.0', 'Accept': '*/*', 'Postman-Token': '762d5bef-d1bc-4fcd-afdd-c6f5ce71768f', 'Host': '127.0.0.1:5000', 'Accept-Encoding': 'gzip, deflate, br', 'Connection': 'keep-alive', 'Content-Length': '74'}
+  - body: {'email': 'pravin6@watchguard.com', 'password': '***'}
+Function Context:
+  - handler: UserHandler
+ - for user_id=unknown | role=unknown
+2024-12-17 09:33:58,334 - INFO - login executed successfully. - for user_id=unknown | role=unknown
+2024-12-17 09:33:58,334 - DEBUG - Exiting login - for user_id=unknown | role=unknown
+2024-12-17 09:33:58,436 - DEBUG - Entering get_user_issues
+User Context:
+  - user_id: 4700db0e-66a7-4d15-86ef-c21774386553
+  - role: user
+Request Context:
+  - method: GET
+  - path: /issues/4700db0e-66a7-4d15-86ef-c21774386553
+  - client_ip: 127.0.0.1
+  - headers: {'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNDcwMGRiMGUtNjZhNy00ZDE1LTg2ZWYtYzIxNzc0Mzg2NTUzIiwicm9sZSI6InVzZXIiLCJleHAiOjE3MzQ0MTE4MzgsImlhdCI6MTczNDQwODIzOCwibmJmIjoxNzM0NDA4MjM4fQ.KP74q_nynF86tlsjwn0vbuPHsH-WYe2TXrk9X1Z7GoU', 'User-Agent': 'PostmanRuntime/7.43.0', 'Accept': '*/*', 'Postman-Token': 'b7fb36a3-442c-4187-b5f2-828feddac06b', 'Host': '127.0.0.1:5000', 'Accept-Encoding': 'gzip, deflate, br', 'Connection': 'keep-alive'}
+  - body: {}
+Function Context:
+  - handler: IssueHandler
+ - for user_id=4700db0e-66a7-4d15-86ef-c21774386553 | role=user
+2024-12-17 09:33:58,437 - INFO - get_user_issues executed successfully. - for user_id=4700db0e-66a7-4d15-86ef-c21774386553 | role=user
+2024-12-17 09:33:58,438 - DEBUG - Exiting get_user_issues - for user_id=4700db0e-66a7-4d15-86ef-c21774386553 | role=user
+2024-12-17 09:33:58,532 - DEBUG - Entering assigned_assets
+User Context:
+  - user_id: 4700db0e-66a7-4d15-86ef-c21774386553
+  - role: user
+Request Context:
+  - method: GET
+  - path: /assigned-assets/4700db0e-66a7-4d15-86ef-c21774386553
+  - client_ip: 127.0.0.1
+  - headers: {'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNDcwMGRiMGUtNjZhNy00ZDE1LTg2ZWYtYzIxNzc0Mzg2NTUzIiwicm9sZSI6InVzZXIiLCJleHAiOjE3MzQ0MTE4MzgsImlhdCI6MTczNDQwODIzOCwibmJmIjoxNzM0NDA4MjM4fQ.KP74q_nynF86tlsjwn0vbuPHsH-WYe2TXrk9X1Z7GoU', 'User-Agent': 'PostmanRuntime/7.43.0', 'Accept': '*/*', 'Postman-Token': 'e535e81e-8416-4b3b-93b0-1541b80a35ae', 'Host': '127.0.0.1:5000', 'Accept-Encoding': 'gzip, deflate, br', 'Connection': 'keep-alive'}
+  - body: {}
+Function Context:
+  - handler: AssetHandler
+ - for user_id=4700db0e-66a7-4d15-86ef-c21774386553 | role=user
+2024-12-17 09:33:58,533 - INFO - assigned_assets executed successfully. - for user_id=4700db0e-66a7-4d15-86ef-c21774386553 | role=user
+2024-12-17 09:33:58,533 - DEBUG - Exiting assigned_assets - for user_id=4700db0e-66a7-4d15-86ef-c21774386553 | role=user
+2024-12-17 09:33:58,610 - DEBUG - Entering get_user
+User Context:
+  - user_id: 4700db0e-66a7-4d15-86ef-c21774386553
+  - role: user
+Request Context:
+  - method: GET
+  - path: /user/4700db0e-66a7-4d15-86ef-c21774386553
+  - client_ip: 127.0.0.1
+  - headers: {'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNDcwMGRiMGUtNjZhNy00ZDE1LTg2ZWYtYzIxNzc0Mzg2NTUzIiwicm9sZSI6InVzZXIiLCJleHAiOjE3MzQ0MTE4MzgsImlhdCI6MTczNDQwODIzOCwibmJmIjoxNzM0NDA4MjM4fQ.KP74q_nynF86tlsjwn0vbuPHsH-WYe2TXrk9X1Z7GoU', 'User-Agent': 'PostmanRuntime/7.43.0', 'Accept': '*/*', 'Postman-Token': '692a0f2c-299f-4d83-a95b-062ee3a4c849', 'Host': '127.0.0.1:5000', 'Accept-Encoding': 'gzip, deflate, br', 'Connection': 'keep-alive'}
+  - body: {}
+Function Context:
+  - handler: UserHandler
+ - for user_id=4700db0e-66a7-4d15-86ef-c21774386553 | role=user
+2024-12-17 09:33:58,610 - INFO - get_user executed successfully. - for user_id=4700db0e-66a7-4d15-86ef-c21774386553 | role=user
+2024-12-17 09:33:58,610 - DEBUG - Exiting get_user - for user_id=4700db0e-66a7-4d15-86ef-c21774386553 | role=user
+2024-12-17 09:33:58,674 - DEBUG - Entering login
+User Context:
+  - user_id: Unknown
+  - role: Unknown
+Request Context:
+  - method: POST
+  - path: /login
+  - client_ip: 127.0.0.1
+  - headers: {'Content-Type': 'application/json', 'User-Agent': 'PostmanRuntime/7.43.0', 'Accept': '*/*', 'Postman-Token': '49bc7640-cc7e-4ad0-ac07-04a46d87d2b4', 'Host': '127.0.0.1:5000', 'Accept-Encoding': 'gzip, deflate, br', 'Connection': 'keep-alive', 'Content-Length': '71'}
+  - body: {'email': 'admin@watchguard.com', 'password': '***'}
+Function Context:
+  - handler: UserHandler
+ - for user_id=unknown | role=unknown
+2024-12-17 09:33:58,904 - INFO - login executed successfully. - for user_id=unknown | role=unknown
+2024-12-17 09:33:58,904 - DEBUG - Exiting login - for user_id=unknown | role=unknown
+2024-12-17 09:33:58,976 - DEBUG - Entering wrapped_func
+User Context:
+  - user_id: fcb38cbd-317b-4b9e-aa52-87c8fadc6434
+  - role: admin
+Request Context:
+  - method: GET
+  - path: /users
+  - client_ip: 127.0.0.1
+  - headers: {'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZmNiMzhjYmQtMzE3Yi00YjllLWFhNTItODdjOGZhZGM2NDM0Iiwicm9sZSI6ImFkbWluIiwiZXhwIjoxNzM0NDExODM4LCJpYXQiOjE3MzQ0MDgyMzgsIm5iZiI6MTczNDQwODIzOH0.myygJbW_Y7a4A-0ucJVL9BOjTxlwIqndE3U7g4Ydwf4', 'User-Agent': 'PostmanRuntime/7.43.0', 'Accept': '*/*', 'Postman-Token': '603a2cd5-be70-4eef-a1de-2c7770cfb353', 'Host': '127.0.0.1:5000', 'Accept-Encoding': 'gzip, deflate, br', 'Connection': 'keep-alive'}
+  - body: {}
+Function Context:
+  - handler: UserHandler
+ - for user_id=fcb38cbd-317b-4b9e-aa52-87c8fadc6434 | role=admin
+2024-12-17 09:33:58,977 - INFO - wrapped_func executed successfully. - for user_id=fcb38cbd-317b-4b9e-aa52-87c8fadc6434 | role=admin
+2024-12-17 09:33:58,977 - DEBUG - Exiting wrapped_func - for user_id=fcb38cbd-317b-4b9e-aa52-87c8fadc6434 | role=admin
+2024-12-17 09:33:59,055 - DEBUG - Entering wrapped_func
+User Context:
+  - user_id: fcb38cbd-317b-4b9e-aa52-87c8fadc6434
+  - role: admin
+Request Context:
+  - method: GET
+  - path: /issues
+  - client_ip: 127.0.0.1
+  - headers: {'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZmNiMzhjYmQtMzE3Yi00YjllLWFhNTItODdjOGZhZGM2NDM0Iiwicm9sZSI6ImFkbWluIiwiZXhwIjoxNzM0NDExODM4LCJpYXQiOjE3MzQ0MDgyMzgsIm5iZiI6MTczNDQwODIzOH0.myygJbW_Y7a4A-0ucJVL9BOjTxlwIqndE3U7g4Ydwf4', 'User-Agent': 'PostmanRuntime/7.43.0', 'Accept': '*/*', 'Postman-Token': 'f6d0d9ae-4df9-4dbc-8b31-1cfea06b6622', 'Host': '127.0.0.1:5000', 'Accept-Encoding': 'gzip, deflate, br', 'Connection': 'keep-alive'}
+  - body: {}
+Function Context:
+  - handler: IssueHandler
+ - for user_id=fcb38cbd-317b-4b9e-aa52-87c8fadc6434 | role=admin
+2024-12-17 09:33:59,056 - INFO - wrapped_func executed successfully. - for user_id=fcb38cbd-317b-4b9e-aa52-87c8fadc6434 | role=admin
+2024-12-17 09:33:59,056 - DEBUG - Exiting wrapped_func - for user_id=fcb38cbd-317b-4b9e-aa52-87c8fadc6434 | role=admin
+2024-12-17 09:33:59,134 - DEBUG - Entering wrapped_func
+User Context:
+  - user_id: fcb38cbd-317b-4b9e-aa52-87c8fadc6434
+  - role: admin
+Request Context:
+  - method: POST
+  - path: /add-asset
+  - client_ip: 127.0.0.1
+  - headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZmNiMzhjYmQtMzE3Yi00YjllLWFhNTItODdjOGZhZGM2NDM0Iiwicm9sZSI6ImFkbWluIiwiZXhwIjoxNzM0NDExODM4LCJpYXQiOjE3MzQ0MDgyMzgsIm5iZiI6MTczNDQwODIzOH0.myygJbW_Y7a4A-0ucJVL9BOjTxlwIqndE3U7g4Ydwf4', 'User-Agent': 'PostmanRuntime/7.43.0', 'Accept': '*/*', 'Postman-Token': '4cfb5654-7d30-421c-8bfe-328eb88d2b00', 'Host': '127.0.0.1:5000', 'Accept-Encoding': 'gzip, deflate, br', 'Connection': 'keep-alive', 'Content-Length': '95'}
+  - body: {'name': 'Dell X22', 'description': 'Dell 2024 series laptop with intel x22 chip'}
+Function Context:
+  - handler: AssetHandler
+ - for user_id=fcb38cbd-317b-4b9e-aa52-87c8fadc6434 | role=admin
+2024-12-17 09:33:59,152 - INFO - wrapped_func executed successfully. - for user_id=fcb38cbd-317b-4b9e-aa52-87c8fadc6434 | role=admin
+2024-12-17 09:33:59,152 - DEBUG - Exiting wrapped_func - for user_id=fcb38cbd-317b-4b9e-aa52-87c8fadc6434 | role=admin
+2024-12-17 09:33:59,244 - DEBUG - Entering wrapped_func
+User Context:
+  - user_id: fcb38cbd-317b-4b9e-aa52-87c8fadc6434
+  - role: admin
+Request Context:
+  - method: GET
+  - path: /assets
+  - client_ip: 127.0.0.1
+  - headers: {'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZmNiMzhjYmQtMzE3Yi00YjllLWFhNTItODdjOGZhZGM2NDM0Iiwicm9sZSI6ImFkbWluIiwiZXhwIjoxNzM0NDExODM4LCJpYXQiOjE3MzQ0MDgyMzgsIm5iZiI6MTczNDQwODIzOH0.myygJbW_Y7a4A-0ucJVL9BOjTxlwIqndE3U7g4Ydwf4', 'User-Agent': 'PostmanRuntime/7.43.0', 'Accept': '*/*', 'Postman-Token': 'ac8f6a38-e01b-4b33-af61-0614423ce8e2', 'Host': '127.0.0.1:5000', 'Accept-Encoding': 'gzip, deflate, br', 'Connection': 'keep-alive'}
+  - body: {}
+Function Context:
+  - handler: AssetHandler
+ - for user_id=fcb38cbd-317b-4b9e-aa52-87c8fadc6434 | role=admin
+2024-12-17 09:33:59,245 - INFO - wrapped_func executed successfully. - for user_id=fcb38cbd-317b-4b9e-aa52-87c8fadc6434 | role=admin
+2024-12-17 09:33:59,245 - DEBUG - Exiting wrapped_func - for user_id=fcb38cbd-317b-4b9e-aa52-87c8fadc6434 | role=admin
+2024-12-17 09:33:59,323 - DEBUG - Entering wrapped_func
+User Context:
+  - user_id: fcb38cbd-317b-4b9e-aa52-87c8fadc6434
+  - role: admin
+Request Context:
+  - method: POST
+  - path: /assign-asset
+  - client_ip: 127.0.0.1
+  - headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZmNiMzhjYmQtMzE3Yi00YjllLWFhNTItODdjOGZhZGM2NDM0Iiwicm9sZSI6ImFkbWluIiwiZXhwIjoxNzM0NDExODM4LCJpYXQiOjE3MzQ0MDgyMzgsIm5iZiI6MTczNDQwODIzOH0.myygJbW_Y7a4A-0ucJVL9BOjTxlwIqndE3U7g4Ydwf4', 'User-Agent': 'PostmanRuntime/7.43.0', 'Accept': '*/*', 'Postman-Token': 'c7f2fbe2-3cd1-4bf9-9a61-94cef74487da', 'Host': '127.0.0.1:5000', 'Accept-Encoding': 'gzip, deflate, br', 'Connection': 'keep-alive', 'Content-Length': '116'}
+  - body: {'user_id': 'fcb38cbd-317b-4b9e-aa52-87c8fadc6434', 'asset_id': '88a184df-0659-4465-8e32-6bf067866b61'}
+Function Context:
+  - handler: AssetHandler
+ - for user_id=fcb38cbd-317b-4b9e-aa52-87c8fadc6434 | role=admin
+2024-12-17 09:33:59,339 - INFO - wrapped_func executed successfully. - for user_id=fcb38cbd-317b-4b9e-aa52-87c8fadc6434 | role=admin
+2024-12-17 09:33:59,339 - DEBUG - Exiting wrapped_func - for user_id=fcb38cbd-317b-4b9e-aa52-87c8fadc6434 | role=admin
+2024-12-17 09:33:59,433 - DEBUG - Entering report_issue
+User Context:
+  - user_id: fcb38cbd-317b-4b9e-aa52-87c8fadc6434
+  - role: admin
+Request Context:
+  - method: POST
+  - path: /report-issue
+  - client_ip: 127.0.0.1
+  - headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZmNiMzhjYmQtMzE3Yi00YjllLWFhNTItODdjOGZhZGM2NDM0Iiwicm9sZSI6ImFkbWluIiwiZXhwIjoxNzM0NDExODM4LCJpYXQiOjE3MzQ0MDgyMzgsIm5iZiI6MTczNDQwODIzOH0.myygJbW_Y7a4A-0ucJVL9BOjTxlwIqndE3U7g4Ydwf4', 'User-Agent': 'PostmanRuntime/7.43.0', 'Accept': '*/*', 'Postman-Token': 'ed3971b5-405e-487d-96d9-a0224ee90925', 'Host': '127.0.0.1:5000', 'Accept-Encoding': 'gzip, deflate, br', 'Connection': 'keep-alive', 'Content-Length': '100'}
+  - body: {'asset_id': '88a184df-0659-4465-8e32-6bf067866b61', 'description': 'Keyboard failure'}
+Function Context:
+  - handler: IssueHandler
+ - for user_id=fcb38cbd-317b-4b9e-aa52-87c8fadc6434 | role=admin
+2024-12-17 09:33:59,441 - INFO - report_issue executed successfully. - for user_id=fcb38cbd-317b-4b9e-aa52-87c8fadc6434 | role=admin
+2024-12-17 09:33:59,442 - DEBUG - Exiting report_issue - for user_id=fcb38cbd-317b-4b9e-aa52-87c8fadc6434 | role=admin
+2024-12-17 09:33:59,512 - DEBUG - Entering wrapped_func
+User Context:
+  - user_id: fcb38cbd-317b-4b9e-aa52-87c8fadc6434
+  - role: admin
+Request Context:
+  - method: GET
+  - path: /assigned-assets/all
+  - client_ip: 127.0.0.1
+  - headers: {'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZmNiMzhjYmQtMzE3Yi00YjllLWFhNTItODdjOGZhZGM2NDM0Iiwicm9sZSI6ImFkbWluIiwiZXhwIjoxNzM0NDExODM4LCJpYXQiOjE3MzQ0MDgyMzgsIm5iZiI6MTczNDQwODIzOH0.myygJbW_Y7a4A-0ucJVL9BOjTxlwIqndE3U7g4Ydwf4', 'User-Agent': 'PostmanRuntime/7.43.0', 'Accept': '*/*', 'Postman-Token': 'abf8e709-7961-4ce4-a3df-1960cf8e87bb', 'Host': '127.0.0.1:5000', 'Accept-Encoding': 'gzip, deflate, br', 'Connection': 'keep-alive'}
+  - body: {}
+Function Context:
+  - handler: AssetHandler
+ - for user_id=fcb38cbd-317b-4b9e-aa52-87c8fadc6434 | role=admin
+2024-12-17 09:33:59,514 - INFO - wrapped_func executed successfully. - for user_id=fcb38cbd-317b-4b9e-aa52-87c8fadc6434 | role=admin
+2024-12-17 09:33:59,514 - DEBUG - Exiting wrapped_func - for user_id=fcb38cbd-317b-4b9e-aa52-87c8fadc6434 | role=admin
+2024-12-17 09:33:59,592 - DEBUG - Entering unassign_asset
+User Context:
+  - user_id: fcb38cbd-317b-4b9e-aa52-87c8fadc6434
+  - role: admin
+Request Context:
+  - method: POST
+  - path: /unassign-asset
+  - client_ip: 127.0.0.1
+  - headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZmNiMzhjYmQtMzE3Yi00YjllLWFhNTItODdjOGZhZGM2NDM0Iiwicm9sZSI6ImFkbWluIiwiZXhwIjoxNzM0NDExODM4LCJpYXQiOjE3MzQ0MDgyMzgsIm5iZiI6MTczNDQwODIzOH0.myygJbW_Y7a4A-0ucJVL9BOjTxlwIqndE3U7g4Ydwf4', 'User-Agent': 'PostmanRuntime/7.43.0', 'Accept': '*/*', 'Postman-Token': 'db4040cf-4288-4c77-9d71-29b40a56d1da', 'Host': '127.0.0.1:5000', 'Accept-Encoding': 'gzip, deflate, br', 'Connection': 'keep-alive', 'Content-Length': '116'}
+  - body: {'user_id': 'fcb38cbd-317b-4b9e-aa52-87c8fadc6434', 'asset_id': '88a184df-0659-4465-8e32-6bf067866b61'}
+Function Context:
+  - handler: AssetHandler
+ - for user_id=fcb38cbd-317b-4b9e-aa52-87c8fadc6434 | role=admin
+2024-12-17 09:33:59,607 - INFO - unassign_asset executed successfully. - for user_id=fcb38cbd-317b-4b9e-aa52-87c8fadc6434 | role=admin
+2024-12-17 09:33:59,607 - DEBUG - Exiting unassign_asset - for user_id=fcb38cbd-317b-4b9e-aa52-87c8fadc6434 | role=admin
+2024-12-17 09:33:59,687 - DEBUG - Entering wrapped_func
+User Context:
+  - user_id: fcb38cbd-317b-4b9e-aa52-87c8fadc6434
+  - role: admin
+Request Context:
+  - method: DELETE
+  - path: /delete-asset/88a184df-0659-4465-8e32-6bf067866b61
+  - client_ip: 127.0.0.1
+  - headers: {'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZmNiMzhjYmQtMzE3Yi00YjllLWFhNTItODdjOGZhZGM2NDM0Iiwicm9sZSI6ImFkbWluIiwiZXhwIjoxNzM0NDExODM4LCJpYXQiOjE3MzQ0MDgyMzgsIm5iZiI6MTczNDQwODIzOH0.myygJbW_Y7a4A-0ucJVL9BOjTxlwIqndE3U7g4Ydwf4', 'User-Agent': 'PostmanRuntime/7.43.0', 'Accept': '*/*', 'Postman-Token': '8d07d3ab-c54b-4753-9275-c09dc518bdf1', 'Host': '127.0.0.1:5000', 'Accept-Encoding': 'gzip, deflate, br', 'Connection': 'keep-alive'}
+  - body: {}
+Function Context:
+  - handler: AssetHandler
+ - for user_id=fcb38cbd-317b-4b9e-aa52-87c8fadc6434 | role=admin
+2024-12-17 09:33:59,694 - INFO - wrapped_func executed successfully. - for user_id=fcb38cbd-317b-4b9e-aa52-87c8fadc6434 | role=admin
+2024-12-17 09:33:59,694 - DEBUG - Exiting wrapped_func - for user_id=fcb38cbd-317b-4b9e-aa52-87c8fadc6434 | role=admin
+2024-12-17 09:33:59,767 - DEBUG - Entering wrapped_func
+User Context:
+  - user_id: fcb38cbd-317b-4b9e-aa52-87c8fadc6434
+  - role: admin
+Request Context:
+  - method: DELETE
+  - path: /delete-user/4700db0e-66a7-4d15-86ef-c21774386553
+  - client_ip: 127.0.0.1
+  - headers: {'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZmNiMzhjYmQtMzE3Yi00YjllLWFhNTItODdjOGZhZGM2NDM0Iiwicm9sZSI6ImFkbWluIiwiZXhwIjoxNzM0NDExODM4LCJpYXQiOjE3MzQ0MDgyMzgsIm5iZiI6MTczNDQwODIzOH0.myygJbW_Y7a4A-0ucJVL9BOjTxlwIqndE3U7g4Ydwf4', 'User-Agent': 'PostmanRuntime/7.43.0', 'Accept': '*/*', 'Postman-Token': '7fd67958-62d8-432a-a57b-bfb63a29bf51', 'Host': '127.0.0.1:5000', 'Accept-Encoding': 'gzip, deflate, br', 'Connection': 'keep-alive'}
+  - body: {}
+Function Context:
+  - handler: UserHandler
+ - for user_id=fcb38cbd-317b-4b9e-aa52-87c8fadc6434 | role=admin
+2024-12-17 09:33:59,775 - INFO - wrapped_func executed successfully. - for user_id=fcb38cbd-317b-4b9e-aa52-87c8fadc6434 | role=admin
+2024-12-17 09:33:59,775 - DEBUG - Exiting wrapped_func - for user_id=fcb38cbd-317b-4b9e-aa52-87c8fadc6434 | role=admin

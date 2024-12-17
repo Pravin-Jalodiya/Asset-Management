@@ -1,0 +1,902 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="0" failures="22" skipped="0" tests="150" time="9.667" timestamp="2024-12-17T17:55:44.558039+05:30" hostname="LAP-55355"><testcase classname="tests.controllers_tests.test_asset_handlers.TestAssetHandler" name="test_add_asset_invalid_data" time="0.033" /><testcase classname="tests.controllers_tests.test_asset_handlers.TestAssetHandler" name="test_add_asset_success" time="0.008" /><testcase classname="tests.controllers_tests.test_asset_handlers.TestAssetHandler" name="test_assign_asset_already_assigned" time="0.010"><failure message="AssertionError: 'Invalid user id' != 'Asset already assigned'&#10;- Invalid user id&#10;+ Asset already assigned">self = &lt;AssetManagement.tests.controllers_tests.test_asset_handlers.TestAssetHandler testMethod=test_assign_asset_already_assigned&gt;
+
+    def test_assign_asset_already_assigned(self):
+        """Test failure when assigning an already assigned asset."""
+        assign_payload = {"user_id": "user123", "asset_id": "asset123"}
+        with self.app.test_request_context(method="POST", json=assign_payload):
+            # Mock the assign_asset method to raise AlreadyAssignedError
+            self.mock_asset_service.assign_asset.side_effect = AlreadyAssignedError("Asset already assigned")
+    
+            # Call the assign_asset method of AssetHandler
+            g.role = 'admin'
+            response, status_code = self.asset_handler.assign_asset()
+    
+            # Assert the response and status code
+            self.assertEqual(status_code, 400)
+&gt;           self.assertEqual(response["message"], "Asset already assigned")
+E           AssertionError: 'Invalid user id' != 'Asset already assigned'
+E           - Invalid user id
+E           + Asset already assigned
+
+assign_payload = {'asset_id': 'asset123', 'user_id': 'user123'}
+response   = {'message': 'Invalid user id', 'status_code': 4002}
+self       = &lt;AssetManagement.tests.controllers_tests.test_asset_handlers.TestAssetHandler testMethod=test_assign_asset_already_assigned&gt;
+status_code = 400
+
+tests\controllers_tests\test_asset_handlers.py:119: AssertionError</failure></testcase><testcase classname="tests.controllers_tests.test_asset_handlers.TestAssetHandler" name="test_assign_asset_success" time="0.015"><failure message="AssertionError: 400 != 200">self = &lt;AssetManagement.tests.controllers_tests.test_asset_handlers.TestAssetHandler testMethod=test_assign_asset_success&gt;
+
+    def test_assign_asset_success(self):
+        """Test successful assignment of an asset."""
+        assign_payload = {"user_id": "user123", "asset_id": "asset123"}
+        with self.app.test_request_context(method="POST", json=assign_payload):
+            # Mocking the assign_asset method of AssetService
+            self.mock_asset_service.assign_asset.return_value = None
+    
+            # Call the assign_asset method of AssetHandler
+            g.role = 'admin'
+            response, status_code = self.asset_handler.assign_asset()
+    
+            # Assert the response and status code
+&gt;           self.assertEqual(status_code, 200)
+E           AssertionError: 400 != 200
+
+assign_payload = {'asset_id': 'asset123', 'user_id': 'user123'}
+response   = {'message': 'Invalid user id', 'status_code': 4002}
+self       = &lt;AssetManagement.tests.controllers_tests.test_asset_handlers.TestAssetHandler testMethod=test_assign_asset_success&gt;
+status_code = 400
+
+tests\controllers_tests\test_asset_handlers.py:102: AssertionError</failure></testcase><testcase classname="tests.controllers_tests.test_asset_handlers.TestAssetHandler" name="test_delete_asset_invalid_id" time="0.015" /><testcase classname="tests.controllers_tests.test_asset_handlers.TestAssetHandler" name="test_delete_asset_success" time="0.016"><failure message="AssertionError: 400 != 200">self = &lt;AssetManagement.tests.controllers_tests.test_asset_handlers.TestAssetHandler testMethod=test_delete_asset_success&gt;
+
+    def test_delete_asset_success(self):
+        """Test successful deletion of an asset."""
+        with self.app.test_request_context(method="DELETE", json={"asset_id": "12345"}):
+            # Mocking the delete_asset method of AssetService
+            self.mock_asset_service.delete_asset.return_value = self.test_asset
+    
+            # Call the delete_asset method of AssetHandler
+            g.role = 'admin'
+            response, status_code = self.asset_handler.delete_asset("12345")
+    
+            # Assert the response and status code
+&gt;           self.assertEqual(status_code, 200)
+E           AssertionError: 400 != 200
+
+response   = {'message': 'Invalid asset id', 'status_code': 4002}
+self       = &lt;AssetManagement.tests.controllers_tests.test_asset_handlers.TestAssetHandler testMethod=test_delete_asset_success&gt;
+status_code = 400
+
+tests\controllers_tests\test_asset_handlers.py:76: AssertionError</failure></testcase><testcase classname="tests.controllers_tests.test_asset_handlers.TestAssetHandler" name="test_get_assets_success" time="0.015" /><testcase classname="tests.controllers_tests.test_asset_handlers.TestAssetHandler" name="test_unassign_asset_not_assigned" time="0.012"><failure message="AssertionError: 'Invalid user id' != 'Asset not assigned'&#10;- Invalid user id&#10;+ Asset not assigned">self = &lt;AssetManagement.tests.controllers_tests.test_asset_handlers.TestAssetHandler testMethod=test_unassign_asset_not_assigned&gt;
+
+    def test_unassign_asset_not_assigned(self):
+        """Test failure when unassigning a non-assigned asset."""
+        unassign_payload = {"user_id": "user123", "asset_id": "asset123"}
+        with self.app.test_request_context(method="POST", json=unassign_payload):
+            # Mock the unassign_asset method to raise NotAssignedError
+            self.mock_asset_service.unassign_asset.side_effect = NotAssignedError("Asset not assigned")
+    
+            # Call the unassign_asset method of AssetHandler
+            response, status_code = self.asset_handler.unassign_asset()
+    
+            # Assert the response and status code
+            self.assertEqual(status_code, 400)
+&gt;           self.assertEqual(response["message"], "Asset not assigned")
+E           AssertionError: 'Invalid user id' != 'Asset not assigned'
+E           - Invalid user id
+E           + Asset not assigned
+
+response   = {'message': 'Invalid user id', 'status_code': 4002}
+self       = &lt;AssetManagement.tests.controllers_tests.test_asset_handlers.TestAssetHandler testMethod=test_unassign_asset_not_assigned&gt;
+status_code = 400
+unassign_payload = {'asset_id': 'asset123', 'user_id': 'user123'}
+
+tests\controllers_tests\test_asset_handlers.py:165: AssertionError</failure></testcase><testcase classname="tests.controllers_tests.test_asset_handlers.TestAssetHandler" name="test_unassign_asset_success" time="0.014"><failure message="AssertionError: 400 != 200">self = &lt;AssetManagement.tests.controllers_tests.test_asset_handlers.TestAssetHandler testMethod=test_unassign_asset_success&gt;
+
+    def test_unassign_asset_success(self):
+        """Test successful unassignment of an asset."""
+        unassign_payload = {"user_id": "user123", "asset_id": "asset123"}
+    
+        dummy_user = User(
+            name="pravin",
+            email="Pravin123@watchguard.com",
+            department="CLOUD PLATFORM",
+            password="Password@123"
+        )
+    
+        dummy_asset = Asset(
+            name="Dell x32",
+            description="Dell laptop"
+        )
+    
+        with self.app.test_request_context(method="POST", json=unassign_payload):
+            # Mock the unassign_asset method of AssetService
+            self.mock_asset_service.unassign_asset.return_value = None
+            self.mock_asset_repository.fetch_asset_by_id(unassign_payload['asset_id']).return_value = dummy_asset
+            self.mock_user_service.get_user_by_id(unassign_payload['user_id']).return_value = dummy_user
+            self.mock_asset_repository.is_asset_assigned(unassign_payload['user_id'],unassign_payload['asset_id']).return_value = True
+    
+            # Call the unassign_asset method of AssetHandler
+            g.role='admin'
+            response, status_code = self.asset_handler.unassign_asset()
+    
+            # Assert the response and status code
+&gt;           self.assertEqual(status_code, 200)
+E           AssertionError: 400 != 200
+
+dummy_asset = &lt;src.app.models.asset.Asset object at 0x00000271FA8A4C80&gt;
+dummy_user = &lt;src.app.models.user.User object at 0x00000271FA845BE0&gt;
+response   = {'message': 'Invalid user id', 'status_code': 4002}
+self       = &lt;AssetManagement.tests.controllers_tests.test_asset_handlers.TestAssetHandler testMethod=test_unassign_asset_success&gt;
+status_code = 400
+unassign_payload = {'asset_id': 'asset123', 'user_id': 'user123'}
+
+tests\controllers_tests\test_asset_handlers.py:149: AssertionError</failure></testcase><testcase classname="tests.controllers_tests.test_asset_issue_handlers.TestIssueHandler" name="test_get_user_issues_success" time="0.005"><failure message="TypeError: MonkeyPatch.setattr() got an unexpected keyword argument 'return_value'">self = &lt;AssetManagement.tests.controllers_tests.test_asset_issue_handlers.TestIssueHandler object at 0x00000271FA6DB610&gt;
+issue_handler = IssueHandler(issue_service=&lt;MagicMock id='2688558060544'&gt;), mock_issue_service = &lt;MagicMock id='2688558060544'&gt;
+app = &lt;Flask 'AssetManagement.tests.controllers_tests.test_asset_issue_handlers'&gt;
+
+    def test_get_user_issues_success(self, issue_handler, mock_issue_service, app):
+        """Test successful retrieval of user issues"""
+        # Prepare mock data
+        user_id = "550e8400-e29b-41d4-a716-446655440000"
+        mock_issues = [
+            MagicMock(id="issue1"),
+            MagicMock(id="issue2")
+        ]
+        mock_issue_service.get_user_issues.return_value = mock_issues
+    
+        # Mock the validator
+        with pytest.MonkeyPatch.context() as m:
+&gt;           m.setattr('src.app.controller.issue_urls.issue_routes.Validators.is_valid_UUID', return_value=True)
+E           TypeError: MonkeyPatch.setattr() got an unexpected keyword argument 'return_value'
+
+app        = &lt;Flask 'AssetManagement.tests.controllers_tests.test_asset_issue_handlers'&gt;
+issue_handler = IssueHandler(issue_service=&lt;MagicMock id='2688558060544'&gt;)
+m          = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x00000271FA8BE2C0&gt;
+mock_issue_service = &lt;MagicMock id='2688558060544'&gt;
+mock_issues = [&lt;MagicMock id='2688558061216'&gt;, &lt;MagicMock id='2688558061552'&gt;]
+self       = &lt;AssetManagement.tests.controllers_tests.test_asset_issue_handlers.TestIssueHandler object at 0x00000271FA6DB610&gt;
+user_id    = '550e8400-e29b-41d4-a716-446655440000'
+
+tests\controllers_tests\test_asset_issue_handlers.py:39: TypeError</failure></testcase><testcase classname="tests.controllers_tests.test_asset_issue_handlers.TestIssueHandler" name="test_get_user_issues_invalid_uuid" time="0.004"><failure message="TypeError: MonkeyPatch.setattr() got an unexpected keyword argument 'return_value'">self = &lt;AssetManagement.tests.controllers_tests.test_asset_issue_handlers.TestIssueHandler object at 0x00000271FA6DB890&gt;
+issue_handler = IssueHandler(issue_service=&lt;MagicMock id='2688558062224'&gt;), mock_issue_service = &lt;MagicMock id='2688558062224'&gt;
+app = &lt;Flask 'AssetManagement.tests.controllers_tests.test_asset_issue_handlers'&gt;
+
+    def test_get_user_issues_invalid_uuid(self, issue_handler, mock_issue_service, app):
+        """Test get user issues with invalid UUID"""
+        # Mock the validator to return False
+        with pytest.MonkeyPatch.context() as m:
+&gt;           m.setattr('src.app.controller.issue_urls.issue_routes.Validators.is_valid_UUID', return_value=False)
+E           TypeError: MonkeyPatch.setattr() got an unexpected keyword argument 'return_value'
+
+app        = &lt;Flask 'AssetManagement.tests.controllers_tests.test_asset_issue_handlers'&gt;
+issue_handler = IssueHandler(issue_service=&lt;MagicMock id='2688558062224'&gt;)
+m          = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x00000271FA8BD220&gt;
+mock_issue_service = &lt;MagicMock id='2688558062224'&gt;
+self       = &lt;AssetManagement.tests.controllers_tests.test_asset_issue_handlers.TestIssueHandler object at 0x00000271FA6DB890&gt;
+
+tests\controllers_tests\test_asset_issue_handlers.py:53: TypeError</failure></testcase><testcase classname="tests.controllers_tests.test_asset_issue_handlers.TestIssueHandler" name="test_get_user_issues_not_exists" time="0.007"><failure message="TypeError: MonkeyPatch.setattr() got an unexpected keyword argument 'return_value'">self = &lt;AssetManagement.tests.controllers_tests.test_asset_issue_handlers.TestIssueHandler object at 0x00000271FA73C9D0&gt;
+issue_handler = IssueHandler(issue_service=&lt;MagicMock id='2688558062560'&gt;), mock_issue_service = &lt;MagicMock id='2688558062560'&gt;
+app = &lt;Flask 'AssetManagement.tests.controllers_tests.test_asset_issue_handlers'&gt;
+
+    def test_get_user_issues_not_exists(self, issue_handler, mock_issue_service, app):
+        """Test get user issues for non-existent user"""
+        # Prepare mock data
+        user_id = "550e8400-e29b-41d4-a716-446655440000"
+        mock_issue_service.get_user_issues.side_effect = NotExistsError("No such user")
+    
+        # Mock the validator
+        with pytest.MonkeyPatch.context() as m:
+&gt;           m.setattr('src.app.controller.issue_urls.issue_routes.Validators.is_valid_UUID', return_value=True)
+E           TypeError: MonkeyPatch.setattr() got an unexpected keyword argument 'return_value'
+
+app        = &lt;Flask 'AssetManagement.tests.controllers_tests.test_asset_issue_handlers'&gt;
+issue_handler = IssueHandler(issue_service=&lt;MagicMock id='2688558062560'&gt;)
+m          = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x00000271FA8B04D0&gt;
+mock_issue_service = &lt;MagicMock id='2688558062560'&gt;
+self       = &lt;AssetManagement.tests.controllers_tests.test_asset_issue_handlers.TestIssueHandler object at 0x00000271FA73C9D0&gt;
+user_id    = '550e8400-e29b-41d4-a716-446655440000'
+
+tests\controllers_tests\test_asset_issue_handlers.py:70: TypeError</failure></testcase><testcase classname="tests.controllers_tests.test_asset_issue_handlers.TestIssueHandler" name="test_get_issues_admin_success" time="0.009"><failure message="ImportError: import error in src.app.controller: No module named 'src.app.controller'">name = 'src.app.controller.issue_urls.issue_routes.Utils'
+
+    def resolve(name: str) -&gt; object:
+        # Simplified from zope.dottedname.
+        parts = name.split(".")
+    
+        used = parts.pop(0)
+        found: object = __import__(used)
+        for part in parts:
+            used += "." + part
+            try:
+                found = getattr(found, part)
+            except AttributeError:
+                pass
+            else:
+                continue
+            # We use explicit un-nesting of the handling block in order
+            # to avoid nested exceptions.
+            try:
+&gt;               __import__(used)
+E               ModuleNotFoundError: No module named 'src.app.controller'
+
+expected   = "'src.app.controller'"
+found      = &lt;module 'src.app' from 'C:\\Users\\pjalodiya\\PycharmProjects\\AssetManagement\\src\\app\\__init__.py'&gt;
+name       = 'src.app.controller.issue_urls.issue_routes.Utils'
+part       = 'controller'
+parts      = ['app', 'controller', 'issue_urls', 'issue_routes', 'Utils']
+used       = 'src.app.controller'
+
+..\.venv\Lib\site-packages\_pytest\monkeypatch.py:77: ModuleNotFoundError
+
+The above exception was the direct cause of the following exception:
+
+self = &lt;AssetManagement.tests.controllers_tests.test_asset_issue_handlers.TestIssueHandler object at 0x00000271FA73CC30&gt;
+issue_handler = IssueHandler(issue_service=&lt;MagicMock id='2688558062224'&gt;), mock_issue_service = &lt;MagicMock id='2688558062224'&gt;
+app = &lt;Flask 'AssetManagement.tests.controllers_tests.test_asset_issue_handlers'&gt;
+
+    def test_get_issues_admin_success(self, issue_handler, mock_issue_service, app):
+        """Test successful retrieval of all issues by admin"""
+        # Prepare mock data
+        mock_issues = [
+            MagicMock(id="issue1"),
+            MagicMock(id="issue2")
+        ]
+        mock_issue_service.get_issues.return_value = mock_issues
+    
+        # Create a mock for the admin decorator
+        def mock_admin_decorator(func):
+            def wrapper(*args, **kwargs):
+                return func(*args, **kwargs)
+    
+            return wrapper
+    
+        with pytest.MonkeyPatch.context() as m:
+&gt;           m.setattr('src.app.controller.issue_urls.issue_routes.Utils.admin', mock_admin_decorator)
+
+app        = &lt;Flask 'AssetManagement.tests.controllers_tests.test_asset_issue_handlers'&gt;
+issue_handler = IssueHandler(issue_service=&lt;MagicMock id='2688558062224'&gt;)
+m          = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x00000271FA935590&gt;
+mock_admin_decorator = &lt;function TestIssueHandler.test_get_issues_admin_success.&lt;locals&gt;.mock_admin_decorator at 0x00000271FA8EE020&gt;
+mock_issue_service = &lt;MagicMock id='2688558062224'&gt;
+mock_issues = [&lt;MagicMock id='2688558063232'&gt;, &lt;MagicMock id='2688558063568'&gt;]
+self       = &lt;AssetManagement.tests.controllers_tests.test_asset_issue_handlers.TestIssueHandler object at 0x00000271FA73CC30&gt;
+
+tests\controllers_tests\test_asset_issue_handlers.py:95: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+..\.venv\Lib\site-packages\_pytest\monkeypatch.py:102: in derive_importpath
+    target = resolve(module)
+        attr       = 'admin'
+        import_path = 'src.app.controller.issue_urls.issue_routes.Utils.admin'
+        module     = 'src.app.controller.issue_urls.issue_routes.Utils'
+        raising    = True
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'src.app.controller.issue_urls.issue_routes.Utils'
+
+    def resolve(name: str) -&gt; object:
+        # Simplified from zope.dottedname.
+        parts = name.split(".")
+    
+        used = parts.pop(0)
+        found: object = __import__(used)
+        for part in parts:
+            used += "." + part
+            try:
+                found = getattr(found, part)
+            except AttributeError:
+                pass
+            else:
+                continue
+            # We use explicit un-nesting of the handling block in order
+            # to avoid nested exceptions.
+            try:
+                __import__(used)
+            except ImportError as ex:
+                expected = str(ex).split()[-1]
+                if expected == used:
+                    raise
+                else:
+&gt;                   raise ImportError(f"import error in {used}: {ex}") from ex
+E                   ImportError: import error in src.app.controller: No module named 'src.app.controller'
+
+expected   = "'src.app.controller'"
+found      = &lt;module 'src.app' from 'C:\\Users\\pjalodiya\\PycharmProjects\\AssetManagement\\src\\app\\__init__.py'&gt;
+name       = 'src.app.controller.issue_urls.issue_routes.Utils'
+part       = 'controller'
+parts      = ['app', 'controller', 'issue_urls', 'issue_routes', 'Utils']
+used       = 'src.app.controller'
+
+..\.venv\Lib\site-packages\_pytest\monkeypatch.py:83: ImportError</failure></testcase><testcase classname="tests.controllers_tests.test_asset_issue_handlers.TestIssueHandler" name="test_get_issues_database_error" time="0.005"><failure message="ImportError: import error in src.app.controller: No module named 'src.app.controller'">name = 'src.app.controller.issue_urls.issue_routes.Utils'
+
+    def resolve(name: str) -&gt; object:
+        # Simplified from zope.dottedname.
+        parts = name.split(".")
+    
+        used = parts.pop(0)
+        found: object = __import__(used)
+        for part in parts:
+            used += "." + part
+            try:
+                found = getattr(found, part)
+            except AttributeError:
+                pass
+            else:
+                continue
+            # We use explicit un-nesting of the handling block in order
+            # to avoid nested exceptions.
+            try:
+&gt;               __import__(used)
+E               ModuleNotFoundError: No module named 'src.app.controller'
+
+expected   = "'src.app.controller'"
+found      = &lt;module 'src.app' from 'C:\\Users\\pjalodiya\\PycharmProjects\\AssetManagement\\src\\app\\__init__.py'&gt;
+name       = 'src.app.controller.issue_urls.issue_routes.Utils'
+part       = 'controller'
+parts      = ['app', 'controller', 'issue_urls', 'issue_routes', 'Utils']
+used       = 'src.app.controller'
+
+..\.venv\Lib\site-packages\_pytest\monkeypatch.py:77: ModuleNotFoundError
+
+The above exception was the direct cause of the following exception:
+
+self = &lt;AssetManagement.tests.controllers_tests.test_asset_issue_handlers.TestIssueHandler object at 0x00000271FA726690&gt;
+issue_handler = IssueHandler(issue_service=&lt;MagicMock id='2688558064240'&gt;), mock_issue_service = &lt;MagicMock id='2688558064240'&gt;
+app = &lt;Flask 'AssetManagement.tests.controllers_tests.test_asset_issue_handlers'&gt;
+
+    def test_get_issues_database_error(self, issue_handler, mock_issue_service, app):
+        """Test get issues with database error"""
+        mock_issue_service.get_issues.side_effect = DatabaseError("Database error")
+    
+        # Create a mock for the admin decorator
+        def mock_admin_decorator(func):
+            def wrapper(*args, **kwargs):
+                return func(*args, **kwargs)
+    
+            return wrapper
+    
+        with pytest.MonkeyPatch.context() as m:
+&gt;           m.setattr('src.app.controller.issue_urls.issue_routes.Utils.admin', mock_admin_decorator)
+
+app        = &lt;Flask 'AssetManagement.tests.controllers_tests.test_asset_issue_handlers'&gt;
+issue_handler = IssueHandler(issue_service=&lt;MagicMock id='2688558064240'&gt;)
+m          = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x00000271FA936030&gt;
+mock_admin_decorator = &lt;function TestIssueHandler.test_get_issues_database_error.&lt;locals&gt;.mock_admin_decorator at 0x00000271FA8EDBC0&gt;
+mock_issue_service = &lt;MagicMock id='2688558064240'&gt;
+self       = &lt;AssetManagement.tests.controllers_tests.test_asset_issue_handlers.TestIssueHandler object at 0x00000271FA726690&gt;
+
+tests\controllers_tests\test_asset_issue_handlers.py:117: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+..\.venv\Lib\site-packages\_pytest\monkeypatch.py:102: in derive_importpath
+    target = resolve(module)
+        attr       = 'admin'
+        import_path = 'src.app.controller.issue_urls.issue_routes.Utils.admin'
+        module     = 'src.app.controller.issue_urls.issue_routes.Utils'
+        raising    = True
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'src.app.controller.issue_urls.issue_routes.Utils'
+
+    def resolve(name: str) -&gt; object:
+        # Simplified from zope.dottedname.
+        parts = name.split(".")
+    
+        used = parts.pop(0)
+        found: object = __import__(used)
+        for part in parts:
+            used += "." + part
+            try:
+                found = getattr(found, part)
+            except AttributeError:
+                pass
+            else:
+                continue
+            # We use explicit un-nesting of the handling block in order
+            # to avoid nested exceptions.
+            try:
+                __import__(used)
+            except ImportError as ex:
+                expected = str(ex).split()[-1]
+                if expected == used:
+                    raise
+                else:
+&gt;                   raise ImportError(f"import error in {used}: {ex}") from ex
+E                   ImportError: import error in src.app.controller: No module named 'src.app.controller'
+
+expected   = "'src.app.controller'"
+found      = &lt;module 'src.app' from 'C:\\Users\\pjalodiya\\PycharmProjects\\AssetManagement\\src\\app\\__init__.py'&gt;
+name       = 'src.app.controller.issue_urls.issue_routes.Utils'
+part       = 'controller'
+parts      = ['app', 'controller', 'issue_urls', 'issue_routes', 'Utils']
+used       = 'src.app.controller'
+
+..\.venv\Lib\site-packages\_pytest\monkeypatch.py:83: ImportError</failure></testcase><testcase classname="tests.controllers_tests.test_asset_issue_handlers.TestIssueHandler" name="test_report_issue_success" time="0.006"><failure message="assert 400 == 200">self = &lt;AssetManagement.tests.controllers_tests.test_asset_issue_handlers.TestIssueHandler object at 0x00000271FA7407C0&gt;
+issue_handler = IssueHandler(issue_service=&lt;MagicMock id='2688558064912'&gt;), mock_issue_service = &lt;MagicMock id='2688558064912'&gt;
+app = &lt;Flask 'AssetManagement.tests.controllers_tests.test_asset_issue_handlers'&gt;
+
+    def test_report_issue_success(self, issue_handler, mock_issue_service, app):
+        """Test successful issue reporting"""
+        # Prepare test data
+        issue_data = {
+            "asset_id": "asset123",
+            "description": "Test issue description"
+        }
+    
+        with app.test_request_context(json=issue_data):
+            response, status_code = issue_handler.report_issue()
+    
+&gt;           assert status_code == 200
+E           assert 400 == 200
+
+app        = &lt;Flask 'AssetManagement.tests.controllers_tests.test_asset_issue_handlers'&gt;
+issue_data = {'asset_id': 'asset123', 'description': 'Test issue description'}
+issue_handler = IssueHandler(issue_service=&lt;MagicMock id='2688558064912'&gt;)
+mock_issue_service = &lt;MagicMock id='2688558064912'&gt;
+response   = {'message': 'Asset ID is not valid', 'status_code': 4002}
+self       = &lt;AssetManagement.tests.controllers_tests.test_asset_issue_handlers.TestIssueHandler object at 0x00000271FA7407C0&gt;
+status_code = 400
+
+tests\controllers_tests\test_asset_issue_handlers.py:136: AssertionError</failure></testcase><testcase classname="tests.controllers_tests.test_asset_issue_handlers.TestIssueHandler" name="test_report_issue_not_assigned" time="0.009"><failure message="AssertionError: assert 'Asset ID is not valid' == 'Asset not assigned'&#10;  &#10;  - Asset not assigned&#10;  + Asset ID is not valid">self = &lt;AssetManagement.tests.controllers_tests.test_asset_issue_handlers.TestIssueHandler object at 0x00000271FA7409E0&gt;
+issue_handler = IssueHandler(issue_service=&lt;MagicMock id='2688558065584'&gt;), mock_issue_service = &lt;MagicMock id='2688558065584'&gt;
+app = &lt;Flask 'AssetManagement.tests.controllers_tests.test_asset_issue_handlers'&gt;
+
+    def test_report_issue_not_assigned(self, issue_handler, mock_issue_service, app):
+        """Test reporting issue when asset is not assigned"""
+        # Prepare test data
+        issue_data = {
+            "asset_id": "asset123",
+            "description": "Test issue description"
+        }
+    
+        mock_issue_service.report_issue.side_effect = NotAssignedError("Asset not assigned")
+    
+        with app.test_request_context(json=issue_data):
+            response, status_code = issue_handler.report_issue()
+    
+            assert status_code == 400
+&gt;           assert str(response['message']) == "Asset not assigned"
+E           AssertionError: assert 'Asset ID is not valid' == 'Asset not assigned'
+E             
+E             - Asset not assigned
+E             + Asset ID is not valid
+
+app        = &lt;Flask 'AssetManagement.tests.controllers_tests.test_asset_issue_handlers'&gt;
+issue_data = {'asset_id': 'asset123', 'description': 'Test issue description'}
+issue_handler = IssueHandler(issue_service=&lt;MagicMock id='2688558065584'&gt;)
+mock_issue_service = &lt;MagicMock id='2688558065584'&gt;
+response   = {'message': 'Asset ID is not valid', 'status_code': 4002}
+self       = &lt;AssetManagement.tests.controllers_tests.test_asset_issue_handlers.TestIssueHandler object at 0x00000271FA7409E0&gt;
+status_code = 400
+
+tests\controllers_tests\test_asset_issue_handlers.py:154: AssertionError</failure></testcase><testcase classname="tests.controllers_tests.test_asset_issue_handlers.TestIssueHandler" name="test_report_issue_asset_not_found" time="0.006"><failure message="assert 400 == 404">self = &lt;AssetManagement.tests.controllers_tests.test_asset_issue_handlers.TestIssueHandler object at 0x00000271FA6A3750&gt;
+issue_handler = IssueHandler(issue_service=&lt;MagicMock id='2688558060880'&gt;), mock_issue_service = &lt;MagicMock id='2688558060880'&gt;
+app = &lt;Flask 'AssetManagement.tests.controllers_tests.test_asset_issue_handlers'&gt;
+
+    def test_report_issue_asset_not_found(self, issue_handler, mock_issue_service, app):
+        """Test reporting issue for non-existent asset"""
+        # Prepare test data
+        issue_data = {
+            "asset_id": "asset123",
+            "description": "Test issue description"
+        }
+    
+        mock_issue_service.report_issue.side_effect = NotExistsError("Asset not found")
+    
+        with app.test_request_context(json=issue_data):
+            response, status_code = issue_handler.report_issue()
+    
+&gt;           assert status_code == 404
+E           assert 400 == 404
+
+app        = &lt;Flask 'AssetManagement.tests.controllers_tests.test_asset_issue_handlers'&gt;
+issue_data = {'asset_id': 'asset123', 'description': 'Test issue description'}
+issue_handler = IssueHandler(issue_service=&lt;MagicMock id='2688558060880'&gt;)
+mock_issue_service = &lt;MagicMock id='2688558060880'&gt;
+response   = {'message': 'Asset ID is not valid', 'status_code': 4002}
+self       = &lt;AssetManagement.tests.controllers_tests.test_asset_issue_handlers.TestIssueHandler object at 0x00000271FA6A3750&gt;
+status_code = 400
+
+tests\controllers_tests\test_asset_issue_handlers.py:169: AssertionError</failure></testcase><testcase classname="tests.controllers_tests.test_asset_issue_handlers.TestIssueHandler" name="test_report_issue_database_error" time="0.006"><failure message="assert 400 == 4002">self = &lt;AssetManagement.tests.controllers_tests.test_asset_issue_handlers.TestIssueHandler object at 0x00000271FA6A3950&gt;
+issue_handler = IssueHandler(issue_service=&lt;MagicMock id='2688558066256'&gt;), mock_issue_service = &lt;MagicMock id='2688558066256'&gt;
+app = &lt;Flask 'AssetManagement.tests.controllers_tests.test_asset_issue_handlers'&gt;
+
+    def test_report_issue_database_error(self, issue_handler, mock_issue_service, app):
+        """Test reporting issue with unexpected database error"""
+        # Prepare test data
+        issue_data = {
+            "asset_id": "asset123",
+            "description": "Test issue description"
+        }
+    
+        mock_issue_service.report_issue.side_effect = DatabaseError("Unexpected database error")
+    
+        with app.test_request_context(json=issue_data):
+            response, status_code = issue_handler.report_issue()
+    
+&gt;           assert status_code == 4002
+E           assert 400 == 4002
+
+app        = &lt;Flask 'AssetManagement.tests.controllers_tests.test_asset_issue_handlers'&gt;
+issue_data = {'asset_id': 'asset123', 'description': 'Test issue description'}
+issue_handler = IssueHandler(issue_service=&lt;MagicMock id='2688558066256'&gt;)
+mock_issue_service = &lt;MagicMock id='2688558066256'&gt;
+response   = {'message': 'Asset ID is not valid', 'status_code': 4002}
+self       = &lt;AssetManagement.tests.controllers_tests.test_asset_issue_handlers.TestIssueHandler object at 0x00000271FA6A3950&gt;
+status_code = 400
+
+tests\controllers_tests\test_asset_issue_handlers.py:185: AssertionError</failure></testcase><testcase classname="tests.controllers_tests.test_main.TestAppFactory" name="test_all_routes_registered" time="0.020" /><testcase classname="tests.controllers_tests.test_main.TestAppFactory" name="test_create_app_returns_flask_app" time="0.017" /><testcase classname="tests.controllers_tests.test_main.TestAppFactory" name="test_database_initialized" time="0.021" /><testcase classname="tests.controllers_tests.test_main.TestAppFactory" name="test_dependencies_are_created" time="0.023" /><testcase classname="tests.controllers_tests.test_main.TestAppFactory" name="test_services_have_correct_dependencies" time="0.062" /><testcase classname="tests.controllers_tests.test_user_handlers.TestUserHandler" name="test_delete_user_not_found" time="0.017"><failure message="UnboundLocalError: cannot access local variable 'user_id' where it is not associated with a value">args = (UserHandler(user_service=&lt;Mock spec='UserService' id='2688557546336'&gt;), '123'), kwargs = {}
+
+    @functools.wraps(func)
+    def wrapped_func(*args, **kwargs):
+        try:
+            # Extract and sanitize request details
+&gt;           sanitized_body = logger.sanitize_body(request.get_json(silent=True) or {})
+
+args       = (UserHandler(user_service=&lt;Mock spec='UserService' id='2688557546336'&gt;), '123')
+func       = &lt;function Utils.admin.&lt;locals&gt;.wrapped_func at 0x00000271FA757880&gt;
+kwargs     = {}
+logger     = &lt;src.app.utils.logger.logger.Logger object at 0x00000271FA6C2A50&gt;
+
+src\app\utils\logger\custom_logger.py:13: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+..\.venv\Lib\site-packages\werkzeug\local.py:318: in __get__
+    obj = instance._get_current_object()
+        instance   = &lt;LocalProxy unbound&gt;
+        owner      = &lt;class 'werkzeug.local.LocalProxy'&gt;
+        self       = proxy __getattr__
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    def _get_current_object() -&gt; T:
+        try:
+            obj = local.get()
+        except LookupError:
+&gt;           raise RuntimeError(unbound_message) from None
+E           RuntimeError: Working outside of request context.
+E           
+E           This typically means that you attempted to use functionality that needed
+E           an active HTTP request. Consult the documentation on testing for
+E           information about how to avoid this problem.
+
+get_name   = operator.attrgetter('request')
+local      = &lt;ContextVar name='flask.request_ctx' at 0x00000271FA3AA7A0&gt;
+unbound_message = 'Working outside of request context.\n\nThis typically means that you attempted to use functionality that needed\nan active HTTP request. Consult the documentation on testing for\ninformation about how to avoid this problem.'
+
+..\.venv\Lib\site-packages\werkzeug\local.py:519: RuntimeError
+
+During handling of the above exception, another exception occurred:
+
+self = &lt;AssetManagement.tests.controllers_tests.test_user_handlers.TestUserHandler testMethod=test_delete_user_not_found&gt;
+
+    def test_delete_user_not_found(self):
+        """
+        Test user deletion when user is not found
+        """
+        # Setup mock service
+        self.mock_user_service.delete_user_account.return_value = False
+    
+        # Simulate request context (for admin decorator)
+        with patch('src.app.utils.utils.g') as mock_g:
+            mock_g.role = 'admin'
+&gt;           response, status_code = self.user_handler.delete_user('123')
+
+mock_g     = &lt;AsyncMock name='g' id='2688557545664'&gt;
+self       = &lt;AssetManagement.tests.controllers_tests.test_user_handlers.TestUserHandler testMethod=test_delete_user_not_found&gt;
+
+tests\controllers_tests\test_user_handlers.py:217: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+args = (UserHandler(user_service=&lt;Mock spec='UserService' id='2688557546336'&gt;), '123'), kwargs = {}
+
+    @functools.wraps(func)
+    def wrapped_func(*args, **kwargs):
+        try:
+            # Extract and sanitize request details
+            sanitized_body = logger.sanitize_body(request.get_json(silent=True) or {})
+            user_id = getattr(g, 'user_id', 'Unknown')
+            role = getattr(g, 'role', 'Unknown')
+    
+            # Log the entry with structured details
+            logger.debug(
+                f"Entering {func.__name__}\n"
+                f"User Context:\n"
+                f"  - user_id: {user_id}\n"
+                f"  - role: {role}\n"
+                f"Request Context:\n"
+                f"  - method: {request.method}\n"
+                f"  - path: {request.path}\n"
+                f"  - client_ip: {request.remote_addr}\n"
+                f"  - headers: {dict(request.headers)}\n"
+                f"  - body: {sanitized_body}\n"
+                f"Function Context:\n"
+                f"  - handler: {type(args[0]).__name__ if args else 'Unknown'}\n"
+            )
+    
+            # Execute the function
+            result = func(*args, **kwargs)
+    
+            # Log successful execution
+            logger.info(f"{func.__name__} executed successfully.")
+            return result
+        except Exception as e:
+            # Handle and log exceptions with request details
+            logger.error(
+                f"Error occurred in {func.__name__}: {str(e)}\n"
+                f"User Context:\n"
+&gt;               f"  - user_id: {user_id}\n"
+                f"  - role: {role}\n"
+                f"Request Context:\n"
+                f"  - method: {request.method}\n"
+                f"  - path: {request.path}\n"
+                f"  - client_ip: {request.remote_addr}\n"
+                f"  - body: {sanitized_body}"
+            )
+E           UnboundLocalError: cannot access local variable 'user_id' where it is not associated with a value
+
+args       = (UserHandler(user_service=&lt;Mock spec='UserService' id='2688557546336'&gt;), '123')
+func       = &lt;function Utils.admin.&lt;locals&gt;.wrapped_func at 0x00000271FA757880&gt;
+kwargs     = {}
+logger     = &lt;src.app.utils.logger.logger.Logger object at 0x00000271FA6C2A50&gt;
+
+src\app\utils\logger\custom_logger.py:44: UnboundLocalError</failure></testcase><testcase classname="tests.controllers_tests.test_user_handlers.TestUserHandler" name="test_delete_user_successful" time="0.009"><failure message="UnboundLocalError: cannot access local variable 'user_id' where it is not associated with a value">args = (UserHandler(user_service=&lt;Mock spec='UserService' id='2688558066928'&gt;), '123'), kwargs = {}
+
+    @functools.wraps(func)
+    def wrapped_func(*args, **kwargs):
+        try:
+            # Extract and sanitize request details
+&gt;           sanitized_body = logger.sanitize_body(request.get_json(silent=True) or {})
+
+args       = (UserHandler(user_service=&lt;Mock spec='UserService' id='2688558066928'&gt;), '123')
+func       = &lt;function Utils.admin.&lt;locals&gt;.wrapped_func at 0x00000271FA757880&gt;
+kwargs     = {}
+logger     = &lt;src.app.utils.logger.logger.Logger object at 0x00000271FA6C2A50&gt;
+
+src\app\utils\logger\custom_logger.py:13: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+..\.venv\Lib\site-packages\werkzeug\local.py:318: in __get__
+    obj = instance._get_current_object()
+        instance   = &lt;LocalProxy unbound&gt;
+        owner      = &lt;class 'werkzeug.local.LocalProxy'&gt;
+        self       = proxy __getattr__
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    def _get_current_object() -&gt; T:
+        try:
+            obj = local.get()
+        except LookupError:
+&gt;           raise RuntimeError(unbound_message) from None
+E           RuntimeError: Working outside of request context.
+E           
+E           This typically means that you attempted to use functionality that needed
+E           an active HTTP request. Consult the documentation on testing for
+E           information about how to avoid this problem.
+
+get_name   = operator.attrgetter('request')
+local      = &lt;ContextVar name='flask.request_ctx' at 0x00000271FA3AA7A0&gt;
+unbound_message = 'Working outside of request context.\n\nThis typically means that you attempted to use functionality that needed\nan active HTTP request. Consult the documentation on testing for\ninformation about how to avoid this problem.'
+
+..\.venv\Lib\site-packages\werkzeug\local.py:519: RuntimeError
+
+During handling of the above exception, another exception occurred:
+
+self = &lt;AssetManagement.tests.controllers_tests.test_user_handlers.TestUserHandler testMethod=test_delete_user_successful&gt;
+
+    def test_delete_user_successful(self):
+        """
+        Test successful user deletion
+        """
+        # Setup mock service
+        self.mock_user_service.delete_user_account.return_value = True
+    
+        # Simulate request context (for admin decorator)
+        with patch('src.app.utils.utils.g') as mock_g:
+            mock_g.role = 'admin'
+&gt;           response, status_code = self.user_handler.delete_user('123')
+
+mock_g     = &lt;AsyncMock name='g' id='2688558065248'&gt;
+self       = &lt;AssetManagement.tests.controllers_tests.test_user_handlers.TestUserHandler testMethod=test_delete_user_successful&gt;
+
+tests\controllers_tests\test_user_handlers.py:201: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+args = (UserHandler(user_service=&lt;Mock spec='UserService' id='2688558066928'&gt;), '123'), kwargs = {}
+
+    @functools.wraps(func)
+    def wrapped_func(*args, **kwargs):
+        try:
+            # Extract and sanitize request details
+            sanitized_body = logger.sanitize_body(request.get_json(silent=True) or {})
+            user_id = getattr(g, 'user_id', 'Unknown')
+            role = getattr(g, 'role', 'Unknown')
+    
+            # Log the entry with structured details
+            logger.debug(
+                f"Entering {func.__name__}\n"
+                f"User Context:\n"
+                f"  - user_id: {user_id}\n"
+                f"  - role: {role}\n"
+                f"Request Context:\n"
+                f"  - method: {request.method}\n"
+                f"  - path: {request.path}\n"
+                f"  - client_ip: {request.remote_addr}\n"
+                f"  - headers: {dict(request.headers)}\n"
+                f"  - body: {sanitized_body}\n"
+                f"Function Context:\n"
+                f"  - handler: {type(args[0]).__name__ if args else 'Unknown'}\n"
+            )
+    
+            # Execute the function
+            result = func(*args, **kwargs)
+    
+            # Log successful execution
+            logger.info(f"{func.__name__} executed successfully.")
+            return result
+        except Exception as e:
+            # Handle and log exceptions with request details
+            logger.error(
+                f"Error occurred in {func.__name__}: {str(e)}\n"
+                f"User Context:\n"
+&gt;               f"  - user_id: {user_id}\n"
+                f"  - role: {role}\n"
+                f"Request Context:\n"
+                f"  - method: {request.method}\n"
+                f"  - path: {request.path}\n"
+                f"  - client_ip: {request.remote_addr}\n"
+                f"  - body: {sanitized_body}"
+            )
+E           UnboundLocalError: cannot access local variable 'user_id' where it is not associated with a value
+
+args       = (UserHandler(user_service=&lt;Mock spec='UserService' id='2688558066928'&gt;), '123')
+func       = &lt;function Utils.admin.&lt;locals&gt;.wrapped_func at 0x00000271FA757880&gt;
+kwargs     = {}
+logger     = &lt;src.app.utils.logger.logger.Logger object at 0x00000271FA6C2A50&gt;
+
+src\app\utils\logger\custom_logger.py:44: UnboundLocalError</failure></testcase><testcase classname="tests.controllers_tests.test_user_handlers.TestUserHandler" name="test_get_user_successful" time="0.007"><failure message="TypeError: User.__init__() missing 2 required positional arguments: 'password' and 'department'">self = &lt;AssetManagement.tests.controllers_tests.test_user_handlers.TestUserHandler testMethod=test_get_user_successful&gt;
+
+    def test_get_user_successful(self):
+        """
+        Test fetching a single user successfully
+        """
+        # Create mock user
+&gt;       mock_user = User(
+            id='123',
+            name='Test User',
+            email='test@example.com'
+        )
+E       TypeError: User.__init__() missing 2 required positional arguments: 'password' and 'department'
+
+self       = &lt;AssetManagement.tests.controllers_tests.test_user_handlers.TestUserHandler testMethod=test_get_user_successful&gt;
+
+tests\controllers_tests\test_user_handlers.py:174: TypeError</failure></testcase><testcase classname="tests.controllers_tests.test_user_handlers.TestUserHandler" name="test_get_users_successful" time="0.007"><failure message="TypeError: User.__init__() missing 2 required positional arguments: 'password' and 'department'">self = &lt;AssetManagement.tests.controllers_tests.test_user_handlers.TestUserHandler testMethod=test_get_users_successful&gt;
+
+    def test_get_users_successful(self):
+        """
+        Test fetching users successfully
+        """
+        # Create mock users
+        mock_users = [
+&gt;           User(id='1', name='User 1', email='user1@example.com'),
+            User(id='2', name='User 2', email='user2@example.com')
+        ]
+E       TypeError: User.__init__() missing 2 required positional arguments: 'password' and 'department'
+
+self       = &lt;AssetManagement.tests.controllers_tests.test_user_handlers.TestUserHandler testMethod=test_get_users_successful&gt;
+
+tests\controllers_tests\test_user_handlers.py:152: TypeError</failure></testcase><testcase classname="tests.controllers_tests.test_user_handlers.TestUserHandler" name="test_login_invalid_credentials" time="0.012"><failure message="AssertionError: 'Email is not valid' != 'Invalid email or password'&#10;- Email is not valid&#10;+ Invalid email or password">self = &lt;AssetManagement.tests.controllers_tests.test_user_handlers.TestUserHandler testMethod=test_login_invalid_credentials&gt;
+
+    def test_login_invalid_credentials(self):
+        """
+        Test login with invalid credentials
+        """
+        # Prepare test data
+        login_data = {
+            'email': 'test@example.com',
+            'password': 'wrongpassword'
+        }
+    
+        # Setup mock service to raise InvalidCredentialsError
+        self.mock_user_service.login_user.side_effect = InvalidCredentialsError("Invalid credentials")
+    
+        # Simulate request
+        with self.app.test_request_context(
+                json=login_data,
+                method='POST'
+        ):
+            response, status_code = self.user_handler.login()
+    
+        # Assertions
+        self.assertEqual(status_code, 400)
+&gt;       self.assertEqual(response['message'], 'Invalid email or password')
+E       AssertionError: 'Email is not valid' != 'Invalid email or password'
+E       - Email is not valid
+E       + Invalid email or password
+
+login_data = {'email': 'test@example.com', 'password': 'wrongpassword'}
+response   = {'message': 'Email is not valid', 'status_code': 4002}
+self       = &lt;AssetManagement.tests.controllers_tests.test_user_handlers.TestUserHandler testMethod=test_login_invalid_credentials&gt;
+status_code = 400
+
+tests\controllers_tests\test_user_handlers.py:92: AssertionError</failure></testcase><testcase classname="tests.controllers_tests.test_user_handlers.TestUserHandler" name="test_login_successful" time="0.008"><failure message="TypeError: User.__init__() missing 2 required positional arguments: 'password' and 'department'">self = &lt;AssetManagement.tests.controllers_tests.test_user_handlers.TestUserHandler testMethod=test_login_successful&gt;
+
+    def test_login_successful(self):
+        """
+        Test successful login
+        """
+        # Prepare test data
+        login_data = {
+            'email': 'test@example.com',
+            'password': 'password123'
+        }
+    
+        # Mock user for successful login
+&gt;       mock_user = User(
+            id='123',
+            email='test@example.com',
+            name='Test User',
+            role='user'
+        )
+E       TypeError: User.__init__() missing 2 required positional arguments: 'password' and 'department'
+
+login_data = {'email': 'test@example.com', 'password': 'password123'}
+self       = &lt;AssetManagement.tests.controllers_tests.test_user_handlers.TestUserHandler testMethod=test_login_successful&gt;
+
+tests\controllers_tests\test_user_handlers.py:46: TypeError</failure></testcase><testcase classname="tests.controllers_tests.test_user_handlers.TestUserHandler" name="test_signup_successful" time="0.008"><failure message="AssertionError: 400 != 200">self = &lt;AssetManagement.tests.controllers_tests.test_user_handlers.TestUserHandler testMethod=test_signup_successful&gt;
+
+    def test_signup_successful(self):
+        """
+        Test successful user signup
+        """
+        # Prepare test data
+        signup_data = {
+            'name': 'Test User',
+            'email': 'test@example.com',
+            'password': 'password123',
+            'department': 'IT'
+        }
+    
+        # Simulate request
+        with self.app.test_request_context(
+                json=signup_data,
+                method='POST'
+        ):
+            response, status_code = self.user_handler.signup()
+    
+        # Assertions
+&gt;       self.assertEqual(status_code, 200)
+E       AssertionError: 400 != 200
+
+response   = {'message': 'Email is not valid', 'status_code': 4002}
+self       = &lt;AssetManagement.tests.controllers_tests.test_user_handlers.TestUserHandler testMethod=test_signup_successful&gt;
+signup_data = {'department': 'IT', 'email': 'test@example.com', 'name': 'Test User', 'password': 'password123'}
+status_code = 400
+
+tests\controllers_tests\test_user_handlers.py:114: AssertionError</failure></testcase><testcase classname="tests.controllers_tests.test_user_handlers.TestUserHandler" name="test_signup_user_exists" time="0.006"><failure message="AssertionError: 400 != 409">self = &lt;AssetManagement.tests.controllers_tests.test_user_handlers.TestUserHandler testMethod=test_signup_user_exists&gt;
+
+    def test_signup_user_exists(self):
+        """
+        Test signup when user already exists
+        """
+        # Prepare test data
+        signup_data = {
+            'name': 'Test User',
+            'email': 'test@example.com',
+            'password': 'password123',
+            'department': 'IT'
+        }
+    
+        # Setup mock service to raise UserExistsError
+        self.mock_user_service.signup_user.side_effect = UserExistsError("User already exists")
+    
+        # Simulate request
+        with self.app.test_request_context(
+                json=signup_data,
+                method='POST'
+        ):
+            response, status_code = self.user_handler.signup()
+    
+        # Assertions
+&gt;       self.assertEqual(status_code, 409)
+E       AssertionError: 400 != 409
+
+response   = {'message': 'Email is not valid', 'status_code': 4002}
+self       = &lt;AssetManagement.tests.controllers_tests.test_user_handlers.TestUserHandler testMethod=test_signup_user_exists&gt;
+signup_data = {'department': 'IT', 'email': 'test@example.com', 'name': 'Test User', 'password': 'password123'}
+status_code = 400
+
+tests\controllers_tests\test_user_handlers.py:143: AssertionError</failure></testcase><testcase classname="tests.middleware_tests.test_middleware.TestAuthMiddleware" name="test_expired_token" time="0.006" /><testcase classname="tests.middleware_tests.test_middleware.TestAuthMiddleware" name="test_invalid_authorization_format" time="0.003" /><testcase classname="tests.middleware_tests.test_middleware.TestAuthMiddleware" name="test_invalid_token" time="0.003" /><testcase classname="tests.middleware_tests.test_middleware.TestAuthMiddleware" name="test_invalid_token_payload" time="0.003" /><testcase classname="tests.middleware_tests.test_middleware.TestAuthMiddleware" name="test_no_authorization_header" time="0.003" /><testcase classname="tests.middleware_tests.test_middleware.TestAuthMiddleware" name="test_skip_middleware_for_login_signup" time="0.003" /><testcase classname="tests.middleware_tests.test_middleware.TestAuthMiddleware" name="test_valid_token" time="0.006" /><testcase classname="tests.repository_tests.test_asset_issue_repository.TestIssueRepository" name="test_fetch_all_issues_empty_list" time="0.013" /><testcase classname="tests.repository_tests.test_asset_issue_repository.TestIssueRepository" name="test_fetch_all_issues_raises_database_error" time="0.007" /><testcase classname="tests.repository_tests.test_asset_issue_repository.TestIssueRepository" name="test_fetch_all_issues_success" time="0.008" /><testcase classname="tests.repository_tests.test_asset_issue_repository.TestIssueRepository" name="test_fetch_user_issues_no_issues_found" time="0.007" /><testcase classname="tests.repository_tests.test_asset_issue_repository.TestIssueRepository" name="test_fetch_user_issues_raises_database_error" time="0.007" /><testcase classname="tests.repository_tests.test_asset_issue_repository.TestIssueRepository" name="test_fetch_user_issues_success" time="0.008" /><testcase classname="tests.repository_tests.test_asset_issue_repository.TestIssueRepository" name="test_report_issue_raises_database_error" time="0.005" /><testcase classname="tests.repository_tests.test_asset_issue_repository.TestIssueRepository" name="test_report_issue_success" time="0.008" /><testcase classname="tests.repository_tests.test_asset_repository.TestAssetRepository" name="test_add_asset_raises_database_error" time="0.008" /><testcase classname="tests.repository_tests.test_asset_repository.TestAssetRepository" name="test_add_asset_success" time="0.008" /><testcase classname="tests.repository_tests.test_asset_repository.TestAssetRepository" name="test_assign_asset_raises_database_error" time="0.009" /><testcase classname="tests.repository_tests.test_asset_repository.TestAssetRepository" name="test_assign_asset_success" time="0.007" /><testcase classname="tests.repository_tests.test_asset_repository.TestAssetRepository" name="test_check_asset_availability_available" time="0.006" /><testcase classname="tests.repository_tests.test_asset_repository.TestAssetRepository" name="test_check_asset_availability_available_raises_database_error" time="0.004" /><testcase classname="tests.repository_tests.test_asset_repository.TestAssetRepository" name="test_check_asset_availability_not_available" time="0.005" /><testcase classname="tests.repository_tests.test_asset_repository.TestAssetRepository" name="test_delete_asset_success" time="0.006" /><testcase classname="tests.repository_tests.test_asset_repository.TestAssetRepository" name="test_delete_asset_success_raises_database_error" time="0.005" /><testcase classname="tests.repository_tests.test_asset_repository.TestAssetRepository" name="test_fetch_all_assets_raises_database_error" time="0.004" /><testcase classname="tests.repository_tests.test_asset_repository.TestAssetRepository" name="test_fetch_all_assets_success" time="0.006" /><testcase classname="tests.repository_tests.test_asset_repository.TestAssetRepository" name="test_fetch_asset_by_id_not_found" time="0.009" /><testcase classname="tests.repository_tests.test_asset_repository.TestAssetRepository" name="test_fetch_asset_by_id_raises_database_error" time="0.010" /><testcase classname="tests.repository_tests.test_asset_repository.TestAssetRepository" name="test_fetch_asset_by_id_success" time="0.009" /><testcase classname="tests.repository_tests.test_asset_repository.TestAssetRepository" name="test_is_asset_assigned_false" time="0.009" /><testcase classname="tests.repository_tests.test_asset_repository.TestAssetRepository" name="test_is_asset_assigned_raises_database_error" time="0.008" /><testcase classname="tests.repository_tests.test_asset_repository.TestAssetRepository" name="test_is_asset_assigned_true" time="0.009" /><testcase classname="tests.repository_tests.test_asset_repository.TestAssetRepository" name="test_unassign_asset_raises_database_error" time="0.008" /><testcase classname="tests.repository_tests.test_asset_repository.TestAssetRepository" name="test_unassign_asset_success" time="0.010" /><testcase classname="tests.repository_tests.test_asset_repository.TestAssetRepository" name="test_update_asset_status_raises_database_error" time="0.007" /><testcase classname="tests.repository_tests.test_asset_repository.TestAssetRepository" name="test_update_asset_status_success" time="0.009" /><testcase classname="tests.repository_tests.test_asset_repository.TestAssetRepository" name="test_view_all_assigned_assets_raises_database_error" time="0.008" /><testcase classname="tests.repository_tests.test_asset_repository.TestAssetRepository" name="test_view_all_assigned_assets_success" time="0.009" /><testcase classname="tests.repository_tests.test_asset_repository.TestAssetRepository" name="test_view_assigned_assets_no_assets" time="0.009" /><testcase classname="tests.repository_tests.test_asset_repository.TestAssetRepository" name="test_view_assigned_assets_no_assets_raises_database_error" time="0.008" /><testcase classname="tests.repository_tests.test_asset_repository.TestAssetRepository" name="test_view_assigned_assets_success" time="0.014" /><testcase classname="tests.repository_tests.test_user_repository.TestUserRepository" name="test_delete_user_database_error" time="0.006" /><testcase classname="tests.repository_tests.test_user_repository.TestUserRepository" name="test_delete_user_not_found" time="0.010" /><testcase classname="tests.repository_tests.test_user_repository.TestUserRepository" name="test_delete_user_success" time="0.008" /><testcase classname="tests.repository_tests.test_user_repository.TestUserRepository" name="test_fetch_user_by_email_database_error" time="0.008" /><testcase classname="tests.repository_tests.test_user_repository.TestUserRepository" name="test_fetch_user_by_email_not_found" time="0.009" /><testcase classname="tests.repository_tests.test_user_repository.TestUserRepository" name="test_fetch_user_by_email_success" time="0.011" /><testcase classname="tests.repository_tests.test_user_repository.TestUserRepository" name="test_fetch_user_by_id_database_error" time="0.008" /><testcase classname="tests.repository_tests.test_user_repository.TestUserRepository" name="test_fetch_user_by_id_not_found" time="0.009" /><testcase classname="tests.repository_tests.test_user_repository.TestUserRepository" name="test_fetch_user_by_id_success" time="0.009" /><testcase classname="tests.repository_tests.test_user_repository.TestUserRepository" name="test_fetch_users_database_error" time="0.007" /><testcase classname="tests.repository_tests.test_user_repository.TestUserRepository" name="test_fetch_users_empty_list" time="0.008" /><testcase classname="tests.repository_tests.test_user_repository.TestUserRepository" name="test_fetch_users_success" time="0.011" /><testcase classname="tests.repository_tests.test_user_repository.TestUserRepository" name="test_save_user_database_error" time="0.005" /><testcase classname="tests.repository_tests.test_user_repository.TestUserRepository" name="test_save_user_success" time="0.007" /><testcase classname="tests.service_tests.test_asset_issue_service.TestIssueService" name="test_get_issues_returns_all_issues" time="0.007" /><testcase classname="tests.service_tests.test_asset_issue_service.TestIssueService" name="test_get_user_issues_raises_error_for_nonexistent_user" time="0.005" /><testcase classname="tests.service_tests.test_asset_issue_service.TestIssueService" name="test_get_user_issues_returns_user_specific_issues" time="0.007" /><testcase classname="tests.service_tests.test_asset_issue_service.TestIssueService" name="test_report_issue_raises_error_for_nonexistent_asset" time="0.008" /><testcase classname="tests.service_tests.test_asset_issue_service.TestIssueService" name="test_report_issue_raises_error_for_unassigned_asset" time="0.008" /><testcase classname="tests.service_tests.test_asset_issue_service.TestIssueService" name="test_report_issue_successful" time="0.009" /><testcase classname="tests.service_tests.test_asset_service.TestAssetService" name="test_add_asset_raises_exists_error" time="0.005" /><testcase classname="tests.service_tests.test_asset_service.TestAssetService" name="test_add_asset_successful" time="0.003" /><testcase classname="tests.service_tests.test_asset_service.TestAssetService" name="test_assign_asset_raises_asset_not_exists_error" time="0.003" /><testcase classname="tests.service_tests.test_asset_service.TestAssetService" name="test_assign_asset_raises_user_not_exists_error" time="0.004" /><testcase classname="tests.service_tests.test_asset_service.TestAssetService" name="test_assign_asset_successful" time="0.006" /><testcase classname="tests.service_tests.test_asset_service.TestAssetService" name="test_delete_asset_raises_not_exists_error" time="0.004" /><testcase classname="tests.service_tests.test_asset_service.TestAssetService" name="test_delete_asset_successful" time="0.005" /><testcase classname="tests.service_tests.test_asset_service.TestAssetService" name="test_get_asset_by_id" time="0.005" /><testcase classname="tests.service_tests.test_asset_service.TestAssetService" name="test_get_assets" time="0.004" /><testcase classname="tests.service_tests.test_asset_service.TestAssetService" name="test_is_asset_assigned" time="0.004" /><testcase classname="tests.service_tests.test_asset_service.TestAssetService" name="test_unassign_asset_raises_not_exists_errors" time="0.004" /><testcase classname="tests.service_tests.test_asset_service.TestAssetService" name="test_unassign_asset_successful" time="0.007" /><testcase classname="tests.service_tests.test_asset_service.TestAssetService" name="test_view_all_assigned_assets" time="0.006" /><testcase classname="tests.service_tests.test_asset_service.TestAssetService" name="test_view_assigned_assets_raises_user_not_exists_error" time="0.004" /><testcase classname="tests.service_tests.test_asset_service.TestAssetService" name="test_view_assigned_assets_successful" time="0.004" /><testcase classname="tests.service_tests.test_user_service.TestUserService" name="test_delete_user_account_nonexistent_user" time="0.004" /><testcase classname="tests.service_tests.test_user_service.TestUserService" name="test_delete_user_account_successful" time="0.003" /><testcase classname="tests.service_tests.test_user_service.TestUserService" name="test_get_user_by_email_returns_none" time="0.003" /><testcase classname="tests.service_tests.test_user_service.TestUserService" name="test_get_user_by_email_successful" time="0.003" /><testcase classname="tests.service_tests.test_user_service.TestUserService" name="test_get_user_by_id_returns_none" time="0.004" /><testcase classname="tests.service_tests.test_user_service.TestUserService" name="test_get_user_by_id_successful" time="0.004" /><testcase classname="tests.service_tests.test_user_service.TestUserService" name="test_get_users_returns_empty_list" time="0.003" /><testcase classname="tests.service_tests.test_user_service.TestUserService" name="test_get_users_returns_list" time="0.003" /><testcase classname="tests.service_tests.test_user_service.TestUserService" name="test_login_user_raises_invalid_credentials" time="0.003" /><testcase classname="tests.service_tests.test_user_service.TestUserService" name="test_login_user_successful" time="0.398" /><testcase classname="tests.service_tests.test_user_service.TestUserService" name="test_signup_user_raises_user_exists_error" time="0.002" /><testcase classname="tests.service_tests.test_user_service.TestUserService" name="test_signup_user_successful" time="0.003" /><testcase classname="tests.utils.db.test_db_connection" name="test_db_connection" time="0.006" /><testcase classname="tests.utils.db.test_query_builder.TestGenericQueryBuilder" name="test_delete_multiple_conditions" time="0.002" /><testcase classname="tests.utils.db.test_query_builder.TestGenericQueryBuilder" name="test_delete_single_condition" time="0.002" /><testcase classname="tests.utils.db.test_query_builder.TestGenericQueryBuilder" name="test_delete_without_where_clause" time="0.002" /><testcase classname="tests.utils.db.test_query_builder.TestGenericQueryBuilder" name="test_insert_multiple_columns" time="0.002" /><testcase classname="tests.utils.db.test_query_builder.TestGenericQueryBuilder" name="test_insert_single_column" time="0.002" /><testcase classname="tests.utils.db.test_query_builder.TestGenericQueryBuilder" name="test_select_all_columns" time="0.002" /><testcase classname="tests.utils.db.test_query_builder.TestGenericQueryBuilder" name="test_select_specific_columns" time="0.002" /><testcase classname="tests.utils.db.test_query_builder.TestGenericQueryBuilder" name="test_select_with_all_parameters" time="0.002" /><testcase classname="tests.utils.db.test_query_builder.TestGenericQueryBuilder" name="test_select_with_limit" time="0.002" /><testcase classname="tests.utils.db.test_query_builder.TestGenericQueryBuilder" name="test_select_with_multiple_where_conditions" time="0.002" /><testcase classname="tests.utils.db.test_query_builder.TestGenericQueryBuilder" name="test_select_with_order_by" time="0.004" /><testcase classname="tests.utils.db.test_query_builder.TestGenericQueryBuilder" name="test_select_with_where_clause" time="0.003" /><testcase classname="tests.utils.db.test_query_builder.TestGenericQueryBuilder" name="test_update_multiple_columns" time="0.004" /><testcase classname="tests.utils.db.test_query_builder.TestGenericQueryBuilder" name="test_update_multiple_where_conditions" time="0.003" /><testcase classname="tests.utils.db.test_query_builder.TestGenericQueryBuilder" name="test_update_single_column" time="0.003" /><testcase classname="tests.utils.test_utils.TestUtils" name="test_admin_decorator_authorized" time="0.006" /><testcase classname="tests.utils.test_utils.TestUtils" name="test_admin_decorator_unauthorized" time="0.007" /><testcase classname="tests.utils.test_utils.TestUtils" name="test_check_password_failure" time="0.693" /><testcase classname="tests.utils.test_utils.TestUtils" name="test_check_password_success" time="0.703" /><testcase classname="tests.utils.test_utils.TestUtils" name="test_create_jwt_token_exception" time="0.002" /><testcase classname="tests.utils.test_utils.TestUtils" name="test_create_jwt_token_success" time="0.004" /><testcase classname="tests.utils.test_utils.TestUtils" name="test_decode_jwt_token_expired" time="0.003" /><testcase classname="tests.utils.test_utils.TestUtils" name="test_decode_jwt_token_invalid" time="0.003" /><testcase classname="tests.utils.test_utils.TestUtils" name="test_decode_jwt_token_success" time="0.003" /><testcase classname="tests.utils.test_utils.TestUtils" name="test_hash_password_unique" time="0.718" /><testcase classname="tests.utils.validators.test_validators.TestValidators" name="test_is_department_valid" time="0.004" /><testcase classname="tests.utils.validators.test_validators.TestValidators" name="test_is_email_valid" time="0.001" /><testcase classname="tests.utils.validators.test_validators.TestValidators" name="test_is_name_valid" time="0.002" /><testcase classname="tests.utils.validators.test_validators.TestValidators" name="test_is_password_valid" time="0.002" /><testcase classname="tests.utils.validators.test_validators.TestValidators" name="test_is_valid_UUID" time="0.003" /></testsuite></testsuites>

@@ -7,7 +7,7 @@ class CustomResponse:
     message: str
     data: any
 
-    def dto_to_dict(self):
+    def object_to_dict(self):
         response ={
             'status_code': self.status_code,
             'message': self.message,

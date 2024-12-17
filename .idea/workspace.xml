@@ -5,43 +5,67 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="347872e0-5b89-419e-982a-7a257b7fd3fb" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/PythonProject.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/PythonProject.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/sonarlint.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/controllers/asset/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/controllers/asset_issue/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/controllers/users/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/controllers_tests/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/controllers_tests/test_asset_handlers.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/controllers_tests/test_asset_issue_handlers.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/controllers_tests/test_main.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/controllers_tests/test_user_handlers.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/middleware_tests/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/middleware_tests/test_middleware.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/models_tests/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/models_tests/asset_issue_model_test.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/repository_tests/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/repository_tests/test_asset_issue_repository.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/repository_tests/test_asset_repository.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/repository_tests/test_user_repository.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/service_tests/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/service_tests/test_asset_issue_service.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/service_tests/test_asset_service.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/service_tests/test_user_service.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/utils/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/utils/db/test_db_connection.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/utils/db/test_query_builder.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/utils/test_utils.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/utils/validators/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/utils/validators/test_validators.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/config/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/config/db_config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/config/types.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/config/types.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/controllers/app.log" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/controllers/app.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/controllers/asset_routes/asset_handlers.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/controllers/asset_routes/asset_handlers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/controllers/asset_routes/asset_routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/controllers/asset_routes/asset_routes.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/controllers/issue_routes/issue_handlers.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/controllers/issue_routes/issue_handlers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/controllers/issue_routes/issue_routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/controllers/issue_routes/issue_routes.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/controllers/asset_routes/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/pytest.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/controllers/asset_routes/asset_handlers.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/controllers/asset/handlers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/controllers/asset_routes/asset_routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/controllers/asset/routes.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/controllers/issue_routes/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/setup.cgf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/controllers/issue_routes/issue_handlers.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/controllers/asset_issue/handlers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/controllers/issue_routes/issue_routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/controllers/asset_issue/routes.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/controllers/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/controllers/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/controllers/users_routes/user_handlers.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/controllers/users_routes/user_handlers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/controllers/users_routes/user_routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/controllers/users_routes/user_routes.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/controllers/users_routes/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/sonar-project.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/controllers/users_routes/user_handlers.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/controllers/users/handlers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/controllers/users_routes/user_routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/controllers/users/routes.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/middleware/middleware.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/middleware/middleware.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/models/asset.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/models/asset.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/models/asset_assigned.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/models/asset_assigned.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/models/issue.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/models/asset_issue.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/models/request_objects.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/models/request_objects.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/models/response.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/models/response.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/models/user.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/models/user.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/repositories/asset_repository.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/repositories/asset_repository.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/repositories/issue_repository.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/repositories/issue_repository.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/repositories/user_repository.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/repositories/user_repository.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/scripts/create_tables.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/scripts/create_tables.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/services/asset_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/services/asset_service.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/services/issue_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/services/issue_service.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/repositories/issue_repository.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/repositories/asset_issue_repository.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/services/issue_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/services/asset_issue_service.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/services/user_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/services/user_service.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/utils/db/asset_management.db" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/utils/db/asset_management.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/utils/db/db.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/utils/db/db.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/utils/db/query_builder.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/utils/db/query_builder.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/utils/errors/error.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/utils/errors/error.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/utils/logger/custom_logger.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/utils/logger/custom_logger.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/utils/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/utils/utils.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/utils/validators/validators.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/utils/validators/validators.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -50,27 +74,179 @@
   &quot;associatedIndex&quot;: 3
 }</component>
   <component name="ProjectId" id="2q1LGCedemIkv9Nib7iwre9MHnh" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Python tests.Python tests for issue_model_test.TestIssue.executor": "Run",
+    "Python tests.Python tests for test_asset_handlers.TestAssetHandler.executor": "Run",
+    "Python tests.Python tests for test_asset_handlers.TestAssetHandler.test_add_asset_duplicate_error.executor": "Run",
+    "Python tests.Python tests for test_asset_handlers.TestAssetHandler.test_add_asset_invalid_data.executor": "Run",
+    "Python tests.Python tests for test_asset_handlers.TestAssetHandler.test_add_asset_success.executor": "Run",
+    "Python tests.Python tests for test_asset_handlers.TestAssetHandler.test_assign_asset_already_assigned.executor": "Run",
+    "Python tests.Python tests for test_asset_handlers.TestAssetHandler.test_assign_asset_success.executor": "Run",
+    "Python tests.Python tests for test_asset_handlers.TestAssetHandler.test_assign_asset_successful.executor": "Run",
+    "Python tests.Python tests for test_asset_handlers.TestAssetHandler.test_delete_asset_invalid_id.executor": "Run",
+    "Python tests.Python tests for test_asset_handlers.TestAssetHandler.test_delete_asset_not_found.executor": "Run",
+    "Python tests.Python tests for test_asset_handlers.TestAssetHandler.test_delete_asset_success.executor": "Run",
+    "Python tests.Python tests for test_asset_handlers.TestAssetHandler.test_get_assets.executor": "Run",
+    "Python tests.Python tests for test_asset_handlers.TestAssetHandler.test_unassign_asset_success.executor": "Run",
+    "Python tests.Python tests for test_asset_handlers.TestAssetHandler.test_unassign_asset_successful.executor": "Run",
+    "Python tests.Python tests for test_asset_issue_handlers.TestIssueHandler.executor": "Run",
+    "Python tests.Python tests for test_asset_issue_handlers.TestIssueHandler.test_report_issue_database_error.executor": "Run",
+    "Python tests.Python tests for test_asset_issue_repository.TestIssueRepository.executor": "Run",
+    "Python tests.Python tests for test_asset_issue_repository.TestIssueRepository.test_fetch_all_issues_empty_list.executor": "Run",
+    "Python tests.Python tests for test_asset_issue_repository.TestIssueRepository.test_fetch_all_issues_success.executor": "Run",
+    "Python tests.Python tests for test_asset_issue_repository.TestIssueRepository.test_fetch_user_issues_no_issues_found.executor": "Run",
+    "Python tests.Python tests for test_asset_issue_repository.TestIssueRepository.test_fetch_user_issues_success.executor": "Run",
+    "Python tests.Python tests for test_asset_issue_repository.TestIssueRepository.test_report_issue_success.executor": "Run",
+    "Python tests.Python tests for test_asset_issue_service.TestIssueService.executor": "Run",
+    "Python tests.Python tests for test_asset_issue_service.TestIssueService.test_report_issue_success.executor": "Run",
+    "Python tests.Python tests for test_asset_repository.TestAssetRepository.executor": "Run",
+    "Python tests.Python tests for test_asset_repository.TestAssetRepository.test_add_asset_raises_database_error.executor": "Run",
+    "Python tests.Python tests for test_asset_repository.TestAssetRepository.test_add_asset_success.executor": "Run",
+    "Python tests.Python tests for test_asset_repository.TestAssetRepository.test_assign_asset_success.executor": "Run",
+    "Python tests.Python tests for test_asset_repository.TestAssetRepository.test_fetch_all_assets_raises_database_error.executor": "Run",
+    "Python tests.Python tests for test_asset_repository.TestAssetRepository.test_fetch_all_assets_success.executor": "Run",
+    "Python tests.Python tests for test_asset_repository.TestAssetRepository.test_fetch_all_assets_success.test_fetch_all_assets_raises_database_error.executor": "Run",
+    "Python tests.Python tests for test_asset_repository.TestAssetRepository.test_fetch_asset_by_id_raises_database_error.executor": "Run",
+    "Python tests.Python tests for test_asset_repository.TestAssetRepository.test_is_asset_assigned_raises_database_error.executor": "Run",
+    "Python tests.Python tests for test_asset_repository.TestAssetRepository.test_update_asset_status_success.executor": "Run",
+    "Python tests.Python tests for test_asset_repository.TestAssetRepository.test_view_all_assigned_assets_raises_database_error.executor": "Run",
+    "Python tests.Python tests for test_asset_repository.test_add_asset_success.executor": "Run",
+    "Python tests.Python tests for test_asset_service.TestAssetService.executor": "Run",
+    "Python tests.Python tests for test_db_connection.test_db_connection.executor": "Run",
+    "Python tests.Python tests for test_issue_repository.TestIssue.executor": "Run",
+    "Python tests.Python tests for test_issue_repository.TestIssueRepository.executor": "Run",
+    "Python tests.Python tests for test_main.TestAppFactory.executor": "Run",
+    "Python tests.Python tests for test_main.TestAppFactory.test_app_configuration.executor": "Run",
+    "Python tests.Python tests for test_main.TestAppFactory.test_app_has_registered_blueprints.executor": "Run",
+    "Python tests.Python tests for test_main.TestAppInitialization.executor": "Run",
+    "Python tests.Python tests for test_middleware.TestAuthMiddleware.executor": "Run",
+    "Python tests.Python tests for test_query_builder.TestGenericQueryBuilder.executor": "Run",
+    "Python tests.Python tests for test_query_builder.TestGenericQueryBuilder.test_delete_multiple_conditions.executor": "Run",
+    "Python tests.Python tests for test_query_builder.TestGenericQueryBuilder.test_delete_without_where_clause.executor": "Run",
+    "Python tests.Python tests for test_query_builder.TestGenericQueryBuilder.test_insert_empty_data.executor": "Run",
+    "Python tests.Python tests for test_query_builder.TestGenericQueryBuilder.test_insert_single_column.executor": "Run",
+    "Python tests.Python tests for test_query_builder.TestGenericQueryBuilder.test_update_multiple_where_conditions.executor": "Run",
+    "Python tests.Python tests for test_user_handlers.TestUserHandler.executor": "Run",
+    "Python tests.Python tests for test_user_repository.TestUserRepository.executor": "Run",
+    "Python tests.Python tests for test_user_service.TestUserService.executor": "Run",
+    "Python tests.Python tests for test_utils.TestUtils.executor": "Run",
+    "Python tests.Python tests for test_validators.TestValidators.executor": "Run",
+    "Python tests.Python tests for test_validators.TestValidators.test_is_name_valid.executor": "Run",
+    "Python tests.Python tests for test_validators.TestValidators.test_is_password_valid.executor": "Run",
+    "Python tests.Python tests for test_validators.TestValidators.test_is_valid_UUID.executor": "Run",
+    "Python tests.Python tests in test_issue_repository.py.executor": "Run",
+    "Python tests.Python tests in test_utils.py.executor": "Run",
+    "Python tests.Python tests in test_validators.py.executor": "Run",
     "Python.create_tables.executor": "Run",
     "Python.main.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "main",
-    "last_opened_file_path": "C:/Users/pjalodiya/PycharmProjects/AssetManagement",
+    "last_opened_file_path": "C:/Users/pjalodiya/Downloads/sonarlint-intellij-10.13.1.80133.zip",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RunManager" selected="Python tests.Python tests for test_asset_handlers.TestAssetHandler.test_unassign_asset_success">
+    <configuration name="Python tests for test_asset_handlers.TestAssetHandler" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+      <module name="PythonProject" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests/controllers_tests" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;test_asset_handlers.TestAssetHandler&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Python tests for test_asset_handlers.TestAssetHandler.test_add_asset_invalid_data" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+      <module name="PythonProject" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests/controllers_tests" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;test_asset_handlers.TestAssetHandler.test_add_asset_invalid_data&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Python tests for test_asset_handlers.TestAssetHandler.test_assign_asset_success" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+      <module name="PythonProject" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests/controllers_tests" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;test_asset_handlers.TestAssetHandler.test_assign_asset_success&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Python tests for test_asset_handlers.TestAssetHandler.test_delete_asset_invalid_id" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+      <module name="PythonProject" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests/controllers_tests" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;test_asset_handlers.TestAssetHandler.test_delete_asset_invalid_id&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Python tests for test_asset_handlers.TestAssetHandler.test_unassign_asset_success" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+      <module name="PythonProject" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests/controllers_tests" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;test_asset_handlers.TestAssetHandler.test_unassign_asset_success&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python tests.Python tests for test_asset_handlers.TestAssetHandler.test_unassign_asset_success" />
+        <item itemvalue="Python tests.Python tests for test_asset_handlers.TestAssetHandler.test_assign_asset_success" />
+        <item itemvalue="Python tests.Python tests for test_asset_handlers.TestAssetHandler.test_delete_asset_invalid_id" />
+        <item itemvalue="Python tests.Python tests for test_asset_handlers.TestAssetHandler" />
+        <item itemvalue="Python tests.Python tests for test_asset_handlers.TestAssetHandler.test_add_asset_invalid_data" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -92,6 +268,17 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/tests/repository_tests/test_asset_repository.py</url>
+          <line>287</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Asset_Management$create_tables.coverage" NAME="create_tables Coverage Results" MODIFIED="1734266401812" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/app/scripts" />

@@ -24,7 +24,7 @@ class SignupRequest:
             self.name = data['name'].strip()
             self.email = data['email'].strip().lower()
             self.password = data['password'].strip()
-            self.department = data['department'].strip().upper()
+            self.department = data['department'].strip()
         except KeyError as e:
             raise MissingFieldError(f"Missing field in request body: {e}")
 
@@ -35,7 +35,7 @@ class SignupRequest:
         if not Validators.is_password_valid(self.password):
             raise ValidationError('Password is not valid')
         if not Validators.is_department_valid(self.department):
-            raise ValidationError('Department is not valid')
+            raise ValidationError('Department is not valid (dept. name should be all caps)')
 
 
 class ReportIssueRequest:

@@ -1,7 +1,7 @@
 from typing import List
 from src.app.models.user import User, UserDTO
 from src.app.models.asset import Asset
-from src.app.models.issue import Issue
+from src.app.models.asset_issue import Issue
 from src.app.repositories.user_repository import UserRepository
 from src.app.utils.errors.error import (
     UserExistsError,

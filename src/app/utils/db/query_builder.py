@@ -17,20 +17,21 @@ class GenericQueryBuilder:
 
         set_clause = ", ".join([f"{key} = ?" for key in data.keys()])
         query = f"UPDATE {table} SET {set_clause}"
+        values = []
         if where:
-            where_clause = ", ".join([f"{key} = ?" for key in where.keys()])
+            where_clause = " AND ".join([f"{key} = ?" for key in where.keys()])
             query += f" WHERE {where_clause}"
-        values = list(data.values()) + list(where.values())
+            values = list(data.values()) + list(where.values())
         return query, values
 
     @staticmethod
     def delete(table: str, where: Optional[Dict[str, any]] = None):
-
         query = f"DELETE FROM {table}"
+        values = []
         if where:
-            where_clause = "AND ".join([f"{key} = ?" for key in where.keys()])
+            where_clause = " AND ".join([f"{key} = ?" for key in where.keys()])
             query += f" WHERE {where_clause}"
-        values = list(where.values())
+            values = list(where.values())
         return query, values
 
     @staticmethod

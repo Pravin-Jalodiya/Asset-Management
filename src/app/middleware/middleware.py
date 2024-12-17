@@ -15,7 +15,7 @@ def auth_middleware():
             status_code=INVALID_TOKEN_ERROR,
             message="Unauthorized, missing or invalid token",
             data=None
-        ).to_dict(), 401
+        ).object_to_dict(), 401
 
     token = auth_token.split(' ')[1]
     try:
@@ -31,7 +31,7 @@ def auth_middleware():
                 status_code=INVALID_TOKEN_PAYLOAD_ERROR,
                 message="Unauthorized, invalid token payload",
                 data=None
-            ).to_dict(), 401
+            ).object_to_dict(), 401
 
         # Set user_id and role in Flask's global context
         g.user_id = user_id
@@ -42,10 +42,10 @@ def auth_middleware():
             status_code=EXPIRED_TOKEN_ERROR,
             message="Unauthorized, token has expired",
             data=None
-        ).to_dict(), 401
+        ).object_to_dict(), 401
     except jwt.InvalidTokenError:
         return CustomResponse(
             status_code=INVALID_TOKEN_ERROR,
             message="Unauthorized, missing or invalid token",
             data=None
-        ).to_dict(), 401
+        ).object_to_dict(), 401
