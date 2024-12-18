@@ -3,7 +3,7 @@ import src.app.config.db_config as config
 
 # Open connection and enable foreign key support explicitly for SQLite
 conn = sqlite3.connect(config.DB)
-conn.execute("PRAGMA foreign_keys = ON;")  # Enabling foreign key support for SQLite
+conn.execute("PRAGMA foreign_keys = ON;")
 
 with conn:
     # Creating the users table

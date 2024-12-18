@@ -5,20 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="347872e0-5b89-419e-982a-7a257b7fd3fb" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.coveragerc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.coverage" beforeDir="false" afterPath="$PROJECT_DIR$/.coverage" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.log" beforeDir="false" afterPath="$PROJECT_DIR$/app.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pytest.ini" beforeDir="false" afterPath="$PROJECT_DIR$/pytest.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/reports/junit/junit.xml" beforeDir="false" afterPath="$PROJECT_DIR$/reports/junit/junit.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/reports/report.html" beforeDir="false" afterPath="$PROJECT_DIR$/reports/report.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/controllers_tests/.coverage" beforeDir="false" afterPath="$PROJECT_DIR$/tests/controllers_tests/.coverage" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/controllers_tests/app.log" beforeDir="false" afterPath="$PROJECT_DIR$/tests/controllers_tests/app.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/controllers_tests/reports/junit/junit.xml" beforeDir="false" afterPath="$PROJECT_DIR$/tests/controllers_tests/reports/junit/junit.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/controllers_tests/reports/report.html" beforeDir="false" afterPath="$PROJECT_DIR$/tests/controllers_tests/reports/report.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/controllers_tests/test_asset_handlers.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/controllers_tests/test_asset_handlers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/controllers_tests/test_asset_issue_handlers.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/controllers_tests/test_asset_issue_handlers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/controllers_tests/test_user_handlers.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/controllers_tests/test_user_handlers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/controllers/app.log" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/controllers/app.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/scripts/create_tables.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/scripts/create_tables.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/utils/db/asset_management.db" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/utils/db/asset_management.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/utils/db/db.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/utils/db/db.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -137,7 +128,7 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "settings.editor.selected.configurable": "com.intellij.pycharm.community.ide.impl.configuration.PythonContentEntriesConfigurable",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
