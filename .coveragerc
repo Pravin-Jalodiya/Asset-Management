@@ -1,0 +1,4 @@
+[run]
+# Directories or files to omit from coverage
+omit =
+    src/app/scripts/*

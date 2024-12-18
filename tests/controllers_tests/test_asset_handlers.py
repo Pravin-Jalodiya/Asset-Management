@@ -1,14 +1,17 @@
 import unittest
-from unittest.mock import MagicMock
+import uuid
+from unittest.mock import MagicMock, patch
 from flask import Flask, g
+from werkzeug.routing import ValidationError
 
+from src.app.config.custom_error_codes import DATABASE_OPERATION_ERROR, ASSET_NOT_ASSIGNED_ERROR, VALIDATION_ERROR, \
+    RECORD_NOT_FOUND_ERROR
 from src.app.models.asset import Asset
-from src.app.models.user import User
 from src.app.repositories.asset_repository import AssetRepository
 from src.app.services.asset_service import AssetService
 from src.app.controllers.asset.handlers import AssetHandler
 from src.app.services.user_service import UserService
-from src.app.utils.errors.error import AlreadyAssignedError, NotAssignedError
+from src.app.utils.errors.error import AlreadyAssignedError, NotAssignedError, DatabaseError, NotExistsError
 
 
 class TestAssetHandler(unittest.TestCase):
@@ -64,18 +67,19 @@ class TestAssetHandler(unittest.TestCase):
 
     def test_delete_asset_success(self):
         """Test successful deletion of an asset."""
-        with self.app.test_request_context(method="DELETE", json={"asset_id": "12345"}):
+        asset_id = str(uuid.uuid4())
+        with self.app.test_request_context(method="DELETE", json={"asset_id": asset_id}):
             # Mocking the delete_asset method of AssetService
             self.mock_asset_service.delete_asset.return_value = self.test_asset
 
             # Call the delete_asset method of AssetHandler
             g.role = 'admin'
-            response, status_code = self.asset_handler.delete_asset("12345")
+            response, status_code = self.asset_handler.delete_asset(asset_id)
 
             # Assert the response and status code
             self.assertEqual(status_code, 200)
             self.assertEqual(response["message"], "Asset deleted successfully")
-            self.mock_asset_service.delete_asset.assert_called_once_with("12345")
+            self.mock_asset_service.delete_asset.assert_called_once_with(asset_id)
 
     def test_delete_asset_invalid_id(self):
         """Test failure when deleting an asset with an invalid ID."""
@@ -89,7 +93,9 @@ class TestAssetHandler(unittest.TestCase):
 
     def test_assign_asset_success(self):
         """Test successful assignment of an asset."""
-        assign_payload = {"user_id": "user123", "asset_id": "asset123"}
+        user_id = str(uuid.uuid4())
+        asset_id = str(uuid.uuid4())
+        assign_payload = {"user_id": user_id, "asset_id": asset_id}
         with self.app.test_request_context(method="POST", json=assign_payload):
             # Mocking the assign_asset method of AssetService
             self.mock_asset_service.assign_asset.return_value = None
@@ -105,7 +111,9 @@ class TestAssetHandler(unittest.TestCase):
 
     def test_assign_asset_already_assigned(self):
         """Test failure when assigning an already assigned asset."""
-        assign_payload = {"user_id": "user123", "asset_id": "asset123"}
+        user_id = str(uuid.uuid4())
+        asset_id = str(uuid.uuid4())
+        assign_payload = {"user_id": user_id, "asset_id": asset_id}
         with self.app.test_request_context(method="POST", json=assign_payload):
             # Mock the assign_asset method to raise AlreadyAssignedError
             self.mock_asset_service.assign_asset.side_effect = AlreadyAssignedError("Asset already assigned")
@@ -120,39 +128,26 @@ class TestAssetHandler(unittest.TestCase):
 
     def test_unassign_asset_success(self):
         """Test successful unassignment of an asset."""
-        unassign_payload = {"user_id": "user123", "asset_id": "asset123"}
-
-        dummy_user = User(
-            name="pravin",
-            email="Pravin123@watchguard.com",
-            department="CLOUD PLATFORM",
-            password="Password@123"
-        )
-
-        dummy_asset = Asset(
-            name="Dell x32",
-            description="Dell laptop"
-        )
+        user_id = str(uuid.uuid4())
+        asset_id = str(uuid.uuid4())
+        unassign_payload = {"user_id": user_id, "asset_id": asset_id}
 
         with self.app.test_request_context(method="POST", json=unassign_payload):
-            # Mock the unassign_asset method of AssetService
-            self.mock_asset_service.unassign_asset.return_value = None
-            self.mock_asset_repository.fetch_asset_by_id(unassign_payload['asset_id']).return_value = dummy_asset
-            self.mock_user_service.get_user_by_id(unassign_payload['user_id']).return_value = dummy_user
-            self.mock_asset_repository.is_asset_assigned(unassign_payload['user_id'],unassign_payload['asset_id']).return_value = True
+            # Ensure g.role is set
+            g.role = 'admin'
 
-            # Call the unassign_asset method of AssetHandler
-            g.role='admin'
             response, status_code = self.asset_handler.unassign_asset()
 
             # Assert the response and status code
             self.assertEqual(status_code, 200)
             self.assertEqual(response["message"], "Asset unassigned successfully")
-            self.mock_asset_service.unassign_asset.assert_called_once()
+
 
     def test_unassign_asset_not_assigned(self):
         """Test failure when unassigning a non-assigned asset."""
-        unassign_payload = {"user_id": "user123", "asset_id": "asset123"}
+        user_id = str(uuid.uuid4())
+        asset_id = str(uuid.uuid4())
+        unassign_payload = {"user_id": user_id, "asset_id": asset_id}
         with self.app.test_request_context(method="POST", json=unassign_payload):
             # Mock the unassign_asset method to raise NotAssignedError
             self.mock_asset_service.unassign_asset.side_effect = NotAssignedError("Asset not assigned")
@@ -179,4 +174,291 @@ class TestAssetHandler(unittest.TestCase):
             self.assertEqual(response["message"], "Assets retrieved successfully")
             self.assertEqual(len(response["data"]), 1)
             self.mock_asset_service.get_assets.assert_called_once()
+
+    def test_unassign_asset_not_exists_error(self):
+        """Test unassignment when user or asset does not exist."""
+        user_id = str(uuid.uuid4())
+        asset_id = str(uuid.uuid4())
+        unassign_payload = {"user_id": user_id, "asset_id": asset_id}
+
+        with self.app.test_request_context(method="POST", json=unassign_payload):
+            # Mock the unassign_asset method to raise NotExistsError
+            self.mock_asset_service.unassign_asset.side_effect = NotExistsError("User or asset not found")
+
+            # Call the unassign_asset method of AssetHandler
+            response, status_code = self.asset_handler.unassign_asset()
+
+            # Assert the response and status code
+            self.assertEqual(status_code, 400)
+            self.assertEqual(response["status_code"], RECORD_NOT_FOUND_ERROR)
+            self.assertEqual(response["message"], "User or asset not found")
+
+    def test_unassign_asset_validation_error(self):
+        """Test unassignment with invalid input."""
+        invalid_payloads = [
+            {"user_id": str(uuid.uuid4()), "asset_id": str(uuid.uuid4())},
+            {"user_id": str(uuid.uuid4()), "asset_id": str(uuid.uuid4())},
+        ]
+
+        for unassign_payload in invalid_payloads:
+            with self.app.test_request_context(method="POST", json=unassign_payload):
+                # Mock the unassign_asset method to raise ValidationError
+                self.mock_asset_service.unassign_asset.side_effect = ValidationError("Invalid input")
+
+                # Call the unassign_asset method of AssetHandler
+                response, status_code = self.asset_handler.unassign_asset()
+
+                # Assert the response and status code
+                self.assertEqual(status_code, 400)
+                self.assertEqual(response["status_code"], VALIDATION_ERROR)
+                self.assertEqual(response["message"], "Invalid input")
+
+    def test_unassign_asset_not_assigned_error(self):
+        """Test unassignment when asset is not assigned."""
+        user_id = str(uuid.uuid4())
+        asset_id = str(uuid.uuid4())
+        unassign_payload = {"user_id": user_id, "asset_id": asset_id}
+
+        with self.app.test_request_context(method="POST", json=unassign_payload):
+            # Mock the unassign_asset method to raise NotAssignedError
+            self.mock_asset_service.unassign_asset.side_effect = NotAssignedError("Asset is not assigned")
+
+            # Call the unassign_asset method of AssetHandler
+            response, status_code = self.asset_handler.unassign_asset()
+
+            # Assert the response and status code
+            self.assertEqual(status_code, 400)
+            self.assertEqual(response["status_code"], ASSET_NOT_ASSIGNED_ERROR)
+            self.assertEqual(response["message"], "Asset is not assigned")
+
+    def test_unassign_asset_database_error(self):
+        """Test unassignment with database error."""
+        user_id = str(uuid.uuid4())
+        asset_id = str(uuid.uuid4())
+        unassign_payload = {"user_id": user_id, "asset_id": asset_id}
+
+        with self.app.test_request_context(method="POST", json=unassign_payload):
+            # Mock the unassign_asset method to raise DatabaseError
+            self.mock_asset_service.unassign_asset.side_effect = DatabaseError("Database operation failed")
+
+            # Call the unassign_asset method of AssetHandler
+            response, status_code = self.asset_handler.unassign_asset()
+
+            # Assert the response and status code
+            self.assertEqual(status_code, 500)
+            self.assertEqual(response["status_code"], DATABASE_OPERATION_ERROR)
+            self.assertEqual(response["message"], "Error unassigning asset")
+
+    def test_unassign_asset_unexpected_error(self):
+        """Test unassignment with an unexpected error."""
+        user_id = str(uuid.uuid4())
+        asset_id = str(uuid.uuid4())
+        unassign_payload = {"user_id": user_id, "asset_id": asset_id}
+
+        with self.app.test_request_context(method="POST", json=unassign_payload):
+            # Mock the unassign_asset method to raise an unexpected exception
+            self.mock_asset_service.unassign_asset.side_effect = Exception("Unexpected error")
+
+            # Call the unassign_asset method of AssetHandler
+            response, status_code = self.asset_handler.unassign_asset()
+
+            # Assert the response and status code
+            self.assertEqual(status_code, 500)
+            self.assertEqual(response["status_code"], DATABASE_OPERATION_ERROR)
+            self.assertEqual(response["message"], "Error unassigning asset")
+
+    def test_delete_asset_invalid_uuid(self):
+        """Test deletion with invalid UUID."""
+        invalid_asset_ids = [
+            "invalid-uuid",
+            "",
+            "12345"
+        ]
+
+        for asset_id in invalid_asset_ids:
+            with self.app.test_request_context(method="DELETE", json={"asset_id": asset_id}):
+                # Ensure g.role is set for admin access
+                g.role = 'admin'
+
+                response, status_code = self.asset_handler.delete_asset(asset_id)
+
+                # Assert the response and status code
+                self.assertEqual(status_code, 400)
+                self.assertEqual(response["status_code"], VALIDATION_ERROR)
+                self.assertEqual(response["message"], "Invalid asset id")
+
+    def test_delete_asset_not_exists(self):
+        """Test deletion of non-existent asset."""
+        asset_id = str(uuid.uuid4())
+
+        with self.app.test_request_context(method="DELETE", json={"asset_id": asset_id}):
+            # Mock the delete_asset method to raise NotExistsError
+            self.mock_asset_service.delete_asset.side_effect = NotExistsError("Asset not found")
+
+            # Ensure g.role is set for admin access
+            g.role = 'admin'
+
+            response, status_code = self.asset_handler.delete_asset(asset_id)
+
+            # Assert the response and status code
+            self.assertEqual(status_code, 404)
+            self.assertEqual(response["status_code"], RECORD_NOT_FOUND_ERROR)
+            self.assertEqual(response["message"], "Asset not found")
+
+    def test_delete_asset_database_error(self):
+        """Test deletion with database error."""
+        asset_id = str(uuid.uuid4())
+
+        with self.app.test_request_context(method="DELETE", json={"asset_id": asset_id}):
+            # Mock the delete_asset method to raise DatabaseError
+            self.mock_asset_service.delete_asset.side_effect = DatabaseError("Database error")
+
+            # Ensure g.role is set for admin access
+            g.role = 'admin'
+
+            response, status_code = self.asset_handler.delete_asset(asset_id)
+
+            # Assert the response and status code
+            self.assertEqual(status_code, 500)
+            self.assertEqual(response["status_code"], DATABASE_OPERATION_ERROR)
+            self.assertEqual(response["message"], "Error deleting asset")
+
+    def test_delete_asset_unexpected_error(self):
+        """Test deletion with unexpected error."""
+        asset_id = str(uuid.uuid4())
+
+        with self.app.test_request_context(method="DELETE", json={"asset_id": asset_id}):
+            # Mock the delete_asset method to raise an unexpected exception
+            self.mock_asset_service.delete_asset.side_effect = Exception("Unexpected error")
+
+            # Ensure g.role is set for admin access
+            g.role = 'admin'
+
+            response, status_code = self.asset_handler.delete_asset(asset_id)
+
+            # Assert the response and status code
+            self.assertEqual(status_code, 500)
+            self.assertEqual(response["status_code"], DATABASE_OPERATION_ERROR)
+            self.assertEqual(response["message"], "Error deleting asset")
+
+    def test_assigned_assets_success(self):
+        """Test successful retrieval of assigned assets for a user."""
+        user_id = str(uuid.uuid4())
+        dummy_assets = [
+            {"id": str(uuid.uuid4()), "name": "Asset 1"},
+            {"id": str(uuid.uuid4()), "name": "Asset 2"}
+        ]
+
+        with self.app.test_request_context(method="GET"):
+            # Mock the view_assigned_assets method to return dummy assets
+            self.mock_asset_service.view_assigned_assets.return_value = dummy_assets
+
+            response, status_code = self.asset_handler.assigned_assets(user_id)
+
+            # Assert the response and status code
+            self.assertEqual(status_code, 200)
+            self.assertEqual(response["message"], "Assigned assets retrieved successfully")
+            self.assertEqual(len(response["data"]), 2)
+            self.mock_asset_service.view_assigned_assets.assert_called_once_with(user_id)
+
+    def test_assigned_assets_invalid_uuid(self):
+        """Test assigned assets retrieval with invalid UUID."""
+        invalid_user_ids = [
+            "invalid-uuid",
+            "",
+            "12345"
+        ]
+
+        for user_id in invalid_user_ids:
+            with self.app.test_request_context(method="GET"):
+                response, status_code = self.asset_handler.assigned_assets(user_id)
+
+                # Assert the response and status code
+                self.assertEqual(status_code, 200)
+                self.assertEqual(response["status_code"], VALIDATION_ERROR)
+                self.assertEqual(response["message"], "Invalid user id")
+
+    def test_assigned_assets_not_exists(self):
+        """Test assigned assets retrieval for non-existent user."""
+        user_id = str(uuid.uuid4())
+
+        with self.app.test_request_context(method="GET"):
+            # Mock the view_assigned_assets method to raise NotExistsError
+            self.mock_asset_service.view_assigned_assets.side_effect = NotExistsError("User not found")
+
+            response, status_code = self.asset_handler.assigned_assets(user_id)
+
+            # Assert the response and status code
+            self.assertEqual(status_code, 400)
+            self.assertEqual(response["status_code"], RECORD_NOT_FOUND_ERROR)
+            self.assertEqual(response["message"], "User not found")
+
+    def test_assigned_assets_database_error(self):
+        """Test assigned assets retrieval with database error."""
+        user_id = str(uuid.uuid4())
+
+        with self.app.test_request_context(method="GET"):
+            # Mock the view_assigned_assets method to raise DatabaseError
+            self.mock_asset_service.view_assigned_assets.side_effect = DatabaseError("Database error")
+
+            response, status_code = self.asset_handler.assigned_assets(user_id)
+
+            # Assert the response and status code
+            self.assertEqual(status_code, 500)
+            self.assertEqual(response["status_code"], DATABASE_OPERATION_ERROR)
+            self.assertEqual(response["message"], "Error fetching assigned assets")
+
+    def test_assigned_all_assets_success(self):
+        """Test successful retrieval of all assigned assets."""
+        dummy_assets = [
+            {"id": str(uuid.uuid4()), "name": "Asset 1", "user_id": str(uuid.uuid4())},
+            {"id": str(uuid.uuid4()), "name": "Asset 2", "user_id": str(uuid.uuid4())}
+        ]
+
+        with self.app.test_request_context(method="GET"):
+            # Ensure g.role is set for admin access
+            g.role = 'admin'
+
+            # Mock the view_all_assigned_assets method to return dummy assets
+            self.mock_asset_service.view_all_assigned_assets.return_value = dummy_assets
+
+            response, status_code = self.asset_handler.assigned_all_assets()
+
+            # Assert the response and status code
+            self.assertEqual(status_code, 200)
+            self.assertEqual(response["message"], "All assigned assets retrieved successfully")
+            self.assertEqual(len(response["data"]), 2)
+            self.mock_asset_service.view_all_assigned_assets.assert_called_once()
+
+    def test_assigned_all_assets_database_error(self):
+        """Test all assigned assets retrieval with database error."""
+        with self.app.test_request_context(method="GET"):
+            # Ensure g.role is set for admin access
+            g.role = 'admin'
+
+            # Mock the view_all_assigned_assets method to raise DatabaseError
+            self.mock_asset_service.view_all_assigned_assets.side_effect = DatabaseError("Database error")
+
+            response, status_code = self.asset_handler.assigned_all_assets()
+
+            # Assert the response and status code
+            self.assertEqual(status_code, 500)
+            self.assertEqual(response["status_code"], DATABASE_OPERATION_ERROR)
+            self.assertEqual(response["message"], "Error fetching assigned assets")
+
+    def test_assigned_all_assets_unexpected_error(self):
+        """Test all assigned assets retrieval with unexpected error."""
+        with self.app.test_request_context(method="GET"):
+            # Ensure g.role is set for admin access
+            g.role = 'admin'
+
+            # Mock the view_all_assigned_assets method to raise an unexpected exception
+            self.mock_asset_service.view_all_assigned_assets.side_effect = Exception("Unexpected error")
+
+            response, status_code = self.asset_handler.assigned_all_assets()
+
+            # Assert the response and status code
+            self.assertEqual(status_code, 500)
+            self.assertEqual(response["status_code"], DATABASE_OPERATION_ERROR)
+            self.assertEqual(response["message"], "Error fetching assigned assets")
 

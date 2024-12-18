@@ -1,225 +1,254 @@
-import unittest
-from unittest.mock import Mock, patch
-from flask import Flask, request
-import json
+import uuid
+import pytest
+from unittest.mock import Mock
+from flask import Flask, g
 
-from src.app.controllers.users.handlers import UserHandler
+from src.app.config.custom_error_codes import (
+    VALIDATION_ERROR,
+    MISSING_FIELD_ERROR,
+    INVALID_CREDENTIALS_ERROR,
+    USER_EXISTS_ERROR,
+    DATABASE_OPERATION_ERROR,
+    USER_NOT_FOUND_ERROR,
+    RECORD_NOT_FOUND_ERROR
+)
 from src.app.models.user import User
-from src.app.services.user_service import UserService
 from src.app.utils.errors.error import (
     UserExistsError,
     InvalidCredentialsError,
     MissingFieldError,
     DatabaseError
 )
-from werkzeug.routing import ValidationError
+from src.app.controllers.users.handlers import UserHandler
 
+@pytest.fixture
+def app():
+    """Flask application fixture"""
+    app = Flask(__name__)
+    return app
 
-class TestUserHandler(unittest.TestCase):
-    def setUp(self):
-        # Create a Flask test client
-        self.app = Flask(__name__)
-        self.app_context = self.app.app_context()
-        self.app_context.push()
+@pytest.fixture
+def mock_user_service():
+    """Mock user service fixture"""
+    return Mock()
 
-        # Mock UserService
-        self.mock_user_service = Mock(spec=UserService)
+@pytest.fixture
+def user_handler(mock_user_service):
+    """User handler fixture with mocked service"""
+    return UserHandler.create(mock_user_service)
 
-        # Create UserHandler with mock service
-        self.user_handler = UserHandler.create(self.mock_user_service)
+@pytest.fixture
+def sample_user():
+    """Sample user fixture"""
+    return User(
+        id=str(uuid.uuid4()),
+        name="Test User",
+        email="test@example.com",
+        password="hashed_password",
+        department="IT",
+        role="user"
+    )
 
-    def tearDown(self):
-        # Pop the application context
-        self.app_context.pop()
-
-    def test_login_successful(self):
-        """
-        Test successful login
-        """
-        # Prepare test data
-        login_data = {
-            'email': 'test@example.com',
-            'password': 'password123'
-        }
-
-        # Mock user for successful login
-        mock_user = User(
-            id='123',
-            email='test@example.com',
-            name='Test User',
-            role='user'
+@pytest.fixture
+def sample_users():
+    """Sample list of users fixture"""
+    return [
+        User(
+            id=str(uuid.uuid4()),
+            name="User One",
+            email="user1@example.com",
+            password="hashed_password1",
+            department="IT",
+            role="user"
+        ),
+        User(
+            id=str(uuid.uuid4()),
+            name="User Two",
+            email="user2@example.com",
+            password="hashed_password2",
+            department="HR",
+            role="admin"
         )
+    ]
 
-        # Setup mock service method
-        self.mock_user_service.login_user.return_value = mock_user
-
-        # Simulate request
-        with self.app.test_request_context(
-                json=login_data,
-                method='POST'
-        ):
-            response, status_code = self.user_handler.login()
-
-        # Assertions
-        self.assertEqual(status_code, 200)
-        self.assertEqual(response['message'], 'Login successful')
-        self.assertIn('token', response['data'])
-        self.assertEqual(response['data']['role'], 'user')
-        self.assertEqual(response['data']['user_id'], '123')
-
-    def test_login_invalid_credentials(self):
-        """
-        Test login with invalid credentials
-        """
-        # Prepare test data
+class TestUserHandler:
+    def test_login_success(self, app, user_handler, sample_user):
+        """Test successful login"""
         login_data = {
-            'email': 'test@example.com',
-            'password': 'wrongpassword'
+            "email": "test@watchguard.com",
+            "password": "password123"
+        }
+        user_handler.user_service.login_user.return_value = sample_user
+
+        with app.test_request_context(json=login_data):
+            response, status_code = user_handler.login()
+
+        assert status_code == 200
+        assert response["status_code"] == 200
+        assert response["message"] == "Login successful"
+        assert "token" in response["data"]
+        assert response["data"]["role"] == sample_user.role
+        assert response["data"]["user_id"] == sample_user.id
+
+    def test_login_validation_error(self, app, user_handler):
+        """Test login with validation error"""
+        login_data = {
+            "email": "invalid-email",
+            "password": "pass"
         }
 
-        # Setup mock service to raise InvalidCredentialsError
-        self.mock_user_service.login_user.side_effect = InvalidCredentialsError("Invalid credentials")
+        with app.test_request_context(json=login_data):
+            response, status_code = user_handler.login()
 
-        # Simulate request
-        with self.app.test_request_context(
-                json=login_data,
-                method='POST'
-        ):
-            response, status_code = self.user_handler.login()
+        assert status_code == 400
+        assert response["status_code"] == VALIDATION_ERROR
 
-        # Assertions
-        self.assertEqual(status_code, 400)
-        self.assertEqual(response['message'], 'Invalid email or password')
+    def test_login_missing_field(self, app, user_handler):
+        """Test login with missing field"""
+        login_data = {
+            "email": "test@example.com"
+        }
+        user_handler.user_service.login_user.side_effect = MissingFieldError("Password is required")
 
-    def test_signup_successful(self):
-        """
-        Test successful user signup
-        """
-        # Prepare test data
+        with app.test_request_context(json=login_data):
+            response, status_code = user_handler.login()
+
+        assert status_code == 400
+        assert response["status_code"] == MISSING_FIELD_ERROR
+
+    def test_login_invalid_credentials(self, app, user_handler):
+        """Test login with invalid credentials"""
+        login_data = {
+            "email": "test@watchguard.com",
+            "password": "wrongpass"
+        }
+        user_handler.user_service.login_user.side_effect = InvalidCredentialsError("Invalid email or password")
+
+        with app.test_request_context(json=login_data):
+            response, status_code = user_handler.login()
+
+        assert status_code == 400
+        assert response["status_code"] == INVALID_CREDENTIALS_ERROR
+        assert response["message"] == "Invalid email or password"
+
+    def test_signup_success(self, app, user_handler, sample_user):
+        """Test successful signup"""
         signup_data = {
-            'name': 'Test User',
-            'email': 'test@example.com',
-            'password': 'password123',
-            'department': 'IT'
+            "name": "Test User",
+            "email": "test@watchguard.com",
+            "password": "Password@123",
+            "department": "CLOUD PLATFORM"
         }
+        user_handler.user_service.signup_user.return_value = None
 
-        # Simulate request
-        with self.app.test_request_context(
-                json=signup_data,
-                method='POST'
-        ):
-            response, status_code = self.user_handler.signup()
+        with app.test_request_context(json=signup_data):
+            response, status_code = user_handler.signup()
 
-        # Assertions
-        self.assertEqual(status_code, 200)
-        self.assertEqual(response['message'], 'User registered successfully')
-        self.assertIn('token', response['data'])
-        self.assertIn('role', response['data'])
-        self.assertIn('user_id', response['data'])
+        assert status_code == 200
+        assert response["status_code"] == 200
+        assert response["message"] == "User registered successfully"
+        assert "token" in response["data"]
 
-    def test_signup_user_exists(self):
-        """
-        Test signup when user already exists
-        """
-        # Prepare test data
+    def test_signup_user_exists(self, app, user_handler):
+        """Test signup with existing user"""
         signup_data = {
-            'name': 'Test User',
-            'email': 'test@example.com',
-            'password': 'password123',
-            'department': 'IT'
+            "name": "Test User",
+            "email": "existing@watchguard.com",
+            "password": "Password@123",
+            "department": "CLOUD PLATFORM"
         }
+        user_handler.user_service.signup_user.side_effect = UserExistsError("User already exists")
 
-        # Setup mock service to raise UserExistsError
-        self.mock_user_service.signup_user.side_effect = UserExistsError("User already exists")
+        with app.test_request_context(json=signup_data):
+            response, status_code = user_handler.signup()
 
-        # Simulate request
-        with self.app.test_request_context(
-                json=signup_data,
-                method='POST'
-        ):
-            response, status_code = self.user_handler.signup()
+        assert status_code == 409
+        assert response["status_code"] == USER_EXISTS_ERROR
 
-        # Assertions
-        self.assertEqual(status_code, 409)
-        self.assertEqual(response['message'], 'User already exists')
+    def test_get_users_success(self, app, user_handler, sample_users):
+        """Test successful retrieval of all users"""
+        user_handler.user_service.get_users.return_value = sample_users
 
-    def test_get_users_successful(self):
-        """
-        Test fetching users successfully
-        """
-        # Create mock users
-        mock_users = [
-            User(id='1', name='User 1', email='user1@example.com'),
-            User(id='2', name='User 2', email='user2@example.com')
-        ]
+        with app.test_request_context():
+            g.role = 'admin'
+            response, status_code = user_handler.get_users()
 
-        # Setup mock service
-        self.mock_user_service.get_users.return_value = mock_users
+        assert status_code == 200
+        assert response["status_code"] == 200
+        assert response["message"] == "Users fetched successfully"
+        assert len(response["data"]) == 2
 
-        # Simulate request context (for admin decorator)
-        with patch('src.app.utils.utils.g') as mock_g:
-            mock_g.role = 'admin'
-            response, status_code = self.user_handler.get_users()
+    def test_get_users_database_error(self, app, user_handler):
+        """Test get users with database error"""
+        user_handler.user_service.get_users.side_effect = DatabaseError("Database error")
 
-        # Assertions
-        self.assertEqual(status_code, 200)
-        self.assertEqual(response['message'], 'Users fetched successfully')
-        self.assertEqual(len(response['data']), 2)
+        with app.test_request_context():
+            g.role = 'admin'
+            response, status_code = user_handler.get_users()
 
-    def test_get_user_successful(self):
-        """
-        Test fetching a single user successfully
-        """
-        # Create mock user
-        mock_user = User(
-            id='123',
-            name='Test User',
-            email='test@example.com'
-        )
+        assert status_code == 500
+        assert response["status_code"] == DATABASE_OPERATION_ERROR
+        assert response["message"] == "Error fetching users"
 
-        # Setup mock service
-        self.mock_user_service.get_user_by_id.return_value = mock_user
+    def test_get_user_success(self, app, user_handler, sample_user):
+        """Test successful retrieval of single user"""
+        user_id = str(uuid.uuid4())
+        user_handler.user_service.get_user_by_id.return_value = sample_user
 
-        # Simulate request
-        response, status_code = self.user_handler.get_user('123')
+        with app.test_request_context():
+            response, status_code = user_handler.get_user(user_id)
 
-        # Assertions
-        self.assertEqual(status_code, 200)
-        self.assertEqual(response['message'], 'User details retrieved successfully')
-        self.assertEqual(response['data']['id'], '123')
+        assert status_code == 200
+        assert response["status_code"] == 200
+        assert response["message"] == "User details retrieved successfully"
+        assert response["data"]["email"] == sample_user.email
 
-    def test_delete_user_successful(self):
-        """
-        Test successful user deletion
-        """
-        # Setup mock service
-        self.mock_user_service.delete_user_account.return_value = True
+    def test_get_user_not_found(self, app, user_handler):
+        """Test get user with non-existent user"""
+        user_id = str(uuid.uuid4())
+        user_handler.user_service.get_user_by_id.side_effect = DatabaseError("Error fetching user")
 
-        # Simulate request context (for admin decorator)
-        with patch('src.app.utils.utils.g') as mock_g:
-            mock_g.role = 'admin'
-            response, status_code = self.user_handler.delete_user('123')
+        with app.test_request_context():
+            response, status_code = user_handler.get_user(user_id)
 
-        # Assertions
-        self.assertEqual(status_code, 200)
-        self.assertEqual(response['message'], 'User account deleted successfully')
+        assert status_code == 500
+        assert response["status_code"] == DATABASE_OPERATION_ERROR
+        assert response["message"] == "Error fetching user details"
 
-    def test_delete_user_not_found(self):
-        """
-        Test user deletion when user is not found
-        """
-        # Setup mock service
-        self.mock_user_service.delete_user_account.return_value = False
+    def test_delete_user_success(self, app, user_handler):
+        """Test successful user deletion"""
+        user_id = str(uuid.uuid4())
+        user_handler.user_service.delete_user_account.return_value = True
 
-        # Simulate request context (for admin decorator)
-        with patch('src.app.utils.utils.g') as mock_g:
-            mock_g.role = 'admin'
-            response, status_code = self.user_handler.delete_user('123')
+        with app.test_request_context():
+            g.role = 'admin'
+            response, status_code = user_handler.delete_user(user_id)
 
-        # Assertions
-        self.assertEqual(status_code, 404)
-        self.assertEqual(response['message'], 'User not found')
+        assert status_code == 200
+        assert response["status_code"] == 200
+        assert response["message"] == "User account deleted successfully"
 
+    def test_delete_user_invalid_uuid(self, app, user_handler):
+        """Test delete user with invalid UUID"""
+        invalid_user_id = "invalid-uuid"
 
-if __name__ == '__main__':
-    unittest.main()
+        with app.test_request_context():
+            g.role = 'admin'
+            response, status_code = user_handler.delete_user(invalid_user_id)
+
+        assert status_code == 200
+        assert response["status_code"] == 200
+        assert response["message"] == "Invalid user id"
+
+    def test_delete_user_not_found(self, app, user_handler):
+        """Test delete non-existent user"""
+        user_id = str(uuid.uuid4())
+        user_handler.user_service.delete_user_account.return_value = False
+
+        with app.test_request_context():
+            g.role = 'admin'
+            response, status_code = user_handler.delete_user(user_id)
+
+        assert status_code == 404
+        assert response["status_code"] == USER_NOT_FOUND_ERROR
+        assert response["message"] == "User not found"
