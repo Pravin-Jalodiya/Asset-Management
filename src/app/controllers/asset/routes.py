@@ -1,43 +1,44 @@
-from flask import Blueprint
+from fastapi import APIRouter, Depends
+from typing import List
 
 from src.app.controllers.asset.handlers import AssetHandler
-from src.app.controllers.asset_issue.handlers import IssueHandler
 from src.app.middleware.middleware import auth_middleware
 from src.app.services.asset_service import AssetService
-from src.app.services.asset_issue_service import IssueService
+from src.app.models.request_objects import AssetRequest, AssignAssetRequest, UnassignAssetRequest
 
-
-def create_asset_routes(asset_service: AssetService) -> Blueprint:
-    asset_routes_blueprint = Blueprint('asset', __name__)
-    asset_routes_blueprint.before_request(auth_middleware)
+def create_asset_routes(asset_service: AssetService) -> APIRouter:
+    router = APIRouter(prefix="/assets", tags=["assets"])
     asset_handler = AssetHandler.create(asset_service)
-    # asset-related routes
-    asset_routes_blueprint.add_url_rule(
-        '/assets', 'assets', asset_handler.get_assets, methods=['GET']
-    )
+    
+    # Add dependencies for auth
+    router.dependencies = [Depends(auth_middleware)]
 
-    asset_routes_blueprint.add_url_rule(
-        '/add-asset', 'add-asset', asset_handler.add_asset, methods=['POST']
-    )
+    @router.get("/")
+    async def get_assets():
+        return await asset_handler.get_assets()
 
-    asset_routes_blueprint.add_url_rule(
-        '/delete-asset/<asset_id>', 'delete_asset', asset_handler.delete_asset, methods=['DELETE']
-    )
+    @router.post("/")
+    async def add_asset(request: AssetRequest):
+        return await asset_handler.add_asset(request)
 
-    asset_routes_blueprint.add_url_rule(
-        '/assign-asset', 'assign-asset', asset_handler.assign_asset, methods=['POST']
-    )
+    @router.delete("/{asset_id}")
+    async def delete_asset(asset_id: str):
+        return await asset_handler.delete_asset(asset_id)
 
-    asset_routes_blueprint.add_url_rule(
-        '/unassign-asset', 'unassign_asset', asset_handler.unassign_asset, methods=['POST']
-    )
+    @router.post("/assign")
+    async def assign_asset(request: AssignAssetRequest):
+        return await asset_handler.assign_asset(request)
 
-    asset_routes_blueprint.add_url_rule(
-        '/assigned-assets/<user_id>', 'assigned_assets', asset_handler.assigned_assets, methods=['GET']
-    )
+    @router.post("/unassign")
+    async def unassign_asset(request: UnassignAssetRequest):
+        return await asset_handler.unassign_asset(request)
 
-    asset_routes_blueprint.add_url_rule(
-        '/assigned-assets/all', 'all_assigned_assets', asset_handler.assigned_all_assets, methods=['GET']
-    )
+    @router.get("/assigned/{user_id}")
+    async def assigned_assets(user_id: str):
+        return await asset_handler.assigned_assets(user_id)
 
-    return asset_routes_blueprint
+    @router.get("/assigned")
+    async def assigned_all_assets():
+        return await asset_handler.assigned_all_assets()
+
+    return router

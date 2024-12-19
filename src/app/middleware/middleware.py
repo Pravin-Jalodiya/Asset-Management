@@ -1,24 +1,25 @@
 import jwt
-from flask import request, jsonify, g
+from fastapi import HTTPException, Security, Request
+from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
+from typing import Optional
 
 from src.app.config.custom_error_codes import INVALID_TOKEN_ERROR, INVALID_TOKEN_PAYLOAD_ERROR, EXPIRED_TOKEN_ERROR
 from src.app.models.response import CustomResponse
 from src.app.utils.utils import Utils
+from src.app.utils.context import set_user_to_context
 
-def auth_middleware():
-    if request.path in ['/login', '/signup']:
+security = HTTPBearer()
+
+async def auth_middleware(
+    request: Request,
+    credentials: HTTPAuthorizationCredentials = Security(security)
+) -> dict:
+    # Skip auth for login and signup endpoints
+    if request.url.path in ['/login', '/signup']:
         return None
 
-    auth_token = request.headers.get('Authorization')
-    if not auth_token or not auth_token.startswith('Bearer '):
-        return CustomResponse(
-            status_code=INVALID_TOKEN_ERROR,
-            message="Unauthorized, missing or invalid token",
-            data=None
-        ).object_to_dict(), 401
-
-    token = auth_token.split(' ')[1]
     try:
+        token = credentials.credentials
         # Decode the token using the secret key
         decoded_token = Utils.decode_jwt_token(token)
 
@@ -29,23 +30,34 @@ def auth_middleware():
         if not user_id or not role:
             return CustomResponse(
                 status_code=INVALID_TOKEN_PAYLOAD_ERROR,
-                message="Unauthorized, invalid token payload",
-                data=None
-            ).object_to_dict(), 401
+                message="Unauthorized, invalid token payload"
+            )
 
-        # Set user_id and role in Flask's global context
-        g.user_id = user_id
-        g.role = role
+        # Set user data in request context
+        user_data = {
+            "user_id": user_id,
+            "role": role
+        }
+        set_user_to_context(request, user_data)
+
+        return user_data
 
     except jwt.ExpiredSignatureError:
         return CustomResponse(
             status_code=EXPIRED_TOKEN_ERROR,
-            message="Unauthorized, token has expired",
-            data=None
-        ).object_to_dict(), 401
+            message="Unauthorized, token has expired"
+        )
     except jwt.InvalidTokenError:
         return CustomResponse(
             status_code=INVALID_TOKEN_ERROR,
-            message="Unauthorized, missing or invalid token",
-            data=None
-        ).object_to_dict(), 401
+            message="Unauthorized, missing or invalid token"
+        )
+    except Exception:
+        return CustomResponse(
+            status_code=INVALID_TOKEN_ERROR,
+            message="Unauthorized, missing or invalid token"
+        )
+
+# Optional: Helper function to get current user from request
+async def get_current_user(request: Request):
+    return request.state.user if hasattr(request.state, 'user') else None

@@ -1,94 +1,117 @@
-from werkzeug.routing import ValidationError
-
-from src.app.utils.errors.error import MissingFieldError
+from pydantic import BaseModel, EmailStr, UUID4, constr, validator, field_validator
 from src.app.utils.validators.validators import Validators
 
 
-class LoginRequest:
-    def __init__(self, data):
-        try:
-            self.email = data['email'].strip().lower()
-            self.password = data['password'].strip()
-        except KeyError as e:
-            raise MissingFieldError(f"Missing field in request body: {e}")
+class LoginRequest(BaseModel):
+    email: EmailStr
+    password: str
 
-        if not Validators.is_email_valid(self.email):
-            raise ValidationError('Email is not valid')
-        if not self.password:
-            raise ValidationError('Password is required')
+    @field_validator('password')
+    def validate_password(cls, v):
+        if not Validators.is_password_valid(v):
+            raise ValueError('Password is not valid')
+        return v
 
-
-class SignupRequest:
-    def __init__(self, data):
-        try:
-            self.name = data['name'].strip()
-            self.email = data['email'].strip().lower()
-            self.password = data['password'].strip()
-            self.department = data['department'].strip()
-        except KeyError as e:
-            raise MissingFieldError(f"Missing field in request body: {e}")
-
-        if not Validators.is_name_valid(self.name):
-            raise ValidationError('Name is not valid')
-        if not Validators.is_email_valid(self.email):
-            raise ValidationError('Email is not valid')
-        if not Validators.is_password_valid(self.password):
-            raise ValidationError('Password is not valid')
-        if not Validators.is_department_valid(self.department):
-            raise ValidationError('Department is not valid (dept. name should be all caps)')
+    class Config:
+        json_schema_extra = {
+            "example": {
+                "email": "user@example.com",
+                "password": "StrongPass123"
+            }
+        }
 
 
-class ReportIssueRequest:
-    def __init__(self, data):
-        try:
-            self.asset_id = data['asset_id'].strip().lower()
-            self.description = data['description'].strip().lower()
-        except KeyError as e:
-            raise MissingFieldError(f"Missing field in request body: {e}")
+class SignupRequest(BaseModel):
+    name: str
+    email: EmailStr
+    password: str
+    department: constr(to_upper=True)  # Automatically converts to uppercase
 
-        if not Validators.is_valid_UUID(self.asset_id):
-            raise ValidationError('Asset ID is not valid')
-        if self.description == "":
-            raise ValidationError('Description cannot be empty')
+    @validator('name')
+    def validate_name(cls, v):
+        if not Validators.is_name_valid(v):
+            raise ValueError('Name is not valid')
+        return v
 
+    @validator('password')
+    def validate_password(cls, v):
+        if not Validators.is_password_valid(v):
+            raise ValueError('Password is not valid')
+        return v
 
-class AssetRequest:
-    def __init__(self, data):
-        try:
-            self.name = data['name'].strip().lower()
-            self.description = data['description'].strip().lower()
-        except KeyError as e:
-            raise MissingFieldError(f"Missing field in request body: {e}")
+    @validator('department')
+    def validate_department(cls, v):
+        if not Validators.is_department_valid(v):
+            raise ValueError('Department is not valid (dept. name should be all caps)')
+        return v
 
-        if self.name == "":
-            raise ValidationError('Asset name cannot be empty')
-        if self.description == "":
-            raise ValidationError('Description cannot be empty')
-
-
-class AssignAssetRequest:
-    def __init__(self, data):
-        try:
-            self.user_id = data['user_id'].strip().lower()
-            self.asset_id = data['asset_id'].strip().lower()
-        except KeyError as e:
-            raise MissingFieldError(f"Missing field in request body: {e}")
-
-        if not Validators.is_valid_UUID(self.user_id):
-            raise ValidationError('Invalid user id')
-        if not Validators.is_valid_UUID(self.asset_id):
-            raise ValidationError('Invalid asset id')
+    class Config:
+        json_schema_extra = {
+            "example": {
+                "name": "John Doe",
+                "email": "john@example.com",
+                "password": "StrongPass123",
+                "department": "IT"
+            }
+        }
 
 
-class UnassignAssetRequest:
-    def __init__(self, data):
-        try:
-            self.user_id = data['user_id'].strip().lower()
-            self.asset_id = data['asset_id'].strip().lower()
-        except KeyError as e:
-            raise MissingFieldError(f"Missing field in request body: {e}")
+class ReportIssueRequest(BaseModel):
+    asset_id: UUID4
+    description: str
 
-        if not Validators.is_valid_UUID(self.user_id):
-            raise ValidationError('Invalid user id')
-        if not Validators.is_valid_UUID(self.asset_id):
-            raise ValidationError('Invalid asset id')
+    @validator('description')
+    def validate_description(cls, v):
+        if not Validators.is_description_valid(v):
+            raise ValueError('Description is not valid')
+        return v
+
+    class Config:
+        json_schema_extra = {
+            "example": {
+                "asset_id": "123e4567-e89b-12d3-a456-426614174000",
+                "description": "Screen not working"
+            }
+        }
+
+
+class AssetRequest(BaseModel):
+    name: str
+    description: str
+
+    @validator('name')
+    def validate_name(cls, v):
+        if not Validators.is_asset_name_valid(v):
+            raise ValueError('Asset name is not valid')
+        return v
+
+    @validator('description')
+    def validate_description(cls, v):
+        if not Validators.is_description_valid(v):
+            raise ValueError('Description is not valid')
+        return v
+
+    class Config:
+        json_schema_extra = {
+            "example": {
+                "name": "Laptop XPS 13",
+                "description": "Dell XPS 13 laptop with 16GB RAM"
+            }
+        }
+
+
+class AssignAssetRequest(BaseModel):
+    user_id: UUID4
+    asset_id: UUID4
+
+    class Config:
+        json_schema_extra = {
+            "example": {
+                "user_id": "123e4567-e89b-12d3-a456-426614174000",
+                "asset_id": "123e4567-e89b-12d3-a456-426614174001"
+            }
+        }
+
+
+# UnassignAssetRequest can reuse AssignAssetRequest since they're identical
+UnassignAssetRequest = AssignAssetRequest

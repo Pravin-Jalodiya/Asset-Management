@@ -1,8 +1,10 @@
 from bcrypt import hashpw, checkpw, gensalt
 import jwt
 import datetime
-
-from flask import jsonify,g
+from functools import wraps
+from fastapi import Request
+from src.app.models.response import CustomResponse
+from src.app.utils.context import get_user_from_context
 
 from src.app.config.types import Role
 
@@ -58,11 +60,33 @@ class Utils:
         return jwt.decode(token, Utils.SECRET_KEY, algorithms=["HS256"])
 
     @staticmethod
-    def admin(f):
-        def wrapped_func(*args, **kwargs):
-            # Check if the user role in g is 'admin'
-            if g.get("role") != Role.ADMIN.value:
-                return jsonify({"message": "Unauthorized: Admin role required"}), 403
-            return f(*args, **kwargs)
+    def admin(func):
+        @wraps(func)
+        async def wrapper(*args, **kwargs):
+            try:
+                # Get the Request object from kwargs
+                request = next((arg for arg in args if isinstance(arg, Request)), 
+                             kwargs.get('request'))
+                
+                if not request:
+                    return CustomResponse(
+                        status_code=500,
+                        message="Request context not available"
+                    )
 
-        return wrapped_func
+                user = get_user_from_context(request)
+                if not user or user.get('role') != 'ADMIN':
+                    return CustomResponse(
+                        status_code=403,
+                        message="Admin access required"
+                    )
+                
+                return await func(*args, **kwargs)
+                
+            except Exception as e:
+                return CustomResponse(
+                    status_code=500,
+                    message="Error checking admin privileges"
+                )
+                
+        return wrapper
