@@ -80,6 +80,7 @@ class UserHandler:
                 data=None
             ).object_to_dict(), 500
 
+    @custom_logger(logger)
     def signup(self):
         try:
             signup_data = SignupRequest(request.get_json())
@@ -126,6 +127,7 @@ class UserHandler:
             ).object_to_dict(), 409
 
         except (DatabaseError, Exception) as e:
+            print(e)
             return CustomResponse(
                 status_code=DATABASE_OPERATION_ERROR,
                 message="Unexpected error during signup",
