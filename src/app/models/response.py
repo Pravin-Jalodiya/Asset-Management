@@ -5,7 +5,7 @@ from dataclasses import dataclass
 class CustomResponse:
     status_code: int
     message: str
-    data: any
+    data: any = None
 
     def object_to_dict(self):
         response ={
@@ -13,7 +13,7 @@ class CustomResponse:
             'message': self.message,
         }
 
-        if self.data:
+        if self.data is not None:
             response.update({'data': self.data})
 
         return response

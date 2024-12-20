@@ -3,6 +3,8 @@ import jwt
 import datetime
 from functools import wraps
 from fastapi import Request
+
+from src.app.config.custom_error_codes import INVALID_TOKEN_PAYLOAD_ERROR, UNAUTHORIZED_ACCESS_ERROR, SYSTEM_ERROR
 from src.app.models.response import CustomResponse
 from src.app.utils.context import get_user_from_context
 
@@ -62,31 +64,32 @@ class Utils:
     @staticmethod
     def admin(func):
         @wraps(func)
-        async def wrapper(*args, **kwargs):
+        def wrapper(*args, **kwargs):
             try:
-                # Get the Request object from kwargs
-                request = next((arg for arg in args if isinstance(arg, Request)), 
-                             kwargs.get('request'))
-                
+                # Get the Request object from args or kwargs
+                request = next((arg for arg in args if isinstance(arg, Request)),
+                               kwargs.get('request'))
+
                 if not request:
                     return CustomResponse(
-                        status_code=500,
+                        status_code=INVALID_TOKEN_PAYLOAD_ERROR,
                         message="Request context not available"
-                    )
+                    ).object_to_dict()
 
                 user = get_user_from_context(request)
-                if not user or user.get('role') != 'ADMIN':
+                if not user or user.get('role') != 'admin':
                     return CustomResponse(
-                        status_code=403,
+                        status_code=UNAUTHORIZED_ACCESS_ERROR,
                         message="Admin access required"
-                    )
-                
-                return await func(*args, **kwargs)
-                
+                    ).object_to_dict()
+
+                return func(*args, **kwargs)
+
             except Exception as e:
+                print(e)
                 return CustomResponse(
-                    status_code=500,
+                    status_code=SYSTEM_ERROR,
                     message="Error checking admin privileges"
-                )
-                
+                ).object_to_dict()
+
         return wrapper

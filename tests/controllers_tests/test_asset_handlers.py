@@ -1,6 +1,6 @@
 import unittest
 import uuid
-from unittest.mock import MagicMock, patch
+from unittest.mock import MagicMock
 from flask import Flask, g
 from werkzeug.routing import ValidationError
 

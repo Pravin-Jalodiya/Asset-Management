@@ -1,4 +1,6 @@
-from pydantic import BaseModel, EmailStr, UUID4, constr, validator, field_validator
+from pydantic import BaseModel, EmailStr, field_validator
+from werkzeug.routing import ValidationError
+
 from src.app.utils.validators.validators import Validators
 
 
@@ -6,17 +8,23 @@ class LoginRequest(BaseModel):
     email: EmailStr
     password: str
 
+    @classmethod
+    @field_validator('email')
+    def validate_email(cls, v):
+        if not Validators.is_email_valid(v):
+            raise ValidationError('Invalid email (supported domain(s) : [@watchguard.com])')
+
+    @classmethod
     @field_validator('password')
     def validate_password(cls, v):
         if not Validators.is_password_valid(v):
-            raise ValueError('Password is not valid')
-        return v
+            raise ValidationError('Invalid password')
 
     class Config:
         json_schema_extra = {
             "example": {
-                "email": "user@example.com",
-                "password": "StrongPass123"
+                "email": "user@watchguard.com",
+                "password": "Strongpass@123"
             }
         }
 
@@ -25,46 +33,58 @@ class SignupRequest(BaseModel):
     name: str
     email: EmailStr
     password: str
-    department: constr(to_upper=True)  # Automatically converts to uppercase
+    department: str
 
-    @validator('name')
+    @classmethod
+    @field_validator('name')
     def validate_name(cls, v):
         if not Validators.is_name_valid(v):
-            raise ValueError('Name is not valid')
-        return v
+            raise ValidationError('Invalid name')
 
-    @validator('password')
+    @classmethod
+    @field_validator('password')
     def validate_password(cls, v):
         if not Validators.is_password_valid(v):
-            raise ValueError('Password is not valid')
-        return v
+            raise ValidationError('Invalid password')
 
-    @validator('department')
+    @classmethod
+    @field_validator('email')
+    def validate_email(cls, v):
+        if not Validators.is_email_valid(str(v)):
+            raise ValidationError('Invalid email (supported domain(s) : [@watchguard.com])')
+
+    @classmethod
+    @field_validator('department')
     def validate_department(cls, v):
         if not Validators.is_department_valid(v):
-            raise ValueError('Department is not valid (dept. name should be all caps)')
-        return v
+            raise ValidationError('Invalid department (dept. name should be all caps)')
 
     class Config:
         json_schema_extra = {
             "example": {
                 "name": "John Doe",
-                "email": "john@example.com",
-                "password": "StrongPass123",
-                "department": "IT"
+                "email": "john@watchguard.com",
+                "password": "Strongpass@123",
+                "department": "CLOUD PLATFORM"
             }
         }
 
 
 class ReportIssueRequest(BaseModel):
-    asset_id: UUID4
+    asset_id: str
     description: str
 
-    @validator('description')
+    @classmethod
+    @field_validator('asset_id')
+    def validate_uuid(cls, v):
+        if not Validators.is_valid_UUID(v):
+            raise ValidationError(f'{v} is not a valid UUID')
+
+    @classmethod
+    @field_validator('description')
     def validate_description(cls, v):
-        if not Validators.is_description_valid(v):
-            raise ValueError('Description is not valid')
-        return v
+        if not v:
+            raise ValidationError('Description cannot be empty')
 
     class Config:
         json_schema_extra = {
@@ -79,30 +99,36 @@ class AssetRequest(BaseModel):
     name: str
     description: str
 
-    @validator('name')
+    @classmethod
+    @field_validator('name')
     def validate_name(cls, v):
-        if not Validators.is_asset_name_valid(v):
-            raise ValueError('Asset name is not valid')
-        return v
+        if not v:
+            raise ValidationError('Asset name cannot be empty')
 
-    @validator('description')
+    @classmethod
+    @field_validator('description')
     def validate_description(cls, v):
-        if not Validators.is_description_valid(v):
-            raise ValueError('Description is not valid')
-        return v
+        if not v:
+            raise ValidationError('Description cannot be empty')
 
     class Config:
         json_schema_extra = {
             "example": {
                 "name": "Laptop XPS 13",
-                "description": "Dell XPS 13 laptop with 16GB RAM"
+                "description": "Dell XPS 13 laptop with 16GB RAM and intel i13 processor"
             }
         }
 
 
 class AssignAssetRequest(BaseModel):
-    user_id: UUID4
-    asset_id: UUID4
+    user_id: str
+    asset_id: str
+
+    @classmethod
+    @field_validator('user_id', 'asset_id')
+    def validate_uuid(cls, v: str):
+        if not Validators.is_valid_UUID(v):
+            raise ValidationError(f"{v} is not a valid UUID")
 
     class Config:
         json_schema_extra = {
@@ -113,5 +139,4 @@ class AssignAssetRequest(BaseModel):
         }
 
 
-# UnassignAssetRequest can reuse AssignAssetRequest since they're identical
 UnassignAssetRequest = AssignAssetRequest

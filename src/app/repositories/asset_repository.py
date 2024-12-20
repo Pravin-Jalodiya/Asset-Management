@@ -63,22 +63,22 @@ class AssetRepository:
                     columns=columns,
                     where=where_clause
                 )
+
                 cursor.execute(query, values)
                 result = cursor.fetchone()
 
                 if result is not None:
                     return Asset(
-                            serial_number=result[0],
-                            name=result[1],
-                            description=result[2],
-                            status=result[3]
-                        )
+                        serial_number=result[0],
+                        name=result[1],
+                        description=result[2],
+                        status=result[3]
+                    )
 
-                else:
-                    return None
+                return None
 
         except Exception as e:
-            raise DatabaseError(f"Error retrieving assets {str(e)}")
+            raise DatabaseError(f"Error retrieving assets: {str(e)}")
 
     def assign_asset(self, asset_assigned: AssetAssigned):
         try:

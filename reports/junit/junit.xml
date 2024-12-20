@@ -1,1 +1,189 @@
-<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="0" failures="0" skipped="0" tests="173" time="4.500" timestamp="2024-12-18T11:30:44.591938+05:30" hostname="LAP-55355"><testcase classname="tests.controllers_tests.test_asset_handlers.TestAssetHandler" name="test_add_asset_invalid_data" time="0.024" /><testcase classname="tests.controllers_tests.test_asset_handlers.TestAssetHandler" name="test_add_asset_success" time="0.007" /><testcase classname="tests.controllers_tests.test_asset_handlers.TestAssetHandler" name="test_assign_asset_already_assigned" time="0.007" /><testcase classname="tests.controllers_tests.test_asset_handlers.TestAssetHandler" name="test_assign_asset_success" time="0.006" /><testcase classname="tests.controllers_tests.test_asset_handlers.TestAssetHandler" name="test_assigned_all_assets_database_error" time="0.006" /><testcase classname="tests.controllers_tests.test_asset_handlers.TestAssetHandler" name="test_assigned_all_assets_success" time="0.006" /><testcase classname="tests.controllers_tests.test_asset_handlers.TestAssetHandler" name="test_assigned_all_assets_unexpected_error" time="0.006" /><testcase classname="tests.controllers_tests.test_asset_handlers.TestAssetHandler" name="test_assigned_assets_database_error" time="0.006" /><testcase classname="tests.controllers_tests.test_asset_handlers.TestAssetHandler" name="test_assigned_assets_invalid_uuid" time="0.007" /><testcase classname="tests.controllers_tests.test_asset_handlers.TestAssetHandler" name="test_assigned_assets_not_exists" time="0.006" /><testcase classname="tests.controllers_tests.test_asset_handlers.TestAssetHandler" name="test_assigned_assets_success" time="0.006" /><testcase classname="tests.controllers_tests.test_asset_handlers.TestAssetHandler" name="test_delete_asset_database_error" time="0.009" /><testcase classname="tests.controllers_tests.test_asset_handlers.TestAssetHandler" name="test_delete_asset_invalid_id" time="0.006" /><testcase classname="tests.controllers_tests.test_asset_handlers.TestAssetHandler" name="test_delete_asset_invalid_uuid" time="0.008" /><testcase classname="tests.controllers_tests.test_asset_handlers.TestAssetHandler" name="test_delete_asset_not_exists" time="0.011" /><testcase classname="tests.controllers_tests.test_asset_handlers.TestAssetHandler" name="test_delete_asset_success" time="0.014" /><testcase classname="tests.controllers_tests.test_asset_handlers.TestAssetHandler" name="test_delete_asset_unexpected_error" time="0.013" /><testcase classname="tests.controllers_tests.test_asset_handlers.TestAssetHandler" name="test_get_assets_success" time="0.008" /><testcase classname="tests.controllers_tests.test_asset_handlers.TestAssetHandler" name="test_unassign_asset_database_error" time="0.008" /><testcase classname="tests.controllers_tests.test_asset_handlers.TestAssetHandler" name="test_unassign_asset_not_assigned" time="0.017" /><testcase classname="tests.controllers_tests.test_asset_handlers.TestAssetHandler" name="test_unassign_asset_not_assigned_error" time="0.011" /><testcase classname="tests.controllers_tests.test_asset_handlers.TestAssetHandler" name="test_unassign_asset_not_exists_error" time="0.009" /><testcase classname="tests.controllers_tests.test_asset_handlers.TestAssetHandler" name="test_unassign_asset_success" time="0.013" /><testcase classname="tests.controllers_tests.test_asset_handlers.TestAssetHandler" name="test_unassign_asset_unexpected_error" time="0.006" /><testcase classname="tests.controllers_tests.test_asset_handlers.TestAssetHandler" name="test_unassign_asset_validation_error" time="0.008" /><testcase classname="tests.controllers_tests.test_asset_issue_handlers.TestIssueHandler" name="test_get_user_issues_success" time="0.004" /><testcase classname="tests.controllers_tests.test_asset_issue_handlers.TestIssueHandler" name="test_get_user_issues_invalid_uuid" time="0.004" /><testcase classname="tests.controllers_tests.test_asset_issue_handlers.TestIssueHandler" name="test_get_user_issues_user_not_found" time="0.004" /><testcase classname="tests.controllers_tests.test_asset_issue_handlers.TestIssueHandler" name="test_get_user_issues_database_error" time="0.004" /><testcase classname="tests.controllers_tests.test_asset_issue_handlers.TestIssueHandler" name="test_get_issues_success" time="0.003" /><testcase classname="tests.controllers_tests.test_asset_issue_handlers.TestIssueHandler" name="test_get_issues_database_error" time="0.004" /><testcase classname="tests.controllers_tests.test_asset_issue_handlers.TestIssueHandler" name="test_report_issue_success" time="0.004" /><testcase classname="tests.controllers_tests.test_asset_issue_handlers.TestIssueHandler" name="test_report_issue_validation_error" time="0.003" /><testcase classname="tests.controllers_tests.test_asset_issue_handlers.TestIssueHandler" name="test_report_issue_not_assigned_error" time="0.004" /><testcase classname="tests.controllers_tests.test_asset_issue_handlers.TestIssueHandler" name="test_report_issue_asset_not_found" time="0.004" /><testcase classname="tests.controllers_tests.test_asset_issue_handlers.TestIssueHandler" name="test_report_issue_database_error" time="0.004" /><testcase classname="tests.controllers_tests.test_main.TestAppFactory" name="test_all_routes_registered" time="0.013" /><testcase classname="tests.controllers_tests.test_main.TestAppFactory" name="test_create_app_returns_flask_app" time="0.015" /><testcase classname="tests.controllers_tests.test_main.TestAppFactory" name="test_database_initialized" time="0.015" /><testcase classname="tests.controllers_tests.test_main.TestAppFactory" name="test_dependencies_are_created" time="0.014" /><testcase classname="tests.controllers_tests.test_main.TestAppFactory" name="test_services_have_correct_dependencies" time="0.027" /><testcase classname="tests.controllers_tests.test_user_handlers.TestUserHandler" name="test_login_success" time="0.005" /><testcase classname="tests.controllers_tests.test_user_handlers.TestUserHandler" name="test_login_validation_error" time="0.004" /><testcase classname="tests.controllers_tests.test_user_handlers.TestUserHandler" name="test_login_missing_field" time="0.004" /><testcase classname="tests.controllers_tests.test_user_handlers.TestUserHandler" name="test_login_invalid_credentials" time="0.004" /><testcase classname="tests.controllers_tests.test_user_handlers.TestUserHandler" name="test_signup_success" time="0.005" /><testcase classname="tests.controllers_tests.test_user_handlers.TestUserHandler" name="test_signup_user_exists" time="0.004" /><testcase classname="tests.controllers_tests.test_user_handlers.TestUserHandler" name="test_get_users_success" time="0.005" /><testcase classname="tests.controllers_tests.test_user_handlers.TestUserHandler" name="test_get_users_database_error" time="0.005" /><testcase classname="tests.controllers_tests.test_user_handlers.TestUserHandler" name="test_get_user_success" time="0.005" /><testcase classname="tests.controllers_tests.test_user_handlers.TestUserHandler" name="test_get_user_not_found" time="0.004" /><testcase classname="tests.controllers_tests.test_user_handlers.TestUserHandler" name="test_delete_user_success" time="0.004" /><testcase classname="tests.controllers_tests.test_user_handlers.TestUserHandler" name="test_delete_user_invalid_uuid" time="0.004" /><testcase classname="tests.controllers_tests.test_user_handlers.TestUserHandler" name="test_delete_user_not_found" time="0.004" /><testcase classname="tests.middleware_tests.test_middleware.TestAuthMiddleware" name="test_expired_token" time="0.006" /><testcase classname="tests.middleware_tests.test_middleware.TestAuthMiddleware" name="test_invalid_authorization_format" time="0.002" /><testcase classname="tests.middleware_tests.test_middleware.TestAuthMiddleware" name="test_invalid_token" time="0.002" /><testcase classname="tests.middleware_tests.test_middleware.TestAuthMiddleware" name="test_invalid_token_payload" time="0.002" /><testcase classname="tests.middleware_tests.test_middleware.TestAuthMiddleware" name="test_no_authorization_header" time="0.002" /><testcase classname="tests.middleware_tests.test_middleware.TestAuthMiddleware" name="test_skip_middleware_for_login_signup" time="0.002" /><testcase classname="tests.middleware_tests.test_middleware.TestAuthMiddleware" name="test_valid_token" time="0.002" /><testcase classname="tests.repository_tests.test_asset_issue_repository.TestIssueRepository" name="test_fetch_all_issues_empty_list" time="0.006" /><testcase classname="tests.repository_tests.test_asset_issue_repository.TestIssueRepository" name="test_fetch_all_issues_raises_database_error" time="0.003" /><testcase classname="tests.repository_tests.test_asset_issue_repository.TestIssueRepository" name="test_fetch_all_issues_success" time="0.004" /><testcase classname="tests.repository_tests.test_asset_issue_repository.TestIssueRepository" name="test_fetch_user_issues_no_issues_found" time="0.004" /><testcase classname="tests.repository_tests.test_asset_issue_repository.TestIssueRepository" name="test_fetch_user_issues_raises_database_error" time="0.003" /><testcase classname="tests.repository_tests.test_asset_issue_repository.TestIssueRepository" name="test_fetch_user_issues_success" time="0.006" /><testcase classname="tests.repository_tests.test_asset_issue_repository.TestIssueRepository" name="test_report_issue_raises_database_error" time="0.002" /><testcase classname="tests.repository_tests.test_asset_issue_repository.TestIssueRepository" name="test_report_issue_success" time="0.003" /><testcase classname="tests.repository_tests.test_asset_repository.TestAssetRepository" name="test_add_asset_raises_database_error" time="0.003" /><testcase classname="tests.repository_tests.test_asset_repository.TestAssetRepository" name="test_add_asset_success" time="0.004" /><testcase classname="tests.repository_tests.test_asset_repository.TestAssetRepository" name="test_assign_asset_raises_database_error" time="0.003" /><testcase classname="tests.repository_tests.test_asset_repository.TestAssetRepository" name="test_assign_asset_success" time="0.003" /><testcase classname="tests.repository_tests.test_asset_repository.TestAssetRepository" name="test_check_asset_availability_available" time="0.004" /><testcase classname="tests.repository_tests.test_asset_repository.TestAssetRepository" name="test_check_asset_availability_available_raises_database_error" time="0.003" /><testcase classname="tests.repository_tests.test_asset_repository.TestAssetRepository" name="test_check_asset_availability_not_available" time="0.003" /><testcase classname="tests.repository_tests.test_asset_repository.TestAssetRepository" name="test_delete_asset_success" time="0.004" /><testcase classname="tests.repository_tests.test_asset_repository.TestAssetRepository" name="test_delete_asset_success_raises_database_error" time="0.003" /><testcase classname="tests.repository_tests.test_asset_repository.TestAssetRepository" name="test_fetch_all_assets_raises_database_error" time="0.003" /><testcase classname="tests.repository_tests.test_asset_repository.TestAssetRepository" name="test_fetch_all_assets_success" time="0.005" /><testcase classname="tests.repository_tests.test_asset_repository.TestAssetRepository" name="test_fetch_asset_by_id_not_found" time="0.003" /><testcase classname="tests.repository_tests.test_asset_repository.TestAssetRepository" name="test_fetch_asset_by_id_raises_database_error" time="0.003" /><testcase classname="tests.repository_tests.test_asset_repository.TestAssetRepository" name="test_fetch_asset_by_id_success" time="0.004" /><testcase classname="tests.repository_tests.test_asset_repository.TestAssetRepository" name="test_is_asset_assigned_false" time="0.003" /><testcase classname="tests.repository_tests.test_asset_repository.TestAssetRepository" name="test_is_asset_assigned_raises_database_error" time="0.003" /><testcase classname="tests.repository_tests.test_asset_repository.TestAssetRepository" name="test_is_asset_assigned_true" time="0.003" /><testcase classname="tests.repository_tests.test_asset_repository.TestAssetRepository" name="test_unassign_asset_raises_database_error" time="0.003" /><testcase classname="tests.repository_tests.test_asset_repository.TestAssetRepository" name="test_unassign_asset_success" time="0.003" /><testcase classname="tests.repository_tests.test_asset_repository.TestAssetRepository" name="test_update_asset_status_raises_database_error" time="0.003" /><testcase classname="tests.repository_tests.test_asset_repository.TestAssetRepository" name="test_update_asset_status_success" time="0.004" /><testcase classname="tests.repository_tests.test_asset_repository.TestAssetRepository" name="test_view_all_assigned_assets_raises_database_error" time="0.005" /><testcase classname="tests.repository_tests.test_asset_repository.TestAssetRepository" name="test_view_all_assigned_assets_success" time="0.003" /><testcase classname="tests.repository_tests.test_asset_repository.TestAssetRepository" name="test_view_assigned_assets_no_assets" time="0.004" /><testcase classname="tests.repository_tests.test_asset_repository.TestAssetRepository" name="test_view_assigned_assets_no_assets_raises_database_error" time="0.003" /><testcase classname="tests.repository_tests.test_asset_repository.TestAssetRepository" name="test_view_assigned_assets_success" time="0.003" /><testcase classname="tests.repository_tests.test_user_repository.TestUserRepository" name="test_delete_user_database_error" time="0.002" /><testcase classname="tests.repository_tests.test_user_repository.TestUserRepository" name="test_delete_user_not_found" time="0.003" /><testcase classname="tests.repository_tests.test_user_repository.TestUserRepository" name="test_delete_user_success" time="0.003" /><testcase classname="tests.repository_tests.test_user_repository.TestUserRepository" name="test_fetch_user_by_email_database_error" time="0.004" /><testcase classname="tests.repository_tests.test_user_repository.TestUserRepository" name="test_fetch_user_by_email_not_found" time="0.003" /><testcase classname="tests.repository_tests.test_user_repository.TestUserRepository" name="test_fetch_user_by_email_success" time="0.004" /><testcase classname="tests.repository_tests.test_user_repository.TestUserRepository" name="test_fetch_user_by_id_database_error" time="0.003" /><testcase classname="tests.repository_tests.test_user_repository.TestUserRepository" name="test_fetch_user_by_id_not_found" time="0.003" /><testcase classname="tests.repository_tests.test_user_repository.TestUserRepository" name="test_fetch_user_by_id_success" time="0.004" /><testcase classname="tests.repository_tests.test_user_repository.TestUserRepository" name="test_fetch_users_database_error" time="0.003" /><testcase classname="tests.repository_tests.test_user_repository.TestUserRepository" name="test_fetch_users_empty_list" time="0.003" /><testcase classname="tests.repository_tests.test_user_repository.TestUserRepository" name="test_fetch_users_success" time="0.005" /><testcase classname="tests.repository_tests.test_user_repository.TestUserRepository" name="test_save_user_database_error" time="0.002" /><testcase classname="tests.repository_tests.test_user_repository.TestUserRepository" name="test_save_user_success" time="0.003" /><testcase classname="tests.service_tests.test_asset_issue_service.TestIssueService" name="test_get_issues_returns_all_issues" time="0.005" /><testcase classname="tests.service_tests.test_asset_issue_service.TestIssueService" name="test_get_user_issues_raises_error_for_nonexistent_user" time="0.003" /><testcase classname="tests.service_tests.test_asset_issue_service.TestIssueService" name="test_get_user_issues_returns_user_specific_issues" time="0.003" /><testcase classname="tests.service_tests.test_asset_issue_service.TestIssueService" name="test_report_issue_raises_error_for_nonexistent_asset" time="0.004" /><testcase classname="tests.service_tests.test_asset_issue_service.TestIssueService" name="test_report_issue_raises_error_for_unassigned_asset" time="0.004" /><testcase classname="tests.service_tests.test_asset_issue_service.TestIssueService" name="test_report_issue_successful" time="0.004" /><testcase classname="tests.service_tests.test_asset_service.TestAssetService" name="test_add_asset_raises_exists_error" time="0.002" /><testcase classname="tests.service_tests.test_asset_service.TestAssetService" name="test_add_asset_successful" time="0.002" /><testcase classname="tests.service_tests.test_asset_service.TestAssetService" name="test_assign_asset_raises_asset_not_exists_error" time="0.004" /><testcase classname="tests.service_tests.test_asset_service.TestAssetService" name="test_assign_asset_raises_user_not_exists_error" time="0.002" /><testcase classname="tests.service_tests.test_asset_service.TestAssetService" name="test_assign_asset_successful" time="0.003" /><testcase classname="tests.service_tests.test_asset_service.TestAssetService" name="test_delete_asset_raises_not_exists_error" time="0.002" /><testcase classname="tests.service_tests.test_asset_service.TestAssetService" name="test_delete_asset_successful" time="0.002" /><testcase classname="tests.service_tests.test_asset_service.TestAssetService" name="test_get_asset_by_id" time="0.002" /><testcase classname="tests.service_tests.test_asset_service.TestAssetService" name="test_get_assets" time="0.002" /><testcase classname="tests.service_tests.test_asset_service.TestAssetService" name="test_is_asset_assigned" time="0.002" /><testcase classname="tests.service_tests.test_asset_service.TestAssetService" name="test_unassign_asset_raises_not_exists_errors" time="0.002" /><testcase classname="tests.service_tests.test_asset_service.TestAssetService" name="test_unassign_asset_successful" time="0.003" /><testcase classname="tests.service_tests.test_asset_service.TestAssetService" name="test_view_all_assigned_assets" time="0.002" /><testcase classname="tests.service_tests.test_asset_service.TestAssetService" name="test_view_assigned_assets_raises_user_not_exists_error" time="0.002" /><testcase classname="tests.service_tests.test_asset_service.TestAssetService" name="test_view_assigned_assets_successful" time="0.002" /><testcase classname="tests.service_tests.test_user_service.TestUserService" name="test_delete_user_account_nonexistent_user" time="0.002" /><testcase classname="tests.service_tests.test_user_service.TestUserService" name="test_delete_user_account_successful" time="0.003" /><testcase classname="tests.service_tests.test_user_service.TestUserService" name="test_get_user_by_email_returns_none" time="0.002" /><testcase classname="tests.service_tests.test_user_service.TestUserService" name="test_get_user_by_email_successful" time="0.002" /><testcase classname="tests.service_tests.test_user_service.TestUserService" name="test_get_user_by_id_returns_none" time="0.002" /><testcase classname="tests.service_tests.test_user_service.TestUserService" name="test_get_user_by_id_successful" time="0.001" /><testcase classname="tests.service_tests.test_user_service.TestUserService" name="test_get_users_returns_empty_list" time="0.001" /><testcase classname="tests.service_tests.test_user_service.TestUserService" name="test_get_users_returns_list" time="0.002" /><testcase classname="tests.service_tests.test_user_service.TestUserService" name="test_login_user_raises_invalid_credentials" time="0.002" /><testcase classname="tests.service_tests.test_user_service.TestUserService" name="test_login_user_successful" time="0.234" /><testcase classname="tests.service_tests.test_user_service.TestUserService" name="test_signup_user_raises_user_exists_error" time="0.003" /><testcase classname="tests.service_tests.test_user_service.TestUserService" name="test_signup_user_successful" time="0.003" /><testcase classname="tests.utils.db.test_db_connection" name="test_db_connection" time="0.005" /><testcase classname="tests.utils.db.test_query_builder.TestGenericQueryBuilder" name="test_delete_multiple_conditions" time="0.001" /><testcase classname="tests.utils.db.test_query_builder.TestGenericQueryBuilder" name="test_delete_single_condition" time="0.001" /><testcase classname="tests.utils.db.test_query_builder.TestGenericQueryBuilder" name="test_delete_without_where_clause" time="0.002" /><testcase classname="tests.utils.db.test_query_builder.TestGenericQueryBuilder" name="test_insert_multiple_columns" time="0.001" /><testcase classname="tests.utils.db.test_query_builder.TestGenericQueryBuilder" name="test_insert_single_column" time="0.001" /><testcase classname="tests.utils.db.test_query_builder.TestGenericQueryBuilder" name="test_select_all_columns" time="0.001" /><testcase classname="tests.utils.db.test_query_builder.TestGenericQueryBuilder" name="test_select_specific_columns" time="0.001" /><testcase classname="tests.utils.db.test_query_builder.TestGenericQueryBuilder" name="test_select_with_all_parameters" time="0.002" /><testcase classname="tests.utils.db.test_query_builder.TestGenericQueryBuilder" name="test_select_with_limit" time="0.001" /><testcase classname="tests.utils.db.test_query_builder.TestGenericQueryBuilder" name="test_select_with_multiple_where_conditions" time="0.001" /><testcase classname="tests.utils.db.test_query_builder.TestGenericQueryBuilder" name="test_select_with_order_by" time="0.001" /><testcase classname="tests.utils.db.test_query_builder.TestGenericQueryBuilder" name="test_select_with_where_clause" time="0.001" /><testcase classname="tests.utils.db.test_query_builder.TestGenericQueryBuilder" name="test_update_multiple_columns" time="0.001" /><testcase classname="tests.utils.db.test_query_builder.TestGenericQueryBuilder" name="test_update_multiple_where_conditions" time="0.002" /><testcase classname="tests.utils.db.test_query_builder.TestGenericQueryBuilder" name="test_update_single_column" time="0.001" /><testcase classname="tests.utils.test_utils.TestUtils" name="test_admin_decorator_authorized" time="0.002" /><testcase classname="tests.utils.test_utils.TestUtils" name="test_admin_decorator_unauthorized" time="0.002" /><testcase classname="tests.utils.test_utils.TestUtils" name="test_check_password_failure" time="0.474" /><testcase classname="tests.utils.test_utils.TestUtils" name="test_check_password_success" time="0.464" /><testcase classname="tests.utils.test_utils.TestUtils" name="test_create_jwt_token_exception" time="0.001" /><testcase classname="tests.utils.test_utils.TestUtils" name="test_create_jwt_token_success" time="0.001" /><testcase classname="tests.utils.test_utils.TestUtils" name="test_decode_jwt_token_expired" time="0.001" /><testcase classname="tests.utils.test_utils.TestUtils" name="test_decode_jwt_token_invalid" time="0.001" /><testcase classname="tests.utils.test_utils.TestUtils" name="test_decode_jwt_token_success" time="0.001" /><testcase classname="tests.utils.test_utils.TestUtils" name="test_hash_password_unique" time="0.465" /><testcase classname="tests.utils.validators.test_validators.TestValidators" name="test_is_department_valid" time="0.005" /><testcase classname="tests.utils.validators.test_validators.TestValidators" name="test_is_email_valid" time="0.002" /><testcase classname="tests.utils.validators.test_validators.TestValidators" name="test_is_name_valid" time="0.002" /><testcase classname="tests.utils.validators.test_validators.TestValidators" name="test_is_password_valid" time="0.002" /><testcase classname="tests.utils.validators.test_validators.TestValidators" name="test_is_valid_UUID" time="0.002" /></testsuite></testsuites>
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="4" failures="0" skipped="0" tests="4" time="7.562" timestamp="2024-12-19T10:56:03.381683+05:30" hostname="LAP-55355"><testcase classname="" name="tests.controllers_tests.test_asset_handlers" time="0.000"><error message="collection failure">ImportError while importing test module 'C:\Users\pjalodiya\PycharmProjects\Asset-Management\tests\controllers_tests\test_asset_handlers.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+..\.venv\Lib\site-packages\pydantic\networks.py:895: in import_email_validator
+    import email_validator
+E   ModuleNotFoundError: No module named 'email_validator'
+
+The above exception was the direct cause of the following exception:
+C:\Program Files\Python313\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+tests\controllers_tests\test_asset_handlers.py:12: in &lt;module&gt;
+    from src.app.controllers.asset.handlers import AssetHandler
+src\app\controllers\asset\handlers.py:3: in &lt;module&gt;
+    from src.app.models.request_objects import AssetRequest, AssignAssetRequest, UnassignAssetRequest
+src\app\models\request_objects.py:5: in &lt;module&gt;
+    class LoginRequest(BaseModel):
+..\.venv\Lib\site-packages\pydantic\_internal\_model_construction.py:226: in __new__
+    complete_model_class(
+..\.venv\Lib\site-packages\pydantic\_internal\_model_construction.py:658: in complete_model_class
+    schema = cls.__get_pydantic_core_schema__(cls, handler)
+..\.venv\Lib\site-packages\pydantic\main.py:702: in __get_pydantic_core_schema__
+    return handler(source)
+..\.venv\Lib\site-packages\pydantic\_internal\_schema_generation_shared.py:84: in __call__
+    schema = self._handler(source_type)
+..\.venv\Lib\site-packages\pydantic\_internal\_generate_schema.py:610: in generate_schema
+    schema = self._generate_schema_inner(obj)
+..\.venv\Lib\site-packages\pydantic\_internal\_generate_schema.py:879: in _generate_schema_inner
+    return self._model_schema(obj)
+..\.venv\Lib\site-packages\pydantic\_internal\_generate_schema.py:691: in _model_schema
+    {k: self._generate_md_field_schema(k, v, decorators) for k, v in fields.items()},
+..\.venv\Lib\site-packages\pydantic\_internal\_generate_schema.py:1071: in _generate_md_field_schema
+    common_field = self._common_field_schema(name, field_info, decorators)
+..\.venv\Lib\site-packages\pydantic\_internal\_generate_schema.py:1263: in _common_field_schema
+    schema = self._apply_annotations(
+..\.venv\Lib\site-packages\pydantic\_internal\_generate_schema.py:2056: in _apply_annotations
+    schema = get_inner_schema(source_type)
+..\.venv\Lib\site-packages\pydantic\_internal\_schema_generation_shared.py:84: in __call__
+    schema = self._handler(source_type)
+..\.venv\Lib\site-packages\pydantic\_internal\_generate_schema.py:2035: in inner_handler
+    from_property = self._generate_schema_from_property(obj, source_type)
+..\.venv\Lib\site-packages\pydantic\_internal\_generate_schema.py:759: in _generate_schema_from_property
+    schema = get_schema(
+..\.venv\Lib\site-packages\pydantic\networks.py:935: in __get_pydantic_core_schema__
+    import_email_validator()
+..\.venv\Lib\site-packages\pydantic\networks.py:897: in import_email_validator
+    raise ImportError('email-validator is not installed, run `pip install pydantic[email]`') from e
+E   ImportError: email-validator is not installed, run `pip install pydantic[email]`</error></testcase><testcase classname="" name="tests.controllers_tests.test_asset_issue_handlers" time="0.000"><error message="collection failure">ImportError while importing test module 'C:\Users\pjalodiya\PycharmProjects\Asset-Management\tests\controllers_tests\test_asset_issue_handlers.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+..\.venv\Lib\site-packages\pydantic\networks.py:895: in import_email_validator
+    import email_validator
+E   ModuleNotFoundError: No module named 'email_validator'
+
+The above exception was the direct cause of the following exception:
+C:\Program Files\Python313\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+tests\controllers_tests\test_asset_issue_handlers.py:11: in &lt;module&gt;
+    from src.app.controllers.asset_issue.handlers import IssueHandler
+src\app\controllers\asset_issue\handlers.py:3: in &lt;module&gt;
+    from src.app.models.request_objects import ReportIssueRequest
+src\app\models\request_objects.py:5: in &lt;module&gt;
+    class LoginRequest(BaseModel):
+..\.venv\Lib\site-packages\pydantic\_internal\_model_construction.py:226: in __new__
+    complete_model_class(
+..\.venv\Lib\site-packages\pydantic\_internal\_model_construction.py:658: in complete_model_class
+    schema = cls.__get_pydantic_core_schema__(cls, handler)
+..\.venv\Lib\site-packages\pydantic\main.py:702: in __get_pydantic_core_schema__
+    return handler(source)
+..\.venv\Lib\site-packages\pydantic\_internal\_schema_generation_shared.py:84: in __call__
+    schema = self._handler(source_type)
+..\.venv\Lib\site-packages\pydantic\_internal\_generate_schema.py:610: in generate_schema
+    schema = self._generate_schema_inner(obj)
+..\.venv\Lib\site-packages\pydantic\_internal\_generate_schema.py:879: in _generate_schema_inner
+    return self._model_schema(obj)
+..\.venv\Lib\site-packages\pydantic\_internal\_generate_schema.py:691: in _model_schema
+    {k: self._generate_md_field_schema(k, v, decorators) for k, v in fields.items()},
+..\.venv\Lib\site-packages\pydantic\_internal\_generate_schema.py:1071: in _generate_md_field_schema
+    common_field = self._common_field_schema(name, field_info, decorators)
+..\.venv\Lib\site-packages\pydantic\_internal\_generate_schema.py:1263: in _common_field_schema
+    schema = self._apply_annotations(
+..\.venv\Lib\site-packages\pydantic\_internal\_generate_schema.py:2056: in _apply_annotations
+    schema = get_inner_schema(source_type)
+..\.venv\Lib\site-packages\pydantic\_internal\_schema_generation_shared.py:84: in __call__
+    schema = self._handler(source_type)
+..\.venv\Lib\site-packages\pydantic\_internal\_generate_schema.py:2035: in inner_handler
+    from_property = self._generate_schema_from_property(obj, source_type)
+..\.venv\Lib\site-packages\pydantic\_internal\_generate_schema.py:759: in _generate_schema_from_property
+    schema = get_schema(
+..\.venv\Lib\site-packages\pydantic\networks.py:935: in __get_pydantic_core_schema__
+    import_email_validator()
+..\.venv\Lib\site-packages\pydantic\networks.py:897: in import_email_validator
+    raise ImportError('email-validator is not installed, run `pip install pydantic[email]`') from e
+E   ImportError: email-validator is not installed, run `pip install pydantic[email]`</error></testcase><testcase classname="" name="tests.controllers_tests.test_main" time="0.000"><error message="collection failure">ImportError while importing test module 'C:\Users\pjalodiya\PycharmProjects\Asset-Management\tests\controllers_tests\test_main.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+..\.venv\Lib\site-packages\pydantic\networks.py:895: in import_email_validator
+    import email_validator
+E   ModuleNotFoundError: No module named 'email_validator'
+
+The above exception was the direct cause of the following exception:
+C:\Program Files\Python313\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+tests\controllers_tests\test_main.py:3: in &lt;module&gt;
+    from src.app.controllers.main import create_app
+src\app\controllers\main.py:4: in &lt;module&gt;
+    from src.app.controllers.asset.routes import create_asset_routes
+src\app\controllers\asset\routes.py:4: in &lt;module&gt;
+    from src.app.controllers.asset.handlers import AssetHandler
+src\app\controllers\asset\handlers.py:3: in &lt;module&gt;
+    from src.app.models.request_objects import AssetRequest, AssignAssetRequest, UnassignAssetRequest
+src\app\models\request_objects.py:5: in &lt;module&gt;
+    class LoginRequest(BaseModel):
+..\.venv\Lib\site-packages\pydantic\_internal\_model_construction.py:226: in __new__
+    complete_model_class(
+..\.venv\Lib\site-packages\pydantic\_internal\_model_construction.py:658: in complete_model_class
+    schema = cls.__get_pydantic_core_schema__(cls, handler)
+..\.venv\Lib\site-packages\pydantic\main.py:702: in __get_pydantic_core_schema__
+    return handler(source)
+..\.venv\Lib\site-packages\pydantic\_internal\_schema_generation_shared.py:84: in __call__
+    schema = self._handler(source_type)
+..\.venv\Lib\site-packages\pydantic\_internal\_generate_schema.py:610: in generate_schema
+    schema = self._generate_schema_inner(obj)
+..\.venv\Lib\site-packages\pydantic\_internal\_generate_schema.py:879: in _generate_schema_inner
+    return self._model_schema(obj)
+..\.venv\Lib\site-packages\pydantic\_internal\_generate_schema.py:691: in _model_schema
+    {k: self._generate_md_field_schema(k, v, decorators) for k, v in fields.items()},
+..\.venv\Lib\site-packages\pydantic\_internal\_generate_schema.py:1071: in _generate_md_field_schema
+    common_field = self._common_field_schema(name, field_info, decorators)
+..\.venv\Lib\site-packages\pydantic\_internal\_generate_schema.py:1263: in _common_field_schema
+    schema = self._apply_annotations(
+..\.venv\Lib\site-packages\pydantic\_internal\_generate_schema.py:2056: in _apply_annotations
+    schema = get_inner_schema(source_type)
+..\.venv\Lib\site-packages\pydantic\_internal\_schema_generation_shared.py:84: in __call__
+    schema = self._handler(source_type)
+..\.venv\Lib\site-packages\pydantic\_internal\_generate_schema.py:2035: in inner_handler
+    from_property = self._generate_schema_from_property(obj, source_type)
+..\.venv\Lib\site-packages\pydantic\_internal\_generate_schema.py:759: in _generate_schema_from_property
+    schema = get_schema(
+..\.venv\Lib\site-packages\pydantic\networks.py:935: in __get_pydantic_core_schema__
+    import_email_validator()
+..\.venv\Lib\site-packages\pydantic\networks.py:897: in import_email_validator
+    raise ImportError('email-validator is not installed, run `pip install pydantic[email]`') from e
+E   ImportError: email-validator is not installed, run `pip install pydantic[email]`</error></testcase><testcase classname="" name="tests.controllers_tests.test_user_handlers" time="0.000"><error message="collection failure">ImportError while importing test module 'C:\Users\pjalodiya\PycharmProjects\Asset-Management\tests\controllers_tests\test_user_handlers.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+..\.venv\Lib\site-packages\pydantic\networks.py:895: in import_email_validator
+    import email_validator
+E   ModuleNotFoundError: No module named 'email_validator'
+
+The above exception was the direct cause of the following exception:
+C:\Program Files\Python313\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+tests\controllers_tests\test_user_handlers.py:22: in &lt;module&gt;
+    from src.app.controllers.users.handlers import UserHandler
+src\app\controllers\users\handlers.py:3: in &lt;module&gt;
+    from src.app.models.request_objects import SignupRequest, LoginRequest
+src\app\models\request_objects.py:5: in &lt;module&gt;
+    class LoginRequest(BaseModel):
+..\.venv\Lib\site-packages\pydantic\_internal\_model_construction.py:226: in __new__
+    complete_model_class(
+..\.venv\Lib\site-packages\pydantic\_internal\_model_construction.py:658: in complete_model_class
+    schema = cls.__get_pydantic_core_schema__(cls, handler)
+..\.venv\Lib\site-packages\pydantic\main.py:702: in __get_pydantic_core_schema__
+    return handler(source)
+..\.venv\Lib\site-packages\pydantic\_internal\_schema_generation_shared.py:84: in __call__
+    schema = self._handler(source_type)
+..\.venv\Lib\site-packages\pydantic\_internal\_generate_schema.py:610: in generate_schema
+    schema = self._generate_schema_inner(obj)
+..\.venv\Lib\site-packages\pydantic\_internal\_generate_schema.py:879: in _generate_schema_inner
+    return self._model_schema(obj)
+..\.venv\Lib\site-packages\pydantic\_internal\_generate_schema.py:691: in _model_schema
+    {k: self._generate_md_field_schema(k, v, decorators) for k, v in fields.items()},
+..\.venv\Lib\site-packages\pydantic\_internal\_generate_schema.py:1071: in _generate_md_field_schema
+    common_field = self._common_field_schema(name, field_info, decorators)
+..\.venv\Lib\site-packages\pydantic\_internal\_generate_schema.py:1263: in _common_field_schema
+    schema = self._apply_annotations(
+..\.venv\Lib\site-packages\pydantic\_internal\_generate_schema.py:2056: in _apply_annotations
+    schema = get_inner_schema(source_type)
+..\.venv\Lib\site-packages\pydantic\_internal\_schema_generation_shared.py:84: in __call__
+    schema = self._handler(source_type)
+..\.venv\Lib\site-packages\pydantic\_internal\_generate_schema.py:2035: in inner_handler
+    from_property = self._generate_schema_from_property(obj, source_type)
+..\.venv\Lib\site-packages\pydantic\_internal\_generate_schema.py:759: in _generate_schema_from_property
+    schema = get_schema(
+..\.venv\Lib\site-packages\pydantic\networks.py:935: in __get_pydantic_core_schema__
+    import_email_validator()
+..\.venv\Lib\site-packages\pydantic\networks.py:897: in import_email_validator
+    raise ImportError('email-validator is not installed, run `pip install pydantic[email]`') from e
+E   ImportError: email-validator is not installed, run `pip install pydantic[email]`</error></testcase></testsuite></testsuites>

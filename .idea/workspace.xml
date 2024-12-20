@@ -5,9 +5,32 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="347872e0-5b89-419e-982a-7a257b7fd3fb" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.coverage" beforeDir="false" afterPath="$PROJECT_DIR$/.coverage" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/PythonProject.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/PythonProject.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/controllers/app.log" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/controllers/app.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/reports/junit/junit.xml" beforeDir="false" afterPath="$PROJECT_DIR$/reports/junit/junit.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/reports/report.html" beforeDir="false" afterPath="$PROJECT_DIR$/reports/report.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/config/db_config.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/config/db_config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/controllers/asset/handlers.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/controllers/asset/handlers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/controllers/asset/routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/controllers/asset/routes.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/controllers/asset_issue/handlers.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/controllers/asset_issue/handlers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/controllers/asset_issue/routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/controllers/asset_issue/routes.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/controllers/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/controllers/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/controllers/users/handlers.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/controllers/users/handlers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/controllers/users/routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/controllers/users/routes.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/middleware/middleware.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/middleware/middleware.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/models/request_objects.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/models/request_objects.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/models/response.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/models/response.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/repositories/asset_repository.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/repositories/asset_repository.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/services/asset_issue_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/services/asset_issue_service.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/services/user_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/services/user_service.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/utils/db/asset_management.db" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/utils/db/asset_management.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/utils/logger/custom_logger.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/utils/logger/custom_logger.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/utils/logger/logger.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/utils/logger/logger.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/utils/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/utils/utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/controllers_tests/test_asset_handlers.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/controllers_tests/test_asset_handlers.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,6 +39,9 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/src/app/utils/logger/logger.py" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 3
@@ -28,22 +54,102 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Python.create_tables.executor&quot;: &quot;Run&quot;,
-    &quot;Python.handlers.executor&quot;: &quot;Run&quot;,
-    &quot;Python.main.executor&quot;: &quot;Run&quot;,
-    &quot;Python.request_objects.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;fastAPI&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Python tests.Python tests for test_middleware.TestAuthMiddleware.executor": "Run",
+    "Python tests.Python tests in repository_tests.executor": "Run",
+    "Python tests.Python tests in service_tests.executor": "Run",
+    "Python.create_tables.executor": "Run",
+    "Python.handlers.executor": "Run",
+    "Python.main.executor": "Run",
+    "Python.request_objects.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "fastAPI",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
+  <component name="RunManager">
+    <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="PythonProject" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/app/controllers" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/app/controllers/main.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Python tests for test_middleware.TestAuthMiddleware" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+      <module name="PythonProject" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests/middleware_tests" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;test_middleware.TestAuthMiddleware&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Python tests in repository_tests" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+      <module name="PythonProject" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests/repository_tests" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;$PROJECT_DIR$/tests/repository_tests&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Python tests in service_tests" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+      <module name="PythonProject" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests/service_tests" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;$PROJECT_DIR$/tests/service_tests&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python tests.Python tests for test_middleware.TestAuthMiddleware" />
+        <item itemvalue="Python.main" />
+        <item itemvalue="Python tests.Python tests in service_tests" />
+        <item itemvalue="Python tests.Python tests in repository_tests" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>

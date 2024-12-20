@@ -49,7 +49,7 @@ class UserService:
         user = self.get_user_by_id(user_id)
         if user:
             return self.user_repository.delete_user(user_id)
-        return False
+        raise NotExistsError("User does not exist")
 
     def get_users(self) -> List[UserDTO]:
         """
@@ -58,7 +58,7 @@ class UserService:
         results = self.user_repository.fetch_users()
         return results if results else []
 
-    def get_user_by_id(self, user_id: str) -> User | None:
+    def get_user_by_id(self, user_id: str) -> UserDTO | None:
         """
         Retrieve user by ID
         """

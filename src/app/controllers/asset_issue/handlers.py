@@ -1,4 +1,6 @@
 from dataclasses import dataclass
+from fastapi import Request
+
 from src.app.models.asset_issue import Issue
 from src.app.models.request_objects import ReportIssueRequest
 from src.app.services.asset_issue_service import IssueService
@@ -7,6 +9,11 @@ from src.app.utils.logger.custom_logger import custom_logger
 from src.app.utils.logger.logger import Logger
 from src.app.utils.utils import Utils
 from src.app.models.response import CustomResponse
+from src.app.config.custom_error_codes import (
+    RECORD_NOT_FOUND_ERROR,
+    DATABASE_OPERATION_ERROR,
+    ASSET_NOT_FOUND_ERROR, ASSET_NOT_ASSIGNED_ERROR
+)
 
 @dataclass
 class IssueHandler:
@@ -18,66 +25,74 @@ class IssueHandler:
         return cls(issue_service)
 
     @custom_logger(logger)
-    async def get_user_issues(self, user_id: str):
+    def get_user_issues(self, user_id: str):
         try:
-            issues = await self.issue_service.get_user_issues(user_id)
+            issues = self.issue_service.get_user_issues(user_id)
             return CustomResponse(
                 status_code=200,
                 message="User issues fetched successfully",
-                data=[issue.dict() for issue in issues] if issues else []
-            )
+                data=[issue.__dict__ for issue in issues] if issues else []
+            ).object_to_dict()
+
         except NotExistsError as e:
             return CustomResponse(
-                status_code=404,
+                status_code=RECORD_NOT_FOUND_ERROR,
                 message=str(e)
-            )
+            ).object_to_dict()
+
         except Exception as e:
             return CustomResponse(
-                status_code=500,
+                status_code=DATABASE_OPERATION_ERROR,
                 message="Error fetching user issues"
-            )
+            ).object_to_dict()
 
     @custom_logger(logger)
     @Utils.admin
-    async def get_issues(self):
+    def get_issues(self, request: Request):
         try:
-            issues = await self.issue_service.get_issues()
+            issues = self.issue_service.get_issues()
             return CustomResponse(
                 status_code=200,
                 message="All issues fetched successfully",
-                data=[issue.dict() for issue in issues] if issues else []
-            )
+                data=[issue.__dict__ for issue in issues] if issues else []
+            ).object_to_dict()
+
         except Exception as e:
             return CustomResponse(
-                status_code=500,
+                status_code=DATABASE_OPERATION_ERROR,
                 message="Error fetching all issues"
-            )
+            ).object_to_dict()
 
     @custom_logger(logger)
-    async def report_issue(self, issue_data: ReportIssueRequest):
+    def report_issue(self, request: Request, issue_data: ReportIssueRequest):
         try:
             issue_obj = Issue(
                 asset_id=str(issue_data.asset_id),
                 description=issue_data.description
             )
-            await self.issue_service.report_issue(issue_obj)
+
+            self.issue_service.report_issue(request, issue_obj)
             return CustomResponse(
-                status_code=201,
+                status_code=200,
                 message="Issue reported successfully",
-                data=issue_obj.dict()
-            )
+                data=issue_obj.__dict__
+            ).object_to_dict()
+
         except NotAssignedError as e:
             return CustomResponse(
-                status_code=400,
+                status_code=ASSET_NOT_ASSIGNED_ERROR,
                 message=str(e)
-            )
+            ).object_to_dict()
+
         except NotExistsError as e:
             return CustomResponse(
-                status_code=404,
+                status_code=ASSET_NOT_FOUND_ERROR,
                 message=str(e)
-            )
+            ).object_to_dict()
+
         except Exception as e:
+            print(e)
             return CustomResponse(
-                status_code=500,
+                status_code=DATABASE_OPERATION_ERROR,
                 message="Unexpected error reporting the issue"
-            )
+            ).object_to_dict()
