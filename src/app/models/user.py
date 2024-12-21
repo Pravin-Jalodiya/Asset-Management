@@ -3,7 +3,7 @@ from typing import Optional
 from src.app.config.types import Role, AssetStatus
 
 
-class User:
+class   User:
     def __init__(
             self,
             name: str,

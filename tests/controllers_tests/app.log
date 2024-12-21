@@ -7272,3 +7272,241 @@ Function Context:
  - for user_id=unknown | role=admin
 2024-12-18 11:31:46,553 - INFO - wrapped_func executed successfully. - for user_id=unknown | role=admin
 2024-12-18 11:31:46,553 - DEBUG - Exiting wrapped_func - for user_id=unknown | role=admin
+2024-12-20 16:24:39,322 - INFO - [user_id=unknown role=unknown] - get_user_issues executed successfully.
+2024-12-20 16:24:39,323 - DEBUG - [user_id=unknown role=unknown] - Exiting get_user_issues
+2024-12-20 16:24:39,342 - INFO - [user_id=unknown role=unknown] - get_user_issues executed successfully.
+2024-12-20 16:24:39,342 - DEBUG - [user_id=unknown role=unknown] - Exiting get_user_issues
+2024-12-20 16:24:39,348 - INFO - [user_id=unknown role=unknown] - get_user_issues executed successfully.
+2024-12-20 16:24:39,348 - DEBUG - [user_id=unknown role=unknown] - Exiting get_user_issues
+2024-12-20 16:24:39,357 - ERROR - [user_id=unknown role=unknown] - Error occurred in get_issues: Mock.keys() returned a non-iterable (type Mock)
+User Context:
+  - user_id: <Mock name='mock.state.user.get()' id='2407488712256'>
+  - role: <Mock name='mock.state.user.get()' id='2407488712256'>
+Request Context:
+  - method: <Mock name='mock.method' id='2407488707888'>
+  - path: <Mock name='mock.url.path' id='2407488700832'>
+  - body: <AsyncMock name='mock.json()' id='2407488704192'>
+2024-12-20 16:24:39,358 - DEBUG - [user_id=unknown role=unknown] - Exiting get_issues
+2024-12-20 16:24:39,520 - ERROR - [user_id=unknown role=unknown] - Error occurred in get_issues: Mock.keys() returned a non-iterable (type Mock)
+User Context:
+  - user_id: <Mock name='mock.state.user.get()' id='2407489213776'>
+  - role: <Mock name='mock.state.user.get()' id='2407489213776'>
+Request Context:
+  - method: <Mock name='mock.method' id='2407489217136'>
+  - path: <Mock name='mock.url.path' id='2407489217808'>
+  - body: <AsyncMock name='mock.json()' id='2407489216464'>
+2024-12-20 16:24:39,521 - DEBUG - [user_id=unknown role=unknown] - Exiting get_issues
+2024-12-20 16:24:39,552 - ERROR - [user_id=unknown role=unknown] - Error occurred in report_issue: Mock.keys() returned a non-iterable (type Mock)
+User Context:
+  - user_id: <Mock name='mock.state.user.get()' id='2407489222176'>
+  - role: <Mock name='mock.state.user.get()' id='2407489222176'>
+Request Context:
+  - method: <Mock name='mock.method' id='2407489782848'>
+  - path: <Mock name='mock.url.path' id='2407489783520'>
+  - body: <AsyncMock name='mock.json()' id='2407489782176'>
+2024-12-20 16:24:39,552 - DEBUG - [user_id=unknown role=unknown] - Exiting report_issue
+2024-12-20 16:24:39,585 - ERROR - [user_id=unknown role=unknown] - Error occurred in report_issue: Mock.keys() returned a non-iterable (type Mock)
+User Context:
+  - user_id: <Mock name='mock.state.user.get()' id='2407489218816'>
+  - role: <Mock name='mock.state.user.get()' id='2407489218816'>
+Request Context:
+  - method: <Mock name='mock.method' id='2407489217472'>
+  - path: <Mock name='mock.url.path' id='2407489216800'>
+  - body: <AsyncMock name='mock.json()' id='2407489218144'>
+2024-12-20 16:24:39,585 - DEBUG - [user_id=unknown role=unknown] - Exiting report_issue
+2024-12-20 16:24:39,632 - ERROR - [user_id=unknown role=unknown] - Error occurred in report_issue: Mock.keys() returned a non-iterable (type Mock)
+User Context:
+  - user_id: <Mock name='mock.state.user.get()' id='2407488708896'>
+  - role: <Mock name='mock.state.user.get()' id='2407488708896'>
+Request Context:
+  - method: <Mock name='mock.method' id='2407488704528'>
+  - path: <Mock name='mock.url.path' id='2407488712592'>
+  - body: <AsyncMock name='mock.json()' id='2407488704864'>
+2024-12-20 16:24:39,633 - DEBUG - [user_id=unknown role=unknown] - Exiting report_issue
+2024-12-20 16:24:39,667 - ERROR - [user_id=unknown role=unknown] - Error occurred in report_issue: Mock.keys() returned a non-iterable (type Mock)
+User Context:
+  - user_id: <Mock name='mock.state.user.get()' id='2407489786544'>
+  - role: <Mock name='mock.state.user.get()' id='2407489786544'>
+Request Context:
+  - method: <Mock name='mock.method' id='2407489789904'>
+  - path: <Mock name='mock.url.path' id='2407489790576'>
+  - body: <AsyncMock name='mock.json()' id='2407489789232'>
+2024-12-20 16:24:39,668 - DEBUG - [user_id=unknown role=unknown] - Exiting report_issue
+2024-12-20 16:30:20,596 - INFO - [user_id=unknown role=unknown] - get_user_issues executed successfully.
+2024-12-20 16:30:20,605 - DEBUG - [user_id=unknown role=unknown] - Exiting get_user_issues
+2024-12-20 16:30:57,053 - INFO - [user_id=unknown role=unknown] - get_user_issues executed successfully.
+2024-12-20 16:30:57,054 - DEBUG - [user_id=unknown role=unknown] - Exiting get_user_issues
+2024-12-20 16:31:43,014 - INFO - [user_id=unknown role=unknown] - get_issues executed successfully.
+2024-12-20 16:31:43,016 - DEBUG - [user_id=unknown role=unknown] - Exiting get_issues
+2024-12-20 16:31:49,449 - INFO - [user_id=unknown role=unknown] - get_user_issues executed successfully.
+2024-12-20 16:31:49,450 - DEBUG - [user_id=unknown role=unknown] - Exiting get_user_issues
+2024-12-20 16:31:55,426 - INFO - [user_id=unknown role=unknown] - get_issues executed successfully.
+2024-12-20 16:31:55,426 - DEBUG - [user_id=unknown role=unknown] - Exiting get_issues
+2024-12-20 16:32:23,881 - INFO - [user_id=unknown role=unknown] - get_user_issues executed successfully.
+2024-12-20 16:32:23,882 - DEBUG - [user_id=unknown role=unknown] - Exiting get_user_issues
+2024-12-20 16:32:28,251 - INFO - [user_id=unknown role=unknown] - get_issues executed successfully.
+2024-12-20 16:32:28,252 - DEBUG - [user_id=unknown role=unknown] - Exiting get_issues
+2024-12-20 16:35:11,085 - INFO - [user_id=unknown role=unknown] - get_issues executed successfully.
+2024-12-20 16:35:11,086 - DEBUG - [user_id=unknown role=unknown] - Exiting get_issues
+2024-12-20 16:42:19,151 - INFO - [user_id=unknown role=unknown] - get_user_issues executed successfully.
+2024-12-20 16:42:19,152 - DEBUG - [user_id=unknown role=unknown] - Exiting get_user_issues
+2024-12-20 16:42:31,744 - INFO - [user_id=unknown role=unknown] - get_issues executed successfully.
+2024-12-20 16:42:31,745 - DEBUG - [user_id=unknown role=unknown] - Exiting get_issues
+2024-12-20 16:43:18,553 - INFO - [user_id=unknown role=unknown] - get_issues executed successfully.
+2024-12-20 16:43:18,554 - DEBUG - [user_id=unknown role=unknown] - Exiting get_issues
+2024-12-20 16:46:20,977 - INFO - [user_id=unknown role=unknown] - get_user_issues executed successfully.
+2024-12-20 16:46:20,978 - DEBUG - [user_id=unknown role=unknown] - Exiting get_user_issues
+2024-12-20 16:46:20,996 - INFO - [user_id=unknown role=unknown] - get_user_issues executed successfully.
+2024-12-20 16:46:20,996 - DEBUG - [user_id=unknown role=unknown] - Exiting get_user_issues
+2024-12-20 16:46:21,002 - INFO - [user_id=unknown role=unknown] - get_user_issues executed successfully.
+2024-12-20 16:46:21,003 - DEBUG - [user_id=unknown role=unknown] - Exiting get_user_issues
+2024-12-20 16:46:21,013 - INFO - [user_id=unknown role=unknown] - get_issues executed successfully.
+2024-12-20 16:46:21,013 - DEBUG - [user_id=unknown role=unknown] - Exiting get_issues
+2024-12-20 16:46:21,224 - INFO - [user_id=unknown role=unknown] - get_issues executed successfully.
+2024-12-20 16:46:21,224 - DEBUG - [user_id=unknown role=unknown] - Exiting get_issues
+2024-12-20 16:46:57,397 - INFO - [user_id=unknown role=unknown] - get_user_issues executed successfully.
+2024-12-20 16:46:57,398 - DEBUG - [user_id=unknown role=unknown] - Exiting get_user_issues
+2024-12-20 16:46:57,416 - INFO - [user_id=unknown role=unknown] - get_user_issues executed successfully.
+2024-12-20 16:46:57,416 - DEBUG - [user_id=unknown role=unknown] - Exiting get_user_issues
+2024-12-20 16:46:57,421 - INFO - [user_id=unknown role=unknown] - get_user_issues executed successfully.
+2024-12-20 16:46:57,422 - DEBUG - [user_id=unknown role=unknown] - Exiting get_user_issues
+2024-12-20 16:46:57,431 - INFO - [user_id=unknown role=unknown] - get_issues executed successfully.
+2024-12-20 16:46:57,431 - DEBUG - [user_id=unknown role=unknown] - Exiting get_issues
+2024-12-20 16:46:57,555 - INFO - [user_id=unknown role=unknown] - get_issues executed successfully.
+2024-12-20 16:46:57,556 - DEBUG - [user_id=unknown role=unknown] - Exiting get_issues
+2024-12-20 16:46:57,576 - INFO - [user_id=unknown role=unknown] - report_issue executed successfully.
+2024-12-20 16:46:57,576 - DEBUG - [user_id=unknown role=unknown] - Exiting report_issue
+2024-12-20 16:46:57,584 - INFO - [user_id=unknown role=unknown] - report_issue executed successfully.
+2024-12-20 16:46:57,584 - DEBUG - [user_id=unknown role=unknown] - Exiting report_issue
+2024-12-20 16:49:29,295 - INFO - [user_id=unknown role=unknown] - get_user_issues executed successfully.
+2024-12-20 16:49:29,296 - DEBUG - [user_id=unknown role=unknown] - Exiting get_user_issues
+2024-12-20 16:49:29,314 - INFO - [user_id=unknown role=unknown] - get_user_issues executed successfully.
+2024-12-20 16:49:29,314 - DEBUG - [user_id=unknown role=unknown] - Exiting get_user_issues
+2024-12-20 16:49:29,320 - INFO - [user_id=unknown role=unknown] - get_user_issues executed successfully.
+2024-12-20 16:49:29,320 - DEBUG - [user_id=unknown role=unknown] - Exiting get_user_issues
+2024-12-20 16:49:29,329 - INFO - [user_id=unknown role=unknown] - get_issues executed successfully.
+2024-12-20 16:49:29,329 - DEBUG - [user_id=unknown role=unknown] - Exiting get_issues
+2024-12-20 16:49:29,455 - INFO - [user_id=unknown role=unknown] - get_issues executed successfully.
+2024-12-20 16:49:29,455 - DEBUG - [user_id=unknown role=unknown] - Exiting get_issues
+2024-12-20 16:49:29,476 - INFO - [user_id=unknown role=unknown] - report_issue executed successfully.
+2024-12-20 16:49:29,476 - DEBUG - [user_id=unknown role=unknown] - Exiting report_issue
+2024-12-20 16:49:29,491 - INFO - [user_id=unknown role=unknown] - report_issue executed successfully.
+2024-12-20 16:49:29,492 - DEBUG - [user_id=unknown role=unknown] - Exiting report_issue
+2024-12-20 16:49:29,500 - INFO - [user_id=unknown role=unknown] - report_issue executed successfully.
+2024-12-20 16:49:29,500 - DEBUG - [user_id=unknown role=unknown] - Exiting report_issue
+2024-12-20 16:49:29,509 - INFO - [user_id=unknown role=unknown] - report_issue executed successfully.
+2024-12-20 16:49:29,509 - DEBUG - [user_id=unknown role=unknown] - Exiting report_issue
+2024-12-20 16:51:42,232 - INFO - [user_id=unknown role=unknown] - get_issues executed successfully.
+2024-12-20 16:51:42,232 - DEBUG - [user_id=unknown role=unknown] - Exiting get_issues
+2024-12-20 16:53:23,259 - INFO - [user_id=unknown role=unknown] - get_issues executed successfully.
+2024-12-20 16:53:23,260 - DEBUG - [user_id=unknown role=unknown] - Exiting get_issues
+2024-12-20 16:58:05,907 - INFO - [user_id=unknown role=unknown] - get_user_issues executed successfully.
+2024-12-20 16:58:05,908 - DEBUG - [user_id=unknown role=unknown] - Exiting get_user_issues
+2024-12-20 16:58:05,926 - INFO - [user_id=unknown role=unknown] - get_user_issues executed successfully.
+2024-12-20 16:58:05,926 - DEBUG - [user_id=unknown role=unknown] - Exiting get_user_issues
+2024-12-20 16:58:05,931 - INFO - [user_id=unknown role=unknown] - get_user_issues executed successfully.
+2024-12-20 16:58:05,931 - DEBUG - [user_id=unknown role=unknown] - Exiting get_user_issues
+2024-12-20 16:58:05,941 - INFO - [user_id=unknown role=unknown] - get_issues executed successfully.
+2024-12-20 16:58:05,941 - DEBUG - [user_id=unknown role=unknown] - Exiting get_issues
+2024-12-20 16:58:06,070 - INFO - [user_id=unknown role=unknown] - get_issues executed successfully.
+2024-12-20 16:58:06,070 - DEBUG - [user_id=unknown role=unknown] - Exiting get_issues
+2024-12-20 16:58:06,091 - INFO - [user_id=unknown role=unknown] - report_issue executed successfully.
+2024-12-20 16:58:06,091 - DEBUG - [user_id=unknown role=unknown] - Exiting report_issue
+2024-12-20 16:58:06,108 - INFO - [user_id=unknown role=unknown] - report_issue executed successfully.
+2024-12-20 16:58:06,108 - DEBUG - [user_id=unknown role=unknown] - Exiting report_issue
+2024-12-20 16:58:06,118 - INFO - [user_id=unknown role=unknown] - report_issue executed successfully.
+2024-12-20 16:58:06,118 - DEBUG - [user_id=unknown role=unknown] - Exiting report_issue
+2024-12-20 16:58:06,128 - INFO - [user_id=unknown role=unknown] - report_issue executed successfully.
+2024-12-20 16:58:06,131 - DEBUG - [user_id=unknown role=unknown] - Exiting report_issue
+2024-12-20 17:00:31,516 - INFO - [user_id=unknown role=unknown] - get_issues executed successfully.
+2024-12-20 17:00:31,517 - DEBUG - [user_id=unknown role=unknown] - Exiting get_issues
+2024-12-20 17:04:43,376 - INFO - [user_id=unknown role=unknown] - get_issues executed successfully.
+2024-12-20 17:04:43,376 - DEBUG - [user_id=unknown role=unknown] - Exiting get_issues
+2024-12-20 17:05:40,369 - INFO - [user_id=unknown role=unknown] - get_issues executed successfully.
+2024-12-20 17:05:40,369 - DEBUG - [user_id=unknown role=unknown] - Exiting get_issues
+2024-12-20 17:06:19,454 - INFO - [user_id=unknown role=unknown] - get_issues executed successfully.
+2024-12-20 17:06:19,455 - DEBUG - [user_id=unknown role=unknown] - Exiting get_issues
+2024-12-20 17:07:43,265 - INFO - [user_id=unknown role=unknown] - get_issues executed successfully.
+2024-12-20 17:07:43,266 - DEBUG - [user_id=unknown role=unknown] - Exiting get_issues
+2024-12-20 17:08:10,823 - INFO - [user_id=unknown role=unknown] - get_issues executed successfully.
+2024-12-20 17:08:10,824 - DEBUG - [user_id=unknown role=unknown] - Exiting get_issues
+2024-12-20 17:08:42,529 - INFO - [user_id=unknown role=unknown] - get_issues executed successfully.
+2024-12-20 17:08:42,529 - DEBUG - [user_id=unknown role=unknown] - Exiting get_issues
+2024-12-20 17:09:21,396 - INFO - [user_id=unknown role=unknown] - get_issues executed successfully.
+2024-12-20 17:09:21,397 - DEBUG - [user_id=unknown role=unknown] - Exiting get_issues
+2024-12-20 17:11:20,703 - INFO - [user_id=unknown role=unknown] - get_issues executed successfully.
+2024-12-20 17:11:20,704 - DEBUG - [user_id=unknown role=unknown] - Exiting get_issues
+2024-12-20 17:11:55,915 - INFO - [user_id=unknown role=unknown] - get_issues executed successfully.
+2024-12-20 17:11:55,916 - DEBUG - [user_id=unknown role=unknown] - Exiting get_issues
+2024-12-20 17:14:18,901 - INFO - [user_id=unknown role=unknown] - get_issues executed successfully.
+2024-12-20 17:14:18,902 - DEBUG - [user_id=unknown role=unknown] - Exiting get_issues
+2024-12-20 17:15:04,447 - INFO - [user_id=unknown role=unknown] - get_issues executed successfully.
+2024-12-20 17:15:04,448 - DEBUG - [user_id=unknown role=unknown] - Exiting get_issues
+2024-12-20 17:16:14,844 - INFO - [user_id=unknown role=unknown] - get_issues executed successfully.
+2024-12-20 17:16:14,845 - DEBUG - [user_id=unknown role=unknown] - Exiting get_issues
+2024-12-20 17:17:10,478 - INFO - [user_id=unknown role=unknown] - get_issues executed successfully.
+2024-12-20 17:17:10,480 - DEBUG - [user_id=unknown role=unknown] - Exiting get_issues
+2024-12-20 17:17:57,187 - INFO - [user_id=unknown role=unknown] - get_issues executed successfully.
+2024-12-20 17:17:57,188 - DEBUG - [user_id=unknown role=unknown] - Exiting get_issues
+2024-12-20 17:18:20,171 - INFO - [user_id=unknown role=unknown] - get_issues executed successfully.
+2024-12-20 17:18:20,172 - DEBUG - [user_id=unknown role=unknown] - Exiting get_issues
+2024-12-20 17:23:19,879 - INFO - [user_id=unknown role=unknown] - signup executed successfully.
+2024-12-20 17:23:19,880 - DEBUG - [user_id=unknown role=unknown] - Exiting signup
+2024-12-20 17:26:00,618 - INFO - [user_id=unknown role=unknown] - signup executed successfully.
+2024-12-20 17:26:00,618 - DEBUG - [user_id=unknown role=unknown] - Exiting signup
+2024-12-20 17:26:00,766 - INFO - [user_id=unknown role=unknown] - signup executed successfully.
+2024-12-20 17:26:00,766 - DEBUG - [user_id=unknown role=unknown] - Exiting signup
+2024-12-20 17:26:00,786 - INFO - [user_id=unknown role=unknown] - signup executed successfully.
+2024-12-20 17:26:00,786 - DEBUG - [user_id=unknown role=unknown] - Exiting signup
+2024-12-20 17:26:00,813 - INFO - [user_id=unknown role=unknown] - login executed successfully.
+2024-12-20 17:26:00,813 - DEBUG - [user_id=unknown role=unknown] - Exiting login
+2024-12-20 17:26:00,837 - INFO - [user_id=unknown role=unknown] - login executed successfully.
+2024-12-20 17:26:00,838 - DEBUG - [user_id=unknown role=unknown] - Exiting login
+2024-12-20 17:26:00,856 - INFO - [user_id=unknown role=unknown] - get_user executed successfully.
+2024-12-20 17:26:00,856 - DEBUG - [user_id=unknown role=unknown] - Exiting get_user
+2024-12-20 17:26:00,874 - INFO - [user_id=unknown role=unknown] - get_user executed successfully.
+2024-12-20 17:26:00,874 - DEBUG - [user_id=unknown role=unknown] - Exiting get_user
+2024-12-20 17:26:00,897 - INFO - [user_id=unknown role=unknown] - get_users executed successfully.
+2024-12-20 17:26:00,897 - DEBUG - [user_id=unknown role=unknown] - Exiting get_users
+2024-12-20 17:26:00,919 - INFO - [user_id=unknown role=unknown] - get_users executed successfully.
+2024-12-20 17:26:00,919 - DEBUG - [user_id=unknown role=unknown] - Exiting get_users
+2024-12-20 17:26:00,940 - INFO - [user_id=unknown role=unknown] - delete_user executed successfully.
+2024-12-20 17:26:00,940 - DEBUG - [user_id=unknown role=unknown] - Exiting delete_user
+2024-12-20 17:26:00,963 - INFO - [user_id=unknown role=unknown] - delete_user executed successfully.
+2024-12-20 17:26:00,964 - DEBUG - [user_id=unknown role=unknown] - Exiting delete_user
+2024-12-20 17:26:36,985 - INFO - [user_id=unknown role=unknown] - signup executed successfully.
+2024-12-20 17:26:36,986 - DEBUG - [user_id=unknown role=unknown] - Exiting signup
+2024-12-20 17:26:58,886 - INFO - [user_id=unknown role=unknown] - signup executed successfully.
+2024-12-20 17:26:58,887 - DEBUG - [user_id=unknown role=unknown] - Exiting signup
+2024-12-20 17:27:08,904 - INFO - [user_id=unknown role=unknown] - signup executed successfully.
+2024-12-20 17:27:08,905 - DEBUG - [user_id=unknown role=unknown] - Exiting signup
+2024-12-20 17:29:09,562 - INFO - [user_id=unknown role=unknown] - signup executed successfully.
+2024-12-20 17:29:09,563 - DEBUG - [user_id=unknown role=unknown] - Exiting signup
+2024-12-20 17:29:16,200 - INFO - [user_id=unknown role=unknown] - signup executed successfully.
+2024-12-20 17:29:16,200 - DEBUG - [user_id=unknown role=unknown] - Exiting signup
+2024-12-20 17:29:21,474 - INFO - [user_id=unknown role=unknown] - login executed successfully.
+2024-12-20 17:29:21,475 - DEBUG - [user_id=unknown role=unknown] - Exiting login
+2024-12-20 17:29:26,933 - INFO - [user_id=unknown role=unknown] - login executed successfully.
+2024-12-20 17:29:26,934 - DEBUG - [user_id=unknown role=unknown] - Exiting login
+2024-12-20 17:29:33,207 - INFO - [user_id=unknown role=unknown] - signup executed successfully.
+2024-12-20 17:29:33,208 - DEBUG - [user_id=unknown role=unknown] - Exiting signup
+2024-12-20 17:29:33,231 - INFO - [user_id=unknown role=unknown] - signup executed successfully.
+2024-12-20 17:29:33,231 - DEBUG - [user_id=unknown role=unknown] - Exiting signup
+2024-12-20 17:29:33,237 - INFO - [user_id=unknown role=unknown] - signup executed successfully.
+2024-12-20 17:29:33,237 - DEBUG - [user_id=unknown role=unknown] - Exiting signup
+2024-12-20 17:29:33,244 - INFO - [user_id=unknown role=unknown] - login executed successfully.
+2024-12-20 17:29:33,245 - DEBUG - [user_id=unknown role=unknown] - Exiting login
+2024-12-20 17:29:33,251 - INFO - [user_id=unknown role=unknown] - login executed successfully.
+2024-12-20 17:29:33,251 - DEBUG - [user_id=unknown role=unknown] - Exiting login
+2024-12-20 17:29:33,258 - INFO - [user_id=unknown role=unknown] - get_user executed successfully.
+2024-12-20 17:29:33,258 - DEBUG - [user_id=unknown role=unknown] - Exiting get_user
+2024-12-20 17:29:33,263 - INFO - [user_id=unknown role=unknown] - get_user executed successfully.
+2024-12-20 17:29:33,264 - DEBUG - [user_id=unknown role=unknown] - Exiting get_user
+2024-12-20 17:29:33,272 - INFO - [user_id=unknown role=unknown] - get_users executed successfully.
+2024-12-20 17:29:33,272 - DEBUG - [user_id=unknown role=unknown] - Exiting get_users
+2024-12-20 17:29:33,399 - INFO - [user_id=unknown role=unknown] - get_users executed successfully.
+2024-12-20 17:29:33,399 - DEBUG - [user_id=unknown role=unknown] - Exiting get_users
+2024-12-20 17:29:33,420 - INFO - [user_id=unknown role=unknown] - delete_user executed successfully.
+2024-12-20 17:29:33,420 - DEBUG - [user_id=unknown role=unknown] - Exiting delete_user
+2024-12-20 17:29:33,441 - INFO - [user_id=unknown role=unknown] - delete_user executed successfully.
+2024-12-20 17:29:33,441 - DEBUG - [user_id=unknown role=unknown] - Exiting delete_user

@@ -4,6 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from src.app.controllers.asset.routes import create_asset_routes
 from src.app.controllers.asset_issue.routes import create_issue_routes
 from src.app.controllers.users.routes import create_user_routes, create_auth_routes
+from src.app.middleware.middleware import auth_middleware
 from src.app.repositories.asset_repository import AssetRepository
 from src.app.repositories.asset_issue_repository import IssueRepository
 from src.app.repositories.user_repository import UserRepository

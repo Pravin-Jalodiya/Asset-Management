@@ -1,1 +1,79 @@
-<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="0" failures="0" skipped="0" tests="13" time="1.553" timestamp="2024-12-18T11:31:45.986455+05:30" hostname="LAP-55355"><testcase classname="tests.controllers_tests.test_user_handlers.TestUserHandler" name="test_login_success" time="0.021" /><testcase classname="tests.controllers_tests.test_user_handlers.TestUserHandler" name="test_login_validation_error" time="0.004" /><testcase classname="tests.controllers_tests.test_user_handlers.TestUserHandler" name="test_login_missing_field" time="0.004" /><testcase classname="tests.controllers_tests.test_user_handlers.TestUserHandler" name="test_login_invalid_credentials" time="0.004" /><testcase classname="tests.controllers_tests.test_user_handlers.TestUserHandler" name="test_signup_success" time="0.003" /><testcase classname="tests.controllers_tests.test_user_handlers.TestUserHandler" name="test_signup_user_exists" time="0.004" /><testcase classname="tests.controllers_tests.test_user_handlers.TestUserHandler" name="test_get_users_success" time="0.004" /><testcase classname="tests.controllers_tests.test_user_handlers.TestUserHandler" name="test_get_users_database_error" time="0.003" /><testcase classname="tests.controllers_tests.test_user_handlers.TestUserHandler" name="test_get_user_success" time="0.004" /><testcase classname="tests.controllers_tests.test_user_handlers.TestUserHandler" name="test_get_user_not_found" time="0.003" /><testcase classname="tests.controllers_tests.test_user_handlers.TestUserHandler" name="test_delete_user_success" time="0.003" /><testcase classname="tests.controllers_tests.test_user_handlers.TestUserHandler" name="test_delete_user_invalid_uuid" time="0.004" /><testcase classname="tests.controllers_tests.test_user_handlers.TestUserHandler" name="test_delete_user_not_found" time="0.003" /></testsuite></testsuites>
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="0" failures="4" skipped="0" tests="11" time="2.511" timestamp="2024-12-20T17:29:31.986116+05:30" hostname="LAP-55355"><testcase classname="tests.controllers_tests.test_user_handlers.TestUserHandler" name="test_signup_success" time="0.022" /><testcase classname="tests.controllers_tests.test_user_handlers.TestUserHandler" name="test_signup_user_exists" time="0.004" /><testcase classname="tests.controllers_tests.test_user_handlers.TestUserHandler" name="test_signup_database_error" time="0.004" /><testcase classname="tests.controllers_tests.test_user_handlers.TestUserHandler" name="test_login_success" time="0.006" /><testcase classname="tests.controllers_tests.test_user_handlers.TestUserHandler" name="test_login_invalid_credentials" time="0.004" /><testcase classname="tests.controllers_tests.test_user_handlers.TestUserHandler" name="test_get_user_success" time="0.004" /><testcase classname="tests.controllers_tests.test_user_handlers.TestUserHandler" name="test_get_user_not_found" time="0.003" /><testcase classname="tests.controllers_tests.test_user_handlers.TestUserHandler" name="test_get_users_success" time="0.007"><failure message="assert 4008 == 200">self = &lt;tests.controllers_tests.test_user_handlers.TestUserHandler object at 0x0000021392378050&gt;
+user_handler = UserHandler(user_service=&lt;Mock id='2283078548320'&gt;)
+mock_request = &lt;MagicMock spec='Request' id='2283078548992'&gt;
+sample_users = [&lt;src.app.models.user.User object at 0x00000213924BD7B0&gt;, &lt;src.app.models.user.User object at 0x00000213924BD9D0&gt;]
+
+    @pytest.mark.asyncio
+    async def test_get_users_success(self, user_handler, mock_request, sample_users):
+        user_handler.user_service.get_users.return_value = sample_users
+    
+        response = await user_handler.get_users(mock_request)
+    
+&gt;       assert response["status_code"] == 200
+E       assert 4008 == 200
+
+mock_request = &lt;MagicMock spec='Request' id='2283078548992'&gt;
+response   = {'message': 'Request context not available', 'status_code': 4008}
+sample_users = [&lt;src.app.models.user.User object at 0x00000213924BD7B0&gt;,
+ &lt;src.app.models.user.User object at 0x00000213924BD9D0&gt;]
+self       = &lt;tests.controllers_tests.test_user_handlers.TestUserHandler object at 0x0000021392378050&gt;
+user_handler = UserHandler(user_service=&lt;Mock id='2283078548320'&gt;)
+
+test_user_handlers.py:203: AssertionError</failure></testcase><testcase classname="tests.controllers_tests.test_user_handlers.TestUserHandler" name="test_get_users_database_error" time="0.006"><failure message="assert 4008 == 5003">self = &lt;tests.controllers_tests.test_user_handlers.TestUserHandler object at 0x0000021392378250&gt;
+user_handler = UserHandler(user_service=&lt;Mock id='2283082287488'&gt;)
+mock_request = &lt;MagicMock spec='Request' id='2283082287824'&gt;
+
+    @pytest.mark.asyncio
+    async def test_get_users_database_error(self, user_handler, mock_request):
+        user_handler.user_service.get_users.side_effect = Exception("Database error")
+    
+        response = await user_handler.get_users(mock_request)
+    
+&gt;       assert response["status_code"] == DATABASE_OPERATION_ERROR
+E       assert 4008 == 5003
+
+mock_request = &lt;MagicMock spec='Request' id='2283082287824'&gt;
+response   = {'message': 'Request context not available', 'status_code': 4008}
+self       = &lt;tests.controllers_tests.test_user_handlers.TestUserHandler object at 0x0000021392378250&gt;
+user_handler = UserHandler(user_service=&lt;Mock id='2283082287488'&gt;)
+
+test_user_handlers.py:215: AssertionError</failure></testcase><testcase classname="tests.controllers_tests.test_user_handlers.TestUserHandler" name="test_delete_user_success" time="0.006"><failure message="assert 4008 == 200">self = &lt;tests.controllers_tests.test_user_handlers.TestUserHandler object at 0x0000021391A7DF40&gt;
+user_handler = UserHandler(user_service=&lt;Mock id='2283082289840'&gt;)
+mock_request = &lt;MagicMock spec='Request' id='2283082290176'&gt;
+
+    @pytest.mark.asyncio
+    async def test_delete_user_success(self, user_handler, mock_request):
+        user_id = "550e8400-e29b-41d4-a716-446655440000"
+    
+        response = await user_handler.delete_user(mock_request, user_id)
+    
+&gt;       assert response["status_code"] == 200
+E       assert 4008 == 200
+
+mock_request = &lt;MagicMock spec='Request' id='2283082290176'&gt;
+response   = {'message': 'Request context not available', 'status_code': 4008}
+self       = &lt;tests.controllers_tests.test_user_handlers.TestUserHandler object at 0x0000021391A7DF40&gt;
+user_handler = UserHandler(user_service=&lt;Mock id='2283082289840'&gt;)
+user_id    = '550e8400-e29b-41d4-a716-446655440000'
+
+test_user_handlers.py:224: AssertionError</failure></testcase><testcase classname="tests.controllers_tests.test_user_handlers.TestUserHandler" name="test_delete_user_not_found" time="0.006"><failure message="assert 4008 == 4101">self = &lt;tests.controllers_tests.test_user_handlers.TestUserHandler object at 0x0000021391A7E120&gt;
+user_handler = UserHandler(user_service=&lt;Mock id='2283082291856'&gt;)
+mock_request = &lt;MagicMock spec='Request' id='2283082292192'&gt;
+
+    @pytest.mark.asyncio
+    async def test_delete_user_not_found(self, user_handler, mock_request):
+        user_id = "550e8400-e29b-41d4-a716-446655440000"
+        user_handler.user_service.delete_user_account.side_effect = NotExistsError("User not found")
+    
+        response = await user_handler.delete_user(mock_request, user_id)
+    
+&gt;       assert response["status_code"] == USER_NOT_FOUND_ERROR
+E       assert 4008 == 4101
+
+mock_request = &lt;MagicMock spec='Request' id='2283082292192'&gt;
+response   = {'message': 'Request context not available', 'status_code': 4008}
+self       = &lt;tests.controllers_tests.test_user_handlers.TestUserHandler object at 0x0000021391A7E120&gt;
+user_handler = UserHandler(user_service=&lt;Mock id='2283082291856'&gt;)
+user_id    = '550e8400-e29b-41d4-a716-446655440000'
+
+test_user_handlers.py:235: AssertionError</failure></testcase></testsuite></testsuites>

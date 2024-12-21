@@ -9402,3 +9402,43 @@ Function Context:
  - for user_id=unknown | role=admin
 2024-12-18 11:30:45,867 - INFO - wrapped_func executed successfully. - for user_id=unknown | role=admin
 2024-12-18 11:30:45,867 - DEBUG - Exiting wrapped_func - for user_id=unknown | role=admin
+2024-12-20 17:30:12,535 - INFO - [user_id=unknown role=unknown] - get_user_issues executed successfully.
+2024-12-20 17:30:12,536 - DEBUG - [user_id=unknown role=unknown] - Exiting get_user_issues
+2024-12-20 17:30:12,541 - INFO - [user_id=unknown role=unknown] - get_user_issues executed successfully.
+2024-12-20 17:30:12,542 - DEBUG - [user_id=unknown role=unknown] - Exiting get_user_issues
+2024-12-20 17:30:12,547 - INFO - [user_id=unknown role=unknown] - get_user_issues executed successfully.
+2024-12-20 17:30:12,547 - DEBUG - [user_id=unknown role=unknown] - Exiting get_user_issues
+2024-12-20 17:30:12,556 - INFO - [user_id=unknown role=unknown] - get_issues executed successfully.
+2024-12-20 17:30:12,556 - DEBUG - [user_id=unknown role=unknown] - Exiting get_issues
+2024-12-20 17:30:12,581 - INFO - [user_id=unknown role=unknown] - get_issues executed successfully.
+2024-12-20 17:30:12,582 - DEBUG - [user_id=unknown role=unknown] - Exiting get_issues
+2024-12-20 17:30:12,602 - INFO - [user_id=unknown role=unknown] - report_issue executed successfully.
+2024-12-20 17:30:12,602 - DEBUG - [user_id=unknown role=unknown] - Exiting report_issue
+2024-12-20 17:30:12,620 - INFO - [user_id=unknown role=unknown] - report_issue executed successfully.
+2024-12-20 17:30:12,620 - DEBUG - [user_id=unknown role=unknown] - Exiting report_issue
+2024-12-20 17:30:12,628 - INFO - [user_id=unknown role=unknown] - report_issue executed successfully.
+2024-12-20 17:30:12,628 - DEBUG - [user_id=unknown role=unknown] - Exiting report_issue
+2024-12-20 17:30:12,636 - INFO - [user_id=unknown role=unknown] - report_issue executed successfully.
+2024-12-20 17:30:12,636 - DEBUG - [user_id=unknown role=unknown] - Exiting report_issue
+2024-12-20 17:30:12,847 - INFO - [user_id=unknown role=unknown] - signup executed successfully.
+2024-12-20 17:30:12,847 - DEBUG - [user_id=unknown role=unknown] - Exiting signup
+2024-12-20 17:30:12,857 - INFO - [user_id=unknown role=unknown] - signup executed successfully.
+2024-12-20 17:30:12,858 - DEBUG - [user_id=unknown role=unknown] - Exiting signup
+2024-12-20 17:30:12,863 - INFO - [user_id=unknown role=unknown] - signup executed successfully.
+2024-12-20 17:30:12,863 - DEBUG - [user_id=unknown role=unknown] - Exiting signup
+2024-12-20 17:30:12,869 - INFO - [user_id=unknown role=unknown] - login executed successfully.
+2024-12-20 17:30:12,870 - DEBUG - [user_id=unknown role=unknown] - Exiting login
+2024-12-20 17:30:12,876 - INFO - [user_id=unknown role=unknown] - login executed successfully.
+2024-12-20 17:30:12,876 - DEBUG - [user_id=unknown role=unknown] - Exiting login
+2024-12-20 17:30:12,881 - INFO - [user_id=unknown role=unknown] - get_user executed successfully.
+2024-12-20 17:30:12,881 - DEBUG - [user_id=unknown role=unknown] - Exiting get_user
+2024-12-20 17:30:12,885 - INFO - [user_id=unknown role=unknown] - get_user executed successfully.
+2024-12-20 17:30:12,886 - DEBUG - [user_id=unknown role=unknown] - Exiting get_user
+2024-12-20 17:30:12,893 - INFO - [user_id=unknown role=unknown] - get_users executed successfully.
+2024-12-20 17:30:12,894 - DEBUG - [user_id=unknown role=unknown] - Exiting get_users
+2024-12-20 17:30:12,918 - INFO - [user_id=unknown role=unknown] - get_users executed successfully.
+2024-12-20 17:30:12,918 - DEBUG - [user_id=unknown role=unknown] - Exiting get_users
+2024-12-20 17:30:12,939 - INFO - [user_id=unknown role=unknown] - delete_user executed successfully.
+2024-12-20 17:30:12,939 - DEBUG - [user_id=unknown role=unknown] - Exiting delete_user
+2024-12-20 17:30:12,959 - INFO - [user_id=unknown role=unknown] - delete_user executed successfully.
+2024-12-20 17:30:12,959 - DEBUG - [user_id=unknown role=unknown] - Exiting delete_user

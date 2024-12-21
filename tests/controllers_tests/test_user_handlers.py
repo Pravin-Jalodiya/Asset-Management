@@ -1,254 +1,236 @@
-import uuid
 import pytest
-from unittest.mock import Mock
-from flask import Flask, g
+from unittest.mock import Mock, MagicMock, AsyncMock
+from fastapi import FastAPI, Request
 
+from src.app.models.user import User
+from src.app.models.request_objects import SignupRequest, LoginRequest
+from src.app.utils.errors.error import NotExistsError, InvalidCredentialsError, UserExistsError
 from src.app.config.custom_error_codes import (
-    VALIDATION_ERROR,
-    MISSING_FIELD_ERROR,
     INVALID_CREDENTIALS_ERROR,
     USER_EXISTS_ERROR,
-    DATABASE_OPERATION_ERROR,
     USER_NOT_FOUND_ERROR,
-    RECORD_NOT_FOUND_ERROR
-)
-from src.app.models.user import User
-from src.app.utils.errors.error import (
-    UserExistsError,
-    InvalidCredentialsError,
-    MissingFieldError,
-    DatabaseError
+    DATABASE_OPERATION_ERROR,
 )
 from src.app.controllers.users.handlers import UserHandler
 
+
 @pytest.fixture
 def app():
-    """Flask application fixture"""
-    app = Flask(__name__)
+    """FastAPI application fixture"""
+    app = FastAPI()
     return app
+
+
+@pytest.fixture
+def mock_request():
+    """Mock FastAPI request fixture with admin role"""
+    mock_req = MagicMock(spec=Request)
+
+    # Mock request attributes
+    mock_req.method = "GET"
+    mock_req.url.path = "/test"
+    mock_req.client.host = "127.0.0.1"
+    mock_req.headers = {"content-type": "application/json"}
+
+    class MockState:
+        user = {
+            "user_id": "test-user",
+            "role": "admin"
+        }
+
+    mock_req.state = MockState()
+    return mock_req
+
 
 @pytest.fixture
 def mock_user_service():
     """Mock user service fixture"""
     return Mock()
 
+
 @pytest.fixture
 def user_handler(mock_user_service):
     """User handler fixture with mocked service"""
     return UserHandler.create(mock_user_service)
 
+
 @pytest.fixture
 def sample_user():
     """Sample user fixture"""
     return User(
-        id=str(uuid.uuid4()),
         name="Test User",
-        email="test@example.com",
-        password="hashed_password",
-        department="IT",
-        role="user"
+        email="test@watchguard.com",
+        password="Hashedpassword@123",
+        department="CLOUD PLATFORM",
+        role="user",
+        id="550e8400-e29b-41d4-a716-446655440000"
     )
+
 
 @pytest.fixture
 def sample_users():
     """Sample list of users fixture"""
     return [
         User(
-            id=str(uuid.uuid4()),
-            name="User One",
-            email="user1@example.com",
-            password="hashed_password1",
-            department="IT",
-            role="user"
+            name="First User",
+            email="first@watchguard.com",
+            password="Hashedpassword@123",
+            department="CLOUD PLATFORM",
+            role="user",
+            id="550e8400-e29b-41d4-a716-446655440000"
         ),
         User(
-            id=str(uuid.uuid4()),
-            name="User Two",
-            email="user2@example.com",
-            password="hashed_password2",
-            department="HR",
-            role="admin"
+            name="Second User",
+            email="second@watchguard.com",
+            password="Hashedpassword@456",
+            department="CLOUD PLATFORM",
+            role="user",
+            id="650e8400-e29b-41d4-a716-446655440000"
         )
     ]
 
+
 class TestUserHandler:
-    def test_login_success(self, app, user_handler, sample_user):
-        """Test successful login"""
-        login_data = {
-            "email": "test@watchguard.com",
-            "password": "password123"
-        }
+    @pytest.mark.asyncio
+    async def test_signup_success(self, user_handler, sample_user):
+        signup_data = SignupRequest(
+            name="Test User",
+            email="test@watchguard.com",
+            password="Password@123",
+            department="CLOUD PLATFORM"
+        )
+
+        user_handler.user_service.signup_user.return_value = sample_user
+
+        response = await user_handler.signup(signup_data)
+
+        assert response["status_code"] == 200
+        assert response["message"] == "User registered successfully"
+        assert "token" in response["data"]
+        assert response["data"]["role"] == sample_user.role
+
+    @pytest.mark.asyncio
+    async def test_signup_user_exists(self, user_handler):
+        signup_data = SignupRequest(
+            name="Test User",
+            email="existing@watchguard.com",
+            password="Password@123",
+            department="CLOUD PLATFORM"
+        )
+
+        user_handler.user_service.signup_user.side_effect = UserExistsError("User already exists")
+
+        response = await user_handler.signup(signup_data)
+
+        assert response["status_code"] == USER_EXISTS_ERROR
+        assert response["message"] == "User already exists"
+
+    @pytest.mark.asyncio
+    async def test_signup_database_error(self, user_handler):
+        signup_data = SignupRequest(
+            name="Test User",
+            email="test@watchguard.com",
+            password="Password@123",
+            department="CLOUD PLATFORM"
+        )
+
+        user_handler.user_service.signup_user.side_effect = Exception("Database error")
+
+        response = await user_handler.signup(signup_data)
+
+        assert response["status_code"] == DATABASE_OPERATION_ERROR
+        assert response["message"] == "Error creating user"
+
+    @pytest.mark.asyncio
+    async def test_login_success(self, user_handler, sample_user):
+        login_data = LoginRequest(
+            email="test@watchguard.com",
+            password="Password@123"
+        )
+
         user_handler.user_service.login_user.return_value = sample_user
 
-        with app.test_request_context(json=login_data):
-            response, status_code = user_handler.login()
+        response = await user_handler.login(login_data)
 
-        assert status_code == 200
         assert response["status_code"] == 200
         assert response["message"] == "Login successful"
         assert "token" in response["data"]
         assert response["data"]["role"] == sample_user.role
         assert response["data"]["user_id"] == sample_user.id
 
-    def test_login_validation_error(self, app, user_handler):
-        """Test login with validation error"""
-        login_data = {
-            "email": "invalid-email",
-            "password": "pass"
-        }
+    @pytest.mark.asyncio
+    async def test_login_invalid_credentials(self, user_handler):
+        login_data = LoginRequest(
+            email="test@watchguard.com",
+            password="wrongpassword"
+        )
 
-        with app.test_request_context(json=login_data):
-            response, status_code = user_handler.login()
+        user_handler.user_service.login_user.side_effect = InvalidCredentialsError("Invalid credentials")
 
-        assert status_code == 400
-        assert response["status_code"] == VALIDATION_ERROR
+        response = await user_handler.login(login_data)
 
-    def test_login_missing_field(self, app, user_handler):
-        """Test login with missing field"""
-        login_data = {
-            "email": "test@example.com"
-        }
-        user_handler.user_service.login_user.side_effect = MissingFieldError("Password is required")
-
-        with app.test_request_context(json=login_data):
-            response, status_code = user_handler.login()
-
-        assert status_code == 400
-        assert response["status_code"] == MISSING_FIELD_ERROR
-
-    def test_login_invalid_credentials(self, app, user_handler):
-        """Test login with invalid credentials"""
-        login_data = {
-            "email": "test@watchguard.com",
-            "password": "wrongpass"
-        }
-        user_handler.user_service.login_user.side_effect = InvalidCredentialsError("Invalid email or password")
-
-        with app.test_request_context(json=login_data):
-            response, status_code = user_handler.login()
-
-        assert status_code == 400
         assert response["status_code"] == INVALID_CREDENTIALS_ERROR
-        assert response["message"] == "Invalid email or password"
+        assert response["message"] == "Invalid credentials"
 
-    def test_signup_success(self, app, user_handler, sample_user):
-        """Test successful signup"""
-        signup_data = {
-            "name": "Test User",
-            "email": "test@watchguard.com",
-            "password": "Password@123",
-            "department": "CLOUD PLATFORM"
-        }
-        user_handler.user_service.signup_user.return_value = None
+    @pytest.mark.asyncio
+    async def test_get_user_success(self, user_handler, sample_user):
+        user_id = "550e8400-e29b-41d4-a716-446655440000"
+        user_handler.user_service.get_user_by_id.return_value = sample_user
 
-        with app.test_request_context(json=signup_data):
-            response, status_code = user_handler.signup()
+        response = await user_handler.get_user(user_id)
 
-        assert status_code == 200
         assert response["status_code"] == 200
-        assert response["message"] == "User registered successfully"
-        assert "token" in response["data"]
+        assert response["message"] == "User fetched successfully"
+        assert response["data"]["email"] == sample_user.email
+        assert response["data"]["name"] == sample_user.name
 
-    def test_signup_user_exists(self, app, user_handler):
-        """Test signup with existing user"""
-        signup_data = {
-            "name": "Test User",
-            "email": "existing@watchguard.com",
-            "password": "Password@123",
-            "department": "CLOUD PLATFORM"
-        }
-        user_handler.user_service.signup_user.side_effect = UserExistsError("User already exists")
+    @pytest.mark.asyncio
+    async def test_get_user_not_found(self, user_handler):
+        user_id = "550e8400-e29b-41d4-a716-446655440000"
+        user_handler.user_service.get_user_by_id.side_effect = NotExistsError("User not found")
 
-        with app.test_request_context(json=signup_data):
-            response, status_code = user_handler.signup()
+        response = await user_handler.get_user(user_id)
 
-        assert status_code == 409
-        assert response["status_code"] == USER_EXISTS_ERROR
+        assert response["status_code"] == USER_NOT_FOUND_ERROR
+        assert response["message"] == "User not found"
 
-    def test_get_users_success(self, app, user_handler, sample_users):
-        """Test successful retrieval of all users"""
+    @pytest.mark.asyncio
+    async def test_get_users_success(self, user_handler, mock_request, sample_users):
         user_handler.user_service.get_users.return_value = sample_users
 
-        with app.test_request_context():
-            g.role = 'admin'
-            response, status_code = user_handler.get_users()
+        response = await user_handler.get_users(mock_request)
 
-        assert status_code == 200
         assert response["status_code"] == 200
         assert response["message"] == "Users fetched successfully"
         assert len(response["data"]) == 2
+        assert response["data"][0]["email"] == "first@watchguard.com"
+        assert response["data"][1]["email"] == "second@watchguard.com"
 
-    def test_get_users_database_error(self, app, user_handler):
-        """Test get users with database error"""
-        user_handler.user_service.get_users.side_effect = DatabaseError("Database error")
+    @pytest.mark.asyncio
+    async def test_get_users_database_error(self, user_handler, mock_request):
+        user_handler.user_service.get_users.side_effect = Exception("Database error")
 
-        with app.test_request_context():
-            g.role = 'admin'
-            response, status_code = user_handler.get_users()
+        response = await user_handler.get_users(mock_request)
 
-        assert status_code == 500
         assert response["status_code"] == DATABASE_OPERATION_ERROR
         assert response["message"] == "Error fetching users"
 
-    def test_get_user_success(self, app, user_handler, sample_user):
-        """Test successful retrieval of single user"""
-        user_id = str(uuid.uuid4())
-        user_handler.user_service.get_user_by_id.return_value = sample_user
+    @pytest.mark.asyncio
+    async def test_delete_user_success(self, user_handler, mock_request):
+        user_id = "550e8400-e29b-41d4-a716-446655440000"
 
-        with app.test_request_context():
-            response, status_code = user_handler.get_user(user_id)
+        response = await user_handler.delete_user(mock_request, user_id)
 
-        assert status_code == 200
         assert response["status_code"] == 200
-        assert response["message"] == "User details retrieved successfully"
-        assert response["data"]["email"] == sample_user.email
+        assert response["message"] == "User deleted successfully"
+        user_handler.user_service.delete_user_account.assert_awaited_once_with(user_id)
 
-    def test_get_user_not_found(self, app, user_handler):
-        """Test get user with non-existent user"""
-        user_id = str(uuid.uuid4())
-        user_handler.user_service.get_user_by_id.side_effect = DatabaseError("Error fetching user")
+    @pytest.mark.asyncio
+    async def test_delete_user_not_found(self, user_handler, mock_request):
+        user_id = "550e8400-e29b-41d4-a716-446655440000"
+        user_handler.user_service.delete_user_account.side_effect = NotExistsError("User not found")
 
-        with app.test_request_context():
-            response, status_code = user_handler.get_user(user_id)
+        response = await user_handler.delete_user(mock_request, user_id)
 
-        assert status_code == 500
-        assert response["status_code"] == DATABASE_OPERATION_ERROR
-        assert response["message"] == "Error fetching user details"
-
-    def test_delete_user_success(self, app, user_handler):
-        """Test successful user deletion"""
-        user_id = str(uuid.uuid4())
-        user_handler.user_service.delete_user_account.return_value = True
-
-        with app.test_request_context():
-            g.role = 'admin'
-            response, status_code = user_handler.delete_user(user_id)
-
-        assert status_code == 200
-        assert response["status_code"] == 200
-        assert response["message"] == "User account deleted successfully"
-
-    def test_delete_user_invalid_uuid(self, app, user_handler):
-        """Test delete user with invalid UUID"""
-        invalid_user_id = "invalid-uuid"
-
-        with app.test_request_context():
-            g.role = 'admin'
-            response, status_code = user_handler.delete_user(invalid_user_id)
-
-        assert status_code == 200
-        assert response["status_code"] == 200
-        assert response["message"] == "Invalid user id"
-
-    def test_delete_user_not_found(self, app, user_handler):
-        """Test delete non-existent user"""
-        user_id = str(uuid.uuid4())
-        user_handler.user_service.delete_user_account.return_value = False
-
-        with app.test_request_context():
-            g.role = 'admin'
-            response, status_code = user_handler.delete_user(user_id)
-
-        assert status_code == 404
         assert response["status_code"] == USER_NOT_FOUND_ERROR
         assert response["message"] == "User not found"
