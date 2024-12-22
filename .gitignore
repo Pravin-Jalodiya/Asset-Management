@@ -1,3 +1,4 @@
 src/app/controllers/app.log
 src/app/config/db_config.py
 .DS_Store
+app.log
