@@ -2,3 +2,5 @@ src/app/controllers/app.log
 src/app/config/db_config.py
 .DS_Store
 app.log
+"C:\\Users\\pjalodiya\\PycharmProjects\\Asset-Management\\src\\app\\utils\\db\\asset_management.db"
+"src/app/controllers/C:\\Users\\pjalodiya\\PycharmProjects\\Asset-Management\\src\\app\\utils\\db\\asset_management.db"
