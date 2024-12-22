@@ -4,3 +4,8 @@ src/app/config/db_config.py
 app.log
 "C:\\Users\\pjalodiya\\PycharmProjects\\Asset-Management\\src\\app\\utils\\db\\asset_management.db"
 "src/app/controllers/C:\\Users\\pjalodiya\\PycharmProjects\\Asset-Management\\src\\app\\utils\\db\\asset_management.db"
+.venv
+venv
+C:\\Users\\pjalodiya\\PycharmProjects\\Asset-Management\\src\\app\\utils\\db\\asset_management.db
+.idea
+__pycache__/

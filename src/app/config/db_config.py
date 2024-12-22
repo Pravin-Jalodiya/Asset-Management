@@ -1,1 +1,0 @@
-DB="C:\\Users\\pjalodiya\\PycharmProjects\\Asset-Management\\src\\app\\utils\\db\\asset_management.db"
