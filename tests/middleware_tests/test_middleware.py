@@ -3,11 +3,7 @@ from unittest.mock import patch
 from flask import Flask, g
 import jwt
 from src.app.middleware.middleware import auth_middleware
-from src.app.config.custom_error_codes import (
-    INVALID_TOKEN_ERROR,
-    INVALID_TOKEN_PAYLOAD_ERROR,
-    EXPIRED_TOKEN_ERROR
-)
+from src.app.config.custom_error_codes import ErrorCodes
 
 # Set up a Flask app for testing
 app = Flask(__name__)
@@ -23,7 +19,7 @@ class TestAuthMiddleware(unittest.TestCase):
         with app.test_request_context('/some/protected/route'):
             response, status_code = auth_middleware()
             self.assertEqual(status_code, 401)
-            self.assertEqual(response['status_code'], INVALID_TOKEN_ERROR)
+            self.assertEqual(response['status_code'], ErrorCodes.INVALID_TOKEN_ERROR)
             self.assertEqual(response['message'], "Unauthorized, missing or invalid token")
 
     @patch('src.app.utils.utils.Utils.decode_jwt_token')
@@ -33,7 +29,7 @@ class TestAuthMiddleware(unittest.TestCase):
         ):
             response, status_code = auth_middleware()
             self.assertEqual(status_code, 401)
-            self.assertEqual(response['status_code'], INVALID_TOKEN_ERROR)
+            self.assertEqual(response['status_code'], ErrorCodes.INVALID_TOKEN_ERROR)
             self.assertEqual(response['message'], "Unauthorized, missing or invalid token")
 
     @patch('src.app.utils.utils.Utils.decode_jwt_token')
@@ -44,7 +40,7 @@ class TestAuthMiddleware(unittest.TestCase):
         ):
             response, status_code = auth_middleware()
             self.assertEqual(status_code, 401)
-            self.assertEqual(response['status_code'], EXPIRED_TOKEN_ERROR)
+            self.assertEqual(response['status_code'], ErrorCodes.EXPIRED_TOKEN_ERROR)
             self.assertEqual(response['message'], "Unauthorized, token has expired")
 
     @patch('src.app.utils.utils.Utils.decode_jwt_token')
@@ -55,7 +51,7 @@ class TestAuthMiddleware(unittest.TestCase):
         ):
             response, status_code = auth_middleware()
             self.assertEqual(status_code, 401)
-            self.assertEqual(response['status_code'], INVALID_TOKEN_ERROR)
+            self.assertEqual(response['status_code'], ErrorCodes.INVALID_TOKEN_ERROR)
             self.assertEqual(response['message'], "Unauthorized, missing or invalid token")
 
     @patch('src.app.utils.utils.Utils.decode_jwt_token')
@@ -66,7 +62,7 @@ class TestAuthMiddleware(unittest.TestCase):
         ):
             response, status_code = auth_middleware()
             self.assertEqual(status_code, 401)
-            self.assertEqual(response['status_code'], INVALID_TOKEN_PAYLOAD_ERROR)
+            self.assertEqual(response['status_code'], ErrorCodes.INVALID_TOKEN_PAYLOAD_ERROR)
             self.assertEqual(response['message'], "Unauthorized, invalid token payload")
 
     @patch('src.app.utils.utils.Utils.decode_jwt_token')

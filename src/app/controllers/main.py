@@ -3,8 +3,8 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from src.app.controllers.asset.routes import create_asset_routes
 from src.app.controllers.asset_issue.routes import create_issue_routes
-from src.app.controllers.users.routes import create_user_routes, create_auth_routes
-from src.app.middleware.middleware import auth_middleware
+from src.app.controllers.users.routes import create_user_routes
+from src.app.controllers.auth.routes import create_auth_routes
 from src.app.repositories.asset_repository import AssetRepository
 from src.app.repositories.asset_issue_repository import IssueRepository
 from src.app.repositories.user_repository import UserRepository
@@ -12,6 +12,7 @@ from src.app.services.asset_service import AssetService
 from src.app.services.asset_issue_service import IssueService
 from src.app.services.user_service import UserService
 from src.app.utils.db.db import DB
+from src.app.utils.errors.error import CustomHTTPException, custom_http_exception_handler
 from src.app.utils.logger.logger import LoggerMiddleware
 
 
@@ -27,6 +28,8 @@ def create_app():
     )
 
     app.add_middleware(LoggerMiddleware)
+
+    app.add_exception_handler(CustomHTTPException, custom_http_exception_handler)
 
     db = DB()
 

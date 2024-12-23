@@ -2,15 +2,17 @@ from fastapi import HTTPException, Security, Request, Depends
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 import jwt
 
-from src.app.config.custom_error_codes import INVALID_TOKEN_ERROR, INVALID_TOKEN_PAYLOAD_ERROR, EXPIRED_TOKEN_ERROR
+from src.app.config.custom_error_codes import ErrorCodes
+from src.app.utils.errors.error import CustomHTTPException
 from src.app.utils.utils import Utils
 from src.app.utils.context import set_user_to_context
 
 security = HTTPBearer()
 
+
 def auth_middleware(
-    request: Request,
-    credentials: HTTPAuthorizationCredentials = Security(security)
+        request: Request,
+        credentials: HTTPAuthorizationCredentials = Security(security)
 ):
     # Skip auth for login and signup endpoints
     if request.url.path in ['/login', '/signup']:
@@ -28,12 +30,10 @@ def auth_middleware(
         role = decoded_token.get("role")
 
         if not user_id or not role:
-            raise HTTPException(
+            raise CustomHTTPException(
                 status_code=401,
-                detail={
-                    "status_code": INVALID_TOKEN_PAYLOAD_ERROR,
-                    "message": "Unauthorized, invalid token payload"
-                }
+                error_code=ErrorCodes.INVALID_TOKEN_PAYLOAD_ERROR,
+                message="Unauthorized, invalid token payload"
             )
 
         # Set user data in request context
@@ -41,32 +41,26 @@ def auth_middleware(
             "user_id": user_id,
             "role": role
         }
+
         set_user_to_context(request, user_data)
 
     except jwt.ExpiredSignatureError:
-        raise HTTPException(
+        raise CustomHTTPException(
             status_code=401,
-            detail={
-                "status_code": EXPIRED_TOKEN_ERROR,
-                "message": "Unauthorized, token has expired"
-            }
+            error_code=ErrorCodes.EXPIRED_TOKEN_ERROR,
+            message="Unauthorized, token has expired"
         )
 
     except jwt.InvalidTokenError:
-        raise HTTPException(
+        raise CustomHTTPException(
             status_code=401,
-            detail={
-                "status_code": INVALID_TOKEN_ERROR,
-                "message": "Unauthorized, missing or invalid token"
-            }
+            error_code=ErrorCodes.INVALID_TOKEN_ERROR,
+            message="Unauthorized, missing or invalid token"
         )
 
     except Exception as e:
-        print(e)
-        raise HTTPException(
+        raise CustomHTTPException(
             status_code=401,
-            detail={
-                "status_code": INVALID_TOKEN_ERROR,
-                "message": "Unauthorized, missing or invalid token"
-            }
+            error_code=ErrorCodes.INVALID_TOKEN_ERROR,
+            message="Unauthorized, missing or invalid token"
         )

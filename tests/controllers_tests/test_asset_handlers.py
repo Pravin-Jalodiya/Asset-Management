@@ -4,8 +4,7 @@ from unittest.mock import MagicMock
 from flask import Flask, g
 from werkzeug.routing import ValidationError
 
-from src.app.config.custom_error_codes import DATABASE_OPERATION_ERROR, ASSET_NOT_ASSIGNED_ERROR, VALIDATION_ERROR, \
-    RECORD_NOT_FOUND_ERROR
+from src.app.config.custom_error_codes import ErrorCodes
 from src.app.models.asset import Asset
 from src.app.repositories.asset_repository import AssetRepository
 from src.app.services.asset_service import AssetService
@@ -190,7 +189,7 @@ class TestAssetHandler(unittest.TestCase):
 
             # Assert the response and status code
             self.assertEqual(status_code, 400)
-            self.assertEqual(response["status_code"], RECORD_NOT_FOUND_ERROR)
+            self.assertEqual(response["status_code"], ErrorCodes.RECORD_NOT_FOUND_ERROR)
             self.assertEqual(response["message"], "User or asset not found")
 
     def test_unassign_asset_validation_error(self):
@@ -210,7 +209,7 @@ class TestAssetHandler(unittest.TestCase):
 
                 # Assert the response and status code
                 self.assertEqual(status_code, 400)
-                self.assertEqual(response["status_code"], VALIDATION_ERROR)
+                self.assertEqual(response["status_code"], ErrorCodes.VALIDATION_ERROR)
                 self.assertEqual(response["message"], "Invalid input")
 
     def test_unassign_asset_not_assigned_error(self):
@@ -228,7 +227,7 @@ class TestAssetHandler(unittest.TestCase):
 
             # Assert the response and status code
             self.assertEqual(status_code, 400)
-            self.assertEqual(response["status_code"], ASSET_NOT_ASSIGNED_ERROR)
+            self.assertEqual(response["status_code"], ErrorCodes.ASSET_NOT_ASSIGNED_ERROR)
             self.assertEqual(response["message"], "Asset is not assigned")
 
     def test_unassign_asset_database_error(self):
@@ -246,7 +245,7 @@ class TestAssetHandler(unittest.TestCase):
 
             # Assert the response and status code
             self.assertEqual(status_code, 500)
-            self.assertEqual(response["status_code"], DATABASE_OPERATION_ERROR)
+            self.assertEqual(response["status_code"], ErrorCodes.DATABASE_OPERATION_ERROR)
             self.assertEqual(response["message"], "Error unassigning asset")
 
     def test_unassign_asset_unexpected_error(self):
@@ -264,7 +263,7 @@ class TestAssetHandler(unittest.TestCase):
 
             # Assert the response and status code
             self.assertEqual(status_code, 500)
-            self.assertEqual(response["status_code"], DATABASE_OPERATION_ERROR)
+            self.assertEqual(response["status_code"], ErrorCodes.DATABASE_OPERATION_ERROR)
             self.assertEqual(response["message"], "Error unassigning asset")
 
     def test_delete_asset_invalid_uuid(self):
@@ -284,7 +283,7 @@ class TestAssetHandler(unittest.TestCase):
 
                 # Assert the response and status code
                 self.assertEqual(status_code, 400)
-                self.assertEqual(response["status_code"], VALIDATION_ERROR)
+                self.assertEqual(response["status_code"], ErrorCodes.VALIDATION_ERROR)
                 self.assertEqual(response["message"], "Invalid asset id")
 
     def test_delete_asset_not_exists(self):
@@ -302,7 +301,7 @@ class TestAssetHandler(unittest.TestCase):
 
             # Assert the response and status code
             self.assertEqual(status_code, 404)
-            self.assertEqual(response["status_code"], RECORD_NOT_FOUND_ERROR)
+            self.assertEqual(response["status_code"], ErrorCodes.RECORD_NOT_FOUND_ERROR)
             self.assertEqual(response["message"], "Asset not found")
 
     def test_delete_asset_database_error(self):
@@ -320,7 +319,7 @@ class TestAssetHandler(unittest.TestCase):
 
             # Assert the response and status code
             self.assertEqual(status_code, 500)
-            self.assertEqual(response["status_code"], DATABASE_OPERATION_ERROR)
+            self.assertEqual(response["status_code"], ErrorCodes.DATABASE_OPERATION_ERROR)
             self.assertEqual(response["message"], "Error deleting asset")
 
     def test_delete_asset_unexpected_error(self):
@@ -338,7 +337,7 @@ class TestAssetHandler(unittest.TestCase):
 
             # Assert the response and status code
             self.assertEqual(status_code, 500)
-            self.assertEqual(response["status_code"], DATABASE_OPERATION_ERROR)
+            self.assertEqual(response["status_code"], ErrorCodes.DATABASE_OPERATION_ERROR)
             self.assertEqual(response["message"], "Error deleting asset")
 
     def test_assigned_assets_success(self):
@@ -375,7 +374,7 @@ class TestAssetHandler(unittest.TestCase):
 
                 # Assert the response and status code
                 self.assertEqual(status_code, 200)
-                self.assertEqual(response["status_code"], VALIDATION_ERROR)
+                self.assertEqual(response["status_code"], ErrorCodes.VALIDATION_ERROR)
                 self.assertEqual(response["message"], "Invalid user id")
 
     def test_assigned_assets_not_exists(self):
@@ -390,7 +389,7 @@ class TestAssetHandler(unittest.TestCase):
 
             # Assert the response and status code
             self.assertEqual(status_code, 400)
-            self.assertEqual(response["status_code"], RECORD_NOT_FOUND_ERROR)
+            self.assertEqual(response["status_code"], ErrorCodes.RECORD_NOT_FOUND_ERROR)
             self.assertEqual(response["message"], "User not found")
 
     def test_assigned_assets_database_error(self):
@@ -405,7 +404,7 @@ class TestAssetHandler(unittest.TestCase):
 
             # Assert the response and status code
             self.assertEqual(status_code, 500)
-            self.assertEqual(response["status_code"], DATABASE_OPERATION_ERROR)
+            self.assertEqual(response["status_code"], ErrorCodes.DATABASE_OPERATION_ERROR)
             self.assertEqual(response["message"], "Error fetching assigned assets")
 
     def test_assigned_all_assets_success(self):
@@ -443,7 +442,7 @@ class TestAssetHandler(unittest.TestCase):
 
             # Assert the response and status code
             self.assertEqual(status_code, 500)
-            self.assertEqual(response["status_code"], DATABASE_OPERATION_ERROR)
+            self.assertEqual(response["status_code"], ErrorCodes.DATABASE_OPERATION_ERROR)
             self.assertEqual(response["message"], "Error fetching assigned assets")
 
     def test_assigned_all_assets_unexpected_error(self):
@@ -459,6 +458,6 @@ class TestAssetHandler(unittest.TestCase):
 
             # Assert the response and status code
             self.assertEqual(status_code, 500)
-            self.assertEqual(response["status_code"], DATABASE_OPERATION_ERROR)
+            self.assertEqual(response["status_code"], ErrorCodes.DATABASE_OPERATION_ERROR)
             self.assertEqual(response["message"], "Error fetching assigned assets")
 

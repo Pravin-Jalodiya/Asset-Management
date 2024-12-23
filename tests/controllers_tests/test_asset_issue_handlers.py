@@ -3,12 +3,7 @@ import pytest
 from unittest.mock import Mock, AsyncMock, MagicMock
 from fastapi import FastAPI, Request
 
-from src.app.config.custom_error_codes import (
-    RECORD_NOT_FOUND_ERROR,
-    DATABASE_OPERATION_ERROR,
-    ASSET_NOT_FOUND_ERROR,
-    ASSET_NOT_ASSIGNED_ERROR
-)
+from src.app.config.custom_error_codes import ErrorCodes
 from src.app.models.asset_issue import Issue
 from src.app.models.request_objects import ReportIssueRequest
 from src.app.utils.errors.error import NotExistsError, NotAssignedError
@@ -106,7 +101,7 @@ class TestIssueHandler:
 
         response = await issue_handler.get_user_issues(valid_user_id)
 
-        assert response["status_code"] == RECORD_NOT_FOUND_ERROR
+        assert response["status_code"] == ErrorCodes.RECORD_NOT_FOUND_ERROR
         assert response["message"] == "No such user exists"
 
     @pytest.mark.asyncio
@@ -116,7 +111,7 @@ class TestIssueHandler:
 
         response = await issue_handler.get_user_issues(valid_user_id)
 
-        assert response["status_code"] == DATABASE_OPERATION_ERROR
+        assert response["status_code"] == ErrorCodes.DATABASE_OPERATION_ERROR
         assert response["message"] == "Error fetching user issues"
 
     @pytest.mark.asyncio
@@ -138,7 +133,7 @@ class TestIssueHandler:
 
         response = await issue_handler.get_issues(mock_request)
 
-        assert response["status_code"] == DATABASE_OPERATION_ERROR
+        assert response["status_code"] == ErrorCodes.DATABASE_OPERATION_ERROR
         assert response["message"] == "Error fetching all issues"
 
     @pytest.mark.asyncio
@@ -168,7 +163,7 @@ class TestIssueHandler:
 
         response = await issue_handler.report_issue(mock_request, issue_data)
 
-        assert response["status_code"] == ASSET_NOT_ASSIGNED_ERROR
+        assert response["status_code"] == ErrorCodes.ASSET_NOT_ASSIGNED_ERROR
         assert response["message"] == "Asset not assigned"
 
     @pytest.mark.asyncio
@@ -181,7 +176,7 @@ class TestIssueHandler:
 
         response = await issue_handler.report_issue(mock_request, issue_data)
 
-        assert response["status_code"] == ASSET_NOT_FOUND_ERROR
+        assert response["status_code"] == ErrorCodes.ASSET_NOT_FOUND_ERROR
         assert response["message"] == "Asset not found"
 
     @pytest.mark.asyncio
@@ -194,5 +189,5 @@ class TestIssueHandler:
 
         response = await issue_handler.report_issue(mock_request, issue_data)
 
-        assert response["status_code"] == DATABASE_OPERATION_ERROR
+        assert response["status_code"] == ErrorCodes.DATABASE_OPERATION_ERROR
         assert response["message"] == "Unexpected error reporting the issue"

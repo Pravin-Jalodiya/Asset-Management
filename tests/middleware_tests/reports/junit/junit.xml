@@ -1,64 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="0" failures="7" skipped="0" tests="7" time="2.788" timestamp="2024-12-20T13:40:25.681368+05:30" hostname="LAP-55355"><testcase classname="tests.middleware_tests.test_middleware.TestAuthMiddleware" name="test_expired_token" time="0.030"><failure message="TypeError: auth_middleware() missing 1 required positional argument: 'request'">self = &lt;tests.middleware_tests.test_middleware.TestAuthMiddleware testMethod=test_expired_token&gt;
-mock_decode = &lt;MagicMock name='decode_jwt_token' id='2178626169088'&gt;
-
-    @patch('src.app.utils.utils.Utils.decode_jwt_token')
-    def test_expired_token(self, mock_decode):
-        mock_decode.side_effect = jwt.ExpiredSignatureError
-        with app.test_request_context(
-            '/some/protected/route', headers={'Authorization': 'Bearer expired.token.here'}
-        ):
-&gt;           response, status_code = auth_middleware()
-E           TypeError: auth_middleware() missing 1 required positional argument: 'request'
-
-mock_decode = &lt;MagicMock name='decode_jwt_token' id='2178626169088'&gt;
-self       = &lt;tests.middleware_tests.test_middleware.TestAuthMiddleware testMethod=test_expired_token&gt;
-
-test_middleware.py:45: TypeError</failure></testcase><testcase classname="tests.middleware_tests.test_middleware.TestAuthMiddleware" name="test_invalid_authorization_format" time="0.002"><failure message="TypeError: auth_middleware() missing 1 required positional argument: 'request'">self = &lt;tests.middleware_tests.test_middleware.TestAuthMiddleware testMethod=test_invalid_authorization_format&gt;
-mock_decode = &lt;MagicMock name='decode_jwt_token' id='2178626932416'&gt;
-
-    @patch('src.app.utils.utils.Utils.decode_jwt_token')
-    def test_invalid_authorization_format(self, mock_decode):
-        with app.test_request_context(
-            '/some/protected/route', headers={'Authorization': 'InvalidToken'}
-        ):
-&gt;           response, status_code = auth_middleware()
-E           TypeError: auth_middleware() missing 1 required positional argument: 'request'
-
-mock_decode = &lt;MagicMock name='decode_jwt_token' id='2178626932416'&gt;
-self       = &lt;tests.middleware_tests.test_middleware.TestAuthMiddleware testMethod=test_invalid_authorization_format&gt;
-
-test_middleware.py:34: TypeError</failure></testcase><testcase classname="tests.middleware_tests.test_middleware.TestAuthMiddleware" name="test_invalid_token" time="0.002"><failure message="TypeError: auth_middleware() missing 1 required positional argument: 'request'">self = &lt;tests.middleware_tests.test_middleware.TestAuthMiddleware testMethod=test_invalid_token&gt;
-mock_decode = &lt;MagicMock name='decode_jwt_token' id='2178626166400'&gt;
-
-    @patch('src.app.utils.utils.Utils.decode_jwt_token')
-    def test_invalid_token(self, mock_decode):
-        mock_decode.side_effect = jwt.InvalidTokenError
-        with app.test_request_context(
-            '/some/protected/route', headers={'Authorization': 'Bearer invalid.token.here'}
-        ):
-&gt;           response, status_code = auth_middleware()
-E           TypeError: auth_middleware() missing 1 required positional argument: 'request'
-
-mock_decode = &lt;MagicMock name='decode_jwt_token' id='2178626166400'&gt;
-self       = &lt;tests.middleware_tests.test_middleware.TestAuthMiddleware testMethod=test_invalid_token&gt;
-
-test_middleware.py:56: TypeError</failure></testcase><testcase classname="tests.middleware_tests.test_middleware.TestAuthMiddleware" name="test_invalid_token_payload" time="0.002"><failure message="TypeError: auth_middleware() missing 1 required positional argument: 'request'">self = &lt;tests.middleware_tests.test_middleware.TestAuthMiddleware testMethod=test_invalid_token_payload&gt;
-mock_decode = &lt;MagicMock name='decode_jwt_token' id='2178626164720'&gt;
-
-    @patch('src.app.utils.utils.Utils.decode_jwt_token')
-    def test_invalid_token_payload(self, mock_decode):
-        mock_decode.return_value = {"invalid_key": "value"}
-        with app.test_request_context(
-            '/some/protected/route', headers={'Authorization': 'Bearer valid.token.here'}
-        ):
-&gt;           response, status_code = auth_middleware()
-E           TypeError: auth_middleware() missing 1 required positional argument: 'request'
-
-mock_decode = &lt;MagicMock name='decode_jwt_token' id='2178626164720'&gt;
-self       = &lt;tests.middleware_tests.test_middleware.TestAuthMiddleware testMethod=test_invalid_token_payload&gt;
-
-test_middleware.py:67: TypeError</failure></testcase><testcase classname="tests.middleware_tests.test_middleware.TestAuthMiddleware" name="test_no_authorization_header" time="0.002"><failure message="TypeError: auth_middleware() missing 1 required positional argument: 'request'">self = &lt;tests.middleware_tests.test_middleware.TestAuthMiddleware testMethod=test_no_authorization_header&gt;
-mock_decode = &lt;MagicMock name='decode_jwt_token' id='2178626169088'&gt;
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="1" time="0.716" timestamp="2024-12-23T08:14:10.673881+05:30" hostname="Pravins-MacBook-Air.local"><testcase classname="tests.middleware_tests.test_middleware.TestAuthMiddleware" name="test_no_authorization_header" time="0.006"><failure message="TypeError: auth_middleware() missing 1 required positional argument: 'request'">self = &lt;tests.middleware_tests.test_middleware.TestAuthMiddleware testMethod=test_no_authorization_header&gt;
+mock_decode = &lt;MagicMock name='decode_jwt_token' id='4358913680'&gt;
 
     @patch('src.app.utils.utils.Utils.decode_jwt_token')
     def test_no_authorization_header(self, mock_decode):
@@ -66,34 +7,7 @@ mock_decode = &lt;MagicMock name='decode_jwt_token' id='2178626169088'&gt;
 &gt;           response, status_code = auth_middleware()
 E           TypeError: auth_middleware() missing 1 required positional argument: 'request'
 
-mock_decode = &lt;MagicMock name='decode_jwt_token' id='2178626169088'&gt;
+mock_decode = &lt;MagicMock name='decode_jwt_token' id='4358913680'&gt;
 self       = &lt;tests.middleware_tests.test_middleware.TestAuthMiddleware testMethod=test_no_authorization_header&gt;
 
-test_middleware.py:24: TypeError</failure></testcase><testcase classname="tests.middleware_tests.test_middleware.TestAuthMiddleware" name="test_skip_middleware_for_login_signup" time="0.002"><failure message="TypeError: auth_middleware() missing 1 required positional argument: 'request'">self = &lt;tests.middleware_tests.test_middleware.TestAuthMiddleware testMethod=test_skip_middleware_for_login_signup&gt;
-mock_decode = &lt;MagicMock name='decode_jwt_token' id='2178626171776'&gt;
-
-    @patch('src.app.utils.utils.Utils.decode_jwt_token')
-    def test_skip_middleware_for_login_signup(self, mock_decode):
-        with app.test_request_context('/login'):
-&gt;           response = auth_middleware()
-E           TypeError: auth_middleware() missing 1 required positional argument: 'request'
-
-mock_decode = &lt;MagicMock name='decode_jwt_token' id='2178626171776'&gt;
-self       = &lt;tests.middleware_tests.test_middleware.TestAuthMiddleware testMethod=test_skip_middleware_for_login_signup&gt;
-
-test_middleware.py:86: TypeError</failure></testcase><testcase classname="tests.middleware_tests.test_middleware.TestAuthMiddleware" name="test_valid_token" time="0.002"><failure message="TypeError: auth_middleware() missing 1 required positional argument: 'request'">self = &lt;tests.middleware_tests.test_middleware.TestAuthMiddleware testMethod=test_valid_token&gt;
-mock_decode = &lt;MagicMock name='decode_jwt_token' id='2178626172112'&gt;
-
-    @patch('src.app.utils.utils.Utils.decode_jwt_token')
-    def test_valid_token(self, mock_decode):
-        mock_decode.return_value = {"user_id": "123", "role": "admin"}
-        with app.test_request_context(
-            '/some/protected/route', headers={'Authorization': 'Bearer valid.token.here'}
-        ):
-&gt;           response = auth_middleware()
-E           TypeError: auth_middleware() missing 1 required positional argument: 'request'
-
-mock_decode = &lt;MagicMock name='decode_jwt_token' id='2178626172112'&gt;
-self       = &lt;tests.middleware_tests.test_middleware.TestAuthMiddleware testMethod=test_valid_token&gt;
-
-test_middleware.py:78: TypeError</failure></testcase></testsuite></testsuites>
+test_middleware.py:20: TypeError</failure></testcase></testsuite></testsuites>

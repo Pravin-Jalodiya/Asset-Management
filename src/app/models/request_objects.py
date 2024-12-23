@@ -1,24 +1,24 @@
-from pydantic import BaseModel, EmailStr, field_validator
-from werkzeug.routing import ValidationError
+from fastapi import HTTPException
+from pydantic import BaseModel, field_validator
 
+from src.app.config.custom_error_codes import ErrorCodes
+from src.app.utils.errors.error import CustomHTTPException
 from src.app.utils.validators.validators import Validators
 
 
 class LoginRequest(BaseModel):
-    email: EmailStr
+    email: str
     password: str
 
-    @classmethod
     @field_validator('email')
-    def validate_email(cls, v):
+    def validate_email(v: str):
         if not Validators.is_email_valid(v):
-            raise ValidationError('Invalid email (supported domain(s) : [@watchguard.com])')
-
-    @classmethod
-    @field_validator('password')
-    def validate_password(cls, v):
-        if not Validators.is_password_valid(v):
-            raise ValidationError('Invalid password')
+            raise CustomHTTPException(
+                status_code=400,
+                error_code=ErrorCodes.VALIDATION_ERROR,
+                message='Invalid email (supported domain(s) : [@watchguard.com])'
+            )
+        return v
 
     class Config:
         json_schema_extra = {
@@ -31,33 +31,49 @@ class LoginRequest(BaseModel):
 
 class SignupRequest(BaseModel):
     name: str
-    email: EmailStr
+    email: str
     password: str
     department: str
 
-    @classmethod
     @field_validator('name')
-    def validate_name(cls, v):
+    def validate_name(v: str):
         if not Validators.is_name_valid(v):
-            raise ValidationError('Invalid name')
+            raise CustomHTTPException(
+                status_code=400,
+                error_code=ErrorCodes.VALIDATION_ERROR,
+                message='Invalid name'
+            )
+        return v
 
-    @classmethod
     @field_validator('password')
-    def validate_password(cls, v):
+    def validate_password(v: str) -> str:
         if not Validators.is_password_valid(v):
-            raise ValidationError('Invalid password')
+            raise CustomHTTPException(
+                status_code=400,
+                error_code=ErrorCodes.VALIDATION_ERROR,
+                message='Invalid password'
+            )
+        return v
 
-    @classmethod
     @field_validator('email')
-    def validate_email(cls, v):
+    def validate_email(v: str) -> str:
         if not Validators.is_email_valid(str(v)):
-            raise ValidationError('Invalid email (supported domain(s) : [@watchguard.com])')
+            raise CustomHTTPException(
+                status_code=400,
+                error_code=ErrorCodes.VALIDATION_ERROR,
+                message='Invalid email (supported domain(s) : [@watchguard.com])'
+            )
+        return v
 
-    @classmethod
     @field_validator('department')
-    def validate_department(cls, v):
+    def validate_department(v: str) -> str:
         if not Validators.is_department_valid(v):
-            raise ValidationError('Invalid department (dept. name should be all caps)')
+            raise CustomHTTPException(
+                status_code=400,
+                error_code=ErrorCodes.VALIDATION_ERROR,
+                message='Invalid department (dept. name should be all caps)'
+            )
+        return v
 
     class Config:
         json_schema_extra = {
@@ -74,17 +90,25 @@ class ReportIssueRequest(BaseModel):
     asset_id: str
     description: str
 
-    @classmethod
     @field_validator('asset_id')
-    def validate_uuid(cls, v):
+    def validate_uuid(v: str):
         if not Validators.is_valid_UUID(v):
-            raise ValidationError(f'{v} is not a valid UUID')
+            raise CustomHTTPException(
+                status_code=400,
+                error_code=ErrorCodes.VALIDATION_ERROR,
+                message=f'{v} is not a valid UUID'
+            )
+        return v
 
-    @classmethod
     @field_validator('description')
-    def validate_description(cls, v):
+    def validate_description(v: str):
         if not v:
-            raise ValidationError('Description cannot be empty')
+            raise CustomHTTPException(
+                status_code=400,
+                error_code=ErrorCodes.VALIDATION_ERROR,
+                message='Description cannot be empty'
+            )
+        return v
 
     class Config:
         json_schema_extra = {
@@ -99,23 +123,31 @@ class AssetRequest(BaseModel):
     name: str
     description: str
 
-    @classmethod
     @field_validator('name')
-    def validate_name(cls, v):
+    def validate_name(v: str):
         if not v:
-            raise ValidationError('Asset name cannot be empty')
+            raise CustomHTTPException(
+                status_code=400,
+                error_code=ErrorCodes.VALIDATION_ERROR,
+                message='Asset name cannot be empty'
+            )
+        return v
 
-    @classmethod
     @field_validator('description')
-    def validate_description(cls, v):
+    def validate_description(v: str):
         if not v:
-            raise ValidationError('Description cannot be empty')
+            raise CustomHTTPException(
+                status_code=400,
+                error_code=ErrorCodes.VALIDATION_ERROR,
+                message='Description cannot be empty'
+            )
+        return v
 
     class Config:
         json_schema_extra = {
             "example": {
                 "name": "Laptop XPS 13",
-                "description": "Dell XPS 13 laptop with 16GB RAM and intel i13 processor"
+                "description": "Dell XPS 13 laptop with 16GB RAM and Intel i13 processor"
             }
         }
 
@@ -124,11 +156,15 @@ class AssignAssetRequest(BaseModel):
     user_id: str
     asset_id: str
 
-    @classmethod
     @field_validator('user_id', 'asset_id')
-    def validate_uuid(cls, v: str):
+    def validate_uuid(v: str):
         if not Validators.is_valid_UUID(v):
-            raise ValidationError(f"{v} is not a valid UUID")
+            raise CustomHTTPException(
+                status_code=400,
+                error_code=ErrorCodes.VALIDATION_ERROR,
+                message=f"{v} is not a valid UUID"
+            )
+        return v
 
     class Config:
         json_schema_extra = {

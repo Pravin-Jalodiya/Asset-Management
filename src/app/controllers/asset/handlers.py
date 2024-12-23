@@ -9,13 +9,7 @@ from src.app.utils.logger.custom_logger import custom_logger
 from src.app.utils.logger.logger import Logger
 from src.app.models.response import CustomResponse
 from src.app.utils.utils import Utils
-from src.app.config.custom_error_codes import (
-    DUPLICATE_RECORD_ERROR,
-    RECORD_NOT_FOUND_ERROR,
-    ASSET_ALREADY_ASSIGNED_ERROR,
-    ASSET_NOT_ASSIGNED_ERROR,
-    DATABASE_OPERATION_ERROR, ASSET_NOT_FOUND_ERROR
-)
+from src.app.config.custom_error_codes import ErrorCodes
 
 @dataclass
 class AssetHandler:
@@ -39,9 +33,10 @@ class AssetHandler:
 
         except Exception:
             return CustomResponse(
-                status_code=DATABASE_OPERATION_ERROR,
-                message="Error fetching assets"
-            ).object_to_dict()
+                status_code=ErrorCodes.DATABASE_OPERATION_ERROR,
+                message="Error fetching assets",
+                http_status_code=500
+            ).to_response()
 
     @custom_logger(logger)
     @Utils.admin
@@ -61,21 +56,22 @@ class AssetHandler:
 
         except ExistsError as e:
             return CustomResponse(
-                status_code=DUPLICATE_RECORD_ERROR,
+                status_code=ErrorCodes.DUPLICATE_RECORD_ERROR,
                 message=str(e)
             ).object_to_dict()
 
         except AlreadyAssignedError as e:
             return CustomResponse(
-                status_code=ASSET_ALREADY_ASSIGNED_ERROR,
+                status_code=ErrorCodes.ASSET_ALREADY_ASSIGNED_ERROR,
                 message=str(e)
             ).object_to_dict()
 
         except Exception:
             return CustomResponse(
-                status_code=DATABASE_OPERATION_ERROR,
-                message="Error adding asset"
-            ).object_to_dict()
+                status_code=ErrorCodes.DATABASE_OPERATION_ERROR,
+                message="Error adding asset",
+                http_status_code=500
+            ).to_response()
 
     @custom_logger(logger)
     @Utils.admin
@@ -89,15 +85,16 @@ class AssetHandler:
 
         except NotExistsError as e:
             return CustomResponse(
-                status_code=RECORD_NOT_FOUND_ERROR,
+                status_code=ErrorCodes.RECORD_NOT_FOUND_ERROR,
                 message=str(e)
             ).object_to_dict()
 
         except Exception:
             return CustomResponse(
-                status_code=DATABASE_OPERATION_ERROR,
-                message="Error deleting asset"
-            ).object_to_dict()
+                status_code=ErrorCodes.DATABASE_OPERATION_ERROR,
+                message="Error deleting asset",
+                http_status_code=500
+            ).to_response()
 
     @custom_logger(logger)
     @Utils.admin
@@ -118,21 +115,22 @@ class AssetHandler:
 
         except NotExistsError as e:
             return CustomResponse(
-                status_code=RECORD_NOT_FOUND_ERROR,
+                status_code=ErrorCodes.RECORD_NOT_FOUND_ERROR,
                 message=str(e)
             ).object_to_dict()
 
         except AlreadyAssignedError as e:
             return CustomResponse(
-                status_code=ASSET_ALREADY_ASSIGNED_ERROR,
+                status_code=ErrorCodes.ASSET_ALREADY_ASSIGNED_ERROR,
                 message=str(e)
             ).object_to_dict()
 
         except Exception as e:
             return CustomResponse(
-                status_code=DATABASE_OPERATION_ERROR,
-                message="Error assigning asset"
-            ).object_to_dict()
+                status_code=ErrorCodes.DATABASE_OPERATION_ERROR,
+                message="Error assigning asset",
+                http_status_code=500
+            ).to_response()
 
     @custom_logger(logger)
     def unassign_asset(self, unassign_data: UnassignAssetRequest):
@@ -149,22 +147,22 @@ class AssetHandler:
 
         except NotAssignedError as e:
             return CustomResponse(
-                status_code=ASSET_NOT_ASSIGNED_ERROR,
+                status_code=ErrorCodes.ASSET_NOT_ASSIGNED_ERROR,
                 message=str(e)
             ).object_to_dict()
 
         except NotExistsError as e:
             return CustomResponse(
-                status_code=ASSET_NOT_FOUND_ERROR,
+                status_code=ErrorCodes.ASSET_NOT_FOUND_ERROR,
                 message=str(e)
             ).object_to_dict()
 
         except Exception as e:
-            print(e)
             return CustomResponse(
-                status_code=DATABASE_OPERATION_ERROR,
-                message="Error unassigning asset"
-            ).object_to_dict()
+                status_code=ErrorCodes.DATABASE_OPERATION_ERROR,
+                message="Error unassigning asset",
+                http_status_code=500
+            ).to_response()
 
     @custom_logger(logger)
     def assigned_assets(self, user_id: str):
@@ -178,16 +176,16 @@ class AssetHandler:
 
         except NotExistsError as e:
             return CustomResponse(
-                status_code=RECORD_NOT_FOUND_ERROR,
+                status_code=ErrorCodes.RECORD_NOT_FOUND_ERROR,
                 message=str(e)
             ).object_to_dict()
 
         except Exception as e:
-            print(e)
             return CustomResponse(
-                status_code=DATABASE_OPERATION_ERROR,
-                message="Error fetching user assets"
-            ).object_to_dict()
+                status_code=ErrorCodes.DATABASE_OPERATION_ERROR,
+                message="Error fetching user assets",
+                http_status_code=500
+            ).to_response()
 
     @custom_logger(logger)
     @Utils.admin
@@ -202,6 +200,7 @@ class AssetHandler:
 
         except Exception:
             return CustomResponse(
-                status_code=DATABASE_OPERATION_ERROR,
-                message="Error fetching assigned assets"
-            ).object_to_dict()
+                status_code=ErrorCodes.DATABASE_OPERATION_ERROR,
+                message="Error fetching assigned assets",
+                http_status_code=500
+            ).to_response()

@@ -9,11 +9,7 @@ from src.app.utils.logger.custom_logger import custom_logger
 from src.app.utils.logger.logger import Logger
 from src.app.utils.utils import Utils
 from src.app.models.response import CustomResponse
-from src.app.config.custom_error_codes import (
-    RECORD_NOT_FOUND_ERROR,
-    DATABASE_OPERATION_ERROR,
-    ASSET_NOT_FOUND_ERROR, ASSET_NOT_ASSIGNED_ERROR
-)
+from src.app.config.custom_error_codes import ErrorCodes
 
 @dataclass
 class IssueHandler:
@@ -36,15 +32,16 @@ class IssueHandler:
 
         except NotExistsError as e:
             return CustomResponse(
-                status_code=RECORD_NOT_FOUND_ERROR,
+                status_code=ErrorCodes.RECORD_NOT_FOUND_ERROR,
                 message=str(e)
             ).object_to_dict()
 
         except Exception as e:
             return CustomResponse(
-                status_code=DATABASE_OPERATION_ERROR,
-                message="Error fetching user issues"
-            ).object_to_dict()
+                status_code=ErrorCodes.DATABASE_OPERATION_ERROR,
+                message="Error fetching user issues",
+                http_status_code=500
+            ).to_response()
 
     @custom_logger(logger)
     @Utils.admin
@@ -59,9 +56,10 @@ class IssueHandler:
 
         except Exception as e:
             return CustomResponse(
-                status_code=DATABASE_OPERATION_ERROR,
-                message="Error fetching all issues"
-            ).object_to_dict()
+                status_code=ErrorCodes.DATABASE_OPERATION_ERROR,
+                message="Error fetching all issues",
+                http_status_code=500
+            ).to_response()
 
     @custom_logger(logger)
     def report_issue(self, request: Request, issue_data: ReportIssueRequest):
@@ -80,19 +78,19 @@ class IssueHandler:
 
         except NotAssignedError as e:
             return CustomResponse(
-                status_code=ASSET_NOT_ASSIGNED_ERROR,
+                status_code=ErrorCodes.ASSET_NOT_ASSIGNED_ERROR,
                 message=str(e)
             ).object_to_dict()
 
         except NotExistsError as e:
             return CustomResponse(
-                status_code=ASSET_NOT_FOUND_ERROR,
+                status_code=ErrorCodes.ASSET_NOT_FOUND_ERROR,
                 message=str(e)
             ).object_to_dict()
 
         except Exception as e:
-            print(e)
             return CustomResponse(
-                status_code=DATABASE_OPERATION_ERROR,
-                message="Unexpected error reporting the issue"
-            ).object_to_dict()
+                status_code=ErrorCodes.DATABASE_OPERATION_ERROR,
+                message="Unexpected error reporting the issue",
+                http_status_code=500
+            ).to_response()

@@ -1,3 +1,9 @@
+import enum
+
+from fastapi import HTTPException, Request
+from starlette.responses import JSONResponse
+
+
 class UserError(Exception):
     """Base exception class for all user-related errors"""
     pass
@@ -72,8 +78,35 @@ class AlreadyAssignedError(Exception):
     def __init__(self, message: str):
         super().__init__(message)
 
+
 class MissingFieldError(Exception):
     """Base exception class for missing fields"""
 
     def __init__(self, message: str):
         super().__init__(message)
+
+
+class CustomHTTPException(HTTPException):
+    def __init__(
+            self,
+            status_code: int,
+            error_code: enum,
+            message: str,
+    ) -> None:
+        self.status_code = status_code
+        self.error_code = error_code.value
+        self.message = message
+        super().__init__(status_code=status_code, detail=None)
+
+
+async def custom_http_exception_handler(
+        request: Request,
+        exc: CustomHTTPException
+) -> JSONResponse:
+    return JSONResponse(
+        status_code=exc.status_code,
+        content={
+            "status_code": exc.error_code,
+            "message": exc.message
+        }
+    )

@@ -5,10 +5,11 @@ from src.app.middleware.middleware import auth_middleware
 from src.app.services.asset_service import AssetService
 from src.app.models.request_objects import AssetRequest, AssignAssetRequest, UnassignAssetRequest
 
+
 def create_asset_routes(asset_service: AssetService) -> APIRouter:
     router = APIRouter(tags=["assets"])
     asset_handler = AssetHandler.create(asset_service)
-    
+
     # Add dependencies for auth
     router.dependencies = [Depends(auth_middleware)]
 
@@ -17,7 +18,7 @@ def create_asset_routes(asset_service: AssetService) -> APIRouter:
         return await asset_handler.get_assets(request)
 
     @router.post("/add-asset")
-    async def add_asset(request: Request,request_data: AssetRequest):
+    async def add_asset(request: Request, request_data: AssetRequest):
         return await asset_handler.add_asset(request, request_data)
 
     @router.post("/assign-asset")

@@ -1,14 +1,19 @@
+import enum
 from dataclasses import dataclass
+from typing import Optional, Any
+
+from starlette.responses import JSONResponse
 
 
 @dataclass
 class CustomResponse:
-    status_code: int
+    status_code: enum
     message: str
-    data: any = None
+    http_status_code: int = 200
+    data: Optional[Any] = None
 
     def object_to_dict(self):
-        response ={
+        response = {
             'status_code': self.status_code,
             'message': self.message,
         }
@@ -17,3 +22,10 @@ class CustomResponse:
             response.update({'data': self.data})
 
         return response
+
+    def to_response(self):
+        """Convert to FastAPI JSONResponse with proper HTTP status code"""
+        return JSONResponse(
+            status_code=self.http_status_code,
+            content=self.object_to_dict()
+        )
