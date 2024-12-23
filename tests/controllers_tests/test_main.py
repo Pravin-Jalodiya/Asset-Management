@@ -1,18 +1,19 @@
 import unittest
-from flask import Flask
+from fastapi import FastAPI
+from fastapi.testclient import TestClient
 from src.app.controllers.main import create_app
 
 
 class TestAppFactory(unittest.TestCase):
-    def test_create_app_returns_flask_app(self):
+    def test_create_app_returns_fastapi_app(self):
         """
-        Test that create_app returns a Flask application
+        Test that create_app returns a FastAPI application
         """
         # Act
         app = create_app()
 
         # Assert
-        self.assertIsInstance(app, Flask)
+        self.assertIsInstance(app, FastAPI)
 
     def test_dependencies_are_created(self):
         """
@@ -30,11 +31,6 @@ class TestAppFactory(unittest.TestCase):
         Verify that services are created with their correct dependencies
         """
         # Act
-        app = create_app()
-
-        # We'll use the blueprint registration as a proxy to verify dependency injection
-        # Since we can't directly access the services, we're checking that the app
-        # was created without any dependency injection errors
         try:
             # This would have happened during app creation
             app = create_app()
@@ -58,17 +54,34 @@ class TestAppFactory(unittest.TestCase):
         """
         # Arrange
         app = create_app()
+        client = TestClient(app)
 
-        # Expected route prefixes
-        expected_routes = [
-        ]
+        # Expected route prefixes based on actual API structure
+        expected_routes = {
+            # Auth routes
+            '/signup',
+            '/login',
+            # User routes
+            '/users',
+            '/user',
+            # Issue routes
+            '/issues',
+            '/report-issue',
+            # Asset routes
+            '/assets',
+            '/add-asset',
+            '/assign-asset',
+            '/unassign-asset',
+            '/assigned-assets'
+        }
 
-        # Act & Assert
-        with app.test_request_context():
-            # Get all registered routes
-            routes = [rule.rule for rule in app.url_map.iter_rules()]
+        # Act
+        routes = [route.path for route in app.routes]
 
-            # Check that all expected routes are in the registered routes
-            for route in expected_routes:
-                self.assertTrue(any(route in r for r in routes),
-                                f"Route {route} not found in registered routes")
+        # Assert
+        for expected_route in expected_routes:
+            matching_routes = [r for r in routes if expected_route in r]
+            self.assertTrue(
+                len(matching_routes) > 0,
+                f"No routes found matching prefix '{expected_route}'. Available routes: {routes}"
+            )

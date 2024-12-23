@@ -5,7 +5,7 @@ from src.app.models.user import User, UserDTO
 from src.app.services.user_service import UserService
 from src.app.utils.errors.error import (
     UserExistsError,
-    InvalidCredentialsError
+    InvalidCredentialsError, NotExistsError
 )
 from src.app.utils.utils import Utils
 
@@ -146,11 +146,11 @@ class TestUserService(unittest.TestCase):
         # Simulate no user found
         self.mock_user_repository.fetch_user_by_id.return_value = None
 
-        # Act
-        result = self.user_service.delete_user_account(user_id)
+        # Act & Assert
+        with self.assertRaises(NotExistsError) as context:
+            self.user_service.delete_user_account(user_id)
 
-        # Assert
-        self.assertFalse(result)
+        self.assertEqual(str(context.exception), "User does not exist")
         self.mock_user_repository.fetch_user_by_id.assert_called_once_with(user_id)
         self.mock_user_repository.delete_user.assert_not_called()
 

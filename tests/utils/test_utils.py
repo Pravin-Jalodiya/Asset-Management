@@ -156,7 +156,7 @@ class TestUtils(unittest.TestCase):
         result = test_function(mock_request)
 
         # Check for unauthorized response
-        self.assertEqual(result["status_code"], ErrorCodes.UNAUTHORIZED_ACCESS_ERROR)
+        self.assertEqual(result["status_code"], ErrorCodes.UNAUTHORIZED_ACCESS_ERROR.value)
         self.assertEqual(result["message"], "Admin access required")
 
     def test_admin_decorator_no_request(self):
@@ -172,7 +172,7 @@ class TestUtils(unittest.TestCase):
         result = test_function()
 
         # Check for invalid token payload error
-        self.assertEqual(result["status_code"], ErrorCodes.INVALID_TOKEN_PAYLOAD_ERROR)
+        self.assertEqual(result["status_code"], ErrorCodes.INVALID_TOKEN_PAYLOAD_ERROR.value)
         self.assertEqual(result["message"], "Request context not available")
 
     def test_create_jwt_token_exception(self):

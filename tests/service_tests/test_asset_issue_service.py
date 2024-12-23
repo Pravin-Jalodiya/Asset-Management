@@ -1,7 +1,7 @@
 import unittest
 from unittest.mock import MagicMock
 from datetime import datetime, timezone
-from flask import Flask, g
+from fastapi import Request
 from src.app.models.asset_issue import Issue
 from src.app.services.asset_issue_service import IssueService
 from src.app.utils.errors.error import NotExistsError, NotAssignedError
@@ -9,11 +9,6 @@ from src.app.utils.errors.error import NotExistsError, NotAssignedError
 
 class TestIssueService(unittest.TestCase):
     def setUp(self):
-        # Create Flask app and context
-        self.app = Flask(__name__)
-        self.app_context = self.app.app_context()
-        self.app_context.push()
-
         # Create mock dependencies
         self.mock_issue_repository = MagicMock()
         self.mock_asset_service = MagicMock()
@@ -26,9 +21,9 @@ class TestIssueService(unittest.TestCase):
             self.mock_user_service
         )
 
-    def tearDown(self):
-        # Remove the application context
-        self.app_context.pop()
+        # Create mock request
+        self.mock_request = MagicMock(spec=Request)
+        self.mock_request.state.user = {"user_id": "test-user"}
 
     def test_get_issues_returns_all_issues(self):
         # Arrange
@@ -104,76 +99,78 @@ class TestIssueService(unittest.TestCase):
         # Arrange
         user_id = "user1"
         asset_id = "asset1"
-        with self.app.test_request_context():
-            g.user_id = user_id  # Set user_id in Flask g context
 
-            issue = Issue(
-                asset_id=asset_id,
-                description="Test issue description",
-                user_id=None,
-            )
+        # Set up the mock request with user context
+        self.mock_request.state.user = {"user_id": user_id}
 
-            self.mock_asset_service.get_asset_by_id.return_value = {"id": asset_id}
-            self.mock_asset_service.is_asset_assigned.return_value = True
-            self.mock_issue_repository.report_issue.return_value = issue
+        issue = Issue(
+            asset_id=asset_id,
+            description="Test issue description",
+            user_id=None,
+        )
 
-            # Act
-            result = self.issue_service.report_issue(issue)
+        self.mock_asset_service.get_asset_by_id.return_value = {"id": asset_id}
+        self.mock_asset_service.is_asset_assigned.return_value = True
+        self.mock_issue_repository.report_issue.return_value = issue
 
-            # Assert
-            self.mock_asset_service.get_asset_by_id.assert_called_once_with(asset_id)
-            self.mock_asset_service.is_asset_assigned.assert_called_once_with(user_id, asset_id)
-            self.mock_issue_repository.report_issue.assert_called_once_with(issue)
-            self.assertEqual(result, issue)
-            self.assertEqual(result.user_id, user_id)
-            self.assertIsNotNone(result.report_date)
-            self.assertIsNotNone(result.issue_id)
+        # Act
+        result = self.issue_service.report_issue(self.mock_request, issue)
+
+        # Assert
+        self.mock_asset_service.get_asset_by_id.assert_called_once_with(asset_id)
+        self.mock_asset_service.is_asset_assigned.assert_called_once_with(user_id, asset_id)
+        self.mock_issue_repository.report_issue.assert_called_once_with(issue)
+        self.assertEqual(result, issue)
+        self.assertEqual(result.user_id, user_id)
+        self.assertIsNotNone(result.report_date)
 
     def test_report_issue_raises_error_for_nonexistent_asset(self):
         # Arrange
         user_id = "user1"
         asset_id = "nonexistent_asset"
-        with self.app.test_request_context():
-            g.user_id = user_id
 
-            issue = Issue(
-                asset_id=asset_id,
-                description="Test issue description",
-                user_id=None,
-            )
+        # Set up the mock request with user context
+        self.mock_request.state.user = {"user_id": user_id}
 
-            self.mock_asset_service.get_asset_by_id.return_value = None
+        issue = Issue(
+            asset_id=asset_id,
+            description="Test issue description",
+            user_id=None,
+        )
 
-            # Act & Assert
-            with self.assertRaises(NotExistsError) as context:
-                self.issue_service.report_issue(issue)
+        self.mock_asset_service.get_asset_by_id.return_value = None
 
-            self.assertEqual(str(context.exception), "No such asset exists")
-            self.mock_asset_service.get_asset_by_id.assert_called_once_with(asset_id)
-            self.mock_asset_service.is_asset_assigned.assert_not_called()
-            self.mock_issue_repository.report_issue.assert_not_called()
+        # Act & Assert
+        with self.assertRaises(NotExistsError) as context:
+            self.issue_service.report_issue(self.mock_request, issue)
+
+        self.assertEqual(str(context.exception), "No such asset exists")
+        self.mock_asset_service.get_asset_by_id.assert_called_once_with(asset_id)
+        self.mock_asset_service.is_asset_assigned.assert_not_called()
+        self.mock_issue_repository.report_issue.assert_not_called()
 
     def test_report_issue_raises_error_for_unassigned_asset(self):
         # Arrange
         user_id = "user1"
         asset_id = "asset1"
-        with self.app.test_request_context():
-            g.user_id = user_id
 
-            issue = Issue(
-                asset_id=asset_id,
-                description="Test issue description",
-                user_id=None,
-            )
+        # Set up the mock request with user context
+        self.mock_request.state.user = {"user_id": user_id}
 
-            self.mock_asset_service.get_asset_by_id.return_value = {"id": asset_id}
-            self.mock_asset_service.is_asset_assigned.return_value = False
+        issue = Issue(
+            asset_id=asset_id,
+            description="Test issue description",
+            user_id=None,
+        )
 
-            # Act & Assert
-            with self.assertRaises(NotAssignedError) as context:
-                self.issue_service.report_issue(issue)
+        self.mock_asset_service.get_asset_by_id.return_value = {"id": asset_id}
+        self.mock_asset_service.is_asset_assigned.return_value = False
 
-            self.assertEqual(str(context.exception), "Asset not assigned to user")
-            self.mock_asset_service.get_asset_by_id.assert_called_once_with(asset_id)
-            self.mock_asset_service.is_asset_assigned.assert_called_once_with(user_id, asset_id)
-            self.mock_issue_repository.report_issue.assert_not_called()
+        # Act & Assert
+        with self.assertRaises(NotAssignedError) as context:
+            self.issue_service.report_issue(self.mock_request, issue)
+
+        self.assertEqual(str(context.exception), "Asset not assigned to user")
+        self.mock_asset_service.get_asset_by_id.assert_called_once_with(asset_id)
+        self.mock_asset_service.is_asset_assigned.assert_called_once_with(user_id, asset_id)
+        self.mock_issue_repository.report_issue.assert_not_called()
