@@ -1,10 +1,10 @@
 import unittest
 import jwt
 from unittest.mock import patch
-from flask import Flask, g
+from fastapi import Request
 
 from src.app.utils.utils import Utils
-from src.app.config.types import Role
+from src.app.config.custom_error_codes import ErrorCodes
 
 
 class TestUtils(unittest.TestCase):
@@ -110,42 +110,70 @@ class TestUtils(unittest.TestCase):
         """
         Test admin decorator with authorized access
         """
-        # Create a Flask app context for testing
-        app = Flask(__name__)
-        with app.app_context():
-            # Set up g with admin role
-            g.role = Role.ADMIN.value
+        # Create a mock request with admin user
+        mock_scope = {
+            "type": "http",
+            "headers": [],
+            "method": "GET",
+            "path": "/",
+            "query_string": b"",
+            "client": ("127.0.0.1", 8000),
+        }
+        mock_request = Request(mock_scope)
+        mock_request.state.user = {"role": "admin"}
 
-            # Mock function to be decorated
-            @Utils.admin
-            def test_function():
-                return "Authorized"
+        # Mock function to be decorated
+        @Utils.admin
+        def test_function(request: Request):
+            return "Authorized"
 
-            # Call the decorated function
-            result = test_function()
-            self.assertEqual(result, "Authorized")
+        # Run the function directly (no async needed for test)
+        result = test_function(mock_request)
+        self.assertEqual(result, "Authorized")
 
     def test_admin_decorator_unauthorized(self):
         """
         Test admin decorator with unauthorized access
         """
-        # Create a Flask app context for testing
-        app = Flask(__name__)
-        with app.app_context():
-            # Set up g with non-admin role
-            g.role = Role.USER.value
+        # Create a mock request with non-admin user
+        mock_scope = {
+            "type": "http",
+            "headers": [],
+            "method": "GET",
+            "path": "/",
+            "query_string": b"",
+            "client": ("127.0.0.1", 8000),
+        }
+        mock_request = Request(mock_scope)
+        mock_request.state.user = {"role": "user"}
 
-            # Mock function to be decorated
-            @Utils.admin
-            def test_function():
-                return "Authorized"
+        # Mock function to be decorated
+        @Utils.admin
+        def test_function(request: Request):
+            return "Authorized"
 
-            # Call the decorated function
-            result = test_function()
+        # Run the function directly
+        result = test_function(mock_request)
 
-            # Check for unauthorized response
-            self.assertEqual(result[1], 403)
-            self.assertIn("Unauthorized", result[0].get_json()["message"])
+        # Check for unauthorized response
+        self.assertEqual(result["status_code"], ErrorCodes.UNAUTHORIZED_ACCESS_ERROR)
+        self.assertEqual(result["message"], "Admin access required")
+
+    def test_admin_decorator_no_request(self):
+        """
+        Test admin decorator when request context is not available
+        """
+        # Mock function to be decorated
+        @Utils.admin
+        def test_function():
+            return "Authorized"
+
+        # Run the function directly (no async needed)
+        result = test_function()
+
+        # Check for invalid token payload error
+        self.assertEqual(result["status_code"], ErrorCodes.INVALID_TOKEN_PAYLOAD_ERROR)
+        self.assertEqual(result["message"], "Request context not available")
 
     def test_create_jwt_token_exception(self):
         """

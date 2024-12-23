@@ -1,13 +1,1 @@
-<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="1" time="0.716" timestamp="2024-12-23T08:14:10.673881+05:30" hostname="Pravins-MacBook-Air.local"><testcase classname="tests.middleware_tests.test_middleware.TestAuthMiddleware" name="test_no_authorization_header" time="0.006"><failure message="TypeError: auth_middleware() missing 1 required positional argument: 'request'">self = &lt;tests.middleware_tests.test_middleware.TestAuthMiddleware testMethod=test_no_authorization_header&gt;
-mock_decode = &lt;MagicMock name='decode_jwt_token' id='4358913680'&gt;
-
-    @patch('src.app.utils.utils.Utils.decode_jwt_token')
-    def test_no_authorization_header(self, mock_decode):
-        with app.test_request_context('/some/protected/route'):
-&gt;           response, status_code = auth_middleware()
-E           TypeError: auth_middleware() missing 1 required positional argument: 'request'
-
-mock_decode = &lt;MagicMock name='decode_jwt_token' id='4358913680'&gt;
-self       = &lt;tests.middleware_tests.test_middleware.TestAuthMiddleware testMethod=test_no_authorization_header&gt;
-
-test_middleware.py:20: TypeError</failure></testcase></testsuite></testsuites>
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="0" failures="0" skipped="0" tests="5" time="0.595" timestamp="2024-12-23T08:48:19.674686+05:30" hostname="Pravins-MacBook-Air.local"><testcase classname="tests.middleware_tests.test_middleware.TestAuthMiddleware" name="test_expired_token" time="0.002" /><testcase classname="tests.middleware_tests.test_middleware.TestAuthMiddleware" name="test_invalid_token" time="0.000" /><testcase classname="tests.middleware_tests.test_middleware.TestAuthMiddleware" name="test_invalid_token_payload" time="0.000" /><testcase classname="tests.middleware_tests.test_middleware.TestAuthMiddleware" name="test_skip_middleware_for_login_signup" time="0.000" /><testcase classname="tests.middleware_tests.test_middleware.TestAuthMiddleware" name="test_valid_token" time="0.000" /></testsuite></testsuites>

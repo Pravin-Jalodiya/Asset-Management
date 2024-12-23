@@ -1,86 +1,103 @@
 import unittest
-from unittest.mock import patch
-from flask import Flask, g
+from unittest.mock import patch, MagicMock
 import jwt
+from fastapi import Request
+from fastapi.security import HTTPAuthorizationCredentials
 from src.app.middleware.middleware import auth_middleware
 from src.app.config.custom_error_codes import ErrorCodes
-
-# Set up a Flask app for testing
-app = Flask(__name__)
 
 class TestAuthMiddleware(unittest.TestCase):
 
     def setUp(self):
-        app.config['TESTING'] = True
-        self.app = app.test_client()
+        # Create base mock request
+        self.mock_scope = {
+            "type": "http",
+            "headers": [],
+            "method": "GET",
+            "path": "/",
+            "query_string": b"",
+            "client": ("127.0.0.1", 8000),
+        }
 
     @patch('src.app.utils.utils.Utils.decode_jwt_token')
-    def test_no_authorization_header(self, mock_decode):
-        with app.test_request_context('/some/protected/route'):
-            response, status_code = auth_middleware()
-            self.assertEqual(status_code, 401)
-            self.assertEqual(response['status_code'], ErrorCodes.INVALID_TOKEN_ERROR)
-            self.assertEqual(response['message'], "Unauthorized, missing or invalid token")
-
-    @patch('src.app.utils.utils.Utils.decode_jwt_token')
-    def test_invalid_authorization_format(self, mock_decode):
-        with app.test_request_context(
-            '/some/protected/route', headers={'Authorization': 'InvalidToken'}
-        ):
-            response, status_code = auth_middleware()
-            self.assertEqual(status_code, 401)
-            self.assertEqual(response['status_code'], ErrorCodes.INVALID_TOKEN_ERROR)
-            self.assertEqual(response['message'], "Unauthorized, missing or invalid token")
-
-    @patch('src.app.utils.utils.Utils.decode_jwt_token')
-    def test_expired_token(self, mock_decode):
+    async def test_expired_token(self, mock_decode):
         mock_decode.side_effect = jwt.ExpiredSignatureError
-        with app.test_request_context(
-            '/some/protected/route', headers={'Authorization': 'Bearer expired.token.here'}
-        ):
-            response, status_code = auth_middleware()
-            self.assertEqual(status_code, 401)
-            self.assertEqual(response['status_code'], ErrorCodes.EXPIRED_TOKEN_ERROR)
-            self.assertEqual(response['message'], "Unauthorized, token has expired")
+        request = Request(self.mock_scope)
+        credentials = HTTPAuthorizationCredentials(
+            scheme="Bearer",
+            credentials="expired.token.here"
+        )
+
+        try:
+            await auth_middleware(request, credentials)
+            self.fail("Should have raised an exception")
+        except Exception as e:
+            self.assertEqual(e.status_code, 401)
+            self.assertEqual(e.error_code, ErrorCodes.EXPIRED_TOKEN_ERROR)
+            self.assertEqual(str(e), "Unauthorized, token has expired")
 
     @patch('src.app.utils.utils.Utils.decode_jwt_token')
-    def test_invalid_token(self, mock_decode):
+    async def test_invalid_token(self, mock_decode):
         mock_decode.side_effect = jwt.InvalidTokenError
-        with app.test_request_context(
-            '/some/protected/route', headers={'Authorization': 'Bearer invalid.token.here'}
-        ):
-            response, status_code = auth_middleware()
-            self.assertEqual(status_code, 401)
-            self.assertEqual(response['status_code'], ErrorCodes.INVALID_TOKEN_ERROR)
-            self.assertEqual(response['message'], "Unauthorized, missing or invalid token")
+        request = Request(self.mock_scope)
+        credentials = HTTPAuthorizationCredentials(
+            scheme="Bearer",
+            credentials="invalid.token.here"
+        )
+
+        try:
+            await auth_middleware(request, credentials)
+            self.fail("Should have raised an exception")
+        except Exception as e:
+            self.assertEqual(e.status_code, 401)
+            self.assertEqual(e.error_code, ErrorCodes.INVALID_TOKEN_ERROR)
+            self.assertEqual(str(e), "Unauthorized, missing or invalid token")
 
     @patch('src.app.utils.utils.Utils.decode_jwt_token')
-    def test_invalid_token_payload(self, mock_decode):
+    async def test_invalid_token_payload(self, mock_decode):
         mock_decode.return_value = {"invalid_key": "value"}
-        with app.test_request_context(
-            '/some/protected/route', headers={'Authorization': 'Bearer valid.token.here'}
-        ):
-            response, status_code = auth_middleware()
-            self.assertEqual(status_code, 401)
-            self.assertEqual(response['status_code'], ErrorCodes.INVALID_TOKEN_PAYLOAD_ERROR)
-            self.assertEqual(response['message'], "Unauthorized, invalid token payload")
+        request = Request(self.mock_scope)
+        credentials = HTTPAuthorizationCredentials(
+            scheme="Bearer",
+            credentials="valid.token.here"
+        )
+
+        try:
+            await auth_middleware(request, credentials)
+            self.fail("Should have raised an exception")
+        except Exception as e:
+            self.assertEqual(e.status_code, 401)
+            self.assertEqual(e.error_code, ErrorCodes.INVALID_TOKEN_PAYLOAD_ERROR)
+            self.assertEqual(str(e), "Unauthorized, invalid token payload")
 
     @patch('src.app.utils.utils.Utils.decode_jwt_token')
-    def test_valid_token(self, mock_decode):
+    async def test_valid_token(self, mock_decode):
         mock_decode.return_value = {"user_id": "123", "role": "admin"}
-        with app.test_request_context(
-            '/some/protected/route', headers={'Authorization': 'Bearer valid.token.here'}
-        ):
-            response = auth_middleware()
-            self.assertIsNone(response)  # No response for valid token
-            self.assertEqual(g.user_id, "123")
-            self.assertEqual(g.role, "admin")
+        request = Request(self.mock_scope)
+        credentials = HTTPAuthorizationCredentials(
+            scheme="Bearer",
+            credentials="valid.token.here"
+        )
 
-    @patch('src.app.utils.utils.Utils.decode_jwt_token')
-    def test_skip_middleware_for_login_signup(self, mock_decode):
-        with app.test_request_context('/login'):
-            response = auth_middleware()
-            self.assertIsNone(response)  # Middleware should allow these routes
-        with app.test_request_context('/signup'):
-            response = auth_middleware()
-            self.assertIsNone(response)
+        result = await auth_middleware(request, credentials)
+        self.assertIsNone(result)
+        # Check if user data was set in request state
+        self.assertEqual(request.state.user["user_id"], "123")
+        self.assertEqual(request.state.user["role"], "admin")
+
+    async def test_skip_middleware_for_login_signup(self):
+        # Test login endpoint
+        login_scope = self.mock_scope.copy()
+        login_scope["path"] = "/login"
+        login_request = Request(login_scope)
+        
+        result = await auth_middleware(login_request, None)
+        self.assertIsNone(result)
+
+        # Test signup endpoint
+        signup_scope = self.mock_scope.copy()
+        signup_scope["path"] = "/signup"
+        signup_request = Request(signup_scope)
+        
+        result = await auth_middleware(signup_request, None)
+        self.assertIsNone(result)

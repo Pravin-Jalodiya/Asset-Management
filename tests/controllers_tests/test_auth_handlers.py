@@ -2,11 +2,11 @@ import pytest
 from unittest.mock import Mock, MagicMock, AsyncMock
 from fastapi import FastAPI, Request
 
+from src.app.controllers.auth.handlers import AuthHandler
 from src.app.models.user import User
 from src.app.models.request_objects import SignupRequest, LoginRequest
 from src.app.utils.errors.error import InvalidCredentialsError, UserExistsError
 from src.app.config.custom_error_codes import ErrorCodes
-from src.app.controllers.users.handlers import UserHandler
 
 
 @pytest.fixture
@@ -44,9 +44,9 @@ def mock_user_service():
 
 
 @pytest.fixture
-def user_handler(mock_user_service):
+def auth_handler(mock_user_service):
     """User handler fixture with mocked service"""
-    return UserHandler.create(mock_user_service)
+    return AuthHandler.create(mock_user_service)
 
 
 @pytest.fixture
@@ -85,9 +85,9 @@ def sample_users():
     ]
 
 
-class TestUserHandler:
+class TestAuthHandler:
     @pytest.mark.asyncio
-    async def test_signup_success(self, user_handler, sample_user):
+    async def test_signup_success(self, auth_handler, sample_user):
         signup_data = SignupRequest(
             name="Test User",
             email="test@watchguard.com",
@@ -95,9 +95,9 @@ class TestUserHandler:
             department="CLOUD PLATFORM"
         )
 
-        user_handler.user_service.signup_user.return_value = sample_user
+        auth_handler.user_service.signup_user.return_value = sample_user
 
-        response = await user_handler.signup(signup_data)
+        response = await auth_handler.signup(signup_data)
 
         assert response["status_code"] == 200
         assert response["message"] == "User registered successfully"
@@ -105,7 +105,7 @@ class TestUserHandler:
         assert response["data"]["role"] == sample_user.role
 
     @pytest.mark.asyncio
-    async def test_signup_user_exists(self, user_handler):
+    async def test_signup_user_exists(self, auth_handler):
         signup_data = SignupRequest(
             name="Test User",
             email="existing@watchguard.com",
@@ -113,15 +113,15 @@ class TestUserHandler:
             department="CLOUD PLATFORM"
         )
 
-        user_handler.user_service.signup_user.side_effect = UserExistsError("User already exists")
+        auth_handler.user_service.signup_user.side_effect = UserExistsError("User already exists")
 
-        response = await user_handler.signup(signup_data)
+        response = await auth_handler.signup(signup_data)
 
-        assert response["status_code"] == ErrorCodes.USER_EXISTS_ERROR
+        assert response["status_code"] == ErrorCodes.USER_EXISTS_ERROR.value
         assert response["message"] == "User already exists"
 
     @pytest.mark.asyncio
-    async def test_signup_database_error(self, user_handler):
+    async def test_signup_database_error(self, auth_handler):
         signup_data = SignupRequest(
             name="Test User",
             email="test@watchguard.com",
@@ -129,23 +129,27 @@ class TestUserHandler:
             department="CLOUD PLATFORM"
         )
 
-        user_handler.user_service.signup_user.side_effect = Exception("Database error")
+        auth_handler.user_service.signup_user.side_effect = Exception("Database error")
 
-        response = await user_handler.signup(signup_data)
+        response = await auth_handler.signup(signup_data)
+        response_body = response.body.decode()  # Convert bytes to string
+        import json
+        response_data = json.loads(response_body)  # Parse JSON string
 
-        assert response["status_code"] == ErrorCodes.DATABASE_OPERATION_ERROR
-        assert response["message"] == "Error creating user"
+        assert response.status_code == 500  # HTTP status code
+        assert response_data["status_code"] == ErrorCodes.DATABASE_OPERATION_ERROR.value  # Custom status code
+        assert response_data["message"] == "Error creating user"
 
     @pytest.mark.asyncio
-    async def test_login_success(self, user_handler, sample_user):
+    async def test_login_success(self, auth_handler, sample_user):
         login_data = LoginRequest(
             email="test@watchguard.com",
             password="Password@123"
         )
 
-        user_handler.user_service.login_user.return_value = sample_user
+        auth_handler.user_service.login_user.return_value = sample_user
 
-        response = await user_handler.login(login_data)
+        response = await auth_handler.login(login_data)
 
         assert response["status_code"] == 200
         assert response["message"] == "Login successful"
@@ -154,15 +158,15 @@ class TestUserHandler:
         assert response["data"]["user_id"] == sample_user.id
 
     @pytest.mark.asyncio
-    async def test_login_invalid_credentials(self, user_handler):
+    async def test_login_invalid_credentials(self, auth_handler):
         login_data = LoginRequest(
             email="test@watchguard.com",
             password="wrongpassword"
         )
 
-        user_handler.user_service.login_user.side_effect = InvalidCredentialsError("Invalid credentials")
+        auth_handler.user_service.login_user.side_effect = InvalidCredentialsError("Invalid credentials")
 
-        response = await user_handler.login(login_data)
+        response = await auth_handler.login(login_data)
 
-        assert response["status_code"] == ErrorCodes.INVALID_CREDENTIALS_ERROR
+        assert response["status_code"] == ErrorCodes.INVALID_CREDENTIALS_ERROR.value
         assert response["message"] == "Invalid credentials"
